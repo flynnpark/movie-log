@@ -1,0 +1,32 @@
+{
+   "name": "movie-log-backend",
+   "version": "0.1.0",
+   "description": "Movie.log",
+   "main": "index.js",
+   "scripts": {
+      "prestart": "tsc",
+      "start": "ts-node src/index.ts",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/wphestiraid/movie-log-backend.git"
+   },
+   "author": "Flynn <wphestiraid@gmail.com>",
+   "license": "MIT",
+   "bugs": {
+      "url": "https://github.com/wphestiraid/movie-log-backend/issues"
+   },
+   "homepage": "https://github.com/wphestiraid/movie-log-backend#readme",
+   "dependencies": {
+      "@types/node": "^10.5.2",
+      "pg": "^7.3.0",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.7"
+   },
+   "devDependencies": {
+      "ts-node": "3.3.0",
+      "@types/node": "^8.0.29",
+      "typescript": "2.5.2"
+   }
+}
