@@ -9,10 +9,17 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": false
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "build", "scripts", "webpack"]
 }
