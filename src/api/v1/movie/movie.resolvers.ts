@@ -1,6 +1,13 @@
+import { Movie } from '../../../types/graph';
+
 const resolvers = {
   Query: {
-    movie: () => 'Harry Potter Series'
+    movie: (): Movie => {
+      return {
+        title: 'HarryPotter',
+        year: 2004
+      };
+    }
   }
 };
 
