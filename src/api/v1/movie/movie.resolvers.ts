@@ -1,10 +1,10 @@
-import { Movie } from '../../../types/graph';
+import { MovieQueryArgs, MovieResponse } from '../../../types/graph';
 
 const resolvers = {
   Query: {
-    movie: (): Movie => {
+    movie: (_, args: MovieQueryArgs): MovieResponse => {
       return {
-        title: 'HarryPotter',
+        title: `HarryPotter ${args.name}`,
         year: 2004
       };
     }

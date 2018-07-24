@@ -1,8 +1,8 @@
-type Movie {
+type MovieResponse {
   title: String!
   year: Int!
 }
 
 type Query {
-  movie: Movie!
+  movie(name: String!): MovieResponse!
 }
