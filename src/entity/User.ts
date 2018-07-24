@@ -1,10 +1,33 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn
+} from 'typeorm';
+import { IsEmail } from 'class-validator';
 
 @Entity()
-export class User {
+class User extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
-  @Column() name: string;
+  @Column({ type: 'text', unique: true })
+  @IsEmail()
+  email: string;
 
-  @Column() age: number;
+  @Column({ type: 'text' })
+  password: string;
+
+  @Column({ type: 'text' })
+  name: string;
+
+  @Column({ type: 'int' })
+  birthYear: number;
+
+  @Column({ type: 'text' })
+  profileImage: string;
+
+  @CreateDateColumn() createdAt: number;
 }
+
+export default User;

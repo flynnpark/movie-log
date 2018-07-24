@@ -1,8 +1,0 @@
-type MovieResponse {
-  title: String!
-  year: Int!
-}
-
-type Query {
-  movie(name: String!): MovieResponse!
-}
