@@ -1,7 +1,7 @@
 import { Options } from 'graphql-yoga';
 import 'reflect-metadata';
-// import { createConnection } from 'typeorm';
-// import connectionOptions from './ormconfig';
+import { createConnection } from 'typeorm';
+import connectionOptions from './ormconfig';
 import app from './app';
 
 const PORT: number | string = process.env.PORT || 4000;
@@ -16,8 +16,6 @@ const appOptions: Options = {
 
 const handleAppStart = () => console.log(`Listening on port ${PORT}`);
 
-// createConnection(connectionOptions)
-//   .then(async connection => {})
-//   .catch(error => console.log(error));
-
-app.start(appOptions, handleAppStart);
+createConnection(connectionOptions).then(() => {
+  app.start(appOptions, handleAppStart);
+});
