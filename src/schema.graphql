@@ -1,8 +1,13 @@
-type MovieResponse {
-  title: String!
-  year: Int!
+type User {
+  id: Int!
+  email: String!
+  password: String!
+  name: String!
+  birthYear: Int!
+  profileImage: String
+  createdAt: Int!
 }
 
 type Query {
-  movie(name: String!): MovieResponse!
+  user: User
 }

@@ -1,15 +1,16 @@
-export const typeDefs = ["type MovieResponse {\n  title: String!\n  year: Int!\n}\n\ntype Query {\n  movie(name: String!): MovieResponse!\n}\n"];
+export const typeDefs = ["type User {\n  id: Int!\n  email: String!\n  password: String!\n  name: String!\n  birthYear: Int!\n  profileImage: String\n  createdAt: Int!\n}\n\ntype Query {\n  user: User\n}\n"];
 /* tslint:disable */
 
 export interface Query {
-  movie: MovieResponse;
+  user: User | null;
 }
 
-export interface MovieQueryArgs {
+export interface User {
+  id: number;
+  email: string;
+  password: string;
   name: string;
-}
-
-export interface MovieResponse {
-  title: string;
-  year: number;
+  birthYear: number;
+  profileImage: string | null;
+  createdAt: number;
 }
