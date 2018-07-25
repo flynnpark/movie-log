@@ -1,4 +1,4 @@
-import bcrypt, { hash } from 'bcrypt';
+import bcrypt from 'bcrypt';
 import {
   BaseEntity,
   Column,
@@ -33,6 +33,10 @@ class User extends BaseEntity {
   profileImage: string;
 
   @CreateDateColumn() createdAt: number;
+
+  public comparePassword(password: string): Promise<boolean> {
+    return bcrypt.compare(password, this.password);
+  }
 
   @BeforeInsert()
   @BeforeUpdate()
