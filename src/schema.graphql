@@ -4,8 +4,15 @@ type EmailSignInResponse {
   token: String
 }
 
-type mutation {
+type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+  EmailSignUp(email: String!, password: String!, name: String!, birthYear: Int!, profileImage: String): EmailSignUpResponse!
+}
+
+type EmailSignUpResponse {
+  ok: Boolean!
+  error: String
+  token: String
 }
 
 type User {

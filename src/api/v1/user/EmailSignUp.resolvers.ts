@@ -1,38 +1,31 @@
 import User from '../../../entity/User';
 import {
-  EmailSignInMutationArgs,
-  EmailSignInResponse,
+  EmailSignUpMutationArgs,
+  EmailSignUpResponse,
 } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 
 const resolvers: Resolvers = {
   Mutation: {
-    EmailSignIn: async (
+    EmailSignUp: async (
       _,
-      args: EmailSignInMutationArgs
-    ): Promise<EmailSignInResponse> => {
-      const { email, password } = args;
+      args: EmailSignUpMutationArgs
+    ): Promise<EmailSignUpResponse> => {
+      const { email } = args;
       try {
-        const user = await User.findOne({ email });
-        if (!user) {
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
           return {
             ok: false,
-            error: 'No user found with that email',
+            error: 'You should log in instead',
             token: null,
           };
-        }
-        const checkPassword = await user.comparePassword(password);
-        if (checkPassword) {
+        } else {
+          const newUser = await User.create({ ...args }).save();
           return {
             ok: true,
             error: null,
             token: 'Will be',
-          };
-        } else {
-          return {
-            ok: false,
-            error: 'Wrong password',
-            token: null,
           };
         }
       } catch (error) {

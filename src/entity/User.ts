@@ -6,7 +6,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   BeforeInsert,
-  BeforeUpdate
+  BeforeUpdate,
 } from 'typeorm';
 import { IsEmail } from 'class-validator';
 
@@ -30,7 +30,7 @@ class User extends BaseEntity {
   birthYear: number;
 
   @Column({ type: 'text' })
-  profileImage: string;
+  profileImage: string | null;
 
   @CreateDateColumn() createdAt: number;
 

@@ -4,6 +4,6 @@ type EmailSignInResponse {
   token: String
 }
 
-type mutation {
+type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
 }
