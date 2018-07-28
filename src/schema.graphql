@@ -1,3 +1,13 @@
+type EmailSignInResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type mutation {
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+}
+
 type User {
   id: Int!
   email: String!
