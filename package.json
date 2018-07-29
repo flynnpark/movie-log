@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/wphestiraid/movie-log-backend#readme",
   "dependencies": {
+    "@types/jsonwebtoken": "^7.2.8",
     "bcrypt": "^3.0.0",
     "class-validator": "^0.9.1",
     "cors": "^2.8.4",
@@ -30,6 +31,7 @@
     "graphql-tools": "^3.0.5",
     "graphql-yoga": "^1.14.12",
     "helmet": "^3.12.1",
+    "jsonwebtoken": "^8.3.0",
     "merge-graphql-schemas": "^1.5.3",
     "morgan": "^1.9.0",
     "pg": "^7.3.0",

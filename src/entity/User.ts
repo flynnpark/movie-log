@@ -29,7 +29,7 @@ class User extends BaseEntity {
   @Column({ type: 'int' })
   birthYear: number;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   profileImage: string | null;
 
   @CreateDateColumn() createdAt: number;
