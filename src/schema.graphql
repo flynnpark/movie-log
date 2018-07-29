@@ -7,6 +7,7 @@ type EmailSignInResponse {
 type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(email: String!, password: String!, name: String!, birthYear: Int!, profileImage: String): EmailSignUpResponse!
+  UpdateMyProfile(password: String, name: String, profileImage: String): UpdateMyProfileResponse!
 }
 
 type EmailSignUpResponse {
@@ -24,6 +25,11 @@ type GetMyProfileResponse {
 type Query {
   GetMyProfile: GetMyProfileResponse!
   user: User
+}
+
+type UpdateMyProfileResponse {
+  ok: Boolean!
+  error: String
 }
 
 type User {
