@@ -4,7 +4,7 @@ import {
   EmailSignUpResponse,
 } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
-import createJWT from '../../../utils/createJWT';
+import { createJWT } from '../../../utils/jwt';
 
 const resolvers: Resolvers = {
   Mutation: {
