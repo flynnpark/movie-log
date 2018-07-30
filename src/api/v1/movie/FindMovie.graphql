@@ -1,0 +1,9 @@
+type FindMovieResponse {
+  ok: Boolean!
+  error: String
+  movie: Movie
+}
+
+type Query {
+  FindMovie: FindMovieResponse!
+}

@@ -1,0 +1,15 @@
+type Movie {
+  id: Int!
+  title: String!
+  poster_path: String
+  original_language: String!
+  original_title: String!
+  genre_ids: [Int]!
+  adult: Boolean!
+  overview: String
+  release_date: String!
+}
+
+type Quert {
+  movie: Movie
+}

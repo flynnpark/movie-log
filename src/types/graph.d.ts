@@ -1,9 +1,28 @@
-export const typeDefs = ["type EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(email: String!, password: String!, name: String!, birthYear: Int!, profileImage: String): EmailSignUpResponse!\n  UpdateMyProfile(password: String, name: String, profileImage: String): UpdateMyProfileResponse!\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  password: String!\n  name: String!\n  birthYear: Int!\n  profileImage: String\n  createdAt: Int!\n}\n"];
+export const typeDefs = ["type FindMovieResponse {\n  ok: Boolean!\n  error: String\n  movie: Movie\n}\n\ntype Query {\n  FindMovie: FindMovieResponse!\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n}\n\ntype Movie {\n  id: Int!\n  title: String!\n  poster_path: String\n  original_language: String!\n  original_title: String!\n  genre_ids: [Int]!\n  adult: Boolean!\n  overview: String\n  release_date: String!\n}\n\ntype Quert {\n  movie: Movie\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(email: String!, password: String!, name: String!, birthYear: Int!, profileImage: String): EmailSignUpResponse!\n  UpdateMyProfile(password: String, name: String, profileImage: String): UpdateMyProfileResponse!\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  password: String!\n  name: String!\n  birthYear: Int!\n  profileImage: String\n  createdAt: Int!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
+  FindMovie: FindMovieResponse;
   GetMyProfile: GetMyProfileResponse;
   user: User | null;
+}
+
+export interface FindMovieResponse {
+  ok: boolean;
+  error: string | null;
+  movie: Movie | null;
+}
+
+export interface Movie {
+  id: number;
+  title: string;
+  poster_path: string | null;
+  original_language: string;
+  original_title: string;
+  genre_ids: Array<number>;
+  adult: boolean;
+  overview: string | null;
+  release_date: string;
 }
 
 export interface GetMyProfileResponse {
@@ -62,4 +81,8 @@ export interface EmailSignUpResponse {
 export interface UpdateMyProfileResponse {
   ok: boolean;
   error: string | null;
+}
+
+export interface Quert {
+  movie: Movie | null;
 }

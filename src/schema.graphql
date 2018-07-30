@@ -1,3 +1,31 @@
+type FindMovieResponse {
+  ok: Boolean!
+  error: String
+  movie: Movie
+}
+
+type Query {
+  FindMovie: FindMovieResponse!
+  GetMyProfile: GetMyProfileResponse!
+  user: User
+}
+
+type Movie {
+  id: Int!
+  title: String!
+  poster_path: String
+  original_language: String!
+  original_title: String!
+  genre_ids: [Int]!
+  adult: Boolean!
+  overview: String
+  release_date: String!
+}
+
+type Quert {
+  movie: Movie
+}
+
 type EmailSignInResponse {
   ok: Boolean!
   error: String
@@ -19,11 +47,6 @@ type EmailSignUpResponse {
 type GetMyProfileResponse {
   ok: Boolean!
   error: String
-  user: User
-}
-
-type Query {
-  GetMyProfile: GetMyProfileResponse!
   user: User
 }
 
