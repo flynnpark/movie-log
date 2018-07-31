@@ -1,6 +1,10 @@
 import { Resolvers } from '../../../types/resolvers';
-import { FindMovie } from '../../../types/graph';
+import { findMovie } from '../../../utils/tmdb';
 
-const resolvers: Resolvers = {};
+const resolvers: Resolvers = {
+  Query: {
+    FindMovie: (_, { query }) => findMovie(query),
+  },
+};
 
 export default resolvers;

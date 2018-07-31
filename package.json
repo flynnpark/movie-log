@@ -24,6 +24,7 @@
   "homepage": "https://github.com/wphestiraid/movie-log-backend#readme",
   "dependencies": {
     "@types/jsonwebtoken": "^7.2.8",
+    "axios": "^0.18.0",
     "bcrypt": "^3.0.0",
     "class-validator": "^0.9.1",
     "cors": "^2.8.4",
