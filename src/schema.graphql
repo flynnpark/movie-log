@@ -20,6 +20,13 @@ type Quert {
   movie: Movie
 }
 
+type MovieScore {
+  id: Int!
+  movieId: Int!
+  score: Int!
+  createdAt: Int!
+}
+
 type EmailSignInResponse {
   ok: Boolean!
   error: String

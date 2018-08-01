@@ -1,0 +1,10 @@
+type MovieScore {
+  id: Int!
+  movieId: Int!
+  score: Int!
+  createdAt: Int!
+}
+
+type Query {
+  movieScore: MovieScore
+}
