@@ -1,0 +1,11 @@
+type MovieRating {
+  id: Int!
+  movieId: Int!
+  userId: Int!
+  rating: Int!
+  createdAt: Int!
+}
+
+type Query {
+  movieRating: MovieRating
+}

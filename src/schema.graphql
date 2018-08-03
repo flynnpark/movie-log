@@ -1,5 +1,7 @@
 type Query {
   FindMovie(query: String): [Movie]
+  movie: Movie
+  movieRating: MovieRating
   GetMyProfile: GetMyProfileResponse!
   user: User
 }
@@ -16,27 +18,31 @@ type Movie {
   release_date: String!
 }
 
-type Quert {
-  movie: Movie
-}
-
-type MovieScore {
+type MovieRating {
   id: Int!
   movieId: Int!
-  score: Int!
+  userId: Int!
+  rating: Int!
   createdAt: Int!
+}
+
+type SetMovieRatingResponse {
+  ok: Boolean!
+  error: String
+  movieRating: MovieRating
+}
+
+type Mutation {
+  SetMovieRating(movieId: Int!, rating: Int!): SetMovieRatingResponse!
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+  EmailSignUp(email: String!, password: String!, name: String!, birthYear: Int!, profileImage: String): EmailSignUpResponse!
+  UpdateMyProfile(password: String, name: String, profileImage: String): UpdateMyProfileResponse!
 }
 
 type EmailSignInResponse {
   ok: Boolean!
   error: String
   token: String
-}
-
-type Mutation {
-  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(email: String!, password: String!, name: String!, birthYear: Int!, profileImage: String): EmailSignUpResponse!
-  UpdateMyProfile(password: String, name: String, profileImage: String): UpdateMyProfileResponse!
 }
 
 type EmailSignUpResponse {

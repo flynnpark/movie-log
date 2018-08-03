@@ -1,0 +1,9 @@
+type SetMovieRatingResponse {
+  ok: Boolean!
+  error: String
+  movieRating: MovieRating
+}
+
+type Mutation {
+  SetMovieRating(movieId: Int!, rating: Int!): SetMovieRatingResponse!
+}

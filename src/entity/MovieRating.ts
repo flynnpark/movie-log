@@ -7,14 +7,16 @@ import {
 } from 'typeorm';
 
 @Entity()
-class MovieScore extends BaseEntity {
+class MovieRating extends BaseEntity {
   @PrimaryGeneratedColumn() id: number;
 
   @Column() movieId: number;
 
-  @Column() score: number;
+  @Column() userId: number;
+
+  @Column() rating: number;
 
   @CreateDateColumn() createdAt: number;
 }
 
-export default MovieScore;
+export default MovieRating;

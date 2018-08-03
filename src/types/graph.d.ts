@@ -1,8 +1,10 @@
-export const typeDefs = ["type Query {\n  FindMovie(query: String): [Movie]\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n}\n\ntype Movie {\n  id: Int!\n  title: String!\n  poster_path: String\n  original_language: String!\n  original_title: String!\n  genre_ids: [Int]!\n  adult: Boolean!\n  overview: String\n  release_date: String!\n}\n\ntype Quert {\n  movie: Movie\n}\n\ntype MovieScore {\n  id: Int!\n  movieId: Int!\n  score: Int!\n  createdAt: Int!\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(email: String!, password: String!, name: String!, birthYear: Int!, profileImage: String): EmailSignUpResponse!\n  UpdateMyProfile(password: String, name: String, profileImage: String): UpdateMyProfileResponse!\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  password: String!\n  name: String!\n  birthYear: Int!\n  profileImage: String\n  createdAt: Int!\n}\n"];
+export const typeDefs = ["type Query {\n  FindMovie(query: String): [Movie]\n  movie: Movie\n  movieRating: MovieRating\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n}\n\ntype Movie {\n  id: Int!\n  title: String!\n  poster_path: String\n  original_language: String!\n  original_title: String!\n  genre_ids: [Int]!\n  adult: Boolean!\n  overview: String\n  release_date: String!\n}\n\ntype MovieRating {\n  id: Int!\n  movieId: Int!\n  userId: Int!\n  rating: Int!\n  createdAt: Int!\n}\n\ntype SetMovieRatingResponse {\n  ok: Boolean!\n  error: String\n  movieRating: MovieRating\n}\n\ntype Mutation {\n  SetMovieRating(movieId: Int!, rating: Int!): SetMovieRatingResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(email: String!, password: String!, name: String!, birthYear: Int!, profileImage: String): EmailSignUpResponse!\n  UpdateMyProfile(password: String, name: String, profileImage: String): UpdateMyProfileResponse!\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  password: String!\n  name: String!\n  birthYear: Int!\n  profileImage: String\n  createdAt: Int!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
   FindMovie: Array<Movie> | null;
+  movie: Movie | null;
+  movieRating: MovieRating | null;
   GetMyProfile: GetMyProfileResponse;
   user: User | null;
 }
@@ -23,6 +25,14 @@ export interface Movie {
   release_date: string;
 }
 
+export interface MovieRating {
+  id: number;
+  movieId: number;
+  userId: number;
+  rating: number;
+  createdAt: number;
+}
+
 export interface GetMyProfileResponse {
   ok: boolean;
   error: string | null;
@@ -40,9 +50,15 @@ export interface User {
 }
 
 export interface Mutation {
+  SetMovieRating: SetMovieRatingResponse;
   EmailSignIn: EmailSignInResponse;
   EmailSignUp: EmailSignUpResponse;
   UpdateMyProfile: UpdateMyProfileResponse;
+}
+
+export interface SetMovieRatingMutationArgs {
+  movieId: number;
+  rating: number;
 }
 
 export interface EmailSignInMutationArgs {
@@ -64,6 +80,12 @@ export interface UpdateMyProfileMutationArgs {
   profileImage: string | null;
 }
 
+export interface SetMovieRatingResponse {
+  ok: boolean;
+  error: string | null;
+  movieRating: MovieRating | null;
+}
+
 export interface EmailSignInResponse {
   ok: boolean;
   error: string | null;
@@ -79,15 +101,4 @@ export interface EmailSignUpResponse {
 export interface UpdateMyProfileResponse {
   ok: boolean;
   error: string | null;
-}
-
-export interface Quert {
-  movie: Movie | null;
-}
-
-export interface MovieScore {
-  id: number;
-  movieId: number;
-  score: number;
-  createdAt: number;
 }
