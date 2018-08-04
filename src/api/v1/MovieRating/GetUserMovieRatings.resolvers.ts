@@ -4,7 +4,7 @@ import MovieRating from '../../../entity/MovieRating';
 
 const resolvers: Resolvers = {
   Query: {
-    GetAllMovieRatings: async (_, { userId }) => {
+    GetUserMovieRatings: async (_, { userId }) => {
       const user = User.findOne({ id: userId });
       if (!user) {
         return {
@@ -12,14 +12,13 @@ const resolvers: Resolvers = {
           error: 'User not found',
           movieRatings: null,
         };
-      } else {
-        const movieRatings = MovieRating.find({ userId });
-        return {
-          ok: true,
-          error: null,
-          movieRatings,
-        };
       }
+      const movieRatings = MovieRating.find({ userId });
+      return {
+        ok: true,
+        error: null,
+        movieRatings,
+      };
     },
   },
 };
