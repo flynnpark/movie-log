@@ -1,0 +1,9 @@
+type GetAllMovieRatingsResponse {
+  ok: Boolean!
+  error: String
+  movieRatings: [MovieRating]
+}
+
+type Query {
+  GetAllMovieRatings: GetAllMovieRatingsResponse!
+}
