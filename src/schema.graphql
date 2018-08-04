@@ -1,8 +1,10 @@
 type Query {
   FindMovie(query: String): [Movie]
   movie: Movie
+  GetAllMovieRatings: GetAllMovieRatingsResponse!
   movieRating: MovieRating
   GetMyProfile: GetMyProfileResponse!
+  GetUserProfile: GetUserProfileResponse!
   user: User
 }
 
@@ -16,6 +18,12 @@ type Movie {
   adult: Boolean!
   overview: String
   release_date: String!
+}
+
+type GetAllMovieRatingsResponse {
+  ok: Boolean!
+  error: String
+  movieRatings: [MovieRating]
 }
 
 type MovieRating {
@@ -52,6 +60,12 @@ type EmailSignUpResponse {
 }
 
 type GetMyProfileResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type GetUserProfileResponse {
   ok: Boolean!
   error: String
   user: User
