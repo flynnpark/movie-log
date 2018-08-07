@@ -3,7 +3,11 @@ import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import Home from '../../routes/Home';
 import Login from '../../routes/Login';
 
-const AppPresenter = ({ isLoggedIn }) => (
+interface IAppPresenterProps {
+  isLoggedIn: boolean;
+}
+
+const AppPresenter: React.SFC<IAppPresenterProps> = ({ isLoggedIn }) => (
   <BrowserRouter>
     {isLoggedIn ? <WrappedLoggedInRoutes /> : <WrappedLoggedOutRoutes />}
   </BrowserRouter>
