@@ -1,6 +1,6 @@
-import { Button, Card, Checkbox, Col, Form, Icon, Input, Row } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
+import { Button, Card, Checkbox, Col, Form, Icon, Input, Row } from 'antd';
 
 const PageWrapper = styled(Row)`
   height: 100vh;
