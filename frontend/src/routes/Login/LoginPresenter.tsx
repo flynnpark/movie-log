@@ -1,34 +1,42 @@
-import { Button, Checkbox, Col, Form, Icon, Input, Row } from 'antd';
+import { Button, Card, Checkbox, Col, Form, Icon, Input, Row } from 'antd';
 import React from 'react';
+import styled from 'styled-components';
+
+const PageWrapper = styled(Row)`
+  height: 100vh;
+  background-color: #f2f3f5;
+`;
 
 const LoginPresenter = () => (
-  <Row type="flex" justify="center" align="middle" style={{ height: '100vh' }}>
+  <PageWrapper type="flex" justify="center" align="middle">
     <Col span={6}>
-      <Form>
-        <Form.Item>
-          <Input prefix={<Icon type="user" />} placeholder="E-mail" />
-        </Form.Item>
-        <Form.Item>
-          <Input
-            prefix={<Icon type="lock" />}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Item>
-        <Form.Item>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" block={true}>
-            Log in
-          </Button>
-          <Button type="default" htmlType="button" block={true}>
-            Sign up
-          </Button>
-        </Form.Item>
-      </Form>
+      <Card title="Log in">
+        <Form>
+          <Form.Item>
+            <Input prefix={<Icon type="user" />} placeholder="E-mail" />
+          </Form.Item>
+          <Form.Item>
+            <Input
+              prefix={<Icon type="lock" />}
+              type="password"
+              placeholder="Password"
+            />
+          </Form.Item>
+          <Form.Item>
+            <Checkbox>Remember me</Checkbox>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" block={true}>
+              Log in
+            </Button>
+            <Button type="default" htmlType="button" block={true}>
+              Sign up
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
     </Col>
-  </Row>
+  </PageWrapper>
 );
 
 export default LoginPresenter;
