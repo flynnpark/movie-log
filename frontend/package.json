@@ -5,6 +5,10 @@
   "dependencies": {
     "antd": "^3.8.0",
     "apollo-boost": "^0.1.12",
+    "apollo-cache-inmemory": "^1.2.6",
+    "apollo-client": "^2.3.7",
+    "apollo-link-context": "^1.0.8",
+    "apollo-link-http": "^1.5.4",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "react": "^16.4.2",

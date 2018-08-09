@@ -1,34 +1,25 @@
-import ApolloClient, { InMemoryCache } from 'apollo-boost';
+import { ApolloClient } from 'apollo-client';
+import { createHttpLink } from 'apollo-link-http';
+import { setContext } from 'apollo-link-context';
+import { InMemoryCache } from 'apollo-cache-inmemory';
 
-const cache = new InMemoryCache();
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000/graphql'
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('X-JWT');
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : ''
+    }
+  };
+});
 
 const client = new ApolloClient({
-  clientState: {
-    cache,
-    defaults: {
-      auth: {
-        __typename: 'Auth',
-        isLoggedIn: Boolean(localStorage.getItem('jwt')) || false,
-      },
-    },
-    resolvers: {
-      Mutation: {
-        userLogIn: (_, { token }, { cache: localCache }) => {
-          localStorage.setItem('jwt', token);
-          localCache.writeData({
-            data: {
-              auth: {
-                __typename: 'Auth',
-                isLoggedIn: true,
-              },
-            },
-          });
-          return null;
-        },
-      },
-    },
-  },
-  uri: 'http://localhost:3000/',
+  cache: new InMemoryCache(),
+  link: authLink.concat(httpLink)
 });
 
 export default client;
