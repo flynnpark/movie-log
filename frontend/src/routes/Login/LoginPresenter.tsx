@@ -8,22 +8,45 @@ const PageWrapper = styled(Row)`
   background-color: #f2f3f5;
 `;
 
-const LoginPresenter = () => (
+interface IProps {
+  email: string;
+  password: string;
+  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  loading: boolean;
+}
+
+const LoginPresenter: React.SFC<IProps> = ({
+  email,
+  password,
+  onInputChange,
+  onSubmit,
+  loading
+}) => (
   <PageWrapper type="flex" justify="center" align="middle">
     <Helmet>
       <title>Log in | Movie.log</title>
     </Helmet>
     <Col span={6}>
       <Card title="Log in">
-        <Form>
+        <Form onSubmit={onSubmit}>
           <Form.Item>
-            <Input prefix={<Icon type="user" />} placeholder="E-mail" />
+            <Input
+              prefix={<Icon type="user" />}
+              name="email"
+              placeholder="E-mail"
+              onChange={onInputChange}
+              value={email}
+            />
           </Form.Item>
           <Form.Item>
             <Input
               prefix={<Icon type="lock" />}
               type="password"
+              name="password"
               placeholder="Password"
+              onChange={onInputChange}
+              value={password}
             />
           </Form.Item>
           <Form.Item>
