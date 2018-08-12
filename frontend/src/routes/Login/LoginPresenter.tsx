@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Button, Card, Checkbox, Col, Form, Icon, Input, Row } from 'antd';
 
@@ -9,6 +10,9 @@ const PageWrapper = styled(Row)`
 
 const LoginPresenter = () => (
   <PageWrapper type="flex" justify="center" align="middle">
+    <Helmet>
+      <title>Log in | Movie.log</title>
+    </Helmet>
     <Col span={6}>
       <Card title="Log in">
         <Form>
