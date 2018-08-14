@@ -39,6 +39,14 @@ class LoginContainer extends React.Component<RouteComponentProps<any>, IState> {
       <EmailSignInMutation
         mutation={EMAIL_LOG_IN}
         variables={{ email, password }}
+        onCompleted={data => {
+          const { EmailSignIn } = data;
+          if (EmailSignIn.ok) {
+            return;
+          } else {
+            console.log(data);
+          }
+        }}
       >
         {(mutation, { loading }) => {
           const onSubmit: React.FormEventHandler<HTMLFormElement> = event => {

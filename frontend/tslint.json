@@ -5,6 +5,8 @@
   },
   "rules": {
     "ordered-imports": false,
-    "max-classes-per-file": false
+    "max-classes-per-file": false,
+    "no-console": false,
+    "jsx-no-lambda": false
   }
 }
