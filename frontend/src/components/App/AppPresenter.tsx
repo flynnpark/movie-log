@@ -1,7 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import Home from '../../routes/Home';
-import Login from '../../routes/Login';
+import LogIn from '../../routes/LogIn';
+import SignUp from '../../routes/SignUp';
 
 interface IAppPresenterProps {
   isLoggedIn: boolean;
@@ -9,28 +10,22 @@ interface IAppPresenterProps {
 
 const AppPresenter: React.SFC<IAppPresenterProps> = ({ isLoggedIn }) => (
   <BrowserRouter>
-    {isLoggedIn ? <WrappedLoggedInRoutes /> : <WrappedLoggedOutRoutes />}
+    {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
   </BrowserRouter>
 );
 
-const LoggedOutRoutes = ({ location }) => (
-  <React.Fragment>
-    <Switch key={location.key}>
-      <Route exact={true} path="/" component={Login} />
-    </Switch>
-  </React.Fragment>
+const LoggedOutRoutes: React.SFC = () => (
+  <Switch>
+    <Route exact={true} path="/" component={LogIn} />
+    <Route path="/signup" component={SignUp} />
+    <Redirect from={'*'} to={'/'} />
+  </Switch>
 );
 
-const WrappedLoggedOutRoutes = withRouter(LoggedOutRoutes);
-
-const LoggedInRoutes = ({ location }) => (
-  <React.Fragment>
-    <Switch key={location.key}>
-      <Route exact={true} path="/" component={Home} />
-    </Switch>
-  </React.Fragment>
+const LoggedInRoutes: React.SFC = () => (
+  <Switch>
+    <Route exact={true} path="/" component={Home} />
+  </Switch>
 );
-
-const WrappedLoggedInRoutes = withRouter(LoggedInRoutes);
 
 export default AppPresenter;
