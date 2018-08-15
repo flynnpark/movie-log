@@ -1,7 +1,17 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Card, Col, Form, Input, Row, Tooltip, Icon } from 'antd';
+import {
+  Card,
+  Col,
+  Form,
+  Input,
+  Row,
+  Tooltip,
+  Icon,
+  DatePicker,
+  Upload
+} from 'antd';
 
 const PageWrapper = styled(Row)`
   height: 100vh;
@@ -21,6 +31,14 @@ const SignUpPresenter: React.SFC<any> = props => {
       sm: { span: 18 }
     }
   };
+
+  const uploadButton = (
+    <div>
+      <Icon type="plus" />
+      <div>Upload</div>
+    </div>
+  );
+
   return (
     <PageWrapper type="flex" justify="center" align="middle">
       <Helmet>
@@ -29,6 +47,15 @@ const SignUpPresenter: React.SFC<any> = props => {
       <Col span={8}>
         <Card title="Sign Up">
           <Form>
+            <Form.Item {...formItemLayout} label="Avatar">
+              <Upload
+                name="avatar"
+                listType="picture-card"
+                showUploadList={false}
+              >
+                {uploadButton}
+              </Upload>
+            </Form.Item>
             <Form.Item {...formItemLayout} label="E-mail">
               {getFieldDecorator('email', {
                 rules: [
@@ -83,6 +110,16 @@ const SignUpPresenter: React.SFC<any> = props => {
                   }
                 ]
               })(<Input type="password" />)}
+            </Form.Item>
+            <Form.Item {...formItemLayout} label="Birthday">
+              {getFieldDecorator('birthday', {
+                rules: [
+                  {
+                    required: true,
+                    message: 'Please select your birthday!'
+                  }
+                ]
+              })(<DatePicker />)}
             </Form.Item>
           </Form>
         </Card>
