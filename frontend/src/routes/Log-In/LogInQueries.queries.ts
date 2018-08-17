@@ -5,6 +5,7 @@ export const EMAIL_LOG_IN = gql`
     EmailSignIn(email: $email, password: $password) {
       ok
       error
+      token
     }
   }
 `;

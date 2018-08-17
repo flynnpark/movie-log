@@ -1,4 +1,5 @@
 import React from 'react';
+import { MutationFn } from 'react-apollo';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Button, Card, Checkbox, Col, Form, Icon, Input, Row } from 'antd';
@@ -11,16 +12,16 @@ const PageWrapper = styled(Row)`
 interface IProps {
   email: string;
   password: string;
-  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmitFn: MutationFn;
   loading: boolean;
 }
 
 const LoginPresenter: React.SFC<IProps> = ({
   email,
   password,
-  onInputChange,
-  onSubmit,
+  onChange,
+  onSubmitFn,
   loading
 }) => (
   <PageWrapper type="flex" justify="center" align="middle">
@@ -29,13 +30,18 @@ const LoginPresenter: React.SFC<IProps> = ({
     </Helmet>
     <Col span={6}>
       <Card title="Log in">
-        <Form onSubmit={onSubmit}>
+        <Form
+          onSubmit={e => {
+            e.preventDefault();
+            onSubmitFn();
+          }}
+        >
           <Form.Item>
             <Input
               prefix={<Icon type="user" />}
               name="email"
               placeholder="E-mail"
-              onChange={onInputChange}
+              onChange={onChange}
               value={email}
             />
           </Form.Item>
@@ -45,7 +51,7 @@ const LoginPresenter: React.SFC<IProps> = ({
               type="password"
               name="password"
               placeholder="Password"
-              onChange={onInputChange}
+              onChange={onChange}
               value={password}
             />
           </Form.Item>

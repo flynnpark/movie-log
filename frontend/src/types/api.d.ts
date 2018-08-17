@@ -9,6 +9,7 @@ export interface startEmailVerification_EmailSignIn {
   __typename: "EmailSignInResponse";
   ok: boolean;
   error: string | null;
+  token: string | null;
 }
 
 export interface startEmailVerification {
