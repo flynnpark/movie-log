@@ -1,12 +1,12 @@
 import React from 'react';
 import { MutationFn } from 'react-apollo';
+import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Button, Card, Checkbox, Col, Form, Icon, Input, Row } from 'antd';
 
 const PageWrapper = styled(Row)`
   height: 100vh;
-  background-color: #f2f3f5;
 `;
 
 interface IProps {
@@ -62,9 +62,11 @@ const LoginPresenter: React.SFC<IProps> = ({
             <Button type="primary" htmlType="submit" block={true}>
               Log in
             </Button>
-            <Button type="default" htmlType="button" block={true}>
-              Sign up
-            </Button>
+            <Link to="/signup">
+              <Button type="default" htmlType="button" block={true}>
+                Sign up
+              </Button>
+            </Link>
           </Form.Item>
         </Form>
       </Card>

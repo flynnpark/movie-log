@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   Card,
@@ -10,12 +11,12 @@ import {
   Tooltip,
   Icon,
   DatePicker,
-  Upload
+  Upload,
+  Button
 } from 'antd';
 
 const PageWrapper = styled(Row)`
   height: 100vh;
-  background-color: #f2f3f5;
 `;
 
 const SignUpPresenter: React.SFC<any> = props => {
@@ -29,6 +30,19 @@ const SignUpPresenter: React.SFC<any> = props => {
     wrapperCol: {
       xs: { span: 24 },
       sm: { span: 18 }
+    }
+  };
+
+  const tailFormItemLayout = {
+    wrapperCol: {
+      xs: {
+        span: 24,
+        offset: 0
+      },
+      sm: {
+        span: 18,
+        offset: 6
+      }
     }
   };
 
@@ -101,7 +115,7 @@ const SignUpPresenter: React.SFC<any> = props => {
                 </span>
               }
             >
-              {getFieldDecorator('nickanme', {
+              {getFieldDecorator('nickname', {
                 rules: [
                   {
                     required: true,
@@ -109,7 +123,7 @@ const SignUpPresenter: React.SFC<any> = props => {
                     whitespace: true
                   }
                 ]
-              })(<Input type="password" />)}
+              })(<Input />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Birthday">
               {getFieldDecorator('birthday', {
@@ -120,6 +134,14 @@ const SignUpPresenter: React.SFC<any> = props => {
                   }
                 ]
               })(<DatePicker />)}
+            </Form.Item>
+            <Form.Item {...tailFormItemLayout}>
+              <Button type="default" htmlType="button">
+                <Link to="/">Back</Link>
+              </Button>{' '}
+              <Button type="primary" htmlType="submit">
+                Register
+              </Button>
             </Form.Item>
           </Form>
         </Card>

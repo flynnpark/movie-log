@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import client from './apollo';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
+import './GlobalStyles';
 
 ReactDOM.render(
   <ApolloProvider client={client}>
