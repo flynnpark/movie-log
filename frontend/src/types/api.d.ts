@@ -24,6 +24,32 @@ export interface startEmailVerificationVariables {
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL mutation operation: startEmailSignUp
+// ====================================================
+
+export interface startEmailSignUp_EmailSignUp {
+  __typename: "EmailSignUpResponse";
+  ok: boolean;
+  error: string | null;
+  token: string | null;
+}
+
+export interface startEmailSignUp {
+  EmailSignUp: startEmailSignUp_EmailSignUp;
+}
+
+export interface startEmailSignUpVariables {
+  email: string;
+  password: string;
+  name: string;
+  birthYear: number;
+  profileImage?: string | null;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

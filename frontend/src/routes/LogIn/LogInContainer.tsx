@@ -6,7 +6,7 @@ import {
   startEmailVerificationVariables
 } from '../../types/api';
 import LogInPresenter from './LogInPresenter';
-import { EMAIL_LOG_IN } from './LogInQueries.queries';
+import { EMAIL_LOG_IN } from './LogInQueries';
 import { USER_LOG_IN } from '../../SharedQueries.local';
 
 interface IState {
