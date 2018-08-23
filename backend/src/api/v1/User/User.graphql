@@ -3,7 +3,7 @@ type User {
   email: String!
   password: String!
   name: String!
-  birthYear: Int!
+  birthday: String!
   profileImage: String
   createdAt: Int!
 }

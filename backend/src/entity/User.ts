@@ -26,13 +26,13 @@ class User extends BaseEntity {
   @Column({ type: 'text' })
   name: string;
 
-  @Column({ type: 'int' })
-  birthYear: number;
+  @Column({ type: 'date' })
+  birthday: Date;
 
   @Column({ type: 'text', nullable: true })
   profileImage: string | null;
 
-  @CreateDateColumn() createdAt: number;
+  @CreateDateColumn({ type: 'timestamptz'}) createdAt: Date;
 
   public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
