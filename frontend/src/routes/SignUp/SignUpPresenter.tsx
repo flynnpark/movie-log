@@ -19,8 +19,16 @@ const PageWrapper = styled(Row)`
   height: 100vh;
 `;
 
-const SignUpPresenter: React.SFC<any> = props => {
-  const { getFieldDecorator } = props.form;
+const SignUpPresenter: React.SFC<any> = ({
+  form,
+  email,
+  password,
+  name,
+  birthday,
+  profileImage,
+  onChange
+}) => {
+  const { getFieldDecorator } = form;
 
   const formItemLayout = {
     labelCol: {
@@ -82,7 +90,7 @@ const SignUpPresenter: React.SFC<any> = props => {
                     message: 'Please input your E-mail'
                   }
                 ]
-              })(<Input />)}
+              })(<Input value={email} onChange={onChange} />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Password">
               {getFieldDecorator('password', {
@@ -92,7 +100,9 @@ const SignUpPresenter: React.SFC<any> = props => {
                     message: 'Please input your password!'
                   }
                 ]
-              })(<Input type="password" />)}
+              })(
+                <Input type="password" value={password} onChange={onChange} />
+              )}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Confirm Password">
               {getFieldDecorator('confirm', {

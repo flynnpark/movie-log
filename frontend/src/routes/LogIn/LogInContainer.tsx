@@ -21,7 +21,7 @@ class EmailSignInMutation extends Mutation<
   startEmailVerificationVariables
 > {}
 
-class LogInContainer extends React.Component<RouteComponentProps<any>, IState> {
+class LogInContainer extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     if (!props.location.state) {
