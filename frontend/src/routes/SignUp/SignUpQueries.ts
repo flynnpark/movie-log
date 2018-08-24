@@ -5,14 +5,14 @@ export const EMAIL_SIGN_UP = gql`
     $email: String!
     $password: String!
     $name: String!
-    $birthYear: Int!
+    $birthday: String!
     $profileImage: String
   ) {
     EmailSignUp(
       email: $email
       password: $password
       name: $name
-      birthYear: $birthYear
+      birthday: $birthday
       profileImage: $profileImage
     ) {
       ok

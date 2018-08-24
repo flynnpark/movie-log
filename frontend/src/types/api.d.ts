@@ -43,7 +43,7 @@ export interface startEmailSignUpVariables {
   email: string;
   password: string;
   name: string;
-  birthYear: number;
+  birthday: string;
   profileImage?: string | null;
 }
 
