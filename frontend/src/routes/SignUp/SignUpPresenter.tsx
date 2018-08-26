@@ -14,6 +14,7 @@ import {
   Upload,
   Button
 } from 'antd';
+import moment from 'moment';
 import { MutationFn } from 'react-apollo';
 
 const PageWrapper = styled(Row)`
@@ -23,7 +24,8 @@ const PageWrapper = styled(Row)`
 interface IProps {
   form: any;
   email: string;
-  password: string;
+  password1: string;
+  password2: string;
   name: string;
   birthday: string;
   profileImage: string;
@@ -35,7 +37,8 @@ interface IProps {
 const SignUpPresenter: React.SFC<IProps> = ({
   form,
   email,
-  password,
+  password1,
+  password2,
   name,
   birthday,
   profileImage,
@@ -68,6 +71,8 @@ const SignUpPresenter: React.SFC<IProps> = ({
       }
     }
   };
+
+  const dateFormat = 'YYYY-MM-DD';
 
   const uploadButton = (
     <div>
@@ -105,7 +110,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                     message: 'Please input your E-mail'
                   }
                 ]
-              })(<Input value={email} onChange={onChange} />)}
+              })(<Input name="email" value={email} onChange={onChange} />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Password">
               {getFieldDecorator('password', {
@@ -116,7 +121,12 @@ const SignUpPresenter: React.SFC<IProps> = ({
                   }
                 ]
               })(
-                <Input type="password" value={password} onChange={onChange} />
+                <Input
+                  type="password"
+                  name="password1"
+                  value={password1}
+                  onChange={onChange}
+                />
               )}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Confirm Password">
@@ -127,7 +137,14 @@ const SignUpPresenter: React.SFC<IProps> = ({
                     message: 'Please confirm your password!'
                   }
                 ]
-              })(<Input type="password" />)}
+              })(
+                <Input
+                  type="password"
+                  name="password2"
+                  value={password2}
+                  onChange={onChange}
+                />
+              )}
             </Form.Item>
             <Form.Item
               {...formItemLayout}
@@ -148,7 +165,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                     whitespace: true
                   }
                 ]
-              })(<Input />)}
+              })(<Input name="name" value={name} onChange={onChange} />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Birthday">
               {getFieldDecorator('birthday', {
@@ -158,7 +175,12 @@ const SignUpPresenter: React.SFC<IProps> = ({
                     message: 'Please select your birthday!'
                   }
                 ]
-              })(<DatePicker />)}
+              })(
+                <DatePicker
+                  defaultValue={moment(birthday, dateFormat)}
+                  format={dateFormat}
+                />
+              )}
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
               <Button type="default" htmlType="button">

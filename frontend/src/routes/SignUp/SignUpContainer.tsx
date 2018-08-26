@@ -8,7 +8,8 @@ import { USER_LOG_IN } from '../../SharedQueries.local';
 
 interface IState {
   email: string;
-  password: string;
+  password1: string;
+  password2: string;
   name: string;
   birthday: string;
   profileImage: string;
@@ -26,12 +27,29 @@ class SignUpContainer extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       email: '',
-      password: '',
+      password1: '',
+      password2: '',
       name: '',
-      birthday: '',
+      birthday: this.getFormattedDate(new Date()),
       profileImage: ''
     };
   }
+
+  public getFormattedDate = dateObj => {
+    const tmpDate = new Date(dateObj);
+    let month = '' + (tmpDate.getMonth() + 1);
+    let date = '' + tmpDate.getDate();
+    const year = tmpDate.getFullYear();
+
+    if (month.length < 2) {
+      month = '0' + month;
+    }
+    if (date.length < 2) {
+      date = '0' + date;
+    }
+
+    return [year, month, date].join('-');
+  };
 
   public onInputChange: React.ChangeEventHandler<HTMLInputElement> = event => {
     const {
@@ -43,13 +61,26 @@ class SignUpContainer extends React.Component<IProps, IState> {
   };
 
   public render() {
-    const { email, password, name, birthday, profileImage } = this.state;
+    const {
+      email,
+      password1,
+      password2,
+      name,
+      birthday,
+      profileImage
+    } = this.state;
     return (
       <Mutation mutation={USER_LOG_IN}>
         {userLogIn => (
           <EmailSignUpMutation
             mutation={EMAIL_SIGN_UP}
-            variables={{ email, password, name, birthday, profileImage }}
+            variables={{
+              email,
+              password: password1,
+              name,
+              birthday,
+              profileImage
+            }}
             onCompleted={data => {
               const { EmailSignUp } = data;
               if (EmailSignUp.ok) {
@@ -70,7 +101,8 @@ class SignUpContainer extends React.Component<IProps, IState> {
               return (
                 <SignUpPresenter
                   email={email}
-                  password={password}
+                  password1={password1}
+                  password2={password2}
                   name={name}
                   birthday={birthday}
                   profileImage={profileImage}
