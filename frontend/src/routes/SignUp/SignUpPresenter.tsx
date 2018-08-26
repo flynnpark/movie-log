@@ -14,19 +14,34 @@ import {
   Upload,
   Button
 } from 'antd';
+import { MutationFn } from 'react-apollo';
 
 const PageWrapper = styled(Row)`
   height: 100vh;
 `;
 
-const SignUpPresenter: React.SFC<any> = ({
+interface IProps {
+  form: any;
+  email: string;
+  password: string;
+  name: string;
+  birthday: string;
+  profileImage: string;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSubmitFn: MutationFn;
+  loading: boolean;
+}
+
+const SignUpPresenter: React.SFC<IProps> = ({
   form,
   email,
   password,
   name,
   birthday,
   profileImage,
-  onChange
+  onChange,
+  onSubmitFn,
+  loading
 }) => {
   const { getFieldDecorator } = form;
 
