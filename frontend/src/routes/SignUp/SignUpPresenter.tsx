@@ -31,6 +31,7 @@ interface IProps {
   profileImage: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmitFn: MutationFn;
+  compareToFirstPassword: any;
   loading: boolean;
 }
 
@@ -44,6 +45,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
   profileImage,
   onChange,
   onSubmitFn,
+  compareToFirstPassword,
   loading
 }) => {
   const { getFieldDecorator } = form;
@@ -135,6 +137,9 @@ const SignUpPresenter: React.SFC<IProps> = ({
                   {
                     required: true,
                     message: 'Please confirm your password!'
+                  },
+                  {
+                    validator: compareToFirstPassword
                   }
                 ]
               })(

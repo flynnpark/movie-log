@@ -35,11 +35,10 @@ class SignUpContainer extends React.Component<IProps, IState> {
     };
   }
 
-  public getFormattedDate = dateObj => {
-    const tmpDate = new Date(dateObj);
-    let month = '' + (tmpDate.getMonth() + 1);
-    let date = '' + tmpDate.getDate();
-    const year = tmpDate.getFullYear();
+  public getFormattedDate = (dateObj: Date) => {
+    let month = '' + (dateObj.getMonth() + 1);
+    let date = '' + dateObj.getDate();
+    const year = dateObj.getFullYear();
 
     if (month.length < 2) {
       month = '0' + month;
@@ -58,6 +57,15 @@ class SignUpContainer extends React.Component<IProps, IState> {
     this.setState({
       [name]: value
     } as any);
+  };
+
+  public compareToFirstPassword = (rule, value, callback) => {
+    const { password1 } = this.state;
+    if (value && value !== password1) {
+      callback('Two passwords that you enter is inconsistent!');
+    } else {
+      callback();
+    }
   };
 
   public render() {
@@ -108,6 +116,7 @@ class SignUpContainer extends React.Component<IProps, IState> {
                   profileImage={profileImage}
                   loading={loading}
                   onChange={this.onInputChange}
+                  compareToFirstPassword={this.compareToFirstPassword}
                   onSubmitFn={mutation}
                 />
               );
