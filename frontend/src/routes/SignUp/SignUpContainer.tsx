@@ -35,7 +35,7 @@ class SignUpContainer extends React.Component<IProps, IState> {
     };
   }
 
-  public getFormattedDate = (dateObj: Date) => {
+  public getFormattedDate = (dateObj: Date): string => {
     let month = '' + (dateObj.getMonth() + 1);
     let date = '' + dateObj.getDate();
     const year = dateObj.getFullYear();
@@ -59,7 +59,11 @@ class SignUpContainer extends React.Component<IProps, IState> {
     } as any);
   };
 
-  public compareToFirstPassword = (rule, value, callback) => {
+  public compareToFirstPassword = (
+    rule: any,
+    value: string,
+    callback: (arg?: string) => void
+  ): void => {
     const { password1 } = this.state;
     if (value && value !== password1) {
       callback('Two passwords that you enter is inconsistent!');
