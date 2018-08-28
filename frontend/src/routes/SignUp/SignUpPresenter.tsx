@@ -14,7 +14,6 @@ import {
   Upload,
   Button
 } from 'antd';
-import moment from 'moment';
 import { MutationFn } from 'react-apollo';
 
 const PageWrapper = styled(Row)`
@@ -24,8 +23,8 @@ const PageWrapper = styled(Row)`
 interface IProps {
   form: any;
   email: string;
-  password1: string;
-  password2: string;
+  password: string;
+  confirm: string;
   name: string;
   birthday: string;
   profileImage: string;
@@ -38,8 +37,8 @@ interface IProps {
 const SignUpPresenter: React.SFC<IProps> = ({
   form,
   email,
-  password1,
-  password2,
+  password,
+  confirm,
   name,
   birthday,
   profileImage,
@@ -90,7 +89,12 @@ const SignUpPresenter: React.SFC<IProps> = ({
       </Helmet>
       <Col span={8}>
         <Card title="Sign Up">
-          <Form>
+          <Form
+            onSubmit={e => {
+              e.preventDefault();
+              onSubmitFn();
+            }}
+          >
             <Form.Item {...formItemLayout} label="Avatar">
               <Upload
                 name="avatar"
@@ -112,7 +116,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                     message: 'Please input your E-mail'
                   }
                 ]
-              })(<Input name="email" value={email} onChange={onChange} />)}
+              })(<Input name="email" onChange={onChange} />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Password">
               {getFieldDecorator('password', {
@@ -122,14 +126,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                     message: 'Please input your password!'
                   }
                 ]
-              })(
-                <Input
-                  type="password"
-                  name="password1"
-                  value={password1}
-                  onChange={onChange}
-                />
-              )}
+              })(<Input type="password" name="password" onChange={onChange} />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Confirm Password">
               {getFieldDecorator('confirm', {
@@ -142,14 +139,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                     validator: compareToFirstPassword
                   }
                 ]
-              })(
-                <Input
-                  type="password"
-                  name="password2"
-                  value={password2}
-                  onChange={onChange}
-                />
-              )}
+              })(<Input type="password" name="confirm" onChange={onChange} />)}
             </Form.Item>
             <Form.Item
               {...formItemLayout}
@@ -170,7 +160,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                     whitespace: true
                   }
                 ]
-              })(<Input name="name" value={name} onChange={onChange} />)}
+              })(<Input name="name" onChange={onChange} />)}
             </Form.Item>
             <Form.Item {...formItemLayout} label="Birthday">
               {getFieldDecorator('birthday', {
@@ -180,12 +170,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                     message: 'Please select your birthday!'
                   }
                 ]
-              })(
-                <DatePicker
-                  defaultValue={moment(birthday, dateFormat)}
-                  format={dateFormat}
-                />
-              )}
+              })(<DatePicker format={dateFormat} />)}
             </Form.Item>
             <Form.Item {...tailFormItemLayout}>
               <Button type="default" htmlType="button">

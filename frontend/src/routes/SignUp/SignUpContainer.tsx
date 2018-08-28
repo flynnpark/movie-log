@@ -8,8 +8,8 @@ import { USER_LOG_IN } from '../../SharedQueries.local';
 
 interface IState {
   email: string;
-  password1: string;
-  password2: string;
+  password: string;
+  confirm: string;
   name: string;
   birthday: string;
   profileImage: string;
@@ -27,8 +27,8 @@ class SignUpContainer extends React.Component<IProps, IState> {
     super(props);
     this.state = {
       email: '',
-      password1: '',
-      password2: '',
+      password: '',
+      confirm: '',
       name: '',
       birthday: this.getFormattedDate(new Date()),
       profileImage: ''
@@ -64,8 +64,8 @@ class SignUpContainer extends React.Component<IProps, IState> {
     value: string,
     callback: (arg?: string) => void
   ): void => {
-    const { password1 } = this.state;
-    if (value && value !== password1) {
+    const { password } = this.state;
+    if (value && value !== password) {
       callback('Two passwords that you enter is inconsistent!');
     } else {
       callback();
@@ -75,8 +75,8 @@ class SignUpContainer extends React.Component<IProps, IState> {
   public render() {
     const {
       email,
-      password1,
-      password2,
+      password,
+      confirm,
       name,
       birthday,
       profileImage
@@ -88,7 +88,7 @@ class SignUpContainer extends React.Component<IProps, IState> {
             mutation={EMAIL_SIGN_UP}
             variables={{
               email,
-              password: password1,
+              password,
               name,
               birthday,
               profileImage
@@ -113,8 +113,8 @@ class SignUpContainer extends React.Component<IProps, IState> {
               return (
                 <SignUpPresenter
                   email={email}
-                  password1={password1}
-                  password2={password2}
+                  password={password}
+                  confirm={confirm}
                   name={name}
                   birthday={birthday}
                   profileImage={profileImage}
