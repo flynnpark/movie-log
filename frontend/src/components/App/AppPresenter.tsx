@@ -25,6 +25,7 @@ const LoggedOutRoutes: React.SFC = () => (
 const LoggedInRoutes: React.SFC = () => (
   <Switch>
     <Route exact={true} path="/" component={Home} />
+    <Redirect from={'*'} to={'/'} />
   </Switch>
 );
 
