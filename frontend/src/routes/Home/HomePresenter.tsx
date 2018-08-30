@@ -16,6 +16,9 @@ const FixedHeader = styled(Layout.Header)`
 
 const Content = styled(Layout.Content)`
   padding-top: 96px;
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const HomePresenter = () => (
