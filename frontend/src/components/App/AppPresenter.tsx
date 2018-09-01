@@ -36,11 +36,15 @@ const AppPresenter: React.SFC<IAppPresenterProps> = ({ isLoggedIn }) => (
 );
 
 const LoggedOutRoutes: React.SFC = () => (
-  <Switch>
-    <Route exact={true} path="/" component={LogIn} />
-    <Route path="/signup" component={SignUp} />
-    <Redirect from={'*'} to={'/'} />
-  </Switch>
+  <Layout>
+    <Content>
+      <Switch>
+        <Route exact={true} path="/" component={LogIn} />
+        <Route path="/signup" component={SignUp} />
+        <Redirect from={'*'} to={'/'} />
+      </Switch>
+    </Content>
+  </Layout>
 );
 
 const LoggedInRoutes: React.SFC = () => (
