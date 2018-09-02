@@ -81,8 +81,15 @@ class SignUpContainer extends React.Component<IProps, IState> {
       if (error) {
         return;
       }
-
-      console.log(fieldsValue);
+      const birthday = fieldsValue.birthday.format('YYYY-MM-DD');
+      this.setState({
+        ...this.state,
+        email: fieldsValue.email,
+        password: fieldsValue.password,
+        name: fieldsValue.name,
+        birthday,
+        profileImage: fieldsValue.profileImage
+      });
     });
   };
 

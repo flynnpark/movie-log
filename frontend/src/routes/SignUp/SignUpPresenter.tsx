@@ -86,7 +86,13 @@ const SignUpPresenter: React.SFC<IProps> = ({
         <title>Sign Up | Movie.log</title>
       </Helmet>
       <Card title="Sign Up">
-        <Form onSubmit={handleSubmit}>
+        <Form
+          onSubmit={event => {
+            event.preventDefault();
+            handleSubmit(event);
+            onSubmitFn();
+          }}
+        >
           <Form.Item {...formItemLayout} label="Avatar">
             <Upload
               name="avatar"
