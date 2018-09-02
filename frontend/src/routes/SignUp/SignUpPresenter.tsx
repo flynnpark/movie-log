@@ -19,31 +19,31 @@ const PageWrapper = styled.div`
 `;
 
 interface IProps {
-  form: any;
-  email: string;
-  password: string;
-  confirm: string;
-  name: string;
-  birthday: string;
-  profileImage: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmitFn: MutationFn;
-  compareToFirstPassword: any;
   loading: boolean;
+  form: any;
+  handleConfirmBlur: (event: any) => void;
+  validateToNextPassword: (
+    rule: any,
+    value: string,
+    callback: (arg?: string) => void
+  ) => void;
+  compareToFirstPassword: (
+    rule: any,
+    value: string,
+    callback: (arg?: string) => void
+  ) => void;
+  handleSubmit: (event: any) => void;
+  onSubmitFn: MutationFn;
 }
 
 const SignUpPresenter: React.SFC<IProps> = ({
+  loading,
   form,
-  email,
-  password,
-  confirm,
-  name,
-  birthday,
-  profileImage,
-  onChange,
-  onSubmitFn,
+  handleConfirmBlur,
+  validateToNextPassword,
   compareToFirstPassword,
-  loading
+  handleSubmit,
+  onSubmitFn
 }) => {
   const { getFieldDecorator } = form;
 
@@ -86,12 +86,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
         <title>Sign Up | Movie.log</title>
       </Helmet>
       <Card title="Sign Up">
-        <Form
-          onSubmit={e => {
-            e.preventDefault();
-            onSubmitFn();
-          }}
-        >
+        <Form onSubmit={handleSubmit}>
           <Form.Item {...formItemLayout} label="Avatar">
             <Upload
               name="avatar"
@@ -113,7 +108,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                   message: 'Please input your E-mail'
                 }
               ]
-            })(<Input name="email" onChange={onChange} />)}
+            })(<Input />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Password">
             {getFieldDecorator('password', {
@@ -121,9 +116,12 @@ const SignUpPresenter: React.SFC<IProps> = ({
                 {
                   required: true,
                   message: 'Please input your password!'
+                },
+                {
+                  validator: validateToNextPassword
                 }
               ]
-            })(<Input type="password" name="password" onChange={onChange} />)}
+            })(<Input type="password" onBlur={handleConfirmBlur} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Confirm Password">
             {getFieldDecorator('confirm', {
@@ -136,7 +134,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                   validator: compareToFirstPassword
                 }
               ]
-            })(<Input type="password" name="confirm" onChange={onChange} />)}
+            })(<Input type="password" />)}
           </Form.Item>
           <Form.Item
             {...formItemLayout}
@@ -157,7 +155,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
                   whitespace: true
                 }
               ]
-            })(<Input name="name" onChange={onChange} />)}
+            })(<Input />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Birthday">
             {getFieldDecorator('birthday', {
@@ -166,8 +164,9 @@ const SignUpPresenter: React.SFC<IProps> = ({
                   required: true,
                   message: 'Please select your birthday!'
                 }
-              ]
-            })(<DatePicker format={dateFormat} />)}
+              ],
+              format: dateFormat
+            })(<DatePicker />)}
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button type="default" htmlType="button">
@@ -183,6 +182,4 @@ const SignUpPresenter: React.SFC<IProps> = ({
   );
 };
 
-const WrappedSignUpForm = Form.create()(SignUpPresenter);
-
-export default WrappedSignUpForm;
+export default SignUpPresenter;

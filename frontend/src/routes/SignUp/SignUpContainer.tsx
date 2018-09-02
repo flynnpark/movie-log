@@ -1,21 +1,24 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import SignUpPresenter from './SignUpPresenter';
 import { Mutation } from 'react-apollo';
+import { Form } from 'antd';
+import SignUpPresenter from './SignUpPresenter';
 import { EMAIL_SIGN_UP } from './SignUpQueries';
 import { startEmailSignUp, startEmailSignUpVariables } from '../../types/api';
 import { USER_LOG_IN } from '../../SharedQueries.local';
 
 interface IState {
+  confirmDirty: boolean;
   email: string;
   password: string;
-  confirm: string;
   name: string;
   birthday: string;
   profileImage: string;
 }
 
-interface IProps extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {
+  form: any;
+}
 
 class EmailSignUpMutation extends Mutation<
   startEmailSignUp,
@@ -26,37 +29,36 @@ class SignUpContainer extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
+      confirmDirty: false,
       email: '',
       password: '',
-      confirm: '',
       name: '',
-      birthday: this.getFormattedDate(new Date()),
+      birthday: '',
       profileImage: ''
     };
   }
 
-  public getFormattedDate = (dateObj: Date): string => {
-    let month = '' + (dateObj.getMonth() + 1);
-    let date = '' + dateObj.getDate();
-    const year = dateObj.getFullYear();
-
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (date.length < 2) {
-      date = '0' + date;
-    }
-
-    return [year, month, date].join('-');
+  public handleConfirmBlur = event => {
+    const {
+      target: { value }
+    } = event;
+    const { confirmDirty } = this.state;
+    this.setState({
+      confirmDirty: confirmDirty || !!value
+    });
   };
 
-  public onInputChange: React.ChangeEventHandler<HTMLInputElement> = event => {
-    const {
-      target: { name, value }
-    } = event;
-    this.setState({
-      [name]: value
-    } as any);
+  public validateToNextPassword = (
+    rule: any,
+    value: string,
+    callback: (arg?: string) => void
+  ) => {
+    const { confirmDirty } = this.state;
+    const { form } = this.props;
+    if (value && confirmDirty) {
+      form.validateFields(['confirm'], { force: true });
+    }
+    callback();
   };
 
   public compareToFirstPassword = (
@@ -64,23 +66,29 @@ class SignUpContainer extends React.Component<IProps, IState> {
     value: string,
     callback: (arg?: string) => void
   ): void => {
-    const { password } = this.state;
-    if (value && value !== password) {
+    const { form } = this.props;
+    if (value && value !== form.getFieldValue('password')) {
       callback('Two passwords that you enter is inconsistent!');
     } else {
       callback();
     }
   };
 
+  public handleSubmit = event => {
+    const { form } = this.props;
+    event.preventDefault();
+    form.validateFieldsAndScroll((error, fieldsValue) => {
+      if (error) {
+        return;
+      }
+
+      console.log(fieldsValue);
+    });
+  };
+
   public render() {
-    const {
-      email,
-      password,
-      confirm,
-      name,
-      birthday,
-      profileImage
-    } = this.state;
+    const { email, password, name, birthday, profileImage } = this.state;
+    const { form } = this.props;
     return (
       <Mutation mutation={USER_LOG_IN}>
         {userLogIn => (
@@ -112,15 +120,12 @@ class SignUpContainer extends React.Component<IProps, IState> {
             {(mutation, { loading }) => {
               return (
                 <SignUpPresenter
-                  email={email}
-                  password={password}
-                  confirm={confirm}
-                  name={name}
-                  birthday={birthday}
-                  profileImage={profileImage}
                   loading={loading}
-                  onChange={this.onInputChange}
+                  form={form}
+                  validateToNextPassword={this.validateToNextPassword}
                   compareToFirstPassword={this.compareToFirstPassword}
+                  handleConfirmBlur={this.handleConfirmBlur}
+                  handleSubmit={this.handleSubmit}
                   onSubmitFn={mutation}
                 />
               );
@@ -132,4 +137,4 @@ class SignUpContainer extends React.Component<IProps, IState> {
   }
 }
 
-export default SignUpContainer;
+export default Form.create()(SignUpContainer);
