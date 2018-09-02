@@ -6,7 +6,7 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   BeforeInsert,
-  BeforeUpdate,
+  BeforeUpdate
 } from 'typeorm';
 import { IsEmail } from 'class-validator';
 
@@ -14,7 +14,8 @@ const BCRYPT_ROUNDS = 10;
 
 @Entity()
 class User extends BaseEntity {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column({ type: 'text', unique: true })
   @IsEmail()
@@ -26,13 +27,11 @@ class User extends BaseEntity {
   @Column({ type: 'text' })
   name: string;
 
-  @Column({ type: 'date' })
-  birthday: Date;
-
   @Column({ type: 'text', nullable: true })
-  profileImage: string | null;
+  avatar: string | null;
 
-  @CreateDateColumn({ type: 'timestamptz'}) createdAt: Date;
+  @CreateDateColumn({ type: 'timestamptz' })
+  createdAt: Date;
 
   public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);

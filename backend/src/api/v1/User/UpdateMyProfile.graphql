@@ -7,6 +7,6 @@ type Mutation {
   UpdateMyProfile(
     password: String
     name: String
-    profileImage: String
+    avatar: String
   ): UpdateMyProfileResponse!
 }
