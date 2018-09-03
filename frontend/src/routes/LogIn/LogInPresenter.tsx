@@ -10,66 +10,85 @@ const PageWrapper = styled.div`
 `;
 
 interface IProps {
+  form: any;
+  loading: boolean;
   email: string;
   password: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmitFn: MutationFn;
-  loading: boolean;
 }
 
 const LoginPresenter: React.SFC<IProps> = ({
+  form,
+  loading,
   email,
   password,
   onChange,
-  onSubmitFn,
-  loading
-}) => (
-  <PageWrapper>
-    <Helmet>
-      <title>Log in | Movie.log</title>
-    </Helmet>
-    <Card title="Log in">
-      <Form
-        onSubmit={e => {
-          e.preventDefault();
-          onSubmitFn();
-        }}
-      >
-        <Form.Item>
-          <Input
-            prefix={<Icon type="user" />}
-            name="email"
-            placeholder="E-mail"
-            onChange={onChange}
-            value={email}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Input
-            prefix={<Icon type="lock" />}
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={onChange}
-            value={password}
-          />
-        </Form.Item>
-        <Form.Item>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" block={true}>
-            Log in
-          </Button>
-          <Link to="/signup">
-            <Button type="default" htmlType="button" block={true}>
-              Sign up
+  onSubmitFn
+}) => {
+  const { getFieldDecorator } = form;
+  return (
+    <PageWrapper>
+      <Helmet>
+        <title>Log in | Movie.log</title>
+      </Helmet>
+      <Card title="Log in">
+        <Form
+          onSubmit={e => {
+            e.preventDefault();
+            onSubmitFn();
+          }}
+        >
+          <Form.Item>
+            {getFieldDecorator('email', {
+              rules: [
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!'
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!'
+                }
+              ]
+            })(<Input prefix={<Icon type="user" />} placeholder="E-mail" />)}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('password', {
+              rules: [
+                {
+                  required: true,
+                  message: 'Please input your password!'
+                }
+              ]
+            })(
+              <Input
+                prefix={<Icon type="lock" />}
+                type="password"
+                placeholder="Password"
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator('remember', {
+              valuePropName: 'checked',
+              initialValue: true
+            })(<Checkbox>Remember me</Checkbox>)}
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" block={true}>
+              Log in
             </Button>
-          </Link>
-        </Form.Item>
-      </Form>
-    </Card>
-  </PageWrapper>
-);
+            <Link to="/signup">
+              <Button type="default" htmlType="button" block={true}>
+                Sign up
+              </Button>
+            </Link>
+          </Form.Item>
+        </Form>
+      </Card>
+    </PageWrapper>
+  );
+};
 
 export default LoginPresenter;

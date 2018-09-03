@@ -1,6 +1,7 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
 import { RouteComponentProps } from 'react-router-dom';
+import { Mutation } from 'react-apollo';
+import { Form } from 'antd';
 import {
   startEmailVerification,
   startEmailVerificationVariables
@@ -14,7 +15,9 @@ interface IState {
   password: string;
 }
 
-interface IProps extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {
+  form: any;
+}
 
 class EmailSignInMutation extends Mutation<
   startEmailVerification,
@@ -44,6 +47,7 @@ class LogInContainer extends React.Component<IProps, IState> {
 
   public render() {
     const { email, password } = this.state;
+    const { form } = this.props;
     return (
       <Mutation mutation={USER_LOG_IN}>
         {userLogIn => (
@@ -69,9 +73,10 @@ class LogInContainer extends React.Component<IProps, IState> {
             {(mutation, { loading }) => {
               return (
                 <LogInPresenter
+                  loading={loading}
+                  form={form}
                   email={email}
                   password={password}
-                  loading={loading}
                   onChange={this.onInputChange}
                   onSubmitFn={mutation}
                 />
@@ -84,4 +89,4 @@ class LogInContainer extends React.Component<IProps, IState> {
   }
 }
 
-export default LogInContainer;
+export default Form.create()(LogInContainer);

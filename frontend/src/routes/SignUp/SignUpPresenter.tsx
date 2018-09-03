@@ -10,8 +10,8 @@ const PageWrapper = styled.div`
 `;
 
 interface IProps {
-  loading: boolean;
   form: any;
+  loading: boolean;
   handleConfirmBlur: (event: any) => void;
   validateToNextPassword: (
     rule: any,
@@ -96,7 +96,7 @@ const SignUpPresenter: React.SFC<IProps> = ({
               rules: [
                 {
                   type: 'email',
-                  message: 'The Input is not valid E-mail!'
+                  message: 'The input is not valid E-mail!'
                 },
                 {
                   required: true,
