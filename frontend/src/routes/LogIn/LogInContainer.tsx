@@ -36,13 +36,19 @@ class LogInContainer extends React.Component<IProps, IState> {
     };
   }
 
-  public onInputChange: React.ChangeEventHandler<HTMLInputElement> = event => {
-    const {
-      target: { name, value }
-    } = event;
-    this.setState({
-      [name]: value
-    } as any);
+  public handleSubmit = event => {
+    const { form } = this.props;
+    event.preventDefault();
+    form.validateFields((error, fieldsValue) => {
+      if (error) {
+        return;
+      }
+      this.setState({
+        ...this.state,
+        email: fieldsValue.email,
+        password: fieldsValue.password
+      });
+    });
   };
 
   public render() {
@@ -77,7 +83,7 @@ class LogInContainer extends React.Component<IProps, IState> {
                   form={form}
                   email={email}
                   password={password}
-                  onChange={this.onInputChange}
+                  handleSubmit={this.handleSubmit}
                   onSubmitFn={mutation}
                 />
               );

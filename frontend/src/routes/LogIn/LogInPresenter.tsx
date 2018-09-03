@@ -14,7 +14,7 @@ interface IProps {
   loading: boolean;
   email: string;
   password: string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: (event: any) => void;
   onSubmitFn: MutationFn;
 }
 
@@ -23,7 +23,7 @@ const LoginPresenter: React.SFC<IProps> = ({
   loading,
   email,
   password,
-  onChange,
+  handleSubmit,
   onSubmitFn
 }) => {
   const { getFieldDecorator } = form;
@@ -34,8 +34,9 @@ const LoginPresenter: React.SFC<IProps> = ({
       </Helmet>
       <Card title="Log in">
         <Form
-          onSubmit={e => {
-            e.preventDefault();
+          onSubmit={event => {
+            event.preventDefault();
+            handleSubmit(event);
             onSubmitFn();
           }}
         >
