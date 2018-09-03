@@ -43,8 +43,7 @@ export interface startEmailSignUpVariables {
   email: string;
   password: string;
   name: string;
-  birthday: string;
-  profileImage?: string | null;
+  avatar?: string | null;
 }
 
 /* tslint:disable */

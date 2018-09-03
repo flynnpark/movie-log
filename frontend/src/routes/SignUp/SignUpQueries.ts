@@ -5,15 +5,13 @@ export const EMAIL_SIGN_UP = gql`
     $email: String!
     $password: String!
     $name: String!
-    $birthday: String!
-    $profileImage: String
+    $avatar: String
   ) {
     EmailSignUp(
       email: $email
       password: $password
       name: $name
-      birthday: $birthday
-      profileImage: $profileImage
+      avatar: $avatar
     ) {
       ok
       error

@@ -163,17 +163,6 @@ const SignUpPresenter: React.SFC<IProps> = ({
               ]
             })(<Input />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Birthday">
-            {getFieldDecorator('birthday', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please select your birthday!'
-                }
-              ],
-              format: dateFormat
-            })(<DatePicker />)}
-          </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button type="default" htmlType="button">
               <Link to="/">Back</Link>

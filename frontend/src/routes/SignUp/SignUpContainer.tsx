@@ -12,8 +12,7 @@ interface IState {
   email: string;
   password: string;
   name: string;
-  birthday: string;
-  profileImage: string;
+  avatar: string;
 }
 
 interface IProps extends RouteComponentProps<any> {
@@ -33,8 +32,7 @@ class SignUpContainer extends React.Component<IProps, IState> {
       email: '',
       password: '',
       name: '',
-      birthday: '',
-      profileImage: ''
+      avatar: ''
     };
   }
 
@@ -81,20 +79,18 @@ class SignUpContainer extends React.Component<IProps, IState> {
       if (error) {
         return;
       }
-      const birthday = fieldsValue.birthday.format('YYYY-MM-DD');
       this.setState({
         ...this.state,
         email: fieldsValue.email,
         password: fieldsValue.password,
         name: fieldsValue.name,
-        birthday,
-        profileImage: fieldsValue.profileImage
+        avatar: fieldsValue.avatar
       });
     });
   };
 
   public render() {
-    const { email, password, name, birthday, profileImage } = this.state;
+    const { email, password, name, avatar } = this.state;
     const { form } = this.props;
     return (
       <Mutation mutation={USER_LOG_IN}>
@@ -105,8 +101,7 @@ class SignUpContainer extends React.Component<IProps, IState> {
               email,
               password,
               name,
-              birthday,
-              profileImage
+              avatar
             }}
             onCompleted={data => {
               const { EmailSignUp } = data;
