@@ -2,16 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import {
-  Card,
-  Form,
-  Input,
-  Tooltip,
-  Icon,
-  DatePicker,
-  Upload,
-  Button
-} from 'antd';
+import { Card, Form, Input, Tooltip, Icon, Upload, Button } from 'antd';
 import { MutationFn } from 'react-apollo';
 
 const PageWrapper = styled.div`
@@ -70,8 +61,6 @@ const SignUpPresenter: React.SFC<IProps> = ({
       }
     }
   };
-
-  const dateFormat = 'YYYY-MM-DD';
 
   const uploadButton = (
     <div>
