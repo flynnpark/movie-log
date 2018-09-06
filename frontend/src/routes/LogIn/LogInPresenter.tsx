@@ -12,8 +12,6 @@ const PageWrapper = styled.div`
 interface IProps {
   form: any;
   loading: boolean;
-  email: string;
-  password: string;
   handleSubmit: (event: any) => void;
   onSubmitFn: MutationFn;
 }
@@ -21,8 +19,6 @@ interface IProps {
 const LoginPresenter: React.SFC<IProps> = ({
   form,
   loading,
-  email,
-  password,
   handleSubmit,
   onSubmitFn
 }) => {

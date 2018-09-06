@@ -81,8 +81,6 @@ class LogInContainer extends React.Component<IProps, IState> {
                 <LogInPresenter
                   loading={loading}
                   form={form}
-                  email={email}
-                  password={password}
                   handleSubmit={this.handleSubmit}
                   onSubmitFn={mutation}
                 />
