@@ -55,7 +55,7 @@ const LoggedInRoutes: React.SFC = () => (
     <Content>
       <Switch>
         <Route exact={true} path="/" component={Home} />
-        <Route exact={true} path="/profile" component={Profile} />
+        <Route exact={true} path="/profile/:userId" component={Profile} />
         <Redirect from={'*'} to={'/'} />
       </Switch>
     </Content>
