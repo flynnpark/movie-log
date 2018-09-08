@@ -21,10 +21,10 @@ class User extends BaseEntity {
   @IsEmail()
   email: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 100 })
   password: string;
 
-  @Column({ type: 'varchar', length: 20 })
+  @Column({ type: 'varchar', length: 30 })
   name: string;
 
   @Column({ type: 'varchar', length: 200, nullable: true })
