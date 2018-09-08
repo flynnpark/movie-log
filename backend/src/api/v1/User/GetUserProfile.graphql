@@ -5,5 +5,5 @@ type GetUserProfileResponse {
 }
 
 type Query {
-  GetUserProfile: GetUserProfileResponse!
+  GetUserProfile(userId: Int): GetUserProfileResponse!
 }

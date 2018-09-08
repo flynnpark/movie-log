@@ -4,7 +4,7 @@ type Query {
   GetMovieRating: GetMovieRatingResponse!
   GetUserMovieRatings: GetUserMovieRatingsResponse!
   movieRating: MovieRating
-  GetUserProfile: GetUserProfileResponse!
+  GetUserProfile(userId: Int): GetUserProfileResponse!
   user: User
 }
 
