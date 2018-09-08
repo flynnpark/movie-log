@@ -76,10 +76,10 @@ const SignUpPresenter: React.SFC<IProps> = ({
       </Helmet>
       <Card title="Sign Up">
         <Form
-          onSubmit={event => {
+          onSubmit={async event => {
             event.preventDefault();
-            handleSubmit(event);
-            onSubmitFn();
+            await handleSubmit(event);
+            await onSubmitFn();
           }}
         >
           <Form.Item {...formItemLayout} label="Avatar">
@@ -135,22 +135,35 @@ const SignUpPresenter: React.SFC<IProps> = ({
             {...formItemLayout}
             label={
               <span>
-                Nickname&nbsp;
-                <Tooltip title="What do you want others to call you?">
+                Name&nbsp;
+                <Tooltip title="다른 사람들이 뭐라고 불러주길 원하나요?">
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
             }
           >
-            {getFieldDecorator('nickname', {
+            {getFieldDecorator('name', {
               rules: [
                 {
                   required: true,
-                  message: 'Please input you nickname!',
+                  message: 'Please input you name!',
                   whitespace: true
                 }
               ]
             })(<Input />)}
+          </Form.Item>
+          <Form.Item
+            {...formItemLayout}
+            label={
+              <span>
+                Bio&nbsp;
+                <Tooltip title="자신에 대한 짧은 소개를 적어보세요.">
+                  <Icon type="question-circle-o" />
+                </Tooltip>
+              </span>
+            }
+          >
+            {getFieldDecorator('shortBio')(<Input.TextArea rows={3} />)}
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button type="default" htmlType="button">

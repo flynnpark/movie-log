@@ -13,6 +13,7 @@ interface IState {
   password: string;
   name: string;
   avatar: string;
+  shortBio: string;
 }
 
 interface IProps extends RouteComponentProps<any> {
@@ -32,7 +33,8 @@ class SignUpContainer extends React.Component<IProps, IState> {
       email: '',
       password: '',
       name: '',
-      avatar: ''
+      avatar: '',
+      shortBio: ''
     };
   }
 
@@ -84,13 +86,14 @@ class SignUpContainer extends React.Component<IProps, IState> {
         email: fieldsValue.email,
         password: fieldsValue.password,
         name: fieldsValue.name,
-        avatar: fieldsValue.avatar
+        avatar: fieldsValue.avatar,
+        shortBio: fieldsValue.shortBio
       });
     });
   };
 
   public render() {
-    const { email, password, name, avatar } = this.state;
+    const { email, password, name, avatar, shortBio } = this.state;
     const { form } = this.props;
     return (
       <Mutation mutation={USER_LOG_IN}>
@@ -101,7 +104,8 @@ class SignUpContainer extends React.Component<IProps, IState> {
               email,
               password,
               name,
-              avatar
+              avatar,
+              shortBio
             }}
             onCompleted={data => {
               const { EmailSignUp } = data;

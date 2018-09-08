@@ -44,6 +44,7 @@ export interface startEmailSignUpVariables {
   password: string;
   name: string;
   avatar?: string | null;
+  shortBio?: string | null;
 }
 
 /* tslint:disable */
