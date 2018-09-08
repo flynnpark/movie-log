@@ -30,10 +30,10 @@ const LoginPresenter: React.SFC<IProps> = ({
       </Helmet>
       <Card title="Log in">
         <Form
-          onSubmit={event => {
+          onSubmit={async event => {
             event.preventDefault();
-            handleSubmit(event);
-            onSubmitFn();
+            await handleSubmit(event);
+            await onSubmitFn();
           }}
         >
           <Form.Item>
