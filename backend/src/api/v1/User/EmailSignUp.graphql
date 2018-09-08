@@ -10,5 +10,6 @@ type Mutation {
     password: String!
     name: String!
     avatar: String
+    shortBio: String
   ): EmailSignUpResponse!
 }

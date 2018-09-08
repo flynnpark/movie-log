@@ -4,7 +4,8 @@ type User {
   password: String!
   name: String!
   avatar: String
-  createdAt: Int!
+  shortBio: String
+  createdAt: String!
 }
 
 type Query {

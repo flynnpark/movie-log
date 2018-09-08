@@ -17,18 +17,21 @@ class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'text', unique: true })
+  @Column({ type: 'varchar', length: 50, unique: true })
   @IsEmail()
   email: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'varchar', length: 20 })
   password: string;
 
-  @Column({ type: 'text' })
+  @Column({ type: 'varchar', length: 20 })
   name: string;
 
-  @Column({ type: 'text', nullable: true })
+  @Column({ type: 'varchar', length: 200, nullable: true })
   avatar: string | null;
+
+  @Column({ type: 'varchar', length: 200, nullable: true })
+  shortBio: string;
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
