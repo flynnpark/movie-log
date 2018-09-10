@@ -1,5 +1,10 @@
 import React from 'react';
+import { Card } from 'antd';
 
-const MovieCardPresenter = () => <div>MovieCardPresenter</div>;
+const MovieCardPresenter = () => (
+  <Card hoverable={true} style={{ width: 205 }}>
+    <Card.Meta title="Movie Title" description="Movie Description" />
+  </Card>
+);
 
 export default MovieCardPresenter;
