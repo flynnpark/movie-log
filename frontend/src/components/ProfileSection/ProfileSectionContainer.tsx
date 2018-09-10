@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import ProfilePresenter from '../../routes/Profile/ProfilePresenter';
+import ProfileSectionPresenter from './ProfileSectionPresenter';
 
 class ProfileSectionContainer extends Component {
   public render() {
-    return <ProfilePresenter />;
+    return <ProfileSectionPresenter />;
   }
 }
 

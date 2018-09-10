@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ProfilePresenter from './ProfilePresenter';
 
-const ProfileContainer = () => <ProfilePresenter />;
+class ProfileContainer extends Component {
+  public render() {
+    return <ProfilePresenter />;
+  }
+}
 
 export default ProfileContainer;

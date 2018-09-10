@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Input, Avatar } from 'antd';
 import styled from 'styled-components';
 
@@ -27,15 +28,17 @@ const SearchField = styled(Input.Search)`
 
 const NavigationPresenter: React.SFC = () => (
   <React.Fragment>
-    <HeaderContainer>
-      <div>Movie.log</div>
-      <div>
-        <Avatar size={32} icon="user" />
-      </div>
-    </HeaderContainer>
     <HeaderSearch>
       <SearchField placeholder="영화 제목을 검색해보세요." />
     </HeaderSearch>
+    <HeaderContainer>
+      <div>Movie.log</div>
+      <div>
+        <Link to="/profile">
+          <Avatar size={32} icon="user" />
+        </Link>
+      </div>
+    </HeaderContainer>
   </React.Fragment>
 );
 
