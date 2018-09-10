@@ -31,7 +31,7 @@ class User extends BaseEntity {
   avatar: string | null;
 
   @Column({ type: 'varchar', length: 200, nullable: true })
-  shortBio: string;
+  shortBio: string | null;
 
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
