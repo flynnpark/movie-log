@@ -1,19 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import ProfileSection from '../../components/ProfileSection';
 import MovieCard from '../../components/MovieCard';
+
+const MovieCardContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: -7px;
+`;
 
 const ProfilePresenter = () => (
   <React.Fragment>
     <ProfileSection />
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
-        margin: '-7px'
-      }}
-    >
+    <MovieCardContainer>
       <MovieCard />
       <MovieCard />
       <MovieCard />
@@ -23,7 +24,7 @@ const ProfilePresenter = () => (
       <MovieCard />
       <MovieCard />
       <MovieCard />
-    </div>
+    </MovieCardContainer>
   </React.Fragment>
 );
 

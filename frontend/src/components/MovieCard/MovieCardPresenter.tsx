@@ -1,10 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Card } from 'antd';
 
+const MovieCard = styled(Card)`
+  width: 204px;
+  margin: 7px;
+`;
+
 const MovieCardPresenter = () => (
-  <Card hoverable={true} style={{ width: 204, margin: '7px' }}>
+  <MovieCard hoverable={true}>
     <Card.Meta title="Movie Title" description="Movie Description" />
-  </Card>
+  </MovieCard>
 );
 
 export default MovieCardPresenter;
