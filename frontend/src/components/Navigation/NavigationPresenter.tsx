@@ -10,34 +10,50 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
 `;
 
-const HeaderSearch = styled.div`
+const HeaderSide = styled.div`
   display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+  width: 50%;
+`;
+
+const HeaderCenter = styled.div`
+  display: flex;
+  width: 640px !important;
 `;
 
 const SearchField = styled(Input.Search)`
-  width: 640px;
-  margin: 8px 8px 8px 8px;
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 1;
+  margin-left: auto;
+  margin-right: auto;
+  width: 640px !important;
+  padding: auto;
+`;
+
+const LeftSide = styled.div`
+  margin-right: auto;
+`;
+
+const RightSide = styled.div`
+  margin-left: auto;
 `;
 
 const NavigationPresenter: React.SFC = () => (
   <React.Fragment>
-    <HeaderSearch>
-      <SearchField placeholder="영화 제목을 검색해보세요." />
-    </HeaderSearch>
     <HeaderContainer>
-      <div>Movie.log</div>
-      <div>
-        <Link to="/profile">
-          <Avatar size={32} icon="user" />
-        </Link>
-      </div>
+      <HeaderSide>
+        <LeftSide>Movie.log</LeftSide>
+      </HeaderSide>
+      <HeaderCenter>
+        <SearchField placeholder="영화 제목을 검색해보세요." size="large" />
+      </HeaderCenter>
+      <HeaderSide>
+        <RightSide>
+          <Link to="/profile">
+            <Avatar size={32} icon="user" />
+          </Link>
+        </RightSide>
+      </HeaderSide>
     </HeaderContainer>
   </React.Fragment>
 );
