@@ -42,7 +42,9 @@ const NavigationPresenter: React.SFC = () => (
   <React.Fragment>
     <HeaderContainer>
       <HeaderSide>
-        <LeftSide>Movie.log</LeftSide>
+        <LeftSide>
+          <Link to="/">Movie.log</Link>
+        </LeftSide>
       </HeaderSide>
       <HeaderCenter>
         <SearchField placeholder="영화 제목을 검색해보세요." size="large" />
