@@ -51,7 +51,7 @@ const NavigationPresenter: React.SFC = () => (
       </HeaderCenter>
       <HeaderSide>
         <RightSide>
-          <Link to="/profile">
+          <Link to="/profile/1">
             <Avatar size={32} icon="user" />
           </Link>
         </RightSide>

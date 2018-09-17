@@ -6,6 +6,7 @@ import Home from '../../routes/Home';
 import LogIn from '../../routes/LogIn';
 import SignUp from '../../routes/SignUp';
 import Profile from '../../routes/Profile';
+import Search from '../../routes/Search';
 import Navigation from '../Navigation';
 
 interface IAppPresenterProps {
@@ -56,6 +57,7 @@ const LoggedInRoutes: React.SFC = () => (
       <Switch>
         <Route exact={true} path="/" component={Home} />
         <Route exact={true} path="/profile/:userId" component={Profile} />
+        <Route exact={true} path="/search/:query" component={Search} />
         <Redirect from={'*'} to={'/'} />
       </Switch>
     </Content>

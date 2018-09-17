@@ -1,30 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
 import ProfileSection from '../../components/ProfileSection';
-import MovieCard from '../../components/MovieCard';
-
-const MovieCardContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: -7px;
-`;
+import MovieCardList from 'src/components/MovieCardList';
 
 const ProfilePresenter = () => (
   <React.Fragment>
     <ProfileSection />
-    <MovieCardContainer>
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-      <MovieCard />
-    </MovieCardContainer>
+    <MovieCardList />
   </React.Fragment>
 );
 

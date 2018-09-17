@@ -1,5 +1,6 @@
 import React from 'react';
+import MovieCardList from 'src/components/MovieCardList';
 
-const SearchPresenter = () => <div>SearchPresenter</div>;
+const SearchPresenter = () => <MovieCardList />;
 
 export default SearchPresenter;
