@@ -1,15 +1,17 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import MovieList from '../../components/MovieList';
+import MovieCardList from 'src/components/MovieCardList';
 
 const HomePresenter = () => (
   <React.Fragment>
     <Helmet>
       <title>Home | Movie-log</title>
     </Helmet>
-    <MovieList />
-    <MovieList />
-    <MovieList />
+    <MovieCardList withTitle={true} />
+    <MovieCardList withTitle={true} />
+    <MovieCardList withTitle={true} />
+    <MovieCardList withTitle={true} />
+    <MovieCardList withTitle={true} />
   </React.Fragment>
 );
 

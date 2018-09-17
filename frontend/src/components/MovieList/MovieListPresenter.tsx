@@ -16,7 +16,7 @@ const MovieListWrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: -7px;
+  margin: -7px -7px 0 -7px;
 `;
 
 const MovieListPresenter = () => (

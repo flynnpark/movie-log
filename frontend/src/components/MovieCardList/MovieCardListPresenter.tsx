@@ -7,19 +7,33 @@ const MovieCardContainer = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: -7px;
+  margin: -7px -7px 30px -7px;
 `;
 
-const MovieCardListPresenter = () => (
-  <MovieCardContainer>
-    <MovieCard />
-    <MovieCard />
-    <MovieCard />
-    <MovieCard />
-    <MovieCard />
-    <MovieCard />
-    <MovieCard />
-  </MovieCardContainer>
+const MovieListTitle = styled.h1`
+  font-size: 28px;
+  margin-bottom: 15px;
+`;
+
+interface IMovieCardListProps {
+  withTitle?: boolean;
+}
+
+const MovieCardListPresenter: React.SFC<IMovieCardListProps> = ({
+  withTitle
+}) => (
+  <React.Fragment>
+    {withTitle && <MovieListTitle>Title</MovieListTitle>}
+    <MovieCardContainer>
+      <MovieCard />
+      <MovieCard />
+      <MovieCard />
+      <MovieCard />
+      <MovieCard />
+      <MovieCard />
+      <MovieCard />
+    </MovieCardContainer>
+  </React.Fragment>
 );
 
 export default MovieCardListPresenter;
