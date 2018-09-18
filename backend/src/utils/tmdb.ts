@@ -13,16 +13,54 @@ interface MovieData {
   results: [any];
 }
 
+export const getNowPlaying = async () => {
+  console.log(process.env);
+  const {
+    data: { results }
+  } = await axios.get<MovieData>(BASE_URL, {
+    params: {
+      api_key: API_KEY,
+      language: 'ko-KR'
+    }
+  });
+  return results;
+};
+
+export const getTopRated = async () => {
+  const {
+    data: { results }
+  } = await axios.get<MovieData>(BASE_URL, {
+    params: {
+      api_key: API_KEY,
+      language: 'ko-KR'
+    }
+  });
+  return results;
+};
+
+export const getPopular = async () => {
+  console.log(process.env);
+  const {
+    data: { results }
+  } = await axios.get<MovieData>(BASE_URL, {
+    params: {
+      api_key: API_KEY,
+      language: 'ko-KR'
+    }
+  });
+  return results;
+};
+
 export const findMovie = async query => {
   console.log(process.env);
   const {
-    data: { results },
+    data: { results }
   } = await axios.get<MovieData>(BASE_URL, {
     params: {
       api_key: API_KEY,
       language: 'ko-KR',
-      query,
-    },
+      query
+    }
   });
   return results;
 };
