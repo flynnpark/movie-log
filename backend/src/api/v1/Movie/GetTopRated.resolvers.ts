@@ -1,5 +1,5 @@
-import { Resolvers } from 'src/types/resolvers';
-import { getTopRated } from 'src/utils/tmdb';
+import { Resolvers } from '../../../types/resolvers';
+import { getTopRated } from '../../../utils/tmdb';
 
 const resolvers: Resolvers = {
   Query: {

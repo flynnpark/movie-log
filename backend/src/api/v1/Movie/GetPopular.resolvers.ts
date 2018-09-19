@@ -1,5 +1,5 @@
-import { Resolvers } from 'src/types/resolvers';
-import { getPopular } from 'src/utils/tmdb';
+import { Resolvers } from '../../../types/resolvers';
+import { getPopular } from '../../../utils/tmdb';
 
 const resolvers: Resolvers = {
   Query: {
