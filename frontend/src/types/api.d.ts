@@ -2,6 +2,69 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getNowPlaying
+// ====================================================
+
+export interface getNowPlaying_GetNowPlaying {
+  __typename: "Movie";
+  id: number;
+  title: string;
+  poster_path: string | null;
+  genre_ids: (number | null)[];
+  overview: string | null;
+  release_date: string;
+}
+
+export interface getNowPlaying {
+  GetNowPlaying: (getNowPlaying_GetNowPlaying | null)[] | null;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getTopRated
+// ====================================================
+
+export interface getTopRated_GetTopRated {
+  __typename: "Movie";
+  id: number;
+  title: string;
+  poster_path: string | null;
+  genre_ids: (number | null)[];
+  overview: string | null;
+  release_date: string;
+}
+
+export interface getTopRated {
+  GetTopRated: (getTopRated_GetTopRated | null)[] | null;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getPopular
+// ====================================================
+
+export interface getPopular_GetPopular {
+  __typename: "Movie";
+  id: number;
+  title: string;
+  poster_path: string | null;
+  genre_ids: (number | null)[];
+  overview: string | null;
+  release_date: string;
+}
+
+export interface getPopular {
+  GetPopular: (getPopular_GetPopular | null)[] | null;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: startEmailVerification
 // ====================================================
 
