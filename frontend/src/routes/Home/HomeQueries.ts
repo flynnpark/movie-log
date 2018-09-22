@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
-export const GET_NOW_PLAYING = gql`
-  query getNowPlaying {
+export const GET_HOME_DATA = gql`
+  query getHomeData {
     GetNowPlaying {
       id
       title
@@ -10,11 +10,6 @@ export const GET_NOW_PLAYING = gql`
       overview
       release_date
     }
-  }
-`;
-
-export const GET_TOP_RATED = gql`
-  query getTopRated {
     GetTopRated {
       id
       title
@@ -23,11 +18,6 @@ export const GET_TOP_RATED = gql`
       overview
       release_date
     }
-  }
-`;
-
-export const GET_POPULAR = gql`
-  query getPopular {
     GetPopular {
       id
       title

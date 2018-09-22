@@ -1,30 +1,36 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { getNowPlaying } from 'src/types/api';
+import { getHomeData } from 'src/types/api';
 import HomePresenter from './HomePresenter';
-import { GET_NOW_PLAYING } from './HomeQueries';
+import { GET_HOME_DATA } from './HomeQueries';
 
-class NowPlayingQueries extends Query<getNowPlaying> {}
+class NowPlayingQueries extends Query<getHomeData> {}
 
 class HomeContainer extends Component {
-  public handleNowPlayingRequest = (data: getNowPlaying) => {
+  public handleNowPlayingRequest = (data: getHomeData) => {
     console.log(data);
-    const { GetNowPlaying } = data;
-    if (GetNowPlaying.ok) {
-      const { movies } = GetNowPlaying;
-      this.setState({
-        nowPlayingMovies: movies
-      });
+    const { GetNowPlaying, GetPopular, GetTopRated } = data;
+    if (GetNowPlaying) {
+      console.log(GetNowPlaying);
+    }
+    if (GetPopular) {
+      console.log(GetPopular);
+    }
+    if (GetTopRated) {
+      console.log(GetTopRated);
     }
   };
 
   public render() {
     return (
       <NowPlayingQueries
-        query={GET_NOW_PLAYING}
+        query={GET_HOME_DATA}
         onCompleted={this.handleNowPlayingRequest}
       >
-        {data => <HomePresenter />}
+        {data => {
+          console.log(data);
+          return <HomePresenter />;
+        }}
       </NowPlayingQueries>
     );
   }

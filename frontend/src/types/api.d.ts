@@ -2,10 +2,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getNowPlaying
+// GraphQL query operation: getHomeData
 // ====================================================
 
-export interface getNowPlaying_GetNowPlaying {
+export interface getHomeData_GetNowPlaying {
   __typename: "Movie";
   id: number;
   title: string;
@@ -15,18 +15,7 @@ export interface getNowPlaying_GetNowPlaying {
   release_date: string;
 }
 
-export interface getNowPlaying {
-  GetNowPlaying: (getNowPlaying_GetNowPlaying | null)[] | null;
-}
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: getTopRated
-// ====================================================
-
-export interface getTopRated_GetTopRated {
+export interface getHomeData_GetTopRated {
   __typename: "Movie";
   id: number;
   title: string;
@@ -36,18 +25,7 @@ export interface getTopRated_GetTopRated {
   release_date: string;
 }
 
-export interface getTopRated {
-  GetTopRated: (getTopRated_GetTopRated | null)[] | null;
-}
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: getPopular
-// ====================================================
-
-export interface getPopular_GetPopular {
+export interface getHomeData_GetPopular {
   __typename: "Movie";
   id: number;
   title: string;
@@ -57,8 +35,10 @@ export interface getPopular_GetPopular {
   release_date: string;
 }
 
-export interface getPopular {
-  GetPopular: (getPopular_GetPopular | null)[] | null;
+export interface getHomeData {
+  GetNowPlaying: (getHomeData_GetNowPlaying | null)[] | null;
+  GetTopRated: (getHomeData_GetTopRated | null)[] | null;
+  GetPopular: (getHomeData_GetPopular | null)[] | null;
 }
 
 /* tslint:disable */
