@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import MovieCardPresenter from './MovieCardPresenter';
 
-class MovieCardContainer extends Component {
+interface IMovieCardProps {
+  poster: string;
+}
+
+class MovieCardContainer extends Component<IMovieCardProps, any> {
   public render() {
     return <MovieCardPresenter />;
   }

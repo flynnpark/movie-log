@@ -8,7 +8,6 @@ class NowPlayingQueries extends Query<getHomeData> {}
 
 class HomeContainer extends Component {
   public handleNowPlayingRequest = (data: getHomeData) => {
-    console.log(data);
     const { GetNowPlaying, GetPopular, GetTopRated } = data;
     if (GetNowPlaying) {
       console.log(GetNowPlaying);
@@ -27,9 +26,8 @@ class HomeContainer extends Component {
         query={GET_HOME_DATA}
         onCompleted={this.handleNowPlayingRequest}
       >
-        {data => {
-          console.log(data);
-          return <HomePresenter />;
+        {({ data, loading }) => {
+          return <HomePresenter loading={loading} data={data} />;
         }}
       </NowPlayingQueries>
     );
