@@ -21,7 +21,6 @@ interface IMovieCardListProps {
     id: number;
     poster_path: string;
     title: string;
-    overview: string;
   }>;
 }
 
@@ -33,15 +32,9 @@ const MovieCardListPresenter: React.SFC<IMovieCardListProps> = ({
     {title && <MovieListTitle>{title}</MovieListTitle>}
     <MovieCardContainer>
       {movieList &&
-        movieList
-          .slice(0, 9)
-          .map(movieInfo => (
-            <MovieCard
-              key={movieInfo.id}
-              poster={movieInfo.poster_path}
-              title={movieInfo.title}
-            />
-          ))}
+        movieList.map(movieInfo => (
+          <MovieCard key={movieInfo.id} {...movieInfo} />
+        ))}
     </MovieCardContainer>
   </React.Fragment>
 );

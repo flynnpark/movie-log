@@ -8,8 +8,7 @@ interface IMovieCardListProps {
 
 class MovieCardListContainer extends Component<IMovieCardListProps, any> {
   public render() {
-    const { title, movieList } = this.props;
-    return <MovieCardListPresenter title={title} movieList={movieList} />;
+    return <MovieCardListPresenter {...this.props} />;
   }
 }
 
