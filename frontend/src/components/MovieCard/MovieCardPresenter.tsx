@@ -7,17 +7,17 @@ const MovieCard = styled(Card)`
   margin: 7px;
 `;
 
-const MovieCardPresenter = () => (
+const MovieCardPresenter = ({ poster, title }) => (
   <MovieCard
     hoverable={true}
     cover={
       <img
-        src="https://image.tmdb.org/t/p/w1280/kmP6viwzcEkZeoi1LaVcQemcvZh.jpg"
-        alt="Poster"
+        src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster}`}
+        alt={title}
       />
     }
   >
-    <Card.Meta title="Movie Title" description="Movie Description" />
+    <Card.Meta title={title} />
   </MovieCard>
 );
 

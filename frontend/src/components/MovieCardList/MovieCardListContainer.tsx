@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import MovieCardListPresenter from './MovieCardListPresenter';
 
 interface IMovieCardListProps {
-  withTitle?: boolean;
+  title?: string;
   movieList?: [];
 }
 
 class MovieCardListContainer extends Component<IMovieCardListProps, any> {
   public render() {
-    const { withTitle, movieList } = this.props;
-    return (
-      <MovieCardListPresenter withTitle={withTitle} movieList={movieList} />
-    );
+    const { title, movieList } = this.props;
+    return <MovieCardListPresenter title={title} movieList={movieList} />;
   }
 }
 

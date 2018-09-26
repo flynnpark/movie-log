@@ -16,21 +16,32 @@ const MovieListTitle = styled.h1`
 `;
 
 interface IMovieCardListProps {
-  withTitle?: boolean;
-  movieList?: Array<{ id: number; poster_path: string }>;
+  title?: string;
+  movieList?: Array<{
+    id: number;
+    poster_path: string;
+    title: string;
+    overview: string;
+  }>;
 }
 
 const MovieCardListPresenter: React.SFC<IMovieCardListProps> = ({
-  withTitle,
+  title,
   movieList
 }) => (
   <React.Fragment>
-    {withTitle && <MovieListTitle>Title</MovieListTitle>}
+    {title && <MovieListTitle>{title}</MovieListTitle>}
     <MovieCardContainer>
       {movieList &&
-        movieList.map(movieInfo => (
-          <MovieCard key={movieInfo.id} poster={movieInfo.poster_path} />
-        ))}
+        movieList
+          .slice(0, 9)
+          .map(movieInfo => (
+            <MovieCard
+              key={movieInfo.id}
+              poster={movieInfo.poster_path}
+              title={movieInfo.title}
+            />
+          ))}
     </MovieCardContainer>
   </React.Fragment>
 );

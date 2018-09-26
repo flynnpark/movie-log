@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
+import { Spin } from 'antd';
 import { getHomeData } from 'src/types/api';
 import HomePresenter from './HomePresenter';
 import { GET_HOME_DATA } from './HomeQueries';
@@ -26,9 +27,11 @@ class HomeContainer extends Component {
         query={GET_HOME_DATA}
         onCompleted={this.handleNowPlayingRequest}
       >
-        {({ data, loading }) => {
-          return <HomePresenter loading={loading} data={data} />;
-        }}
+        {({ data, loading }) => (
+          <React.Fragment>
+            {loading ? <Spin size="large" /> : <HomePresenter data={data} />}
+          </React.Fragment>
+        )}
       </NowPlayingQueries>
     );
   }

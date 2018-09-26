@@ -3,11 +3,13 @@ import MovieCardPresenter from './MovieCardPresenter';
 
 interface IMovieCardProps {
   poster: string;
+  title: string;
 }
 
 class MovieCardContainer extends Component<IMovieCardProps, any> {
   public render() {
-    return <MovieCardPresenter />;
+    const { poster, title } = this.props;
+    return <MovieCardPresenter poster={poster} title={title} />;
   }
 }
 
