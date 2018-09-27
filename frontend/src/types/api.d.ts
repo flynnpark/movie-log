@@ -68,6 +68,38 @@ export interface startEmailVerificationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getProfileData
+// ====================================================
+
+export interface getProfileData_GetUserProfile_user {
+  __typename: "User";
+  id: number;
+  email: string;
+  name: string;
+  avatar: string | null;
+  shortBio: string | null;
+  createdAt: string;
+}
+
+export interface getProfileData_GetUserProfile {
+  __typename: "GetUserProfileResponse";
+  ok: boolean;
+  error: string | null;
+  user: getProfileData_GetUserProfile_user | null;
+}
+
+export interface getProfileData {
+  GetUserProfile: getProfileData_GetUserProfile;
+}
+
+export interface getProfileDataVariables {
+  userId: number;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: startEmailSignUp
 // ====================================================
 
