@@ -1,16 +1,28 @@
 import React from 'react';
+import { Alert } from 'antd';
 import ProfileSection from '../../components/ProfileSection';
 import MovieCardList from 'src/components/MovieCardList';
 
 const ProfilePresenter = ({ data }) => {
   const {
-    GetUserProfile: { user }
+    GetUserProfile: { ok, user }
   } = data;
   return (
-    <React.Fragment>
-      <ProfileSection userData={user} />
-      <MovieCardList />
-    </React.Fragment>
+    <>
+      {ok ? (
+        <>
+          <ProfileSection userData={user} />
+          <MovieCardList />
+        </>
+      ) : (
+        <Alert
+          message="Error"
+          description="해당 유저의 프로필을 가져올 수 없습니다."
+          type="error"
+          showIcon={true}
+        />
+      )}
+    </>
   );
 };
 
