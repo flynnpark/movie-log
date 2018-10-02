@@ -1,6 +1,9 @@
-import ApolloClient, { Operation } from 'apollo-boost';
+import ApolloClient, { Operation, InMemoryCache } from 'apollo-boost';
+
+const cache = new InMemoryCache();
 
 const client = new ApolloClient({
+  cache,
   clientState: {
     defaults: {
       auth: {
@@ -10,9 +13,9 @@ const client = new ApolloClient({
     },
     resolvers: {
       Mutation: {
-        userLogIn: (_, { token }, { cache }) => {
+        userLogIn: (_, { token }, { cache: appCache }) => {
           localStorage.setItem('jwt', token);
-          cache.writeData({
+          appCache.writeData({
             data: {
               auth: {
                 __typename: 'Auth',
@@ -22,9 +25,9 @@ const client = new ApolloClient({
           });
           return null;
         },
-        userLogOut: (_, __, { cache }) => {
+        userLogOut: (_, __, { appCache }) => {
           localStorage.removeItem('jwt');
-          cache.writeData({
+          appCache.writeData({
             data: {
               auth: {
                 __typename: 'Auth',
@@ -43,6 +46,17 @@ const client = new ApolloClient({
         'X-JWT': localStorage.getItem('jwt') || ''
       }
     });
+  },
+  onError: ({ graphQLErrors, networkError }) => {
+    console.log(graphQLErrors);
+    if (graphQLErrors) {
+      graphQLErrors.map(({ message }) => {
+        console.log(`Unexpected error: ${message}`);
+      });
+    }
+    if (networkError) {
+      console.log(`Unexpected error: ${networkError}`);
+    }
   },
   uri: 'http://localhost:4000/graphql'
 });
