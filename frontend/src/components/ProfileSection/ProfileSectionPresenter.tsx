@@ -23,14 +23,33 @@ const MovieInfoWrapper = styled.div`
   display: flex;
 `;
 
-const ProfileSectionPresenter = () => (
+interface IProfileSectionProps {
+  userData: {
+    id: number;
+    avatar: string | null;
+    email: string;
+    name: string;
+    shortBio: string;
+    createdAt: string;
+  };
+}
+
+const ProfileSectionPresenter: React.SFC<IProfileSectionProps> = ({
+  userData: { id, avatar, email, name, shortBio, createdAt }
+}) => (
   <ProfileCard>
     <Card.Meta
-      avatar={<Avatar size={128} icon={'user'} />}
-      title={<NameWrapper>Flynn</NameWrapper>}
+      avatar={
+        avatar ? (
+          <Avatar size={128} src={avatar} />
+        ) : (
+          <Avatar size={128} icon={'user'} />
+        )
+      }
+      title={<NameWrapper>{name}</NameWrapper>}
       description={
         <InfoWrapper>
-          <SimpleBioWrapper>Simple Profile Text</SimpleBioWrapper>
+          <SimpleBioWrapper>{shortBio}</SimpleBioWrapper>
           <MovieInfoWrapper>영화 2,304개</MovieInfoWrapper>
         </InfoWrapper>
       }

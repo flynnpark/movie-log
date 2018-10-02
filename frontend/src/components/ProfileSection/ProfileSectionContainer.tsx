@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import ProfileSectionPresenter from './ProfileSectionPresenter';
 
-class ProfileSectionContainer extends Component {
+interface IProfileSectionProps {
+  userData: any;
+}
+
+class ProfileSectionContainer extends Component<IProfileSectionProps, any> {
   public render() {
-    return <ProfileSectionPresenter />;
+    return <ProfileSectionPresenter {...this.props} />;
   }
 }
 

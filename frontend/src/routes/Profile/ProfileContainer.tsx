@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { Spin } from 'antd';
-import { getProfileData } from 'src/types/api';
-import ProfilePresenter from './ProfilePresenter';
-import { GET_PROFILE_DATA } from './ProfileQueries';
 import { RouteComponentProps } from 'react-router';
+import { getProfileData } from 'src/types/api';
+import { GET_PROFILE_DATA } from './ProfileQueries';
+import Loading from 'src/components/Loading';
+import ProfilePresenter from './ProfilePresenter';
 
 interface IProps extends RouteComponentProps<any> {
   match: {
@@ -20,10 +20,6 @@ interface IProps extends RouteComponentProps<any> {
 class ProfileQueries extends Query<getProfileData> {}
 
 class ProfileContainer extends Component<IProps, any> {
-  public handleProfileRequest = (data: getProfileData) => {
-    console.log(data);
-  };
-
   public render() {
     const {
       match: {
@@ -31,14 +27,10 @@ class ProfileContainer extends Component<IProps, any> {
       }
     } = this.props;
     return (
-      <ProfileQueries
-        query={GET_PROFILE_DATA}
-        variables={{ userId }}
-        onCompleted={this.handleProfileRequest}
-      >
+      <ProfileQueries query={GET_PROFILE_DATA} variables={{ userId }}>
         {({ data, loading }) => (
           <React.Fragment>
-            {loading ? <Spin size="large" /> : <ProfilePresenter />}
+            {loading ? <Loading /> : <ProfilePresenter data={data} />}
           </React.Fragment>
         )}
       </ProfileQueries>
