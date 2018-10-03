@@ -5,7 +5,7 @@ const privateResolver = resolverFunction => async (
   info
 ) => {
   if (!context.req.user) {
-    throw Error('No JWT. Refuse to proceed.');
+    throw Error('Unauthorized');
   }
   const resolved = await resolverFunction(parent, args, context, info);
   return resolved;
