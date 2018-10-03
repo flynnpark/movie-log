@@ -52,6 +52,17 @@ const client = new ApolloClient({
     if (graphQLErrors) {
       graphQLErrors.map(({ message }) => {
         console.log(`Unexpected error: ${message}`);
+        if (message === 'Unauthorized') {
+          localStorage.removeItem('jwt');
+          cache.writeData({
+            data: {
+              auth: {
+                __typename: 'Auth',
+                isLoggedIn: false
+              }
+            }
+          });
+        }
       });
     }
     if (networkError) {
