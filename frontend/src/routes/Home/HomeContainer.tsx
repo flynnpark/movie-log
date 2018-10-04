@@ -8,25 +8,9 @@ import Loading from 'src/components/Loading';
 class NowPlayingQueries extends Query<getHomeData> {}
 
 class HomeContainer extends Component {
-  public handleNowPlayingRequest = (data: getHomeData) => {
-    const { GetNowPlaying, GetPopular, GetTopRated } = data;
-    if (GetNowPlaying) {
-      console.log(GetNowPlaying);
-    }
-    if (GetPopular) {
-      console.log(GetPopular);
-    }
-    if (GetTopRated) {
-      console.log(GetTopRated);
-    }
-  };
-
   public render() {
     return (
-      <NowPlayingQueries
-        query={GET_HOME_DATA}
-        onCompleted={this.handleNowPlayingRequest}
-      >
+      <NowPlayingQueries query={GET_HOME_DATA}>
         {({ data, loading }) => (
           <React.Fragment>
             {loading ? <Loading /> : <HomePresenter data={data} />}
