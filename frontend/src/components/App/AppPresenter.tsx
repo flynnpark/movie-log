@@ -1,5 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  Switch,
+  withRouter
+} from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout } from 'antd';
 import Home from '../../routes/Home';
@@ -32,7 +38,7 @@ const Content = styled(Layout.Content)`
 
 const AppPresenter: React.SFC<IAppPresenterProps> = ({ isLoggedIn }) => (
   <BrowserRouter>
-    {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
+    {isLoggedIn ? <WrappedLoggedInRoutes /> : <LoggedOutRoutes />}
   </BrowserRouter>
 );
 
@@ -48,10 +54,14 @@ const LoggedOutRoutes: React.SFC = () => (
   </Layout>
 );
 
-const LoggedInRoutes: React.SFC = () => (
+interface ILoggedInRoutesProps {
+  history: any;
+}
+
+const LoggedInRoutes: React.SFC<ILoggedInRoutesProps> = ({ history }) => (
   <Layout>
     <FixedHeader>
-      <Navigation />
+      <Navigation history={history} />
     </FixedHeader>
     <Content>
       <Switch>
@@ -63,5 +73,7 @@ const LoggedInRoutes: React.SFC = () => (
     </Content>
   </Layout>
 );
+
+const WrappedLoggedInRoutes = withRouter(LoggedInRoutes);
 
 export default AppPresenter;

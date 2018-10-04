@@ -1,6 +1,12 @@
 import React from 'react';
 import NavigationPresenter from './NavigationPresenter';
 
-const NavigationContainer = () => <NavigationPresenter />;
+interface INavigationProps {
+  history: any;
+}
+
+const NavigationContainer: React.SFC<INavigationProps> = props => (
+  <NavigationPresenter {...props} />
+);
 
 export default NavigationContainer;

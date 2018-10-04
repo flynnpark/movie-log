@@ -38,7 +38,11 @@ const RightSide = styled.div`
   margin-left: auto;
 `;
 
-const NavigationPresenter: React.SFC = () => (
+interface INavigationProps {
+  history: any;
+}
+
+const NavigationPresenter: React.SFC<INavigationProps> = ({ history }) => (
   <React.Fragment>
     <HeaderContainer>
       <HeaderSide>
@@ -47,7 +51,11 @@ const NavigationPresenter: React.SFC = () => (
         </LeftSide>
       </HeaderSide>
       <HeaderCenter>
-        <SearchField placeholder="영화 제목을 검색해보세요." size="large" />
+        <SearchField
+          placeholder="영화 제목을 검색해보세요."
+          size="large"
+          onSearch={(value: string) => console.log(history, value)}
+        />
       </HeaderCenter>
       <HeaderSide>
         <RightSide>
