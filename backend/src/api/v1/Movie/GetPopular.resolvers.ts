@@ -1,9 +1,10 @@
 import { Resolvers } from '../../../types/resolvers';
+import privateResolver from '../../../utils/privateResolver';
 import { getPopular } from '../../../utils/tmdb';
 
 const resolvers: Resolvers = {
   Query: {
-    GetPopular: _ => getPopular()
+    GetPopular: privateResolver(async _ => getPopular())
   }
 };
 

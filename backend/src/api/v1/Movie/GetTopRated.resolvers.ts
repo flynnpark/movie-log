@@ -1,9 +1,10 @@
 import { Resolvers } from '../../../types/resolvers';
+import privateResolver from '../../../utils/privateResolver';
 import { getTopRated } from '../../../utils/tmdb';
 
 const resolvers: Resolvers = {
   Query: {
-    GetTopRated: _ => getTopRated()
+    GetTopRated: privateResolver(async _ => getTopRated())
   }
 };
 
