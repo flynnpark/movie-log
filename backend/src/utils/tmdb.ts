@@ -17,7 +17,6 @@ interface MovieData {
 }
 
 export const getNowPlaying = async () => {
-  console.log(process.env);
   const {
     data: { results }
   } = await axios.get<MovieData>(NOW_PLAYING_URL, {
@@ -42,7 +41,6 @@ export const getTopRated = async () => {
 };
 
 export const getPopular = async () => {
-  console.log(process.env);
   const {
     data: { results }
   } = await axios.get<MovieData>(POPULAR_URL, {
@@ -55,7 +53,6 @@ export const getPopular = async () => {
 };
 
 export const findMovie = async query => {
-  console.log(process.env);
   const {
     data: { results }
   } = await axios.get<MovieData>(SEARCH_URL, {
