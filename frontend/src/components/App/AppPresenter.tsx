@@ -4,7 +4,8 @@ import {
   Redirect,
   Route,
   Switch,
-  withRouter
+  withRouter,
+  RouteComponentProps
 } from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout } from 'antd';
@@ -15,7 +16,7 @@ import Profile from '../../routes/Profile';
 import Search from '../../routes/Search';
 import Navigation from '../Navigation';
 
-interface IAppPresenterProps {
+interface IProps {
   isLoggedIn: boolean;
 }
 
@@ -36,7 +37,7 @@ const Content = styled(Layout.Content)`
   margin: 0 auto;
 `;
 
-const AppPresenter: React.SFC<IAppPresenterProps> = ({ isLoggedIn }) => (
+const AppPresenter: React.SFC<IProps> = ({ isLoggedIn }) => (
   <BrowserRouter>
     {isLoggedIn ? <WrappedLoggedInRoutes /> : <LoggedOutRoutes />}
   </BrowserRouter>
@@ -54,14 +55,12 @@ const LoggedOutRoutes: React.SFC = () => (
   </Layout>
 );
 
-interface ILoggedInRoutesProps {
-  history: any;
-}
+interface ILoggedInRoutesProps extends RouteComponentProps<any> {}
 
-const LoggedInRoutes: React.SFC<ILoggedInRoutesProps> = ({ history }) => (
+const LoggedInRoutes: React.SFC<ILoggedInRoutesProps> = props => (
   <Layout>
     <FixedHeader>
-      <Navigation history={history} />
+      <Navigation {...props} />
     </FixedHeader>
     <Content>
       <Switch>

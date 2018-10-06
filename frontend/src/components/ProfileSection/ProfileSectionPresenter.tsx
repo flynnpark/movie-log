@@ -23,7 +23,7 @@ const MovieInfoWrapper = styled.div`
   display: flex;
 `;
 
-interface IProfileSectionProps {
+interface IProps {
   userData: {
     id: number;
     avatar: string | null;
@@ -34,7 +34,7 @@ interface IProfileSectionProps {
   };
 }
 
-const ProfileSectionPresenter: React.SFC<IProfileSectionProps> = ({
+const ProfileSectionPresenter: React.SFC<IProps> = ({
   userData: { id, avatar, email, name, shortBio, createdAt }
 }) => (
   <ProfileCard>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { Input, Avatar } from 'antd';
 import styled from 'styled-components';
 
@@ -38,11 +38,9 @@ const RightSide = styled.div`
   margin-left: auto;
 `;
 
-interface INavigationProps {
-  history: any;
-}
+interface IProps extends RouteComponentProps<any> {}
 
-const NavigationPresenter: React.SFC<INavigationProps> = ({ history }) => (
+const NavigationPresenter: React.SFC<IProps> = ({ history }) => (
   <React.Fragment>
     <HeaderContainer>
       <HeaderSide>
@@ -54,7 +52,7 @@ const NavigationPresenter: React.SFC<INavigationProps> = ({ history }) => (
         <SearchField
           placeholder="영화 제목을 검색해보세요."
           size="large"
-          onSearch={(value: string) => console.log(history, value)}
+          onSearch={(value: string) => history.push(`/search/${value}`)}
         />
       </HeaderCenter>
       <HeaderSide>

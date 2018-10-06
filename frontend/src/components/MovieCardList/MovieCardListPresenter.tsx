@@ -15,7 +15,7 @@ const MovieListTitle = styled.h1`
   margin-bottom: 15px;
 `;
 
-interface IMovieCardListProps {
+interface IProps {
   title?: string;
   movieList?: Array<{
     id: number;
@@ -25,10 +25,7 @@ interface IMovieCardListProps {
   }>;
 }
 
-const MovieCardListPresenter: React.SFC<IMovieCardListProps> = ({
-  title,
-  movieList
-}) => (
+const MovieCardListPresenter: React.SFC<IProps> = ({ title, movieList }) => (
   <React.Fragment>
     {title && <MovieListTitle>{title}</MovieListTitle>}
     <MovieCardContainer>

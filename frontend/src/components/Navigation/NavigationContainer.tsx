@@ -1,11 +1,10 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import NavigationPresenter from './NavigationPresenter';
 
-interface INavigationProps {
-  history: any;
-}
+interface IProps extends RouteComponentProps<any> {}
 
-const NavigationContainer: React.SFC<INavigationProps> = props => (
+const NavigationContainer: React.SFC<IProps> = props => (
   <NavigationPresenter {...props} />
 );
 

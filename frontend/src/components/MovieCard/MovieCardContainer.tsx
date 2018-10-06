@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import MovieCardPresenter from './MovieCardPresenter';
 
-interface IMovieCardProps {
+interface IProps {
   poster_path: string;
   title: string;
   release_date: string;
 }
 
-class MovieCardContainer extends Component<IMovieCardProps, any> {
+class MovieCardContainer extends Component<IProps, any> {
   public render() {
     const { poster_path, title, release_date } = this.props;
     return (
