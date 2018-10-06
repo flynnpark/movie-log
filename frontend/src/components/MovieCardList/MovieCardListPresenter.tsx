@@ -6,7 +6,6 @@ const MovieCardContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
   margin: -7px -7px 30px -7px;
 `;
 
