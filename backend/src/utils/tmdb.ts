@@ -11,19 +11,14 @@ const MOVIE_DETAIL_URL = 'https://api.themoviedb.org/3/movie';
 const API_KEY = process.env.TMDB_KEY;
 
 interface MovieDetailData {
-  adult: boolean;
-  genres: {
-    id: number;
-    name: string;
-  }[];
   id: number;
+  title: string;
+  poster_path: string;
   original_language: string;
   original_title: string;
+  adult: boolean;
   overview: string;
-  poster_path: string;
   release_date: string;
-  runtime: number;
-  title: string;
 }
 
 interface MovieListData {
