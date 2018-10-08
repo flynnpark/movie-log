@@ -1,5 +1,6 @@
 type Query {
   FindMovie(query: String): [Movie]
+  GetMovieDetail(movieId: Int): GetMovieDetailResponse!
   GetNowPlaying: [Movie]
   GetPopular: [Movie]
   GetTopRated: [Movie]
@@ -9,6 +10,12 @@ type Query {
   movieRating: MovieRating
   GetUserProfile(userId: Int): GetUserProfileResponse!
   user: User
+}
+
+type GetMovieDetailResponse {
+  ok: Boolean!
+  error: String
+  movie: Movie
 }
 
 type Movie {

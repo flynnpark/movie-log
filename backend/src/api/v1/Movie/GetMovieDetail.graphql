@@ -1,0 +1,9 @@
+type GetMovieDetailResponse {
+  ok: Boolean!
+  error: String
+  movie: Movie
+}
+
+type Query {
+  GetMovieDetail(movieId: Int): GetMovieDetailResponse!
+}
