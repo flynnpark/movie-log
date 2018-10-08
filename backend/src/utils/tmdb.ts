@@ -10,7 +10,23 @@ const POPULAR_URL = 'https://api.themoviedb.org/3/movie/popular';
 const MOVIE_DETAIL_URL = 'https://api.themoviedb.org/3/movie';
 const API_KEY = process.env.TMDB_KEY;
 
-interface MovieData {
+interface MovieDetailData {
+  adult: boolean;
+  genres: {
+    id: number;
+    name: string;
+  }[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  poster_path: string;
+  release_date: string;
+  runtime: number;
+  title: string;
+}
+
+interface MovieListData {
   page: number;
   total_results: number;
   total_pages: number;
@@ -20,7 +36,7 @@ interface MovieData {
 export const getNowPlaying = async () => {
   const {
     data: { results }
-  } = await axios.get<MovieData>(NOW_PLAYING_URL, {
+  } = await axios.get<MovieListData>(NOW_PLAYING_URL, {
     params: {
       api_key: API_KEY,
       language: 'ko-KR'
@@ -32,7 +48,7 @@ export const getNowPlaying = async () => {
 export const getTopRated = async () => {
   const {
     data: { results }
-  } = await axios.get<MovieData>(TOP_RATED_URL, {
+  } = await axios.get<MovieListData>(TOP_RATED_URL, {
     params: {
       api_key: API_KEY,
       language: 'ko-KR'
@@ -44,7 +60,7 @@ export const getTopRated = async () => {
 export const getPopular = async () => {
   const {
     data: { results }
-  } = await axios.get<MovieData>(POPULAR_URL, {
+  } = await axios.get<MovieListData>(POPULAR_URL, {
     params: {
       api_key: API_KEY,
       language: 'ko-KR'
@@ -53,10 +69,10 @@ export const getPopular = async () => {
   return results;
 };
 
-export const findMovie = async query => {
+export const findMovie = async (query: string) => {
   const {
     data: { results }
-  } = await axios.get<MovieData>(SEARCH_URL, {
+  } = await axios.get<MovieListData>(SEARCH_URL, {
     params: {
       api_key: API_KEY,
       language: 'ko-KR',
@@ -67,14 +83,12 @@ export const findMovie = async query => {
 };
 
 export const getMovieDetail = async (query: string) => {
-  const {
-    data: { results }
-  } = await axios.get(MOVIE_DETAIL_URL, {
+  const { data } = await axios.get<MovieDetailData>(MOVIE_DETAIL_URL, {
     params: {
       api_key: API_KEY,
       language: 'ko-KR',
       query
     }
   });
-  return results;
+  return data;
 };
