@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import { getProfileData } from 'src/types/api';
 import { GET_PROFILE_DATA } from './ProfileQueries';
 import Loading from 'src/components/Loading';

@@ -116,6 +116,10 @@ export interface findMovie {
   FindMovie: (findMovie_FindMovie | null)[] | null;
 }
 
+export interface findMovieVariables {
+  query: string;
+}
+
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
