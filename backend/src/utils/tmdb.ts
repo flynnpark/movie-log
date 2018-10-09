@@ -18,7 +18,7 @@ interface MovieDetailData {
   original_title: string;
   adult: boolean;
   overview: string;
-  release_date: string;
+  release_datde: string;
 }
 
 interface MovieListData {
@@ -77,13 +77,15 @@ export const findMovie = async (query: string) => {
   return results;
 };
 
-export const getMovieDetail = async (query: string) => {
-  const { data } = await axios.get<MovieDetailData>(MOVIE_DETAIL_URL, {
-    params: {
-      api_key: API_KEY,
-      language: 'ko-KR',
-      query
+export const getMovieDetail = async (movieId: string) => {
+  const { data } = await axios.get<MovieDetailData>(
+    `${MOVIE_DETAIL_URL}/${movieId}`,
+    {
+      params: {
+        api_key: API_KEY,
+        language: 'ko-KR'
+      }
     }
-  });
+  );
   return data;
 };
