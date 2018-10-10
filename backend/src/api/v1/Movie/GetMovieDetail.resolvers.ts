@@ -1,22 +1,21 @@
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
 import { getMovieDetail } from '../../../utils/tmdb';
-
 const resolvers: Resolvers = {
   Query: {
     GetMovieDetail: privateResolver(async (_, { movieId }) => {
       const movieDetail = await getMovieDetail(movieId);
-      if (movieDetail.status_code) {
+      if (movieDetail) {
         return {
-          ok: false,
-          error: 'Movie not found',
-          movie: null
+          ok: true,
+          error: null,
+          movie: movieDetail
         };
       }
       return {
-        ok: true,
-        error: null,
-        movie: movieDetail
+        ok: false,
+        error: 'Movie not found',
+        movie: null
       };
     })
   }

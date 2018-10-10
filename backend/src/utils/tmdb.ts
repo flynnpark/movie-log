@@ -78,14 +78,19 @@ export const findMovie = async (query: string) => {
 };
 
 export const getMovieDetail = async (movieId: string) => {
-  const { data } = await axios.get<MovieDetailData>(
-    `${MOVIE_DETAIL_URL}/${movieId}`,
-    {
-      params: {
-        api_key: API_KEY,
-        language: 'ko-KR'
+  try {
+    const { data } = await axios.get<MovieDetailData>(
+      `${MOVIE_DETAIL_URL}/${movieId}`,
+      {
+        params: {
+          api_key: API_KEY,
+          language: 'ko-KR'
+        }
       }
-    }
-  );
-  return data;
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
 };
