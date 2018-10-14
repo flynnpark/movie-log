@@ -1,21 +1,12 @@
 import React, { Component } from 'react';
-import { Query } from 'react-apollo';
 import { RouteComponentProps } from 'react-router-dom';
+import { Query } from 'react-apollo';
 import { getProfileData } from 'src/types/api';
 import { GET_PROFILE_DATA } from './ProfileQueries';
 import Loading from 'src/components/Loading';
 import ProfilePresenter from './ProfilePresenter';
 
-interface IProps extends RouteComponentProps<any> {
-  match: {
-    isExact: boolean;
-    params: {
-      userId: string;
-    };
-    path: string;
-    url: string;
-  };
-}
+interface IProps extends RouteComponentProps<any> {}
 
 class ProfileQueries extends Query<getProfileData> {}
 
