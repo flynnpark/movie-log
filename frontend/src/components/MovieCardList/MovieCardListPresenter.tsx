@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import MovieCard from 'src/components/MovieCard';
 
@@ -30,7 +31,9 @@ const MovieCardListPresenter: React.SFC<IProps> = ({ title, movieList }) => (
     <MovieCardContainer>
       {movieList &&
         movieList.map(movieInfo => (
-          <MovieCard key={movieInfo.id} {...movieInfo} />
+          <Link to={`/movie/${movieInfo.id}`}>
+            <MovieCard key={movieInfo.id} {...movieInfo} />
+          </Link>
         ))}
     </MovieCardContainer>
   </React.Fragment>
