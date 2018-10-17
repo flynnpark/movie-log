@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MovieCardPresenter from './MovieCardPresenter';
 
 interface IProps {
+  id: number;
   poster_path: string;
   title: string;
   release_date: string;
@@ -9,9 +10,10 @@ interface IProps {
 
 class MovieCardContainer extends Component<IProps, any> {
   public render() {
-    const { poster_path, title, release_date } = this.props;
+    const { id, poster_path, title, release_date } = this.props;
     return (
       <MovieCardPresenter
+        id={id}
         poster={poster_path}
         title={title}
         releaseYear={this.getReleasedYear(release_date)}
