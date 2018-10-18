@@ -8,6 +8,23 @@ const MovieInfoCard = styled(Card)`
   margin-bottom: 20px;
 `;
 
+const Poster = styled.div`
+  margin-right: 12px;
+`;
+
+const TitleWrapper = styled.div`
+  font-size: 48px;
+`;
+
+const OriginTitle = styled.span`
+  font-size: 32px;
+  color: #888;
+
+  ::before {
+    content: ' ';
+  }
+`;
+
 const MoviePresenter = ({ data }) => {
   console.log(data);
   const {
@@ -19,13 +36,21 @@ const MoviePresenter = ({ data }) => {
         <MovieInfoCard>
           <Card.Meta
             avatar={
-              <img
-                src={`https://image.tmdb.org/t/p/w200_and_h300_bestv2${
-                  movie.poster_path
-                }`}
-              />
+              <Poster>
+                <img
+                  src={`https://image.tmdb.org/t/p/w200_and_h300_bestv2${
+                    movie.poster_path
+                  }`}
+                />
+              </Poster>
             }
-            title={movie.title}
+            title={
+              <TitleWrapper>
+                {movie.title}
+                <OriginTitle>{movie.original_title}</OriginTitle>
+              </TitleWrapper>
+            }
+            description={<div>개봉일 {movie.release_date}</div>}
           />
         </MovieInfoCard>
       ) : (
