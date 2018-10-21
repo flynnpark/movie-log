@@ -1,7 +1,7 @@
 type GetMovieDetailResponse {
   ok: Boolean!
   error: String
-  movie: Movie
+  movie: MovieDetail
 }
 
 type Query {
