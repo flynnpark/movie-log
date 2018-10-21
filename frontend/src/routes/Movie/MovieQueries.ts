@@ -8,9 +8,13 @@ export const GET_MOVIE_DETAIL = gql`
       movie {
         id
         title
+        tagline
         poster_path
         original_language
         original_title
+        genres {
+          name
+        }
         adult
         overview
         release_date

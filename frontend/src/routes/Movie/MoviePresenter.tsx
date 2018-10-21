@@ -12,28 +12,41 @@ const Poster = styled.div`
   margin-right: 12px;
 `;
 
-const TitleWrapper = styled.div`
-  font-size: 48px;
+const TitleContainer = styled.div``;
+
+const Title = styled.div`
+  display: flex;
+  font-size: 42px;
 `;
 
-const OriginTitle = styled.span`
-  font-size: 32px;
-  color: #888;
+const OriginTitle = styled.div`
+  display: flex;
+  font-size: 24px;
+  color: #8c8c8c;
 
   ::before {
     content: ' ';
   }
 `;
 
+const Tagline = styled.div`
+  display: flex;
+  color: #8c8c8c;
+`;
+
+const CardBodyStyle = {
+  padding: 0
+};
+
 const MoviePresenter = ({ data }) => {
-  console.log(data);
   const {
     GetMovieDetail: { ok, movie }
   } = data;
+  console.log(movie);
   return (
     <>
       {ok ? (
-        <MovieInfoCard>
+        <MovieInfoCard bodyStyle={CardBodyStyle}>
           <Card.Meta
             avatar={
               <Poster>
@@ -45,12 +58,18 @@ const MoviePresenter = ({ data }) => {
               </Poster>
             }
             title={
-              <TitleWrapper>
-                {movie.title}
+              <TitleContainer>
+                <Title>{movie.title}</Title>
                 <OriginTitle>{movie.original_title}</OriginTitle>
-              </TitleWrapper>
+                <Tagline>{movie.tagline}</Tagline>
+              </TitleContainer>
             }
-            description={<div>개봉일 {movie.release_date}</div>}
+            description={
+              <React.Fragment>
+                <div>{movie.genres.map(genre => genre.name)}</div>
+                <div>개봉일 {movie.release_date}</div>
+              </React.Fragment>
+            }
           />
         </MovieInfoCard>
       ) : (
