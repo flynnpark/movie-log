@@ -17,21 +17,28 @@ const TitleContainer = styled.div``;
 const Title = styled.div`
   display: flex;
   font-size: 42px;
+  line-height: 110%;
+  white-space: pre-wrap;
 `;
 
 const OriginTitle = styled.div`
   display: flex;
   font-size: 24px;
+  line-height: 110%;
   color: #8c8c8c;
-
-  ::before {
-    content: ' ';
-  }
+  white-space: pre-wrap;
+  margin-top: 16px;
 `;
 
 const Tagline = styled.div`
   display: flex;
-  color: #8c8c8c;
+  color: #262626;
+  margin-top: 16px;
+`;
+
+const GenreWrapper = styled.div`
+  font-size: 16px;
+  margin-top: 14px;
 `;
 
 const CardBodyStyle = {
@@ -61,13 +68,16 @@ const MoviePresenter = ({ data }) => {
               <TitleContainer>
                 <Title>{movie.title}</Title>
                 <OriginTitle>{movie.original_title}</OriginTitle>
-                <Tagline>{movie.tagline}</Tagline>
+                {movie.tagline && <Tagline>{movie.tagline}</Tagline>}
               </TitleContainer>
             }
             description={
               <React.Fragment>
-                <div>{movie.genres.map(genre => genre.name)}</div>
-                <div>개봉일 {movie.release_date}</div>
+                <GenreWrapper>
+                  {movie.genres.map(genre => genre.name).join(' ')}
+                </GenreWrapper>
+                <div>{movie.release_date.replace(/-/gi, '. ')}</div>
+                <div>{movie.overview}</div>
               </React.Fragment>
             }
           />
