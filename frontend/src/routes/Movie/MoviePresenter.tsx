@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Alert, Card } from 'antd';
 
@@ -53,35 +54,40 @@ const MoviePresenter = ({ data }) => {
   return (
     <>
       {ok ? (
-        <MovieInfoCard bodyStyle={CardBodyStyle}>
-          <Card.Meta
-            avatar={
-              <Poster>
-                <img
-                  src={`https://image.tmdb.org/t/p/w200_and_h300_bestv2${
-                    movie.poster_path
-                  }`}
-                />
-              </Poster>
-            }
-            title={
-              <TitleContainer>
-                <Title>{movie.title}</Title>
-                <OriginTitle>{movie.original_title}</OriginTitle>
-                {movie.tagline && <Tagline>{movie.tagline}</Tagline>}
-              </TitleContainer>
-            }
-            description={
-              <React.Fragment>
-                <GenreWrapper>
-                  {movie.genres.map(genre => genre.name).join(' ')}
-                </GenreWrapper>
-                <div>{movie.release_date.replace(/-/gi, '. ')}</div>
-                <div>{movie.overview}</div>
-              </React.Fragment>
-            }
-          />
-        </MovieInfoCard>
+        <>
+          <Helmet>
+            <title>{movie.title} | Movie-log</title>
+          </Helmet>
+          <MovieInfoCard bodyStyle={CardBodyStyle}>
+            <Card.Meta
+              avatar={
+                <Poster>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w200_and_h300_bestv2${
+                      movie.poster_path
+                    }`}
+                  />
+                </Poster>
+              }
+              title={
+                <TitleContainer>
+                  <Title>{movie.title}</Title>
+                  <OriginTitle>{movie.original_title}</OriginTitle>
+                  {movie.tagline && <Tagline>{movie.tagline}</Tagline>}
+                </TitleContainer>
+              }
+              description={
+                <React.Fragment>
+                  <GenreWrapper>
+                    {movie.genres.map(genre => genre.name).join(' ')}
+                  </GenreWrapper>
+                  <div>{movie.release_date.replace(/-/gi, '. ')}</div>
+                  <div>{movie.overview}</div>
+                </React.Fragment>
+              }
+            />
+          </MovieInfoCard>
+        </>
       ) : (
         <Alert
           message="Error"
