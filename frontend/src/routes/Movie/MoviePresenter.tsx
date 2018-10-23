@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Alert, Card } from 'antd';
+import MovieRating from 'src/components/MovieRating';
 
 const MovieInfoCard = styled(Card)`
   background-color: transparent;
@@ -9,7 +10,7 @@ const MovieInfoCard = styled(Card)`
   margin-bottom: 20px;
 `;
 
-const Poster = styled.div`
+const LeftContainer = styled.div`
   margin-right: 12px;
 `;
 
@@ -61,13 +62,13 @@ const MoviePresenter = ({ data }) => {
           <MovieInfoCard bodyStyle={CardBodyStyle}>
             <Card.Meta
               avatar={
-                <Poster>
+                <LeftContainer>
                   <img
                     src={`https://image.tmdb.org/t/p/w200_and_h300_bestv2${
                       movie.poster_path
                     }`}
                   />
-                </Poster>
+                </LeftContainer>
               }
               title={
                 <TitleContainer>
@@ -82,7 +83,7 @@ const MoviePresenter = ({ data }) => {
                     {movie.genres.map(genre => genre.name).join(' ')}
                   </GenreWrapper>
                   <div>{movie.release_date.replace(/-/gi, '. ')}</div>
-                  <div>{movie.overview}</div>
+                  <MovieRating />
                 </React.Fragment>
               }
             />
