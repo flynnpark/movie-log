@@ -1,7 +1,7 @@
 import MovieRating from '../../../entity/MovieRating';
 import {
   SetMovieRatingMutationArgs,
-  SetMovieRatingResponse,
+  SetMovieRatingResponse
 } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
@@ -14,37 +14,40 @@ const resolvers: Resolvers = {
         args: SetMovieRatingMutationArgs,
         { req }
       ): Promise<SetMovieRatingResponse> => {
-        const { movieId } = args;
+        const { movieId, rating } = args;
         const { user } = req;
         const movieRating = await MovieRating.findOne({
           movieId,
-          userId: user.id,
+          userId: user.id
         });
         if (movieRating) {
           return {
             ok: false,
             error: 'Rating about this movie exist already',
-            movieRating,
+            movieRating
           };
         } else {
+          console.log('123123');
           const newMovieRating = await MovieRating.create({
-            ...args,
-            movieId: user.id,
+            movieId,
+            userId: user.id,
+            rating
           }).save();
+          console.log('123123123123');
           return {
             ok: true,
             error: null,
-            movieRating: newMovieRating,
+            movieRating: newMovieRating
           };
         }
         return {
           ok: true,
           error: null,
-          movieRating: null,
+          movieRating: null
         };
       }
-    ),
-  },
+    )
+  }
 };
 
 export default resolvers;
