@@ -21,30 +21,32 @@ const resolvers: Resolvers = {
           userId: user.id
         });
         if (movieRating) {
+          if (movieRating.rating === rating) {
+            //  점수 삭제
+            await MovieRating.remove(movieRating);
+          } else {
+            // 점수 업데이트
+            movieRating.rating = rating;
+            await MovieRating.save(movieRating);
+          }
+          // type 구분해서 리턴 값 넘겨야할 듯 함
           return {
             ok: false,
             error: 'Rating about this movie exist already',
             movieRating
           };
         } else {
-          console.log('123123');
           const newMovieRating = await MovieRating.create({
             movieId,
             userId: user.id,
             rating
           }).save();
-          console.log('123123123123');
           return {
             ok: true,
             error: null,
             movieRating: newMovieRating
           };
         }
-        return {
-          ok: true,
-          error: null,
-          movieRating: null
-        };
       }
     )
   }
