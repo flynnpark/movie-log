@@ -4,6 +4,11 @@ import styled from 'styled-components';
 import { Alert, Card } from 'antd';
 import MovieRating from 'src/components/MovieRating';
 
+const MovieInfoContinaer = styled.div`
+  background-color: #fff;
+  padding: 24px;
+`;
+
 const MovieInfoCard = styled(Card)`
   background-color: transparent;
   border: none;
@@ -59,35 +64,37 @@ const MoviePresenter = ({ data }) => {
           <Helmet>
             <title>{movie.title} | Movie-log</title>
           </Helmet>
-          <MovieInfoCard bodyStyle={CardBodyStyle}>
-            <Card.Meta
-              avatar={
-                <LeftContainer>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w200_and_h300_bestv2${
-                      movie.poster_path
-                    }`}
-                  />
-                </LeftContainer>
-              }
-              title={
-                <TitleContainer>
-                  <Title>{movie.title}</Title>
-                  <OriginTitle>{movie.original_title}</OriginTitle>
-                  {movie.tagline && <Tagline>{movie.tagline}</Tagline>}
-                </TitleContainer>
-              }
-              description={
-                <React.Fragment>
-                  <GenreWrapper>
-                    {movie.genres.map(genre => genre.name).join(' ')}
-                  </GenreWrapper>
-                  <div>{movie.release_date.replace(/-/gi, '. ')}</div>
-                  <MovieRating />
-                </React.Fragment>
-              }
-            />
-          </MovieInfoCard>
+          <MovieInfoContinaer>
+            <MovieInfoCard bodyStyle={CardBodyStyle}>
+              <Card.Meta
+                avatar={
+                  <LeftContainer>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w200_and_h300_bestv2${
+                        movie.poster_path
+                      }`}
+                    />
+                  </LeftContainer>
+                }
+                title={
+                  <TitleContainer>
+                    <Title>{movie.title}</Title>
+                    <OriginTitle>{movie.original_title}</OriginTitle>
+                    {movie.tagline && <Tagline>{movie.tagline}</Tagline>}
+                  </TitleContainer>
+                }
+                description={
+                  <React.Fragment>
+                    <GenreWrapper>
+                      {movie.genres.map(genre => genre.name).join(' ')}
+                    </GenreWrapper>
+                    <div>{movie.release_date.replace(/-/gi, '. ')}</div>
+                    <MovieRating />
+                  </React.Fragment>
+                }
+              />
+            </MovieInfoCard>
+          </MovieInfoContinaer>
         </>
       ) : (
         <Alert

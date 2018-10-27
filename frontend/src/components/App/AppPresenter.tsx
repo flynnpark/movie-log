@@ -29,6 +29,7 @@ const FixedHeader = styled(Layout.Header)`
   width: 100%;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0 1px 4px #e8e8e8;
 `;
 
 const Content = styled(Layout.Content)`
