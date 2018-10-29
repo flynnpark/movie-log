@@ -11,10 +11,10 @@ const HomePresenter = ({ data }) => {
       </Helmet>
       <MovieCardList
         title="현재 상영작"
-        movieList={GetNowPlaying.slice(0, 9)}
+        movieList={GetNowPlaying.slice(0, 12)}
       />
-      <MovieCardList title="인기작" movieList={GetPopular.slice(0, 9)} />
-      <MovieCardList title="최고 순위" movieList={GetTopRated.slice(0, 9)} />
+      <MovieCardList title="인기작" movieList={GetPopular.slice(0, 12)} />
+      <MovieCardList title="최고 순위" movieList={GetTopRated.slice(0, 12)} />
     </React.Fragment>
   );
 };

@@ -34,7 +34,7 @@ const FixedHeader = styled(Layout.Header)`
 
 const Content = styled(Layout.Content)`
   padding-top: 96px;
-  max-width: 640px;
+  max-width: 960px;
   width: 100%;
   margin: 0 auto;
 `;

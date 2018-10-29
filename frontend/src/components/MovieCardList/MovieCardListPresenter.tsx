@@ -6,12 +6,12 @@ const MovieCardContainer = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: -7px -7px 30px -7px;
+  margin: -10px -10px 30px -10px;
 `;
 
 const MovieListTitle = styled.h1`
-  font-size: 28px;
-  margin-bottom: 15px;
+  font-size: 32px;
+  margin-bottom: 25px;
 `;
 
 interface IProps {

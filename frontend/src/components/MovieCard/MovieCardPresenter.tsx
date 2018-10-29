@@ -4,8 +4,8 @@ import styled from 'styled-components';
 import { Card } from 'antd';
 
 const MovieCard = styled(Card)`
-  width: 204px;
-  margin: 7px;
+  width: 225px;
+  margin: 10px;
 `;
 
 const MovieCardPresenter = ({ id, poster, title, releaseYear }) => (
