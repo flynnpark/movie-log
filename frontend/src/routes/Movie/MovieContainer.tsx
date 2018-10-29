@@ -32,7 +32,6 @@ export class MovieContainer extends Component<IProps, IState> {
   }
 
   public render() {
-    const { rating } = this.state;
     const {
       match: {
         params: { movieId }
@@ -40,18 +39,17 @@ export class MovieContainer extends Component<IProps, IState> {
     } = this.props;
     return (
       <MovieDetailQueries query={GET_MOVIE_DETAIL} variables={{ movieId }}>
-        {({ data, loading }) => (
-          <MovieRatingMutation
-            mutation={SET_MOVIE_RATING}
-            variables={{ movieId, rating }}
-          >
-            {(mutation, { data, loading }) => {
-              return (
-                <>{loading ? <Loading /> : <MoviePresenter data={data} />}</>
-              );
-            }}
-          </MovieRatingMutation>
-        )}
+        {({ data, loading }) =>
+          loading ? (
+            <Loading />
+          ) : (
+            <MovieRatingMutation mutation={SET_MOVIE_RATING}>
+              {SetMovieRating => {
+                return <MoviePresenter data={data} />;
+              }}
+            </MovieRatingMutation>
+          )
+        }
       </MovieDetailQueries>
     );
   }
