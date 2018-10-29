@@ -71,16 +71,22 @@ export interface startEmailVerificationVariables {
 // GraphQL query operation: getMovieDetail
 // ====================================================
 
+export interface getMovieDetail_GetMovieDetail_movie_genres {
+  __typename: "Genre";
+  name: string;
+}
+
 export interface getMovieDetail_GetMovieDetail_movie {
-  __typename: "Movie";
+  __typename: "MovieDetail";
   id: number;
   title: string;
+  tagline: string;
   poster_path: string | null;
   original_language: string;
   original_title: string;
-  genre_ids: (number | null)[];
+  genres: (getMovieDetail_GetMovieDetail_movie_genres | null)[];
   adult: boolean;
-  overview: string | null;
+  overview: string;
   release_date: string;
 }
 
@@ -97,6 +103,38 @@ export interface getMovieDetail {
 
 export interface getMovieDetailVariables {
   movieId: number;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: setMovieRating
+// ====================================================
+
+export interface setMovieRating_SetMovieRating_movieRating {
+  __typename: "MovieRating";
+  id: number;
+  userId: number;
+  movieId: number;
+  rating: number;
+}
+
+export interface setMovieRating_SetMovieRating {
+  __typename: "SetMovieRatingResponse";
+  ok: boolean;
+  type: string | null;
+  error: string | null;
+  movieRating: setMovieRating_SetMovieRating_movieRating | null;
+}
+
+export interface setMovieRating {
+  SetMovieRating: setMovieRating_SetMovieRating;
+}
+
+export interface setMovieRatingVariables {
+  movieId: number;
+  rating: number;
 }
 
 /* tslint:disable */

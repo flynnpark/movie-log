@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Query } from 'react-apollo';
-import { getMovieDetail } from 'src/types/api';
+import { Query, Mutation } from 'react-apollo';
+import {
+  getMovieDetail,
+  setMovieRating,
+  setMovieRatingVariables
+} from 'src/types/api';
 import MoviePresenter from './MoviePresenter';
-import { GET_MOVIE_DETAIL } from './MovieQueries';
+import { GET_MOVIE_DETAIL, SET_MOVIE_RATING } from './MovieQueries';
 import Loading from 'src/components/Loading';
+
+interface IState {
+  rating: number;
+}
 
 interface IProps extends RouteComponentProps<any> {}
 
 class MovieDetailQueries extends Query<getMovieDetail> {}
 
-export class MovieContainer extends Component<IProps, any> {
+class MovieRatingMutation extends Mutation<
+  setMovieRating,
+  setMovieRatingVariables
+> {}
+
+export class MovieContainer extends Component<IProps, IState> {
+  constructor(props: IProps) {
+    super(props);
+    this.state = {
+      rating: 0
+    };
+  }
+
   public render() {
+    const { rating } = this.state;
     const {
       match: {
         params: { movieId }
@@ -20,7 +41,16 @@ export class MovieContainer extends Component<IProps, any> {
     return (
       <MovieDetailQueries query={GET_MOVIE_DETAIL} variables={{ movieId }}>
         {({ data, loading }) => (
-          <>{loading ? <Loading /> : <MoviePresenter data={data} />}</>
+          <MovieRatingMutation
+            mutation={SET_MOVIE_RATING}
+            variables={{ movieId, rating }}
+          >
+            {(mutation, { data, loading }) => {
+              return (
+                <>{loading ? <Loading /> : <MoviePresenter data={data} />}</>
+              );
+            }}
+          </MovieRatingMutation>
         )}
       </MovieDetailQueries>
     );
