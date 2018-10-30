@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import MovieRatingPresenter from './MovieRatingPresenter';
+import { MutationFn } from 'react-apollo';
 
-class MovieRatingContainer extends Component {
+interface IProps {
+  handleRatingClick: MutationFn;
+}
+
+class MovieRatingContainer extends Component<IProps> {
   public render() {
-    return <MovieRatingPresenter />;
+    const { handleRatingClick } = this.props;
+    return <MovieRatingPresenter handleRatingClick={handleRatingClick} />;
   }
 }
 

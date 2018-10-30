@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { Query, Mutation } from 'react-apollo';
+import { Query, Mutation, MutationFn } from 'react-apollo';
 import {
   getMovieDetail,
   setMovieRating,
@@ -14,7 +14,9 @@ interface IState {
   rating: number;
 }
 
-interface IProps extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {
+  setMovieRating?: MutationFn | null;
+}
 
 class MovieDetailQueries extends Query<getMovieDetail> {}
 
@@ -44,8 +46,13 @@ export class MovieContainer extends Component<IProps, IState> {
             <Loading />
           ) : (
             <MovieRatingMutation mutation={SET_MOVIE_RATING}>
-              {SetMovieRating => {
-                return <MoviePresenter data={data} />;
+              {setMovieRatingFn => {
+                return (
+                  <MoviePresenter
+                    data={data}
+                    handleRatingClick={setMovieRatingFn}
+                  />
+                );
               }}
             </MovieRatingMutation>
           )
