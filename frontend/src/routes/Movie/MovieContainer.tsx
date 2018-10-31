@@ -26,12 +26,23 @@ class MovieRatingMutation extends Mutation<
 > {}
 
 export class MovieContainer extends Component<IProps, IState> {
+  private setMovieRating;
+
   constructor(props: IProps) {
     super(props);
     this.state = {
       rating: 0
     };
   }
+
+  public handleClickMovieRating = (rating: number) => {
+    const {
+      match: {
+        params: { movieId }
+      }
+    } = this.props;
+    this.setMovieRating({ variables: { movieId, rating } });
+  };
 
   public render() {
     const {
@@ -47,10 +58,11 @@ export class MovieContainer extends Component<IProps, IState> {
           ) : (
             <MovieRatingMutation mutation={SET_MOVIE_RATING}>
               {setMovieRatingFn => {
+                this.setMovieRating = this.setMovieRating;
                 return (
                   <MoviePresenter
                     data={data}
-                    handleRatingClick={setMovieRatingFn}
+                    handleClickMovieRating={this.handleClickMovieRating}
                   />
                 );
               }}

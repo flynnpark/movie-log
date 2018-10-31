@@ -22,10 +22,14 @@ const Star = styled(Icon)`
   margin-right: 4px;
   :last-child {
     margin-right: 0;
-  }
+  }: 
 `;
 
-const MovieRatingPresenter: React.SFC = () => (
+interface IProps {
+  handleClickMovieRating: (rating: number) => void;
+}
+
+const MovieRatingPresenter: React.SFC<IProps> = () => (
   <ScoreWrapper>
     <ScoreTitle>평가해주세요</ScoreTitle>
     <StarContainer>

@@ -52,7 +52,7 @@ const CardBodyStyle = {
   padding: 0
 };
 
-const MoviePresenter = ({ data, handleRatingClick }) => {
+const MoviePresenter = ({ data, handleClickMovieRating }) => {
   const {
     GetMovieDetail: { ok, movie }
   } = data;
@@ -89,7 +89,9 @@ const MoviePresenter = ({ data, handleRatingClick }) => {
                       {movie.genres.map(genre => genre.name).join(' ')}
                     </GenreWrapper>
                     <div>{movie.release_date.replace(/-/gi, '. ')}</div>
-                    <MovieRating handleRatingClick={handleRatingClick} />
+                    <MovieRating
+                      handleClickMovieRating={handleClickMovieRating}
+                    />
                   </React.Fragment>
                 }
               />

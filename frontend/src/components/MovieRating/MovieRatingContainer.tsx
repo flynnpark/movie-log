@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import MovieRatingPresenter from './MovieRatingPresenter';
-import { MutationFn } from 'react-apollo';
 
 interface IProps {
-  handleRatingClick: MutationFn;
+  handleClickMovieRating: (rating: number) => void;
 }
 
 class MovieRatingContainer extends Component<IProps> {
   public render() {
-    const { handleRatingClick } = this.props;
-    return <MovieRatingPresenter handleRatingClick={handleRatingClick} />;
+    const { handleClickMovieRating } = this.props;
+    return (
+      <MovieRatingPresenter handleClickMovieRating={handleClickMovieRating} />
+    );
   }
 }
 
