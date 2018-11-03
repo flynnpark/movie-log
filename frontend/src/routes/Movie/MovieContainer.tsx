@@ -58,7 +58,7 @@ export class MovieContainer extends Component<IProps, IState> {
           ) : (
             <MovieRatingMutation mutation={SET_MOVIE_RATING}>
               {setMovieRatingFn => {
-                this.setMovieRating = this.setMovieRating;
+                this.setMovieRating = setMovieRatingFn;
                 return (
                   <MoviePresenter
                     data={data}
