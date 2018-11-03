@@ -29,7 +29,10 @@ const resolvers: Resolvers = {
                 ok: true,
                 type: 'remove',
                 error: null,
-                movieRating
+                movieRating: {
+                  ...movieRating,
+                  id: movieId
+                }
               };
             } else {
               // 점수 업데이트
