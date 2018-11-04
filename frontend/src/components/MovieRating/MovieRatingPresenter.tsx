@@ -27,10 +27,12 @@ const Star = styled(Icon)`
 `;
 
 interface IProps {
+  rating: number;
   handleClickMovieRating: (rating: number) => void;
 }
 
 const MovieRatingPresenter: React.SFC<IProps> = ({
+  rating,
   handleClickMovieRating
 }) => (
   <ScoreWrapper>
@@ -38,27 +40,27 @@ const MovieRatingPresenter: React.SFC<IProps> = ({
     <StarContainer>
       <Star
         type="star"
-        theme="outlined"
+        theme={rating >= 1 ? 'filled' : 'outlined'}
         onClick={() => handleClickMovieRating(1)}
       />
       <Star
         type="star"
-        theme="outlined"
+        theme={rating >= 2 ? 'filled' : 'outlined'}
         onClick={() => handleClickMovieRating(2)}
       />
       <Star
         type="star"
-        theme="outlined"
+        theme={rating >= 3 ? 'filled' : 'outlined'}
         onClick={() => handleClickMovieRating(3)}
       />
       <Star
         type="star"
-        theme="outlined"
+        theme={rating >= 4 ? 'filled' : 'outlined'}
         onClick={() => handleClickMovieRating(4)}
       />
       <Star
         type="star"
-        theme="outlined"
+        theme={rating >= 5 ? 'filled' : 'outlined'}
         onClick={() => handleClickMovieRating(5)}
       />
     </StarContainer>

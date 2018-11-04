@@ -23,6 +23,19 @@ export const GET_MOVIE_DETAIL = gql`
   }
 `;
 
+export const GET_MOVIE_RATING = gql`
+  query getMovieRating($movieId: Int!) {
+    GetMovieRating(movieId: $movieId) {
+      ok
+      error
+      movieRating {
+        rating
+        createdAt
+      }
+    }
+  }
+`;
+
 export const SET_MOVIE_RATING = gql`
   mutation setMovieRating($movieId: Int!, $rating: Float!) {
     SetMovieRating(movieId: $movieId, rating: $rating) {

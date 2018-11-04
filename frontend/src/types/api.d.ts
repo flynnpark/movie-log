@@ -109,6 +109,34 @@ export interface getMovieDetailVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getMovieRating
+// ====================================================
+
+export interface getMovieRating_GetMovieRating_movieRating {
+  __typename: "MovieRating";
+  rating: number;
+  createdAt: number;
+}
+
+export interface getMovieRating_GetMovieRating {
+  __typename: "GetMovieRatingResponse";
+  ok: boolean;
+  error: string | null;
+  movieRating: getMovieRating_GetMovieRating_movieRating | null;
+}
+
+export interface getMovieRating {
+  GetMovieRating: getMovieRating_GetMovieRating;
+}
+
+export interface getMovieRatingVariables {
+  movieId: number;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: setMovieRating
 // ====================================================
 
