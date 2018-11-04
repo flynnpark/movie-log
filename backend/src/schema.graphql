@@ -7,7 +7,7 @@ type Query {
   GetTopRated: [Movie]
   movie: Movie
   movieDetail: MovieDetail
-  GetMovieRating: GetMovieRatingResponse!
+  GetMovieRating(movieId: Int!): GetMovieRatingResponse!
   GetUserMovieRatings: GetUserMovieRatingsResponse!
   movieRating: MovieRating
   GetUserProfile(userId: Int): GetUserProfileResponse!

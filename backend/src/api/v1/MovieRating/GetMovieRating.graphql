@@ -5,5 +5,5 @@ type GetMovieRatingResponse {
 }
 
 type Query {
-  GetMovieRating: GetMovieRatingResponse!
+  GetMovieRating(movieId: Int!): GetMovieRatingResponse!
 }
