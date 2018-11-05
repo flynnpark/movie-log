@@ -68,7 +68,7 @@ type MovieRating {
   movieId: Int!
   userId: Int!
   rating: Float!
-  createdAt: Int!
+  createdAt: String!
 }
 
 type SetMovieRatingResponse {

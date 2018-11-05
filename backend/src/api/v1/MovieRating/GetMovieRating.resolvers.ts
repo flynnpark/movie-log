@@ -9,16 +9,16 @@ const resolvers: Resolvers = {
         return {
           ok: false,
           error: 'No rating',
-          movieRating: null,
+          movieRating: null
         };
       }
       return {
         ok: false,
         error: null,
-        movieRating,
+        movieRating
       };
-    },
-  },
+    }
+  }
 };
 
 export default resolvers;
