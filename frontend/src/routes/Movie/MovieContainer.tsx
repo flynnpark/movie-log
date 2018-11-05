@@ -4,15 +4,10 @@ import { Query, Mutation, MutationFn } from 'react-apollo';
 import {
   getMovieDetail,
   setMovieRating,
-  setMovieRatingVariables,
-  getMovieRating
+  setMovieRatingVariables
 } from 'src/types/api';
 import MoviePresenter from './MoviePresenter';
-import {
-  GET_MOVIE_DETAIL,
-  SET_MOVIE_RATING,
-  GET_MOVIE_RATING
-} from './MovieQueries';
+import { GET_MOVIE_DETAIL, SET_MOVIE_RATING } from './MovieQueries';
 import Loading from 'src/components/Loading';
 
 interface IState {
@@ -24,8 +19,6 @@ interface IProps extends RouteComponentProps<any> {
 }
 
 class MovieDetailQueries extends Query<getMovieDetail> {}
-
-class MovieRatingQueries extends Query<getMovieRating> {}
 
 class MovieRatingMutation extends Mutation<
   setMovieRating,
@@ -67,18 +60,10 @@ export class MovieContainer extends Component<IProps, IState> {
               {setMovieRatingFn => {
                 this.setMovieRating = setMovieRatingFn;
                 return (
-                  <MovieRatingQueries
-                    query={GET_MOVIE_RATING}
-                    variables={{ movieId }}
-                  >
-                    {({ data: movieRating }) => (
-                      <MoviePresenter
-                        data={data}
-                        movieRating={movieRating}
-                        handleClickMovieRating={this.handleClickMovieRating}
-                      />
-                    )}
-                  </MovieRatingQueries>
+                  <MoviePresenter
+                    data={data}
+                    handleClickMovieRating={this.handleClickMovieRating}
+                  />
                 );
               }}
             </MovieRatingMutation>

@@ -20,11 +20,6 @@ export const GET_MOVIE_DETAIL = gql`
         release_date
       }
     }
-  }
-`;
-
-export const GET_MOVIE_RATING = gql`
-  query getMovieRating($movieId: Int!) {
     GetMovieRating(movieId: $movieId) {
       ok
       error

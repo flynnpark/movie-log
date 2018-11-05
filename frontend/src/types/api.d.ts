@@ -97,39 +97,25 @@ export interface getMovieDetail_GetMovieDetail {
   movie: getMovieDetail_GetMovieDetail_movie | null;
 }
 
-export interface getMovieDetail {
-  GetMovieDetail: getMovieDetail_GetMovieDetail;
-}
-
-export interface getMovieDetailVariables {
-  movieId: number;
-}
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL query operation: getMovieRating
-// ====================================================
-
-export interface getMovieRating_GetMovieRating_movieRating {
+export interface getMovieDetail_GetMovieRating_movieRating {
   __typename: "MovieRating";
   rating: number;
   createdAt: number;
 }
 
-export interface getMovieRating_GetMovieRating {
+export interface getMovieDetail_GetMovieRating {
   __typename: "GetMovieRatingResponse";
   ok: boolean;
   error: string | null;
-  movieRating: getMovieRating_GetMovieRating_movieRating | null;
+  movieRating: getMovieDetail_GetMovieRating_movieRating | null;
 }
 
-export interface getMovieRating {
-  GetMovieRating: getMovieRating_GetMovieRating;
+export interface getMovieDetail {
+  GetMovieDetail: getMovieDetail_GetMovieDetail;
+  GetMovieRating: getMovieDetail_GetMovieRating;
 }
 
-export interface getMovieRatingVariables {
+export interface getMovieDetailVariables {
   movieId: number;
 }
 
