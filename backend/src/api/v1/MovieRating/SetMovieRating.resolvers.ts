@@ -31,7 +31,8 @@ const resolvers: Resolvers = {
                 error: null,
                 movieRating: {
                   ...movieRating,
-                  id: movieId
+                  id: movieId,
+                  createdAt: movieRating.createdAt.toString()
                 }
               };
             } else {
@@ -42,7 +43,10 @@ const resolvers: Resolvers = {
                 ok: true,
                 type: 'update',
                 error: null,
-                movieRating
+                movieRating: {
+                  ...movieRating,
+                  createdAt: movieRating.createdAt.toString()
+                }
               };
             }
           } else {
@@ -55,7 +59,10 @@ const resolvers: Resolvers = {
               ok: true,
               type: 'create',
               error: null,
-              movieRating: newMovieRating
+              movieRating: {
+                ...newMovieRating,
+                createdAt: newMovieRating.createdAt.toString()
+              }
             };
           }
         } catch (error) {

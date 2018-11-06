@@ -20,8 +20,8 @@ class MovieRating extends BaseEntity {
   @Column({ type: 'float' })
   rating: number;
 
-  @CreateDateColumn()
-  createdAt: number;
+  @CreateDateColumn({ type: 'timestamptz' })
+  createdAt: Date;
 }
 
 export default MovieRating;
