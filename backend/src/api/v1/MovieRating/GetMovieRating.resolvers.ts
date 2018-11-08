@@ -4,7 +4,7 @@ import MovieRating from '../../../entity/MovieRating';
 const resolvers: Resolvers = {
   Query: {
     GetMovieRating: async (_, { movieId }) => {
-      const movieRating = MovieRating.findOne({ movieId });
+      const movieRating = await MovieRating.findOne({ movieId });
       if (!movieRating) {
         return {
           ok: false,
@@ -13,7 +13,7 @@ const resolvers: Resolvers = {
         };
       }
       return {
-        ok: false,
+        ok: true,
         error: null,
         movieRating
       };

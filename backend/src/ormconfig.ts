@@ -5,11 +5,11 @@ const connectionOptions: ConnectionOptions = {
   database: 'movielog',
   entities: ['entity/**/*.*'],
   logging: false,
-  synchronize: true,
+  // synchronize: true,
   host: process.env.DB_ENDPOINT,
   port: 5432,
   username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
+  password: process.env.DB_PASSWORD
 };
 
 export default connectionOptions;
