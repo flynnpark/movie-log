@@ -3,13 +3,18 @@ import { ConnectionOptions } from 'typeorm';
 const connectionOptions: ConnectionOptions = {
   type: 'postgres',
   database: 'movielog',
-  entities: ['entity/**/*.*'],
-  logging: false,
-  // synchronize: true,
-  host: process.env.DB_ENDPOINT,
   port: 5432,
+  host: process.env.DB_ENDPOINT,
   username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD
+  password: process.env.DB_PASSWORD,
+  synchronize: true,
+  logging: false,
+  entities: ['entity/**/*.ts'],
+  migrations: ['migration/**/*.ts'],
+  cli: {
+    entitiesDir: 'entity',
+    migrationsDir: 'migration'
+  }
 };
 
 export default connectionOptions;

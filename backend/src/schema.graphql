@@ -67,7 +67,7 @@ type MovieRating {
   id: Int!
   movieId: Int!
   userId: Int!
-  rating: Float!
+  rating: Float
   createdAt: String!
 }
 
