@@ -18,6 +18,7 @@ const StarContainer = styled.div`
 `;
 
 const Star = styled(Icon)`
+  color: ${props => (props.theme === 'filled' ? '#fadb14' : '#8c8c8c')};
   font-size: 32px;
   cursor: pointer;
   margin-right: 4px;
