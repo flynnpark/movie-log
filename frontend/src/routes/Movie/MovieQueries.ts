@@ -24,6 +24,9 @@ export const GET_MOVIE_DETAIL = gql`
       ok
       error
       movieRating {
+        id
+        userId
+        movieId
         rating
         createdAt
       }
@@ -42,6 +45,7 @@ export const SET_MOVIE_RATING = gql`
         userId
         movieId
         rating
+        createdAt
       }
     }
   }

@@ -26,7 +26,7 @@ class MovieRatingMutation extends Mutation<
 > {}
 
 export class MovieContainer extends Component<IProps, IState> {
-  private setMovieRating;
+  private setMovieRatingFn: MutationFn;
 
   constructor(props: IProps) {
     super(props);
@@ -41,7 +41,20 @@ export class MovieContainer extends Component<IProps, IState> {
         params: { movieId }
       }
     } = this.props;
-    this.setMovieRating({ variables: { movieId, rating } });
+    this.setMovieRatingFn({
+      variables: { movieId, rating },
+      update: (store, { data: { SetMovieRating } }) => {
+        const data = store.readQuery({
+          query: GET_MOVIE_DETAIL,
+          variables: { movieId }
+        });
+        const newData = {
+          ...data,
+          GetMovieRating: SetMovieRating
+        };
+        store.writeQuery({ query: GET_MOVIE_DETAIL, data: newData });
+      }
+    });
   };
 
   public render() {
@@ -58,7 +71,7 @@ export class MovieContainer extends Component<IProps, IState> {
           ) : (
             <MovieRatingMutation mutation={SET_MOVIE_RATING}>
               {setMovieRatingFn => {
-                this.setMovieRating = setMovieRatingFn;
+                this.setMovieRatingFn = setMovieRatingFn;
                 return (
                   <MoviePresenter
                     data={data}
