@@ -29,11 +29,7 @@ const resolvers: Resolvers = {
                 ok: true,
                 type: 'remove',
                 error: null,
-                movieRating: {
-                  ...movieRating,
-                  id: movieId,
-                  createdAt: movieRating.createdAt.toString()
-                }
+                movieRating: null
               };
             } else {
               // 점수 업데이트
