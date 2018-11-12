@@ -30,9 +30,6 @@ export class MovieContainer extends Component<IProps, IState> {
 
   constructor(props: IProps) {
     super(props);
-    this.state = {
-      rating: 0
-    };
   }
 
   public handleClickMovieRating = (rating: number) => {
@@ -52,8 +49,10 @@ export class MovieContainer extends Component<IProps, IState> {
           ...data,
           GetMovieRating: SetMovieRating
         };
+        console.log(SetMovieRating);
         store.writeQuery({ query: GET_MOVIE_DETAIL, data: newData });
-      }
+      },
+      refetchQueries: () => ['getMovieDetail']
     });
   };
 
