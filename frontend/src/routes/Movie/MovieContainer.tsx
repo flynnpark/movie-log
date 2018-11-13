@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Query, Mutation, MutationFn } from "react-apollo";
-import { getMovieDetail, setMovieRating, setMovieRatingVariables } from "src/types/api";
+import {
+  getMovieDetail,
+  setMovieRating,
+  setMovieRatingVariables
+} from "src/types/api";
 import MoviePresenter from "./MoviePresenter";
 import { GET_MOVIE_DETAIL, SET_MOVIE_RATING } from "./MovieQueries";
 import Loading from "src/components/Loading";
+
+interface IState {
+  rating: number;
+}
 
 interface IProps extends RouteComponentProps<any> {
   setMovieRating?: MutationFn | null;
@@ -29,13 +37,11 @@ export class MovieContainer extends Component<IProps> {
     } = this.props;
     this.setMovieRatingFn({
       variables: { movieId, rating },
-
       update: (store, { data: { SetMovieRating } }) => {
         const data = store.readQuery({
           query: GET_MOVIE_DETAIL,
           variables: { movieId }
         });
-
         const newData = {
           ...data,
           GetMovieRating: SetMovieRating
