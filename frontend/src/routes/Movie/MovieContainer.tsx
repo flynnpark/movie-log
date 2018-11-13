@@ -20,12 +20,9 @@ interface IProps extends RouteComponentProps<any> {
 
 class MovieDetailQueries extends Query<getMovieDetail> {}
 
-class MovieRatingMutation extends Mutation<
-  setMovieRating,
-  setMovieRatingVariables
-> {}
+class MovieRatingMutation extends Mutation<setMovieRating, setMovieRatingVariables> {}
 
-export class MovieContainer extends Component<IProps, IState> {
+export class MovieContainer extends Component<IProps> {
   private setMovieRatingFn: MutationFn;
 
   constructor(props: IProps) {
@@ -40,38 +37,20 @@ export class MovieContainer extends Component<IProps, IState> {
     } = this.props;
     this.setMovieRatingFn({
       variables: { movieId, rating },
-      optimisticResponse: {
-        SetMovieRating: {
-          __typename: "SetMovieRatingResponse",
-          ok: rating ? true : false,
-          type: null,
-          error: null,
-          movieRating: {
-            __typename: "MovieRating",
-            id: null,
-            rating,
-            userId: null,
-            movieId,
-            createdAt: new Date().toString()
-          }
-        }
-      },
       update: (store, { data: { SetMovieRating } }) => {
         const data = store.readQuery({
           query: GET_MOVIE_DETAIL,
           variables: { movieId }
         });
-        console.log(data);
         const newData = {
           ...data,
           GetMovieRating: SetMovieRating
         };
-        store.writeQuery({
-          query: GET_MOVIE_DETAIL,
-          variables: { movieId },
-          data: newData
-        });
-      }
+
+        store.writeQuery({ query: GET_MOVIE_DETAIL, data: newData });
+      },
+
+      refetchQueries: () => ["getMovieDetail"]
     });
   };
 
