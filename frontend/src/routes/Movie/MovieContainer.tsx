@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { Query, Mutation, MutationFn } from 'react-apollo';
+import React, { Component } from "react";
+import { RouteComponentProps } from "react-router-dom";
+import { Query, Mutation, MutationFn } from "react-apollo";
 import {
   getMovieDetail,
   setMovieRating,
   setMovieRatingVariables
-} from 'src/types/api';
-import MoviePresenter from './MoviePresenter';
-import { GET_MOVIE_DETAIL, SET_MOVIE_RATING } from './MovieQueries';
-import Loading from 'src/components/Loading';
+} from "src/types/api";
+import MoviePresenter from "./MoviePresenter";
+import { GET_MOVIE_DETAIL, SET_MOVIE_RATING } from "./MovieQueries";
+import Loading from "src/components/Loading";
 
 interface IState {
   rating: number;
@@ -42,12 +42,12 @@ export class MovieContainer extends Component<IProps, IState> {
       variables: { movieId, rating },
       optimisticResponse: {
         SetMovieRating: {
-          __typename: 'SetMovieRatingResponse',
+          __typename: "SetMovieRatingResponse",
           ok: rating ? true : false,
           type: null,
           error: null,
           movieRating: {
-            __typename: 'MovieRating',
+            __typename: "MovieRating",
             id: null,
             rating,
             userId: null,
@@ -61,13 +61,17 @@ export class MovieContainer extends Component<IProps, IState> {
           query: GET_MOVIE_DETAIL,
           variables: { movieId }
         });
+        console.log(data);
         const newData = {
           ...data,
           GetMovieRating: SetMovieRating
         };
-        store.writeQuery({ query: GET_MOVIE_DETAIL, data: newData });
-      },
-      refetchQueries: () => ['getMovieDetail']
+        store.writeQuery({
+          query: GET_MOVIE_DETAIL,
+          variables: { movieId },
+          data: newData
+        });
+      }
     });
   };
 

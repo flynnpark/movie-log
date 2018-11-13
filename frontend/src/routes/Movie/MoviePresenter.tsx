@@ -1,8 +1,8 @@
-import React from 'react';
-import Helmet from 'react-helmet';
-import styled from 'styled-components';
-import { Alert, Card } from 'antd';
-import MovieRating from 'src/components/MovieRating';
+import React from "react";
+import Helmet from "react-helmet";
+import styled from "styled-components";
+import { Alert, Card } from "antd";
+import MovieRating from "src/components/MovieRating";
 
 const MovieInfoContinaer = styled.div`
   background-color: #fff;
@@ -57,7 +57,7 @@ const MoviePresenter = ({ data, handleClickMovieRating }) => {
     GetMovieDetail: { ok, movie },
     GetMovieRating: { ok: ratingOk, movieRating }
   } = data;
-  console.log(data);
+  // console.log(data);
   return (
     <>
       {ok ? (
@@ -87,11 +87,11 @@ const MoviePresenter = ({ data, handleClickMovieRating }) => {
                 description={
                   <React.Fragment>
                     <GenreWrapper>
-                      {movie.genres.map(genre => genre.name).join(' ')}
+                      {movie.genres.map(genre => genre.name).join(" ")}
                     </GenreWrapper>
-                    <div>{movie.release_date.replace(/-/gi, '. ')}</div>
+                    <div>{movie.release_date.replace(/-/gi, ". ")}</div>
                     <MovieRating
-                      rating={ratingOk ? movieRating.rating : 0}
+                      rating={ratingOk && movieRating ? movieRating.rating : 0}
                       handleClickMovieRating={handleClickMovieRating}
                     />
                   </React.Fragment>
