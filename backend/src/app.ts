@@ -14,9 +14,9 @@ class App {
       schema,
       context: req => {
         return {
-          req: req.request,
+          req: req.request
         };
-      },
+      }
     });
     this.setMiddlewares();
   }
