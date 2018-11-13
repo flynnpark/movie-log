@@ -1,0 +1,9 @@
+type GetMovieRatingsResponse {
+  ok: Boolean!
+  error: String
+  movieRatings: [MovieRating]
+}
+
+type Query {
+  GetMovieRatings(movieId: Int!, limit: Int): GetMovieRatingsResponse!
+}
