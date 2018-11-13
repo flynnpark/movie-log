@@ -1,18 +1,10 @@
-import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { Query, Mutation, MutationFn } from 'react-apollo';
-import {
-  getMovieDetail,
-  setMovieRating,
-  setMovieRatingVariables
-} from 'src/types/api';
-import MoviePresenter from './MoviePresenter';
-import { GET_MOVIE_DETAIL, SET_MOVIE_RATING } from './MovieQueries';
-import Loading from 'src/components/Loading';
-
-interface IState {
-  rating: number;
-}
+import React, { Component } from "react";
+import { RouteComponentProps } from "react-router-dom";
+import { Query, Mutation, MutationFn } from "react-apollo";
+import { getMovieDetail, setMovieRating, setMovieRatingVariables } from "src/types/api";
+import MoviePresenter from "./MoviePresenter";
+import { GET_MOVIE_DETAIL, SET_MOVIE_RATING } from "./MovieQueries";
+import Loading from "src/components/Loading";
 
 interface IProps extends RouteComponentProps<any> {
   setMovieRating?: MutationFn | null;
@@ -20,12 +12,9 @@ interface IProps extends RouteComponentProps<any> {
 
 class MovieDetailQueries extends Query<getMovieDetail> {}
 
-class MovieRatingMutation extends Mutation<
-  setMovieRating,
-  setMovieRatingVariables
-> {}
+class MovieRatingMutation extends Mutation<setMovieRating, setMovieRatingVariables> {}
 
-export class MovieContainer extends Component<IProps, IState> {
+export class MovieContainer extends Component<IProps> {
   private setMovieRatingFn: MutationFn;
 
   constructor(props: IProps) {
@@ -40,34 +29,22 @@ export class MovieContainer extends Component<IProps, IState> {
     } = this.props;
     this.setMovieRatingFn({
       variables: { movieId, rating },
-      optimisticResponse: {
-        SetMovieRating: {
-          __typename: 'SetMovieRatingResponse',
-          ok: rating ? true : false,
-          type: null,
-          error: null,
-          movieRating: {
-            __typename: 'MovieRating',
-            id: null,
-            rating,
-            userId: null,
-            movieId,
-            createdAt: new Date().toString()
-          }
-        }
-      },
+
       update: (store, { data: { SetMovieRating } }) => {
         const data = store.readQuery({
           query: GET_MOVIE_DETAIL,
           variables: { movieId }
         });
+
         const newData = {
           ...data,
           GetMovieRating: SetMovieRating
         };
+
         store.writeQuery({ query: GET_MOVIE_DETAIL, data: newData });
       },
-      refetchQueries: () => ['getMovieDetail']
+
+      refetchQueries: () => ["getMovieDetail"]
     });
   };
 
