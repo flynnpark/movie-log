@@ -8,6 +8,7 @@ type Query {
   movie: Movie
   movieDetail: MovieDetail
   GetMovieRating(movieId: Int!): GetMovieRatingResponse!
+  GetMovieRatings(movieId: Int!, limit: Int): GetMovieRatingsResponse!
   GetUserMovieRatings: GetUserMovieRatingsResponse!
   movieRating: MovieRating
   GetUserProfile(userId: Int): GetUserProfileResponse!
@@ -55,6 +56,12 @@ type GetMovieRatingResponse {
   ok: Boolean!
   error: String
   movieRating: MovieRating
+}
+
+type GetMovieRatingsResponse {
+  ok: Boolean!
+  error: String
+  movieRatings: [MovieRating]
 }
 
 type GetUserMovieRatingsResponse {
