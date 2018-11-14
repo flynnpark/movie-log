@@ -3,7 +3,7 @@ import MovieRating from '../../../entity/MovieRating';
 
 const resolvers: Resolvers = {
   Query: {
-    GetMovieRating: async (_, { movieId, limit }) => {
+    GetMovieRatings: async (_, { movieId, limit }) => {
       const movieRatings = await MovieRating.find({
         where: { movieId },
         take: limit
