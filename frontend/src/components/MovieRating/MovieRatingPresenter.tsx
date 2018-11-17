@@ -1,14 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon } from 'antd';
+import { Icon, DatePicker } from 'antd';
+import moment from 'moment';
 
-const ScoreWrapper = styled.div`
+const MovieRatingContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-top: 8px;
 `;
 
-const ScoreTitle = styled.div`
+const RatingWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const RatingTitle = styled.div`
   display: flex;
 `;
 
@@ -27,45 +33,73 @@ const Star = styled(Icon)`
   }
 `;
 
+const DateWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+`;
+
+const DateTitle = styled.div`
+  display: flex;
+`;
+
+const DateContainer = styled.div`
+  display: flex;
+  margin-top: 8px;
+`;
+
 interface IProps {
   rating: number;
   handleClickMovieRating: (rating: number) => void;
 }
 
+const dateFormat = 'YYYY/MM/DD';
+
 const MovieRatingPresenter: React.SFC<IProps> = ({
   rating,
   handleClickMovieRating
 }) => (
-  <ScoreWrapper>
-    <ScoreTitle>평가해주세요</ScoreTitle>
-    <StarContainer>
-      <Star
-        type="star"
-        theme={rating >= 1 ? 'filled' : 'outlined'}
-        onClick={() => handleClickMovieRating(1)}
-      />
-      <Star
-        type="star"
-        theme={rating >= 2 ? 'filled' : 'outlined'}
-        onClick={() => handleClickMovieRating(2)}
-      />
-      <Star
-        type="star"
-        theme={rating >= 3 ? 'filled' : 'outlined'}
-        onClick={() => handleClickMovieRating(3)}
-      />
-      <Star
-        type="star"
-        theme={rating >= 4 ? 'filled' : 'outlined'}
-        onClick={() => handleClickMovieRating(4)}
-      />
-      <Star
-        type="star"
-        theme={rating >= 5 ? 'filled' : 'outlined'}
-        onClick={() => handleClickMovieRating(5)}
-      />
-    </StarContainer>
-  </ScoreWrapper>
+  <MovieRatingContainer>
+    <RatingWrapper>
+      <RatingTitle>평가해주세요</RatingTitle>
+      <StarContainer>
+        <Star
+          type="star"
+          theme={rating >= 1 ? 'filled' : 'outlined'}
+          onClick={() => handleClickMovieRating(1)}
+        />
+        <Star
+          type="star"
+          theme={rating >= 2 ? 'filled' : 'outlined'}
+          onClick={() => handleClickMovieRating(2)}
+        />
+        <Star
+          type="star"
+          theme={rating >= 3 ? 'filled' : 'outlined'}
+          onClick={() => handleClickMovieRating(3)}
+        />
+        <Star
+          type="star"
+          theme={rating >= 4 ? 'filled' : 'outlined'}
+          onClick={() => handleClickMovieRating(4)}
+        />
+        <Star
+          type="star"
+          theme={rating >= 5 ? 'filled' : 'outlined'}
+          onClick={() => handleClickMovieRating(5)}
+        />
+      </StarContainer>
+    </RatingWrapper>
+    <DateWrapper>
+      <DateTitle>언제 보셨나요?</DateTitle>
+      <DateContainer>
+        <DatePicker
+          defaultValue={moment(new Date(), dateFormat)}
+          format={dateFormat}
+        />
+      </DateContainer>
+    </DateWrapper>
+  </MovieRatingContainer>
 );
 
 export default MovieRatingPresenter;
