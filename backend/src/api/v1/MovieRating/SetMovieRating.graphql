@@ -6,5 +6,10 @@ type SetMovieRatingResponse {
 }
 
 type Mutation {
-  SetMovieRating(movieId: Int!, rating: Float!): SetMovieRatingResponse!
+  SetMovieRating(
+    id: Int
+    movieId: Int!
+    rating: Float!
+    watchDate: String
+  ): SetMovieRatingResponse!
 }
