@@ -55,9 +55,8 @@ const CardBodyStyle = {
 const MoviePresenter = ({ data, handleClickMovieRating }) => {
   const {
     GetMovieDetail: { ok, movie },
-    GetMovieRating: { ok: ratingOk, movieRating }
+    GetMovieRatings: { ok: ratingOk, movieRating }
   } = data;
-  // console.log(data);
   return (
     <>
       {ok ? (

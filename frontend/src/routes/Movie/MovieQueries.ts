@@ -20,10 +20,10 @@ export const GET_MOVIE_DETAIL = gql`
         release_date
       }
     }
-    GetMovieRating(movieId: $movieId) {
+    GetMovieRatings(movieId: $movieId) {
       ok
       error
-      movieRating {
+      movieRatings {
         id
         userId
         movieId
