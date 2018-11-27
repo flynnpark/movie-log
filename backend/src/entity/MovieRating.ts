@@ -17,7 +17,7 @@ class MovieRating extends BaseEntity {
   @Column()
   userId: number;
 
-  @Column({ type: 'float', nullable: true })
+  @Column({ type: 'float', nullable: false })
   rating: number;
 
   @Column({ type: 'timestamptz', default: new Date() })
