@@ -97,22 +97,25 @@ export interface getMovieDetail_GetMovieDetail {
   movie: getMovieDetail_GetMovieDetail_movie | null;
 }
 
-export interface getMovieDetail_GetMovieRating_movieRating {
+export interface getMovieDetail_GetMovieRatings_movieRatings {
   __typename: "MovieRating";
+  id: number;
+  userId: number;
+  movieId: number;
   rating: number;
-  createdAt: number;
+  createdAt: string;
 }
 
-export interface getMovieDetail_GetMovieRating {
-  __typename: "GetMovieRatingResponse";
+export interface getMovieDetail_GetMovieRatings {
+  __typename: "GetMovieRatingsResponse";
   ok: boolean;
   error: string | null;
-  movieRating: getMovieDetail_GetMovieRating_movieRating | null;
+  movieRatings: (getMovieDetail_GetMovieRatings_movieRatings | null)[] | null;
 }
 
 export interface getMovieDetail {
   GetMovieDetail: getMovieDetail_GetMovieDetail;
-  GetMovieRating: getMovieDetail_GetMovieRating;
+  GetMovieRatings: getMovieDetail_GetMovieRatings;
 }
 
 export interface getMovieDetailVariables {
@@ -132,6 +135,7 @@ export interface setMovieRating_SetMovieRating_movieRating {
   userId: number;
   movieId: number;
   rating: number;
+  createdAt: string;
 }
 
 export interface setMovieRating_SetMovieRating {

@@ -55,7 +55,7 @@ const CardBodyStyle = {
 const MoviePresenter = ({ data, handleClickMovieRating }) => {
   const {
     GetMovieDetail: { ok, movie },
-    GetMovieRatings: { ok: ratingOk, movieRating }
+    GetMovieRatings: { ok: ratingOk, movieRatings }
   } = data;
   return (
     <>
@@ -89,10 +89,16 @@ const MoviePresenter = ({ data, handleClickMovieRating }) => {
                       {movie.genres.map(genre => genre.name).join(' ')}
                     </GenreWrapper>
                     <div>{movie.release_date.replace(/-/gi, '. ')}</div>
-                    <MovieRating
-                      rating={ratingOk && movieRating ? movieRating.rating : 0}
-                      handleClickMovieRating={handleClickMovieRating}
-                    />
+                    {ratingOk &&
+                      movieRatings.map(movieRating => {
+                        return (
+                          <MovieRating
+                            key={movieRating.id}
+                            movieRating={movieRating}
+                            handleClickMovieRating={handleClickMovieRating}
+                          />
+                        );
+                      })}
                   </React.Fragment>
                 }
               />
