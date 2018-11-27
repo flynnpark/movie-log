@@ -89,6 +89,9 @@ const MoviePresenter = ({ data, handleClickMovieRating }) => {
                       {movie.genres.map(genre => genre.name).join(' ')}
                     </GenreWrapper>
                     <div>{movie.release_date.replace(/-/gi, '. ')}</div>
+                    <MovieRating
+                      handleClickMovieRating={handleClickMovieRating}
+                    />
                     {ratingOk &&
                       movieRatings.map(movieRating => {
                         return (
