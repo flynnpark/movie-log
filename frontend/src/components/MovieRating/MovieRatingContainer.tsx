@@ -18,18 +18,23 @@ class MovieRatingContainer extends Component<IProps> {
         now.getTime() - created.setHours(created.getHours() + 24) > 0;
       console.log(modifyAvailable);
       if (modifyAvailable && handleClickMovieRating) {
+        // 수정이 가능한 상태
         return (
           <MovieRatingPresenter
             rating={movieRating.rating}
             handleClickMovieRating={handleClickMovieRating}
           />
         );
-      } else {
+      } else if (!modifyAvailable) {
+        // 수정이 불가능한 상태
         return <MovieRatingPresenter rating={movieRating.rating} />;
       }
-    } else {
-      return <MovieRatingPresenter />;
+      return null;
     }
+    return (
+      // 점수 등록
+      <MovieRatingPresenter handleClickMovieRating={handleClickMovieRating} />
+    );
   }
 }
 
