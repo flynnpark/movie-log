@@ -21,6 +21,7 @@ class MovieRatingContainer extends Component<IProps> {
         // 수정이 가능한 상태
         return (
           <MovieRatingPresenter
+            modifyAvailable={true}
             rating={movieRating.rating}
             handleClickMovieRating={handleClickMovieRating}
           />
@@ -33,7 +34,10 @@ class MovieRatingContainer extends Component<IProps> {
     }
     return (
       // 점수 등록
-      <MovieRatingPresenter handleClickMovieRating={handleClickMovieRating} />
+      <MovieRatingPresenter
+        modifyAvailable={true}
+        handleClickMovieRating={handleClickMovieRating}
+      />
     );
   }
 }

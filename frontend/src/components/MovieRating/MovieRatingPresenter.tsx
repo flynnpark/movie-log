@@ -49,6 +49,7 @@ const DateContainer = styled.div`
 `;
 
 interface IProps {
+  modifyAvailable?: boolean;
   rating?: number;
   handleClickMovieRating?: (rating: number) => void;
 }
