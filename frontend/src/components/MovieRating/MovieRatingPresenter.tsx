@@ -49,9 +49,9 @@ const DateContainer = styled.div`
 `;
 
 interface IProps {
-  modifyAvailable?: boolean;
+  modifyAvailable: boolean;
   rating?: number;
-  handleClickMovieRating?: (rating: number) => void;
+  handleClickMovieRating: (rating: number) => void;
 }
 
 const dateFormat = 'YYYY/MM/DD';
@@ -64,58 +64,14 @@ const MovieRatingPresenter: React.SFC<IProps> = ({
     <RatingWrapper>
       <RatingTitle>평가해주세요</RatingTitle>
       <StarContainer>
-        {handleClickMovieRating ? (
-          <>
-            <Star
-              type="star"
-              theme={rating && rating >= 1 ? 'filled' : 'outlined'}
-              onClick={() => handleClickMovieRating(1)}
-            />
-            <Star
-              type="star"
-              theme={rating && rating >= 2 ? 'filled' : 'outlined'}
-              onClick={() => handleClickMovieRating(2)}
-            />
-            <Star
-              type="star"
-              theme={rating && rating >= 3 ? 'filled' : 'outlined'}
-              onClick={() => handleClickMovieRating(3)}
-            />
-            <Star
-              type="star"
-              theme={rating && rating >= 4 ? 'filled' : 'outlined'}
-              onClick={() => handleClickMovieRating(4)}
-            />
-            <Star
-              type="star"
-              theme={rating && rating >= 5 ? 'filled' : 'outlined'}
-              onClick={() => handleClickMovieRating(5)}
-            />
-          </>
-        ) : (
-          <>
-            <Star
-              type="star"
-              theme={rating && rating >= 1 ? 'filled' : 'outlined'}
-            />
-            <Star
-              type="star"
-              theme={rating && rating >= 2 ? 'filled' : 'outlined'}
-            />
-            <Star
-              type="star"
-              theme={rating && rating >= 3 ? 'filled' : 'outlined'}
-            />
-            <Star
-              type="star"
-              theme={rating && rating >= 4 ? 'filled' : 'outlined'}
-            />
-            <Star
-              type="star"
-              theme={rating && rating >= 5 ? 'filled' : 'outlined'}
-            />
-          </>
-        )}
+        {[1, 2, 3, 4, 5].map(ratingNumber => (
+          <Star
+            key={ratingNumber}
+            type="star"
+            theme={rating && rating >= ratingNumber ? 'filled' : 'outlined'}
+            onClick={() => handleClickMovieRating(ratingNumber)}
+          />
+        ))}
       </StarContainer>
     </RatingWrapper>
     <DateWrapper>

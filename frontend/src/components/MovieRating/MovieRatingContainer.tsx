@@ -4,7 +4,7 @@ import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
 
 interface IProps {
   movieRating?: getMovieDetail_GetMovieRatings_movieRatings;
-  handleClickMovieRating?: (rating: number) => void;
+  handleClickMovieRating: (rating: number) => void;
 }
 
 class MovieRatingContainer extends Component<IProps> {
@@ -16,21 +16,13 @@ class MovieRatingContainer extends Component<IProps> {
       const created = new Date(createdAt);
       const modifyAvailable =
         now.getTime() - created.setHours(created.getHours() + 24) > 0;
-      console.log(modifyAvailable);
-      if (modifyAvailable && handleClickMovieRating) {
-        // 수정이 가능한 상태
-        return (
-          <MovieRatingPresenter
-            modifyAvailable={true}
-            rating={movieRating.rating}
-            handleClickMovieRating={handleClickMovieRating}
-          />
-        );
-      } else if (!modifyAvailable) {
-        // 수정이 불가능한 상태
-        return <MovieRatingPresenter rating={movieRating.rating} />;
-      }
-      return null;
+      return (
+        <MovieRatingPresenter
+          modifyAvailable={modifyAvailable}
+          rating={movieRating.rating}
+          handleClickMovieRating={handleClickMovieRating}
+        />
+      );
     }
     return (
       // 점수 등록
