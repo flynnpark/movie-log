@@ -10,7 +10,10 @@ const resolvers: Resolvers = {
       const take = limit ? limit : 5;
       const movieRatings = await MovieRating.find({
         where: { movieId, userId: user.id },
-        take
+        take,
+        order: {
+          watchDate: 'DESC'
+        }
       });
       return {
         ok: true,
