@@ -57,31 +57,50 @@ interface IProps {
 const dateFormat = 'YYYY/MM/DD';
 
 const MovieRatingPresenter: React.SFC<IProps> = ({
+  modifyAvailable,
   rating,
   handleClickMovieRating
 }) => (
   <MovieRatingContainer>
     <RatingWrapper>
-      <RatingTitle>평가해주세요</RatingTitle>
-      <StarContainer>
-        {[1, 2, 3, 4, 5].map(ratingNumber => (
-          <Star
-            key={ratingNumber}
-            type="star"
-            theme={rating && rating >= ratingNumber ? 'filled' : 'outlined'}
-            onClick={() => handleClickMovieRating(ratingNumber)}
-          />
-        ))}
-      </StarContainer>
+      {modifyAvailable ? (
+        <>
+          <RatingTitle>평가해주세요</RatingTitle>
+          <StarContainer>
+            {[1, 2, 3, 4, 5].map(ratingNumber => (
+              <Star
+                key={ratingNumber}
+                type="star"
+                theme={rating && rating >= ratingNumber ? 'filled' : 'outlined'}
+                onClick={() => handleClickMovieRating(ratingNumber)}
+              />
+            ))}
+          </StarContainer>
+        </>
+      ) : (
+        <StarContainer>
+          {[1, 2, 3, 4, 5].map(ratignNumber => (
+            <Icon
+              key={ratignNumber}
+              type="star"
+              theme={rating && rating >= ratignNumber ? 'filled' : 'outlined'}
+            />
+          ))}
+        </StarContainer>
+      )}
     </RatingWrapper>
     <DateWrapper>
-      <DateTitle>언제 보셨나요?</DateTitle>
-      <DateContainer>
-        <DatePicker
-          defaultValue={moment(new Date(), dateFormat)}
-          format={dateFormat}
-        />
-      </DateContainer>
+      {modifyAvailable && (
+        <>
+          <DateTitle>언제 보셨나요?</DateTitle>
+          <DateContainer>
+            <DatePicker
+              defaultValue={moment(new Date(), dateFormat)}
+              format={dateFormat}
+            />
+          </DateContainer>
+        </>
+      )}
     </DateWrapper>
   </MovieRatingContainer>
 );
