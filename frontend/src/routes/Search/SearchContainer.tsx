@@ -8,28 +8,34 @@ import Loading from 'src/components/Loading';
 
 class FindMovieQueries extends Query<findMovie> {}
 
-interface IProps extends RouteComponentProps<any> {}
+interface IParams {
+  query: string;
+}
+
+interface IProps extends RouteComponentProps<IParams> {}
 
 class SearchContainer extends Component<IProps> {
   public render() {
-    const {
-      match: {
+    const { match } = this.props;
+    if (match) {
+      const {
         params: { query }
-      }
-    } = this.props;
-    return (
-      <FindMovieQueries query={FIND_MOVIE} variables={{ query }}>
-        {({ data, loading }) => (
-          <>
-            {loading ? (
-              <Loading />
-            ) : (
-              <SearchPresenter query={query} data={data} />
-            )}
-          </>
-        )}
-      </FindMovieQueries>
-    );
+      } = match;
+      return (
+        <FindMovieQueries query={FIND_MOVIE} variables={{ query }}>
+          {({ data, loading }) => (
+            <>
+              {loading ? (
+                <Loading />
+              ) : (
+                <SearchPresenter query={query} data={data} />
+              )}
+            </>
+          )}
+        </FindMovieQueries>
+      );
+    }
+    return null;
   }
 }
 

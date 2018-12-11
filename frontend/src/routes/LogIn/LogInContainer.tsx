@@ -2,6 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
 import { Form } from 'antd';
+import { WrappedFormUtils } from 'antd/lib/form/Form';
 import {
   startEmailVerification,
   startEmailVerificationVariables
@@ -16,7 +17,7 @@ interface IState {
 }
 
 interface IProps extends RouteComponentProps<any> {
-  form: any;
+  form: WrappedFormUtils;
 }
 
 class EmailSignInMutation extends Mutation<

@@ -10,7 +10,11 @@ import MoviePresenter from './MoviePresenter';
 import { GET_MOVIE_DETAIL, SET_MOVIE_RATING } from './MovieQueries';
 import Loading from 'src/components/Loading';
 
-interface IProps extends RouteComponentProps<any> {
+interface IParams {
+  movieId: string;
+}
+
+interface IProps extends RouteComponentProps<IParams> {
   setMovieRating?: MutationFn | null;
 }
 
@@ -29,58 +33,61 @@ export class MovieContainer extends Component<IProps> {
   }
 
   public handleClickMovieRating = (rating: number) => {
-    const {
-      match: {
+    const { match } = this.props;
+    if (match) {
+      const {
         params: { movieId }
-      }
-    } = this.props;
-    this.setMovieRatingFn({
-      variables: { movieId, rating },
-      update: (store, { data: { SetMovieRating } }) => {
-        const data = store.readQuery({
-          query: GET_MOVIE_DETAIL,
-          variables: { movieId }
-        });
-        const newData = {
-          ...data,
-          GetMovieRating: SetMovieRating
-        };
-        store.writeQuery({
-          query: GET_MOVIE_DETAIL,
-          variables: { movieId },
-          data: newData
-        });
-      }
-    });
+      } = match;
+      this.setMovieRatingFn({
+        variables: { movieId, rating },
+        update: (store, { data: { SetMovieRating } }) => {
+          const data = store.readQuery({
+            query: GET_MOVIE_DETAIL,
+            variables: { movieId }
+          });
+          const newData = {
+            ...data,
+            GetMovieRating: SetMovieRating
+          };
+          store.writeQuery({
+            query: GET_MOVIE_DETAIL,
+            variables: { movieId },
+            data: newData
+          });
+        }
+      });
+    }
   };
 
   public render() {
-    const {
-      match: {
+    const { match } = this.props;
+    if (match) {
+      const {
         params: { movieId }
-      }
-    } = this.props;
-    return (
-      <MovieDetailQueries query={GET_MOVIE_DETAIL} variables={{ movieId }}>
-        {({ data, loading }) =>
-          loading ? (
-            <Loading />
-          ) : (
-            <MovieRatingMutation mutation={SET_MOVIE_RATING}>
-              {setMovieRatingFn => {
-                this.setMovieRatingFn = setMovieRatingFn;
-                return (
-                  <MoviePresenter
-                    data={data}
-                    handleClickMovieRating={this.handleClickMovieRating}
-                  />
-                );
-              }}
-            </MovieRatingMutation>
-          )
-        }
-      </MovieDetailQueries>
-    );
+      } = match;
+      return (
+        <MovieDetailQueries query={GET_MOVIE_DETAIL} variables={{ movieId }}>
+          {({ data, loading }) =>
+            loading ? (
+              <Loading />
+            ) : (
+              <MovieRatingMutation mutation={SET_MOVIE_RATING}>
+                {setMovieRatingFn => {
+                  this.setMovieRatingFn = setMovieRatingFn;
+                  return (
+                    <MoviePresenter
+                      data={data}
+                      handleClickMovieRating={this.handleClickMovieRating}
+                    />
+                  );
+                }}
+              </MovieRatingMutation>
+            )
+          }
+        </MovieDetailQueries>
+      );
+    }
+    return null;
   }
 }
 

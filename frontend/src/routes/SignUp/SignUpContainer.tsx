@@ -2,6 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
 import { Form } from 'antd';
+import { WrappedFormUtils } from 'antd/lib/form/Form';
 import SignUpPresenter from './SignUpPresenter';
 import { EMAIL_SIGN_UP } from './SignUpQueries';
 import { startEmailSignUp, startEmailSignUpVariables } from '../../types/api';
@@ -17,7 +18,7 @@ interface IState {
 }
 
 interface IProps extends RouteComponentProps<any> {
-  form: any;
+  form: WrappedFormUtils;
 }
 
 class EmailSignUpMutation extends Mutation<
