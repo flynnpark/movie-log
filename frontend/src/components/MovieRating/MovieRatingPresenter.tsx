@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Icon, DatePicker } from 'antd';
 import moment from 'moment';
+import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
 
 const MovieRatingContainer = styled.div`
   display: flex;
@@ -23,9 +24,19 @@ const StarContainer = styled.div`
   margin-top: 8px;
 `;
 
-const Star = styled(Icon)`
+const StarButton = styled(Icon)`
   color: ${props => (props.theme === 'filled' ? '#fadb14' : '#8c8c8c')};
   font-size: 32px;
+  cursor: pointer;
+  margin-right: 4px;
+  :last-child {
+    margin-right: 0;
+  }
+`;
+
+const StarIcon = styled(Icon)`
+  color: ${props => (props.theme === 'filled' ? '#fadb14' : '#8c8c8c')};
+  font-size: 24px;
   cursor: pointer;
   margin-right: 4px;
   :last-child {
@@ -50,7 +61,7 @@ const DateContainer = styled.div`
 
 interface IProps {
   modifyAvailable: boolean;
-  rating?: number;
+  movieRating?: getMovieDetail_GetMovieRatings_movieRatings;
   handleClickMovieRating: (rating: number) => void;
 }
 
@@ -58,7 +69,7 @@ const dateFormat = 'YYYY/MM/DD';
 
 const MovieRatingPresenter: React.SFC<IProps> = ({
   modifyAvailable,
-  rating,
+  movieRating,
   handleClickMovieRating
 }) => (
   <MovieRatingContainer>
@@ -68,10 +79,14 @@ const MovieRatingPresenter: React.SFC<IProps> = ({
           <RatingTitle>평가해주세요</RatingTitle>
           <StarContainer>
             {[1, 2, 3, 4, 5].map(ratingNumber => (
-              <Star
+              <StarButton
                 key={ratingNumber}
                 type="star"
-                theme={rating && rating >= ratingNumber ? 'filled' : 'outlined'}
+                theme={
+                  movieRating && movieRating.rating >= ratingNumber
+                    ? 'filled'
+                    : 'outlined'
+                }
                 onClick={() => handleClickMovieRating(ratingNumber)}
               />
             ))}
@@ -80,17 +95,21 @@ const MovieRatingPresenter: React.SFC<IProps> = ({
       ) : (
         <StarContainer>
           {[1, 2, 3, 4, 5].map(ratignNumber => (
-            <Icon
+            <StarIcon
               key={ratignNumber}
               type="star"
-              theme={rating && rating >= ratignNumber ? 'filled' : 'outlined'}
+              theme={
+                movieRating && movieRating.rating >= ratignNumber
+                  ? 'filled'
+                  : 'outlined'
+              }
             />
           ))}
         </StarContainer>
       )}
     </RatingWrapper>
     <DateWrapper>
-      {modifyAvailable && (
+      {modifyAvailable ? (
         <>
           <DateTitle>언제 보셨나요?</DateTitle>
           <DateContainer>
@@ -100,6 +119,10 @@ const MovieRatingPresenter: React.SFC<IProps> = ({
             />
           </DateContainer>
         </>
+      ) : (
+        <div>
+          {movieRating && <>{new Date(movieRating.watchDate).toString()}</>}
+        </div>
       )}
     </DateWrapper>
   </MovieRatingContainer>

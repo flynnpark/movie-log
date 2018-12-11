@@ -28,6 +28,7 @@ export const GET_MOVIE_DETAIL = gql`
         userId
         movieId
         rating
+        watchDate
         createdAt
       }
     }

@@ -15,11 +15,11 @@ class MovieRatingContainer extends Component<IProps> {
       const now = new Date();
       const created = new Date(createdAt);
       const modifyAvailable =
-        now.getTime() - created.setHours(created.getHours() + 24) > 0;
+        now.getTime() - created.setHours(created.getHours() + 24) < 0;
       return (
         <MovieRatingPresenter
           modifyAvailable={modifyAvailable}
-          rating={movieRating.rating}
+          movieRating={movieRating}
           handleClickMovieRating={handleClickMovieRating}
         />
       );

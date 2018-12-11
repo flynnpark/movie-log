@@ -103,6 +103,7 @@ export interface getMovieDetail_GetMovieRatings_movieRatings {
   userId: number;
   movieId: number;
   rating: number;
+  watchDate: string;
   createdAt: string;
 }
 
