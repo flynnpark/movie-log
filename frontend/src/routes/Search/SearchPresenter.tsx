@@ -7,7 +7,7 @@ interface IProps {
   data: any;
 }
 
-const SearchPresenter: React.SFC<IProps> = props => {
+const SearchPresenter: React.FunctionComponent<IProps> = props => {
   const {
     query,
     data: { FindMovie }

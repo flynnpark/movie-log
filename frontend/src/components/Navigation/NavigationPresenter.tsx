@@ -40,7 +40,7 @@ const RightSide = styled.div`
 
 interface IProps extends RouteComponentProps<any> {}
 
-const NavigationPresenter: React.SFC<IProps> = ({ history }) => (
+const NavigationPresenter: React.FunctionComponent<IProps> = ({ history }) => (
   <React.Fragment>
     <HeaderContainer>
       <HeaderSide>

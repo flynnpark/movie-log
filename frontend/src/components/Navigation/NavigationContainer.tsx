@@ -4,7 +4,7 @@ import NavigationPresenter from './NavigationPresenter';
 
 interface IProps extends RouteComponentProps<any> {}
 
-const NavigationContainer: React.SFC<IProps> = props => (
+const NavigationContainer: React.FunctionComponent<IProps> = props => (
   <NavigationPresenter {...props} />
 );
 

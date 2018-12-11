@@ -24,7 +24,10 @@ interface IProps {
   }>;
 }
 
-const MovieCardListPresenter: React.SFC<IProps> = ({ title, movieList }) => (
+const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
+  title,
+  movieList
+}) => (
   <React.Fragment>
     {title && <MovieListTitle>{title}</MovieListTitle>}
     <MovieCardContainer>

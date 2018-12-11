@@ -16,7 +16,7 @@ interface IProps {
   onSubmitFn: MutationFn;
 }
 
-const LoginPresenter: React.SFC<IProps> = ({
+const LoginPresenter: React.FunctionComponent<IProps> = ({
   form,
   loading,
   handleSubmit,

@@ -27,7 +27,7 @@ interface IProps {
   onSubmitFn: MutationFn;
 }
 
-const SignUpPresenter: React.SFC<IProps> = ({
+const SignUpPresenter: React.FunctionComponent<IProps> = ({
   loading,
   form,
   handleConfirmBlur,

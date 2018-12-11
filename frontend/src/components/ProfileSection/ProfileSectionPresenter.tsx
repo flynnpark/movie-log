@@ -34,7 +34,7 @@ interface IProps {
   };
 }
 
-const ProfileSectionPresenter: React.SFC<IProps> = ({
+const ProfileSectionPresenter: React.FunctionComponent<IProps> = ({
   userData: { id, avatar, email, name, shortBio, createdAt }
 }) => (
   <ProfileCard>

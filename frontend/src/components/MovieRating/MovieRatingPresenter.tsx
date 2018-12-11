@@ -67,7 +67,7 @@ interface IProps {
 
 const dateFormat = 'YYYY/MM/DD';
 
-const MovieRatingPresenter: React.SFC<IProps> = ({
+const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
   modifyAvailable,
   movieRating,
   handleClickMovieRating

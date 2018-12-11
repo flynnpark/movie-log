@@ -39,13 +39,13 @@ const Content = styled(Layout.Content)`
   margin: 0 auto;
 `;
 
-const AppPresenter: React.SFC<IProps> = ({ isLoggedIn }) => (
+const AppPresenter: React.FunctionComponent<IProps> = ({ isLoggedIn }) => (
   <BrowserRouter>
     {isLoggedIn ? <WrappedLoggedInRoutes /> : <LoggedOutRoutes />}
   </BrowserRouter>
 );
 
-const LoggedOutRoutes: React.SFC = () => (
+const LoggedOutRoutes: React.FunctionComponent = () => (
   <Layout>
     <Content>
       <Switch>
@@ -59,7 +59,7 @@ const LoggedOutRoutes: React.SFC = () => (
 
 interface ILoggedInRoutesProps extends RouteComponentProps<any> {}
 
-const LoggedInRoutes: React.SFC<ILoggedInRoutesProps> = props => (
+const LoggedInRoutes: React.FunctionComponent<ILoggedInRoutesProps> = props => (
   <Layout>
     <FixedHeader>
       <Navigation {...props} />
