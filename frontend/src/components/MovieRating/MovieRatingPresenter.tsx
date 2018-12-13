@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon, DatePicker } from 'antd';
+import { Icon, DatePicker, Button } from 'antd';
 import moment from 'moment';
 import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
 
@@ -13,15 +13,22 @@ const MovieRatingContainer = styled.div`
 const RatingWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `;
 
 const RatingTitle = styled.div`
   display: flex;
 `;
 
-const StarContainer = styled.div`
+const StarButtonContainer = styled.div`
   display: flex;
   margin-top: 8px;
+`;
+
+const StarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const StarButton = styled(Icon)`
@@ -54,9 +61,14 @@ const DateTitle = styled.div`
   display: flex;
 `;
 
-const DateContainer = styled.div`
+const DatePickerContainer = styled.div`
   display: flex;
   margin-top: 8px;
+`;
+
+const DateContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 interface IProps {
@@ -77,7 +89,7 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
       {modifyAvailable ? (
         <>
           <RatingTitle>평가해주세요</RatingTitle>
-          <StarContainer>
+          <StarButtonContainer>
             {[1, 2, 3, 4, 5].map(ratingNumber => (
               <StarButton
                 key={ratingNumber}
@@ -90,7 +102,7 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
                 onClick={() => handleClickMovieRating(ratingNumber)}
               />
             ))}
-          </StarContainer>
+          </StarButtonContainer>
         </>
       ) : (
         <StarContainer>
@@ -112,17 +124,22 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
       {modifyAvailable ? (
         <>
           <DateTitle>언제 보셨나요?</DateTitle>
-          <DateContainer>
+          <DatePickerContainer>
             <DatePicker
               defaultValue={moment(new Date(), dateFormat)}
               format={dateFormat}
             />
-          </DateContainer>
+          </DatePickerContainer>
         </>
       ) : (
-        <div>
-          {movieRating && <>{new Date(movieRating.watchDate).toString()}</>}
-        </div>
+        <>
+          {movieRating && (
+            <DateContainer>
+              {moment(new Date(movieRating.watchDate)).format(dateFormat)}
+              <Button type="dashed" shape="circle" icon="delete" />
+            </DateContainer>
+          )}
+        </>
       )}
     </DateWrapper>
   </MovieRatingContainer>
