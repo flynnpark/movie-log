@@ -33,7 +33,7 @@ const StarContainer = styled.div`
 
 const StarButton = styled(Icon)`
   color: ${props => (props.theme === 'filled' ? '#fadb14' : '#8c8c8c')};
-  font-size: 32px;
+  font-size: 30px;
   cursor: pointer;
   margin-right: 4px;
   :last-child {
@@ -43,8 +43,7 @@ const StarButton = styled(Icon)`
 
 const StarIcon = styled(Icon)`
   color: ${props => (props.theme === 'filled' ? '#fadb14' : '#8c8c8c')};
-  font-size: 24px;
-  cursor: pointer;
+  font-size: 26px;
   margin-right: 4px;
   :last-child {
     margin-right: 0;
@@ -74,12 +73,11 @@ const DateContainer = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   margin-left: 10px;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
 `;
 
 interface IProps {
-  modifyAvailable: boolean;
   movieRating?: getMovieDetail_GetMovieRatings_movieRatings;
   handleClickMovieRating: (rating: number) => void;
 }
@@ -87,64 +85,32 @@ interface IProps {
 const dateFormat = 'YYYY/MM/DD';
 
 const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
-  modifyAvailable,
   movieRating,
   handleClickMovieRating
 }) => (
   <MovieRatingContainer>
     {movieRating ? (
       <>
-        {modifyAvailable ? (
-          <>
-            <RatingWrapper>
-              <StarButtonContainer>
-                {[1, 2, 3, 4, 5].map(ratingNumber => (
-                  <StarButton
-                    key={ratingNumber}
-                    type="star"
-                    theme={
-                      movieRating && movieRating.rating >= ratingNumber
-                        ? 'filled'
-                        : 'outlined'
-                    }
-                    onClick={() => handleClickMovieRating(ratingNumber)}
-                  />
-                ))}
-              </StarButtonContainer>
-            </RatingWrapper>
-            <DateWrapper>
-              <DatePickerContainer>
-                <DatePicker
-                  defaultValue={moment(new Date(), dateFormat)}
-                  format={dateFormat}
-                />
-              </DatePickerContainer>
-            </DateWrapper>
-          </>
-        ) : (
-          <>
-            <RatingWrapper>
-              <StarContainer>
-                {[1, 2, 3, 4, 5].map(ratignNumber => (
-                  <StarIcon
-                    key={ratignNumber}
-                    type="star"
-                    theme={
-                      movieRating && movieRating.rating >= ratignNumber
-                        ? 'filled'
-                        : 'outlined'
-                    }
-                  />
-                ))}
-              </StarContainer>
-            </RatingWrapper>
-            <DateWrapper>
-              <DateContainer>
-                {moment(new Date(movieRating.watchDate)).format(dateFormat)}
-              </DateContainer>
-            </DateWrapper>
-          </>
-        )}
+        <RatingWrapper>
+          <StarContainer>
+            {[1, 2, 3, 4, 5].map(ratignNumber => (
+              <StarIcon
+                key={ratignNumber}
+                type="star"
+                theme={
+                  movieRating && movieRating.rating >= ratignNumber
+                    ? 'filled'
+                    : 'outlined'
+                }
+              />
+            ))}
+          </StarContainer>
+        </RatingWrapper>
+        <DateWrapper>
+          <DateContainer>
+            {moment(new Date(movieRating.watchDate)).format(dateFormat)}
+          </DateContainer>
+        </DateWrapper>
         <ButtonWrapper>
           <Button type="dashed" shape="circle" icon="delete" />
         </ButtonWrapper>
@@ -173,6 +139,9 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
             />
           </DatePickerContainer>
         </DateWrapper>
+        <ButtonWrapper>
+          <Button type="dashed" shape="circle" icon="check" />
+        </ButtonWrapper>
       </>
     )}
   </MovieRatingContainer>

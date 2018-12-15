@@ -11,14 +11,8 @@ class MovieRatingContainer extends Component<IProps> {
   public render() {
     const { movieRating, handleClickMovieRating } = this.props;
     if (movieRating) {
-      const { createdAt } = movieRating;
-      const now = new Date();
-      const created = new Date(createdAt);
-      const modifyAvailable =
-        now.getTime() - created.setHours(created.getHours() + 24) < 0;
       return (
         <MovieRatingPresenter
-          modifyAvailable={modifyAvailable}
           movieRating={movieRating}
           handleClickMovieRating={handleClickMovieRating}
         />
@@ -26,10 +20,7 @@ class MovieRatingContainer extends Component<IProps> {
     }
     return (
       // 점수 등록
-      <MovieRatingPresenter
-        modifyAvailable={true}
-        handleClickMovieRating={handleClickMovieRating}
-      />
+      <MovieRatingPresenter handleClickMovieRating={handleClickMovieRating} />
     );
   }
 }
