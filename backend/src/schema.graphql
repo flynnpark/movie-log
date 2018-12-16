@@ -87,7 +87,7 @@ type SetMovieRatingResponse {
 }
 
 type Mutation {
-  SetMovieRating(id: Int, movieId: Int!, rating: Float!, watchDate: String): SetMovieRatingResponse!
+  SetMovieRating(id: Int, movieId: Int!, rating: Float!, watchDate: String!): SetMovieRatingResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(email: String!, password: String!, name: String!, avatar: String, shortBio: String): EmailSignUpResponse!
   UpdateMyProfile(password: String, name: String, avatar: String): UpdateMyProfileResponse!
