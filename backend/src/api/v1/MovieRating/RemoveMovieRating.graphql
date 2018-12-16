@@ -1,0 +1,9 @@
+type RemoveMovieRatingResponse {
+  ok: Boolean!
+  error: String
+  movieRating: MovieRating
+}
+
+type Mutation {
+  RemoveMovieRating(id: Int): RemoveMovieRatingResponse
+}

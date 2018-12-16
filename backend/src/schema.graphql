@@ -79,18 +79,24 @@ type MovieRating {
   createdAt: String!
 }
 
-type SetMovieRatingResponse {
+type RemoveMovieRatingResponse {
   ok: Boolean!
-  type: String
   error: String
   movieRating: MovieRating
 }
 
 type Mutation {
+  RemoveMovieRating(id: Int): RemoveMovieRatingResponse
   SetMovieRating(id: Int, movieId: Int!, rating: Float!, watchDate: String!): SetMovieRatingResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
   EmailSignUp(email: String!, password: String!, name: String!, avatar: String, shortBio: String): EmailSignUpResponse!
   UpdateMyProfile(password: String, name: String, avatar: String): UpdateMyProfileResponse!
+}
+
+type SetMovieRatingResponse {
+  ok: Boolean!
+  error: String
+  movieRating: MovieRating
 }
 
 type EmailSignInResponse {

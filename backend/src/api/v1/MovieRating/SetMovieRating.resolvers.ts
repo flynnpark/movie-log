@@ -31,7 +31,6 @@ const resolvers: Resolvers = {
           }).save();
           return {
             ok: true,
-            type: 'create',
             error: null,
             movieRating: {
               ...newMovieRating,
@@ -42,7 +41,6 @@ const resolvers: Resolvers = {
         } catch (error) {
           return {
             ok: false,
-            type: 'unknown',
             error,
             movieRating: null
           };

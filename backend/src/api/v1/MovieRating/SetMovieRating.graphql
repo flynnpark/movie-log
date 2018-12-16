@@ -1,6 +1,5 @@
 type SetMovieRatingResponse {
   ok: Boolean!
-  type: String
   error: String
   movieRating: MovieRating
 }
