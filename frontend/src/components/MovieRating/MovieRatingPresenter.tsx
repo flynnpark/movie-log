@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Icon, DatePicker, Button } from 'antd';
+import { DatePicker, Button, Rate } from 'antd';
 import moment from 'moment';
 import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
 
@@ -29,25 +29,6 @@ const StarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const StarButton = styled(Icon)`
-  color: ${props => (props.theme === 'filled' ? '#fadb14' : '#8c8c8c')};
-  font-size: 30px;
-  cursor: pointer;
-  margin-right: 4px;
-  :last-child {
-    margin-right: 0;
-  }
-`;
-
-const StarIcon = styled(Icon)`
-  color: ${props => (props.theme === 'filled' ? '#fadb14' : '#8c8c8c')};
-  font-size: 26px;
-  margin-right: 4px;
-  :last-child {
-    margin-right: 0;
-  }
 `;
 
 const DateWrapper = styled.div`
@@ -93,17 +74,12 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
       <>
         <RatingWrapper>
           <StarContainer>
-            {[1, 2, 3, 4, 5].map(ratignNumber => (
-              <StarIcon
-                key={ratignNumber}
-                type="star"
-                theme={
-                  movieRating && movieRating.rating >= ratignNumber
-                    ? 'filled'
-                    : 'outlined'
-                }
-              />
-            ))}
+            <Rate
+              disabled={true}
+              allowHalf={true}
+              defaultValue={movieRating.rating}
+              style={{ fontSize: '24px' }}
+            />
           </StarContainer>
         </RatingWrapper>
         <DateWrapper>
@@ -120,14 +96,7 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
         <RatingWrapper>
           <RatingTitle>평가해주세요</RatingTitle>
           <StarButtonContainer>
-            {[1, 2, 3, 4, 5].map(ratingNumber => (
-              <StarButton
-                key={ratingNumber}
-                type="star"
-                theme={'outlined'}
-                onClick={() => handleClickMovieRating(ratingNumber)}
-              />
-            ))}
+            <Rate allowHalf={true} style={{ fontSize: '28px' }} />
           </StarButtonContainer>
         </RatingWrapper>
         <DateWrapper>
