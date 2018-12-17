@@ -59,15 +59,17 @@ const ButtonWrapper = styled.div`
 `;
 
 interface IProps {
+  rating?: number;
   movieRating?: getMovieDetail_GetMovieRatings_movieRatings;
-  handleClickMovieRating: (rating: number) => void;
+  handleClickRating?: (rating: number) => void;
 }
 
 const dateFormat = 'YYYY/MM/DD';
 
 const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
+  rating,
   movieRating,
-  handleClickMovieRating
+  handleClickRating
 }) => (
   <MovieRatingContainer>
     {movieRating ? (
@@ -96,7 +98,12 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
         <RatingWrapper>
           <RatingTitle>평가해주세요</RatingTitle>
           <StarButtonContainer>
-            <Rate allowHalf={true} style={{ fontSize: '28px' }} />
+            <Rate
+              allowHalf={true}
+              style={{ fontSize: '28px' }}
+              value={rating}
+              onChange={handleClickRating}
+            />
           </StarButtonContainer>
         </RatingWrapper>
         <DateWrapper>
