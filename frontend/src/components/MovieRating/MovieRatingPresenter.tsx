@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment-timezone';
 import { DatePicker, Button, Rate } from 'antd';
-import moment from 'moment';
-import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
 
 const MovieRatingContainer = styled.div`
   display: flex;
@@ -59,41 +58,22 @@ const ButtonWrapper = styled.div`
 `;
 
 interface IProps {
-  rating?: number;
-  movieRating?: getMovieDetail_GetMovieRatings_movieRatings;
+  rating: number;
+  watchDate: string;
   handleClickRating?: (rating: number) => void;
+  handleClickWatchDate?: (date: moment.Moment, dateString: string) => void;
 }
 
 const dateFormat = 'YYYY/MM/DD';
 
 const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
   rating,
-  movieRating,
-  handleClickRating
+  watchDate,
+  handleClickRating,
+  handleClickWatchDate
 }) => (
   <MovieRatingContainer>
-    {movieRating ? (
-      <>
-        <RatingWrapper>
-          <StarContainer>
-            <Rate
-              disabled={true}
-              allowHalf={true}
-              defaultValue={movieRating.rating}
-              style={{ fontSize: '24px' }}
-            />
-          </StarContainer>
-        </RatingWrapper>
-        <DateWrapper>
-          <DateContainer>
-            {moment(new Date(movieRating.watchDate)).format(dateFormat)}
-          </DateContainer>
-        </DateWrapper>
-        <ButtonWrapper>
-          <Button type="dashed" shape="circle" icon="delete" />
-        </ButtonWrapper>
-      </>
-    ) : (
+    {handleClickRating && handleClickWatchDate ? (
       <>
         <RatingWrapper>
           <RatingTitle>평가해주세요</RatingTitle>
@@ -112,11 +92,33 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
             <DatePicker
               defaultValue={moment(new Date(), dateFormat)}
               format={dateFormat}
+              onChange={handleClickWatchDate}
             />
           </DatePickerContainer>
         </DateWrapper>
         <ButtonWrapper>
           <Button type="dashed" shape="circle" icon="check" />
+        </ButtonWrapper>
+      </>
+    ) : (
+      <>
+        <RatingWrapper>
+          <StarContainer>
+            <Rate
+              disabled={true}
+              allowHalf={true}
+              defaultValue={rating}
+              style={{ fontSize: '24px' }}
+            />
+          </StarContainer>
+        </RatingWrapper>
+        <DateWrapper>
+          <DateContainer>
+            {moment(new Date(watchDate)).format(dateFormat)}
+          </DateContainer>
+        </DateWrapper>
+        <ButtonWrapper>
+          <Button type="dashed" shape="circle" icon="delete" />
         </ButtonWrapper>
       </>
     )}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment-timezone';
 import MovieRatingPresenter from './MovieRatingPresenter';
 import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
 
@@ -9,34 +10,52 @@ interface IProps {
 
 interface IState {
   rating: number;
+  watchDate: string;
 }
 
 class MovieRatingContainer extends Component<IProps, IState> {
   public state = {
-    rating: 0
+    rating: 0,
+    watchDate: new Date().toString()
   };
 
-  public setRatingState = async (rating: number) => {
+  public setRatingState = async (rating: number): Promise<void> => {
     await this.setState({
       rating
     });
   };
 
-  /**
-   * 별 버튼 클릭시 컴포넌트 자체 rating 숫자만 변경되어야 함
-   * 별점과 날짜 정한 후 Check 버튼을 누를 경우에 저장하도록 수정해야 함
-   */
+  public setWatchDateState = async (
+    date: moment.Moment,
+    dateString: string
+  ): Promise<void> => {
+    await this.setState({
+      watchDate: date.toDate().toString()
+    });
+  };
+
   public render() {
     const { movieRating } = this.props;
     if (movieRating) {
-      return <MovieRatingPresenter movieRating={movieRating} />;
+      const {
+        rating: databaseRating,
+        watchDate: databaseWatchDate
+      } = movieRating;
+      return (
+        <MovieRatingPresenter
+          rating={databaseRating}
+          watchDate={databaseWatchDate}
+        />
+      );
     }
-    const { rating } = this.state;
+    const { rating, watchDate } = this.state;
     return (
       // 점수 등록
       <MovieRatingPresenter
         rating={rating}
+        watchDate={watchDate}
         handleClickRating={this.setRatingState}
+        handleClickWatchDate={this.setWatchDateState}
       />
     );
   }
