@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import MovieCardPresenter from './MovieCardPresenter';
+import {
+  getHomeData_GetNowPlaying,
+  getHomeData_GetPopular,
+  getHomeData_GetTopRated
+} from 'src/types/api';
 
-interface IProps {
-  id: number;
-  poster_path: string;
-  title: string;
-  release_date: string;
-}
-
-class MovieCardContainer extends Component<IProps, any> {
+class MovieCardContainer extends Component<
+  getHomeData_GetNowPlaying | getHomeData_GetPopular | getHomeData_GetTopRated,
+  any
+> {
   public render() {
     const { id, poster_path, title, release_date } = this.props;
     return (

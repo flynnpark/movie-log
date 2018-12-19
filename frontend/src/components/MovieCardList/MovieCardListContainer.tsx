@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
 import MovieCardListPresenter from './MovieCardListPresenter';
+import {
+  getHomeData_GetNowPlaying,
+  getHomeData_GetPopular,
+  getHomeData_GetTopRated
+} from 'src/types/api';
 
 interface IProps {
   title?: string;
-  movieList?: [];
+  movieList?: Array<
+    | getHomeData_GetNowPlaying
+    | getHomeData_GetPopular
+    | getHomeData_GetTopRated
+    | null
+  >;
 }
 
 class MovieCardListContainer extends Component<IProps, any> {
   public render() {
-    return <MovieCardListPresenter {...this.props} />;
+    const { movieList } = this.props;
+    return movieList && <MovieCardListPresenter {...this.props} />;
   }
 }
 

@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import MovieCard from 'src/components/MovieCard';
+import {
+  getHomeData_GetNowPlaying,
+  getHomeData_GetPopular,
+  getHomeData_GetTopRated
+} from 'src/types/api';
 
 const MovieCardContainer = styled.div`
   display: flex;
@@ -16,12 +21,12 @@ const MovieListTitle = styled.h1`
 
 interface IProps {
   title?: string;
-  movieList?: Array<{
-    id: number;
-    poster_path: string;
-    title: string;
-    release_date: string;
-  }>;
+  movieList?: Array<
+    | getHomeData_GetNowPlaying
+    | getHomeData_GetPopular
+    | getHomeData_GetTopRated
+    | null
+  >;
 }
 
 const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
@@ -32,9 +37,10 @@ const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
     {title && <MovieListTitle>{title}</MovieListTitle>}
     <MovieCardContainer>
       {movieList &&
-        movieList.map(movieInfo => (
-          <MovieCard key={movieInfo.id} {...movieInfo} />
-        ))}
+        movieList.map(
+          movieInfo =>
+            movieInfo && <MovieCard key={movieInfo.id} {...movieInfo} />
+        )}
     </MovieCardContainer>
   </React.Fragment>
 );
