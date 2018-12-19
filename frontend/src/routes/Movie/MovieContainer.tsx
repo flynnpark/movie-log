@@ -32,7 +32,7 @@ export class MovieContainer extends Component<IProps> {
     super(props);
   }
 
-  public handleClickMovieRating = (rating: number) => {
+  public handleMovieRatingApply = (rating: number) => {
     const { match } = this.props;
     if (match) {
       const {
@@ -75,10 +75,12 @@ export class MovieContainer extends Component<IProps> {
                 {setMovieRatingFn => {
                   this.setMovieRatingFn = setMovieRatingFn;
                   return (
-                    <MoviePresenter
-                      data={data}
-                      handleClickMovieRating={this.handleClickMovieRating}
-                    />
+                    data && (
+                      <MoviePresenter
+                        data={data}
+                        handleMovieRatingApply={this.handleMovieRatingApply}
+                      />
+                    )
                   );
                 }}
               </MovieRatingMutation>

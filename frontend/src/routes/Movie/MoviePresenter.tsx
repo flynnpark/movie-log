@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Alert, Card } from 'antd';
 import MovieRating from 'src/components/MovieRating';
+import { getMovieDetail } from 'src/types/api';
 
 const MovieInfoContinaer = styled.div`
   background-color: #fff;
@@ -52,14 +53,22 @@ const CardBodyStyle = {
   padding: 0
 };
 
-const MoviePresenter = ({ data, handleClickMovieRating }) => {
+interface IProps {
+  data: getMovieDetail;
+  handleMovieRatingApply: (rating: number) => void;
+}
+
+const MoviePresenter: React.FunctionComponent<IProps> = ({
+  data,
+  handleMovieRatingApply
+}) => {
   const {
     GetMovieDetail: { ok, movie },
     GetMovieRatings: { ok: ratingOk, movieRatings }
   } = data;
   return (
     <>
-      {ok ? (
+      {ok && movie ? (
         <>
           <Helmet>
             <title>{movie.title} | Movie-log</title>
@@ -86,22 +95,24 @@ const MoviePresenter = ({ data, handleClickMovieRating }) => {
                 description={
                   <React.Fragment>
                     <GenreWrapper>
-                      {movie.genres.map(genre => genre.name).join(' ')}
+                      {movie.genres.map(genre => genre && genre.name).join(' ')}
                     </GenreWrapper>
                     <div>{movie.release_date.replace(/-/gi, '. ')}</div>
                     <MovieRating
-                      handleClickMovieRating={handleClickMovieRating}
+                      handleMovieRatingApply={handleMovieRatingApply}
                     />
                     {ratingOk &&
-                      movieRatings.map(movieRating => {
-                        return (
-                          <MovieRating
-                            key={movieRating.id}
-                            movieRating={movieRating}
-                            handleClickMovieRating={handleClickMovieRating}
-                          />
-                        );
-                      })}
+                      movieRatings &&
+                      movieRatings.map(
+                        movieRating =>
+                          movieRating && (
+                            <MovieRating
+                              key={movieRating.id}
+                              movieRating={movieRating}
+                              handleMovieRatingApply={handleMovieRatingApply}
+                            />
+                          )
+                      )}
                   </React.Fragment>
                 }
               />

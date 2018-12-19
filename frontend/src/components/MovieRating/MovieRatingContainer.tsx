@@ -5,7 +5,7 @@ import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
 
 interface IProps {
   movieRating?: getMovieDetail_GetMovieRatings_movieRatings;
-  handleClickMovieRating: (rating: number) => void;
+  handleMovieRatingApply: (rating: number) => void;
 }
 
 interface IState {
