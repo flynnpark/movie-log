@@ -5,7 +5,7 @@ import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
 
 interface IProps {
   movieRating?: getMovieDetail_GetMovieRatings_movieRatings;
-  handleMovieRatingApply: (rating: number) => void;
+  handleMovieRatingApply: (rating: number, watchDate: string) => void;
 }
 
 interface IState {
@@ -34,6 +34,12 @@ class MovieRatingContainer extends Component<IProps, IState> {
     });
   };
 
+  public setMovieRating = async (): Promise<void> => {
+    const { rating, watchDate } = this.state;
+    const { handleMovieRatingApply } = this.props;
+    await handleMovieRatingApply(rating, watchDate);
+  };
+
   public render() {
     const { movieRating } = this.props;
     if (movieRating) {
@@ -56,6 +62,7 @@ class MovieRatingContainer extends Component<IProps, IState> {
         watchDate={watchDate}
         handleClickRating={this.setRatingState}
         handleClickWatchDate={this.setWatchDateState}
+        setMovieRating={this.setMovieRating}
       />
     );
   }

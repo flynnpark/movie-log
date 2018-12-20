@@ -32,14 +32,14 @@ export class MovieContainer extends Component<IProps> {
     super(props);
   }
 
-  public handleMovieRatingApply = (rating: number) => {
+  public handleMovieRatingApply = (rating: number, watchDate: string): void => {
     const { match } = this.props;
     if (match) {
       const {
         params: { movieId }
       } = match;
       this.setMovieRatingFn({
-        variables: { movieId, rating },
+        variables: { movieId, rating, watchDate },
         update: (store, { data: { SetMovieRating } }) => {
           const data = store.readQuery({
             query: GET_MOVIE_DETAIL,

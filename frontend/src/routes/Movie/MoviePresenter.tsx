@@ -55,7 +55,7 @@ const CardBodyStyle = {
 
 interface IProps {
   data: getMovieDetail;
-  handleMovieRatingApply: (rating: number) => void;
+  handleMovieRatingApply: (rating: number, watchDate: string) => void;
 }
 
 const MoviePresenter: React.FunctionComponent<IProps> = ({
