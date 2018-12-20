@@ -133,16 +133,15 @@ export interface getMovieDetailVariables {
 export interface setMovieRating_SetMovieRating_movieRating {
   __typename: "MovieRating";
   id: number;
-  userId: number;
   movieId: number;
   rating: number;
+  watchDate: string;
   createdAt: string;
 }
 
 export interface setMovieRating_SetMovieRating {
   __typename: "SetMovieRatingResponse";
   ok: boolean;
-  type: string | null;
   error: string | null;
   movieRating: setMovieRating_SetMovieRating_movieRating | null;
 }
@@ -154,6 +153,7 @@ export interface setMovieRating {
 export interface setMovieRatingVariables {
   movieId: number;
   rating: number;
+  watchDate: string;
 }
 
 /* tslint:disable */

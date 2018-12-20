@@ -1208,7 +1208,7 @@
         "description": "",
         "fields": [
           {
-            "name": "SetMovieRating",
+            "name": "RemoveMovieRating",
             "description": "",
             "args": [
               {
@@ -1220,7 +1220,20 @@
                   "ofType": null
                 },
                 "defaultValue": null
-              },
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "RemoveMovieRatingResponse",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "SetMovieRating",
+            "description": "",
+            "args": [
               {
                 "name": "movieId",
                 "description": "",
@@ -1253,9 +1266,13 @@
                 "name": "watchDate",
                 "description": "",
                 "type": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null
               }
@@ -1451,7 +1468,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "SetMovieRatingResponse",
+        "name": "RemoveMovieRatingResponse",
         "description": "",
         "fields": [
           {
@@ -1471,13 +1488,52 @@
             "deprecationReason": null
           },
           {
-            "name": "type",
+            "name": "error",
             "description": "",
             "args": [],
             "type": {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "movieRating",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "MovieRating",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SetMovieRatingResponse",
+        "description": "",
+        "fields": [
+          {
+            "name": "ok",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
