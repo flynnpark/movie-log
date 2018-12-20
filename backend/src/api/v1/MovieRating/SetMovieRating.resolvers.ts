@@ -5,6 +5,7 @@ import {
 } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
+import { Context } from 'graphql-yoga/dist/types';
 
 /**
  * 한 영화에 여러 번 평점을 생성할 수 있음
@@ -16,9 +17,9 @@ const resolvers: Resolvers = {
   Mutation: {
     SetMovieRating: privateResolver(
       async (
-        _,
+        _: null | undefined,
         args: SetMovieRatingMutationArgs,
-        { req }
+        { req }: Context
       ): Promise<SetMovieRatingResponse> => {
         try {
           const { movieId, rating, watchDate } = args;

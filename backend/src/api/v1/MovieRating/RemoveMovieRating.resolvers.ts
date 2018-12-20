@@ -5,14 +5,15 @@ import {
 } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
+import { Context } from 'graphql-yoga/dist/types';
 
 const resolvers: Resolvers = {
   Mutation: {
     RemoveMovieRating: privateResolver(
       async (
-        _,
+        _: null | undefined,
         args: RemoveMovieRatingMutationArgs,
-        { req }
+        { req }: Context
       ): Promise<RemoveMovieRatingResponse> => {
         try {
           const { id } = args;
