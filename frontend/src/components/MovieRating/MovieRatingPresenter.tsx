@@ -21,7 +21,6 @@ const RatingTitle = styled.div`
 
 const StarButtonContainer = styled.div`
   display: flex;
-  margin-top: 8px;
 `;
 
 const StarContainer = styled.div`
@@ -82,7 +81,7 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
           <StarButtonContainer>
             <Rate
               allowHalf={true}
-              style={{ fontSize: '28px' }}
+              style={{ fontSize: '26px' }}
               value={rating}
               onChange={handleClickRating}
             />

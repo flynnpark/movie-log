@@ -11,11 +11,9 @@ class HomeContainer extends Component {
   public render() {
     return (
       <NowPlayingQueries query={GET_HOME_DATA}>
-        {({ data, loading }) => (
-          <React.Fragment>
-            {loading ? <Loading /> : <HomePresenter data={data} />}
-          </React.Fragment>
-        )}
+        {({ data, loading }) =>
+          loading ? <Loading /> : <HomePresenter data={data} />
+        }
       </NowPlayingQueries>
     );
   }
