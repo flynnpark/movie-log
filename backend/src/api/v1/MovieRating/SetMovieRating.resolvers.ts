@@ -28,7 +28,7 @@ const resolvers: Resolvers = {
             movieId,
             userId: user.id,
             rating,
-            watchDate
+            watchDate: new Date(watchDate)
           }).save();
           return {
             ok: true,
