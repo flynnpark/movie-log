@@ -54,3 +54,19 @@ export const SET_MOVIE_RATING = gql`
     }
   }
 `;
+
+export const REMOVE_MOVIE_RATING = gql`
+  mutation removeMovieRating($id: Int!) {
+    RemoveMovieRating(id: $id) {
+      ok
+      error
+      movieRating {
+        id
+        movieId
+        rating
+        watchDate
+        createdAt
+      }
+    }
+  }
+`;

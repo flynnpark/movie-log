@@ -160,6 +160,37 @@ export interface setMovieRatingVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: removeMovieRating
+// ====================================================
+
+export interface removeMovieRating_RemoveMovieRating_movieRating {
+  __typename: "MovieRating";
+  id: number;
+  movieId: number;
+  rating: number;
+  watchDate: string;
+  createdAt: string;
+}
+
+export interface removeMovieRating_RemoveMovieRating {
+  __typename: "RemoveMovieRatingResponse";
+  ok: boolean;
+  error: string | null;
+  movieRating: removeMovieRating_RemoveMovieRating_movieRating | null;
+}
+
+export interface removeMovieRating {
+  RemoveMovieRating: removeMovieRating_RemoveMovieRating | null;
+}
+
+export interface removeMovieRatingVariables {
+  id: number;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getProfileData
 // ====================================================
 
