@@ -56,11 +56,13 @@ const CardBodyStyle = {
 interface IProps {
   data: getMovieDetail;
   handleMovieRatingApply: (rating: number, watchDate: string) => void;
+  handleMovieRatingRemove: (id: number) => void;
 }
 
 const MoviePresenter: React.FunctionComponent<IProps> = ({
   data,
-  handleMovieRatingApply
+  handleMovieRatingApply,
+  handleMovieRatingRemove
 }) => {
   const {
     GetMovieDetail: { ok, movie },
@@ -109,7 +111,7 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
                             <MovieRating
                               key={movieRating.id}
                               movieRating={movieRating}
-                              handleMovieRatingApply={handleMovieRatingApply}
+                              handleMovieRatingRemove={handleMovieRatingRemove}
                             />
                           )
                       )}

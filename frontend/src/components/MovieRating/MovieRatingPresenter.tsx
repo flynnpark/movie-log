@@ -62,6 +62,7 @@ interface IProps {
   handleClickRating?: (rating: number) => void;
   handleClickWatchDate?: (date: moment.Moment, dateString: string) => void;
   setMovieRating?: () => void;
+  removeMovieRating?: () => void;
 }
 
 const dateFormat = 'YYYY/MM/DD';
@@ -71,7 +72,8 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
   watchDate,
   handleClickRating,
   handleClickWatchDate,
-  setMovieRating
+  setMovieRating,
+  removeMovieRating
 }) => (
   <MovieRatingContainer>
     {handleClickRating && handleClickWatchDate && setMovieRating ? (
@@ -124,7 +126,12 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
           </DateContainer>
         </DateWrapper>
         <ButtonWrapper>
-          <Button type="dashed" shape="circle" icon="delete" />
+          <Button
+            type="dashed"
+            shape="circle"
+            icon="delete"
+            onClick={removeMovieRating}
+          />
         </ButtonWrapper>
       </>
     )}

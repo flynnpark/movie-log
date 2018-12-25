@@ -5,7 +5,8 @@ import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
 
 interface IProps {
   movieRating?: getMovieDetail_GetMovieRatings_movieRatings;
-  handleMovieRatingApply: (rating: number, watchDate: string) => void;
+  handleMovieRatingApply?: (rating: number, watchDate: string) => void;
+  handleMovieRatingRemove?: (id: number) => void;
 }
 
 interface IState {
@@ -37,11 +38,21 @@ class MovieRatingContainer extends Component<IProps, IState> {
   public setMovieRating = async (): Promise<void> => {
     const { rating, watchDate } = this.state;
     const { handleMovieRatingApply } = this.props;
-    await handleMovieRatingApply(rating, watchDate);
+    if (handleMovieRatingApply) {
+      await handleMovieRatingApply(rating, watchDate);
+    }
+  };
+
+  public removeMovieRating = async (): Promise<void> => {
+    const { movieRating, handleMovieRatingRemove } = this.props;
+    if (movieRating && handleMovieRatingRemove) {
+      const { id } = movieRating;
+      await handleMovieRatingRemove(id);
+    }
   };
 
   public render() {
-    const { movieRating } = this.props;
+    const { movieRating, handleMovieRatingRemove } = this.props;
     if (movieRating) {
       const {
         rating: databaseRating,
@@ -51,6 +62,7 @@ class MovieRatingContainer extends Component<IProps, IState> {
         <MovieRatingPresenter
           rating={databaseRating}
           watchDate={databaseWatchDate}
+          removeMovieRating={this.removeMovieRating}
         />
       );
     }

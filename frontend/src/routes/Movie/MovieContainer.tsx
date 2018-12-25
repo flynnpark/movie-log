@@ -125,6 +125,9 @@ export class MovieContainer extends Component<IProps> {
                               handleMovieRatingApply={
                                 this.handleMovieRatingApply
                               }
+                              handleMovieRatingRemove={
+                                this.handleMovieRatingRemove
+                              }
                             />
                           )
                         );
