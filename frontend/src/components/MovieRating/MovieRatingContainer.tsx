@@ -52,7 +52,7 @@ class MovieRatingContainer extends Component<IProps, IState> {
   };
 
   public render() {
-    const { movieRating, handleMovieRatingRemove } = this.props;
+    const { movieRating } = this.props;
     if (movieRating) {
       const {
         rating: databaseRating,
