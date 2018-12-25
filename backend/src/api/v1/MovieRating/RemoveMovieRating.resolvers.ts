@@ -24,7 +24,7 @@ const resolvers: Resolvers = {
               userId: user.id
             }
           });
-          if (targetMovieRating) {
+          if (id && targetMovieRating) {
             const removedMovieRating = await MovieRating.remove(
               targetMovieRating
             );
@@ -33,6 +33,7 @@ const resolvers: Resolvers = {
               error: null,
               movieRating: {
                 ...removedMovieRating,
+                id,
                 watchDate: removedMovieRating.watchDate.toString(),
                 createdAt: removedMovieRating.createdAt.toString()
               }
