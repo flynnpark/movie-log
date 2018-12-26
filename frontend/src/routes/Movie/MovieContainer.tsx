@@ -6,7 +6,8 @@ import {
   setMovieRating,
   setMovieRatingVariables,
   removeMovieRating,
-  removeMovieRatingVariables
+  removeMovieRatingVariables,
+  getMovieDetail_GetMovieRatings_movieRatings
 } from 'src/types/api';
 import MoviePresenter from './MoviePresenter';
 import {
@@ -54,19 +55,31 @@ export class MovieContainer extends Component<IProps> {
       this.setMovieRatingFn({
         variables: { movieId, rating, watchDate },
         update: (store, { data: { SetMovieRating } }) => {
-          const data = store.readQuery({
+          const prevData: getMovieDetail | null = store.readQuery({
             query: GET_MOVIE_DETAIL,
             variables: { movieId }
           });
-          const newData = {
-            ...data,
-            GetMovieRating: SetMovieRating
-          };
-          store.writeQuery({
-            query: GET_MOVIE_DETAIL,
-            variables: { movieId },
-            data: newData
-          });
+          if (
+            prevData &&
+            prevData.GetMovieRatings &&
+            prevData.GetMovieRatings.movieRatings
+          ) {
+            const newData = {
+              ...prevData,
+              GetMovieRatings: {
+                ...prevData.GetMovieRatings,
+                movieRatings: [
+                  SetMovieRating.movieRating,
+                  ...prevData.GetMovieRatings.movieRatings
+                ]
+              }
+            };
+            store.writeQuery({
+              query: GET_MOVIE_DETAIL,
+              variables: { movieId },
+              data: newData
+            });
+          }
         }
       });
     }
@@ -80,20 +93,33 @@ export class MovieContainer extends Component<IProps> {
       } = match;
       this.removeMovieRatingFn({
         variables: { id },
-        update: (store, { data: { SetMovieRating } }) => {
-          const data = store.readQuery({
+        update: (store, { data: { RemoveMovieRating } }) => {
+          console.log(RemoveMovieRating);
+          const prevData: getMovieDetail | null = store.readQuery({
             query: GET_MOVIE_DETAIL,
             variables: { movieId }
           });
-          const newData = {
-            ...data,
-            GetMovieRating: SetMovieRating
-          };
-          store.writeQuery({
-            query: GET_MOVIE_DETAIL,
-            variables: { movieId },
-            data: newData
-          });
+          if (
+            prevData &&
+            prevData.GetMovieRatings &&
+            prevData.GetMovieRatings.movieRatings
+          ) {
+            const newData = {
+              ...prevData,
+              GetMovieRatings: {
+                ...prevData.GetMovieRatings,
+                movieRatings: prevData.GetMovieRatings.movieRatings.filter(
+                  (movieRating: getMovieDetail_GetMovieRatings_movieRatings) =>
+                    movieRating.id !== RemoveMovieRating.movieRating.id
+                )
+              }
+            };
+            store.writeQuery({
+              query: GET_MOVIE_DETAIL,
+              variables: { movieId },
+              data: newData
+            });
+          }
         }
       });
     }

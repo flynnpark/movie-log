@@ -46,6 +46,7 @@ export const SET_MOVIE_RATING = gql`
       error
       movieRating {
         id
+        userId
         movieId
         rating
         watchDate
@@ -62,6 +63,7 @@ export const REMOVE_MOVIE_RATING = gql`
       error
       movieRating {
         id
+        userId
         movieId
         rating
         watchDate

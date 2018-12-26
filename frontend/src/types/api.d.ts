@@ -133,6 +133,7 @@ export interface getMovieDetailVariables {
 export interface setMovieRating_SetMovieRating_movieRating {
   __typename: "MovieRating";
   id: number;
+  userId: number;
   movieId: number;
   rating: number;
   watchDate: string;
@@ -166,6 +167,7 @@ export interface setMovieRatingVariables {
 export interface removeMovieRating_RemoveMovieRating_movieRating {
   __typename: "MovieRating";
   id: number;
+  userId: number;
   movieId: number;
   rating: number;
   watchDate: string;
