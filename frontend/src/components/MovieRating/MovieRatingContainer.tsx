@@ -41,6 +41,11 @@ class MovieRatingContainer extends Component<IProps, IState> {
     if (handleMovieRatingApply) {
       await handleMovieRatingApply(rating, watchDate);
     }
+    this.setState({
+      rating: 0,
+      watchDate: new Date().toString()
+    });
+    console.log(this.state);
   };
 
   public removeMovieRating = async (): Promise<void> => {
