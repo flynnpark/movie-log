@@ -4,7 +4,7 @@ import AppPresenter from './AppPresenter';
 import { IS_LOGGED_IN } from './AppQueries.local';
 
 const AppContainer = ({ data }) => (
-  <AppPresenter isLoggedIn={data.auth.isLoggedIn} />
+  <AppPresenter isLoggedIn={data.auth.isLoggedIn} userId={data.auth.userId} />
 );
 
 export default graphql(IS_LOGGED_IN)(AppContainer);

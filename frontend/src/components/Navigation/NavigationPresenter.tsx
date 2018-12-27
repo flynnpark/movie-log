@@ -57,7 +57,7 @@ const NavigationPresenter: React.FunctionComponent<IProps> = ({ history }) => (
       </HeaderCenter>
       <HeaderSide>
         <RightSide>
-          <Link to="/profile/1">
+          <Link to="/profile/">
             <Avatar size={32} icon="user" />
           </Link>
         </RightSide>

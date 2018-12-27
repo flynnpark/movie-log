@@ -94,7 +94,6 @@ export class MovieContainer extends Component<IProps> {
       this.removeMovieRatingFn({
         variables: { id },
         update: (store, { data: { RemoveMovieRating } }) => {
-          console.log(RemoveMovieRating);
           const prevData: getMovieDetail | null = store.readQuery({
             query: GET_MOVIE_DETAIL,
             variables: { movieId }

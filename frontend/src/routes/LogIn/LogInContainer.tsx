@@ -64,10 +64,11 @@ class LogInContainer extends React.Component<IProps, IState> {
             onCompleted={data => {
               const { EmailSignIn } = data;
               if (EmailSignIn.ok) {
-                if (EmailSignIn.token) {
+                if (EmailSignIn.token && EmailSignIn.user) {
                   userLogIn({
                     variables: {
-                      token: EmailSignIn.token
+                      token: EmailSignIn.token,
+                      userId: EmailSignIn.user.id
                     }
                   });
                 }

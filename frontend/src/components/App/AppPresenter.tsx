@@ -17,10 +17,6 @@ import Search from '../../routes/Search';
 import Movie from '../../routes/Movie';
 import Navigation from '../Navigation';
 
-interface IProps {
-  isLoggedIn: boolean;
-}
-
 const FixedHeader = styled(Layout.Header)`
   position: fixed;
   display: flex;
@@ -38,6 +34,11 @@ const Content = styled(Layout.Content)`
   width: 100%;
   margin: 0 auto;
 `;
+
+interface IProps {
+  isLoggedIn: boolean;
+  userId: number;
+}
 
 const AppPresenter: React.FunctionComponent<IProps> = ({ isLoggedIn }) => (
   <BrowserRouter>
