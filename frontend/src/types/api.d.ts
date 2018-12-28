@@ -48,17 +48,11 @@ export interface getHomeData {
 // GraphQL mutation operation: startEmailVerification
 // ====================================================
 
-export interface startEmailVerification_EmailSignIn_user {
-  __typename: "UserExpose";
-  id: number;
-}
-
 export interface startEmailVerification_EmailSignIn {
   __typename: "EmailSignInResponse";
   ok: boolean;
   error: string | null;
   token: string | null;
-  user: startEmailVerification_EmailSignIn_user | null;
 }
 
 export interface startEmailVerification {

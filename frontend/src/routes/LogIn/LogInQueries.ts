@@ -6,9 +6,6 @@ export const EMAIL_LOG_IN = gql`
       ok
       error
       token
-      user {
-        id
-      }
     }
   }
 `;

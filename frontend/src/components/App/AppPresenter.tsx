@@ -37,7 +37,6 @@ const Content = styled(Layout.Content)`
 
 interface IProps {
   isLoggedIn: boolean;
-  userId: number;
 }
 
 const AppPresenter: React.FunctionComponent<IProps> = ({ isLoggedIn }) => (

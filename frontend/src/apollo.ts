@@ -8,15 +8,13 @@ const client = new ApolloClient({
     defaults: {
       auth: {
         __typename: 'Auth',
-        isLoggedIn: Boolean(localStorage.getItem('jwt')),
-        userId: localStorage.getItem('userId')
+        isLoggedIn: Boolean(localStorage.getItem('jwt'))
       }
     },
     resolvers: {
       Mutation: {
-        userLogIn: (_, { token, userId }, { cache: appCache }) => {
+        userLogIn: (_, { token }, { cache: appCache }) => {
           localStorage.setItem('jwt', token);
-          localStorage.setItem('userId', userId);
           appCache.writeData({
             data: {
               auth: {
