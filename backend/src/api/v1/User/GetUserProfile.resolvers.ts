@@ -4,8 +4,14 @@ import User from '../../../entity/User';
 
 const resolvers: Resolvers = {
   Query: {
-    GetUserProfile: privateResolver(async (_, { userId }) => {
-      const user = await User.findOne({ id: userId });
+    GetUserProfile: privateResolver(async (_, { userId }, context) => {
+      console.log(context.req.user.id); // context에 담긴 user information
+      let user;
+      if (!userId) {
+        user = await User.findOne({ id: context.req.user.id });
+      } else {
+        user = await User.findOne({ id: userId });
+      }
       if (user) {
         return {
           ok: true,
