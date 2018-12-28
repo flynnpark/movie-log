@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Input, Avatar } from 'antd';
 import styled from 'styled-components';
+import { getProfileData } from 'src/types/api';
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -38,32 +39,54 @@ const RightSide = styled.div`
   margin-left: auto;
 `;
 
-interface IProps extends RouteComponentProps<any> {}
+interface IProps extends RouteComponentProps<any> {
+  data: getProfileData | undefined;
+  loading: boolean;
+}
 
-const NavigationPresenter: React.FunctionComponent<IProps> = ({ history }) => (
-  <React.Fragment>
-    <HeaderContainer>
-      <HeaderSide>
-        <LeftSide>
-          <Link to="/">Movie.log</Link>
-        </LeftSide>
-      </HeaderSide>
-      <HeaderCenter>
-        <SearchField
-          placeholder="영화 제목을 검색해보세요."
-          size="large"
-          onSearch={(value: string) => history.push(`/search/${value}`)}
-        />
-      </HeaderCenter>
-      <HeaderSide>
-        <RightSide>
-          <Link to="/profile/">
-            <Avatar size={32} icon="user" />
-          </Link>
-        </RightSide>
-      </HeaderSide>
-    </HeaderContainer>
-  </React.Fragment>
-);
+const NavigationPresenter: React.FunctionComponent<IProps> = ({
+  history,
+  data,
+  loading
+}) => {
+  let userId: number | null = null;
+  let avatar: string | null = null;
+  if (data && data.GetUserProfile && data.GetUserProfile.user) {
+    const {
+      GetUserProfile: { user }
+    } = data;
+    userId = user.id;
+    avatar = user.avatar;
+  }
+  return (
+    <React.Fragment>
+      <HeaderContainer>
+        <HeaderSide>
+          <LeftSide>
+            <Link to="/">Movie.log</Link>
+          </LeftSide>
+        </HeaderSide>
+        <HeaderCenter>
+          <SearchField
+            placeholder="영화 제목을 검색해보세요."
+            size="large"
+            onSearch={(value: string) => history.push(`/search/${value}`)}
+          />
+        </HeaderCenter>
+        <HeaderSide>
+          <RightSide>
+            {!loading && userId ? (
+              <Link to={`/profile/${userId}`}>
+                <Avatar size={32} icon={avatar ? avatar : 'user'} />
+              </Link>
+            ) : (
+              <Avatar size={32} icon="user" />
+            )}
+          </RightSide>
+        </HeaderSide>
+      </HeaderContainer>
+    </React.Fragment>
+  );
+};
 
 export default NavigationPresenter;

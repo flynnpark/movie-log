@@ -38,7 +38,7 @@ class RemoveMovieRatingMutation extends Mutation<
   removeMovieRatingVariables
 > {}
 
-export class MovieContainer extends Component<IProps> {
+class MovieContainer extends Component<IProps> {
   private setMovieRatingFn: MutationFn;
   private removeMovieRatingFn: MutationFn;
 

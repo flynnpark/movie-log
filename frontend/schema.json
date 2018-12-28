@@ -1087,7 +1087,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "User",
+              "name": "UserExpose",
               "ofType": null
             },
             "isDeprecated": false,
@@ -1101,7 +1101,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "User",
+        "name": "UserExpose",
         "description": "",
         "fields": [
           {
@@ -1122,22 +1122,6 @@
           },
           {
             "name": "email",
-            "description": "",
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "password",
             "description": "",
             "args": [],
             "type": {
@@ -1216,7 +1200,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "UserExpose",
+        "name": "User",
         "description": "",
         "fields": [
           {
@@ -1237,6 +1221,22 @@
           },
           {
             "name": "email",
+            "description": "",
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "password",
             "description": "",
             "args": [],
             "type": {

@@ -197,7 +197,7 @@ export interface removeMovieRatingVariables {
 // ====================================================
 
 export interface getProfileData_GetUserProfile_user {
-  __typename: "User";
+  __typename: "UserExpose";
   id: number;
   email: string;
   name: string;
