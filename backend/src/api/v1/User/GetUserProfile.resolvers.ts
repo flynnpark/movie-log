@@ -1,30 +1,44 @@
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
 import User from '../../../entity/User';
+import { Context } from 'graphql-yoga/dist/types';
+import { GetUserProfileQueryArgs } from 'src/types/graph';
 
 const resolvers: Resolvers = {
   Query: {
-    GetUserProfile: privateResolver(async (_, { userId }, context) => {
-      console.log(context.req.user.id); // context에 담긴 user information
-      let user;
-      if (!userId) {
-        user = await User.findOne({ id: context.req.user.id });
-      } else {
-        user = await User.findOne({ id: userId });
-      }
-      if (user) {
+    GetUserProfile: privateResolver(
+      async (
+        _: null | undefined,
+        { userId }: GetUserProfileQueryArgs,
+        context: Context
+      ) => {
+        console.log(context.req.user.id); // context에 담긴 user information
+        let userTemp: User | undefined;
+        if (!userId) {
+          const {
+            req: {
+              user: { id }
+            }
+          } = context;
+          userTemp = await User.findOne({ id });
+        } else {
+          userTemp = await User.findOne({ id: userId });
+        }
+        if (userTemp) {
+          delete userTemp.password;
+          return {
+            ok: true,
+            error: null,
+            user: userTemp
+          };
+        }
         return {
-          ok: true,
-          error: null,
-          user
+          ok: false,
+          error: 'User not found',
+          user: null
         };
       }
-      return {
-        ok: false,
-        error: 'User not found',
-        user: null
-      };
-    })
+    )
   }
 };
 

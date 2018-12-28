@@ -1,7 +1,7 @@
 type GetUserProfileResponse {
   ok: Boolean!
   error: String
-  user: User
+  user: UserExpose
 }
 
 type Query {
