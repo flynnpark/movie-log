@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, Avatar } from 'antd';
+import { getProfileData_GetUserProfile_user } from 'src/types/api';
 
 const ProfileCard = styled(Card)`
   background-color: transparent;
@@ -24,18 +25,11 @@ const MovieInfoWrapper = styled.div`
 `;
 
 interface IProps {
-  userData: {
-    id: number;
-    avatar: string | null;
-    email: string;
-    name: string;
-    shortBio: string;
-    createdAt: string;
-  };
+  userData: getProfileData_GetUserProfile_user;
 }
 
 const ProfileSectionPresenter: React.FunctionComponent<IProps> = ({
-  userData: { id, avatar, email, name, shortBio, createdAt }
+  userData: { avatar, name, shortBio }
 }) => (
   <ProfileCard>
     <Card.Meta
@@ -43,7 +37,7 @@ const ProfileSectionPresenter: React.FunctionComponent<IProps> = ({
         avatar ? (
           <Avatar size={128} src={avatar} />
         ) : (
-          <Avatar size={128} icon={'user'} />
+          <Avatar size={128} icon="user" />
         )
       }
       title={<NameWrapper>{name}</NameWrapper>}

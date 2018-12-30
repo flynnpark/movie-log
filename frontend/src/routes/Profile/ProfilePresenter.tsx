@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Alert } from 'antd';
 import ProfileSection from '../../components/ProfileSection';
-import MovieCardList from 'src/components/MovieCardList';
+import { getProfileData } from 'src/types/api';
 
-const ProfilePresenter = ({ data }) => {
+interface IProps {
+  data: getProfileData;
+}
+
+const ProfilePresenter: FunctionComponent<IProps> = ({ data }) => {
   const {
     GetUserProfile: { ok, user }
   } = data;
   return (
     <>
-      {ok ? (
+      {ok && user ? (
         <>
           <ProfileSection userData={user} />
-          <MovieCardList />
         </>
       ) : (
         <Alert

@@ -25,7 +25,11 @@ class ProfileContainer extends Component<IProps, any> {
         <ProfileQueries query={GET_PROFILE_DATA} variables={{ userId }}>
           {({ data, loading }) => (
             <React.Fragment>
-              {loading ? <Loading /> : <ProfilePresenter data={data} />}
+              {!loading && data ? (
+                <ProfilePresenter data={data} />
+              ) : (
+                <Loading />
+              )}
             </React.Fragment>
           )}
         </ProfileQueries>
