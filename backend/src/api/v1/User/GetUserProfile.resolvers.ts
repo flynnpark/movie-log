@@ -1,8 +1,10 @@
+import { getManager } from 'typeorm';
+import { Context } from 'graphql-yoga/dist/types';
+import { GetUserProfileQueryArgs } from 'src/types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
 import User from '../../../entity/User';
-import { Context } from 'graphql-yoga/dist/types';
-import { GetUserProfileQueryArgs } from 'src/types/graph';
+import MovieRating from '../../../entity/MovieRating';
 
 const resolvers: Resolvers = {
   Query: {
@@ -12,7 +14,6 @@ const resolvers: Resolvers = {
         { userId }: GetUserProfileQueryArgs,
         context: Context
       ) => {
-        console.log(context.req.user.id); // context에 담긴 user information
         let userTemp: User | undefined;
         if (!userId) {
           const {
@@ -25,6 +26,12 @@ const resolvers: Resolvers = {
           userTemp = await User.findOne({ id: userId });
         }
         if (userTemp) {
+          const userMovieRatingInformation = await getManager()
+            .createQueryBuilder(MovieRating, 'movie_rating')
+            .select('COUNT(DISTINCT(movie_rating.movieId)) AS cnt')
+            .where('movie_rating.userId = :id', { id: userTemp.id })
+            .getRawMany();
+          console.log(userMovieRatingInformation);
           delete userTemp.password;
           return {
             ok: true,
