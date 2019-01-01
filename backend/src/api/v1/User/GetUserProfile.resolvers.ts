@@ -1,10 +1,8 @@
-import { getManager } from 'typeorm';
 import { Context } from 'graphql-yoga/dist/types';
-import { GetUserProfileQueryArgs } from 'src/types/graph';
+import { GetUserProfileQueryArgs } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
 import User from '../../../entity/User';
-import MovieRating from '../../../entity/MovieRating';
 
 const resolvers: Resolvers = {
   Query: {
@@ -14,29 +12,23 @@ const resolvers: Resolvers = {
         { userId }: GetUserProfileQueryArgs,
         context: Context
       ) => {
-        let userTemp: User | undefined;
-        if (!userId) {
+        let user: User | undefined;
+        if (userId) {
+          user = await User.findOne({ id: userId });
+        } else {
           const {
             req: {
               user: { id }
             }
           } = context;
-          userTemp = await User.findOne({ id });
-        } else {
-          userTemp = await User.findOne({ id: userId });
+          user = await User.findOne({ id });
         }
-        if (userTemp) {
-          const userMovieRatingInformation = await getManager()
-            .createQueryBuilder(MovieRating, 'movie_rating')
-            .select('COUNT(DISTINCT(movie_rating.movieId)) AS cnt')
-            .where('movie_rating.userId = :id', { id: userTemp.id })
-            .getRawMany();
-          console.log(userMovieRatingInformation);
-          delete userTemp.password;
+        if (user) {
+          delete user.password;
           return {
             ok: true,
             error: null,
-            user: userTemp
+            user
           };
         }
         return {

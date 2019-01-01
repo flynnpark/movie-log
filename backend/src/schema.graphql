@@ -11,6 +11,7 @@ type Query {
   GetMovieRatings(movieId: Int!, limit: Int): GetMovieRatingsResponse!
   GetUserMovieRatings: GetUserMovieRatingsResponse!
   movieRating: MovieRating
+  GetUserInfo(userId: Int): GetUserInfoResponse!
   GetUserProfile(userId: Int): GetUserProfileResponse!
   user: User
   userExpose: UserExpose
@@ -110,6 +111,17 @@ type EmailSignUpResponse {
   ok: Boolean!
   error: String
   token: String
+}
+
+type CountInfo {
+  watchedMovieCount: Int!
+  movieRatingCount: Int!
+}
+
+type GetUserInfoResponse {
+  ok: Boolean!
+  error: String
+  countInfo: CountInfo
 }
 
 type GetUserProfileResponse {

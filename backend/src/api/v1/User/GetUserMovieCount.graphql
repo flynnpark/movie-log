@@ -1,0 +1,14 @@
+type CountInfo {
+  watchedMovieCount: Int!
+  movieRatingCount: Int!
+}
+
+type GetUserInfoResponse {
+  ok: Boolean!
+  error: String
+  countInfo: CountInfo
+}
+
+type Query {
+  GetUserInfo(userId: Int): GetUserInfoResponse!
+}
