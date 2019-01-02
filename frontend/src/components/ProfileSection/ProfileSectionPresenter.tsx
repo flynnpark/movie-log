@@ -1,7 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, Avatar } from 'antd';
-import { getProfileData_GetUserProfile_user } from 'src/types/api';
+import {
+  getProfileData_GetUserProfile_user,
+  getProfileData_GetUserInfo_countInfo
+} from 'src/types/api';
 
 const ProfileCard = styled(Card)`
   background-color: transparent;
@@ -26,10 +29,12 @@ const MovieInfoWrapper = styled.div`
 
 interface IProps {
   userData: getProfileData_GetUserProfile_user;
+  countData: getProfileData_GetUserInfo_countInfo | null;
 }
 
 const ProfileSectionPresenter: React.FunctionComponent<IProps> = ({
-  userData: { avatar, name, shortBio }
+  userData: { avatar, name, shortBio },
+  countData
 }) => (
   <ProfileCard>
     <Card.Meta
@@ -44,7 +49,14 @@ const ProfileSectionPresenter: React.FunctionComponent<IProps> = ({
       description={
         <InfoWrapper>
           <SimpleBioWrapper>{shortBio}</SimpleBioWrapper>
-          <MovieInfoWrapper>영화 2,304개</MovieInfoWrapper>
+          <MovieInfoWrapper>
+            {countData && (
+              <>
+                시청한 영화 {countData.watchedMovieCount}개, 평가한 횟수{' '}
+                {countData.movieRatingCount}개
+              </>
+            )}
+          </MovieInfoWrapper>
         </InfoWrapper>
       }
     />

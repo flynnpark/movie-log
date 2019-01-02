@@ -14,5 +14,13 @@ export const GET_PROFILE_DATA = gql`
         createdAt
       }
     }
+    GetUserInfo(userId: $userId) {
+      ok
+      error
+      countInfo {
+        watchedMovieCount
+        movieRatingCount
+      }
+    }
   }
 `;

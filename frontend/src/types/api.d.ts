@@ -2,6 +2,30 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getMyInfo
+// ====================================================
+
+export interface getMyInfo_GetUserProfile_user {
+  __typename: "UserExpose";
+  id: number;
+  avatar: string | null;
+}
+
+export interface getMyInfo_GetUserProfile {
+  __typename: "GetUserProfileResponse";
+  ok: boolean;
+  error: string | null;
+  user: getMyInfo_GetUserProfile_user | null;
+}
+
+export interface getMyInfo {
+  GetUserProfile: getMyInfo_GetUserProfile;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getHomeData
 // ====================================================
 
@@ -213,8 +237,22 @@ export interface getProfileData_GetUserProfile {
   user: getProfileData_GetUserProfile_user | null;
 }
 
+export interface getProfileData_GetUserInfo_countInfo {
+  __typename: "CountInfo";
+  watchedMovieCount: number;
+  movieRatingCount: number;
+}
+
+export interface getProfileData_GetUserInfo {
+  __typename: "GetUserInfoResponse";
+  ok: boolean;
+  error: string | null;
+  countInfo: getProfileData_GetUserInfo_countInfo | null;
+}
+
 export interface getProfileData {
   GetUserProfile: getProfileData_GetUserProfile;
+  GetUserInfo: getProfileData_GetUserInfo;
 }
 
 export interface getProfileDataVariables {

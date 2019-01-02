@@ -9,13 +9,14 @@ interface IProps {
 
 const ProfilePresenter: FunctionComponent<IProps> = ({ data }) => {
   const {
-    GetUserProfile: { ok, user }
+    GetUserProfile: { ok: profileOk, user },
+    GetUserInfo: { countInfo }
   } = data;
   return (
     <>
-      {ok && user ? (
+      {profileOk && user ? (
         <>
-          <ProfileSection userData={user} />
+          <ProfileSection userData={user} countData={countInfo} />
         </>
       ) : (
         <Alert
