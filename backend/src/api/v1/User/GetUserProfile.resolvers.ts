@@ -12,17 +12,18 @@ const resolvers: Resolvers = {
         { userId }: GetUserProfileQueryArgs,
         context: Context
       ) => {
-        let user: User | undefined;
+        let userIdTemp: number | undefined;
         if (userId) {
-          user = await User.findOne({ id: userId });
+          userIdTemp = userId;
         } else {
           const {
             req: {
               user: { id }
             }
           } = context;
-          user = await User.findOne({ id });
+          userIdTemp = id;
         }
+        const user = await User.findOne({ id: userIdTemp });
         if (user) {
           delete user.password;
           return {
