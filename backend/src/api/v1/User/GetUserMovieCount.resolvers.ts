@@ -29,7 +29,7 @@ const resolvers: Resolvers = {
         if (user) {
           const watchedMovieCountTemp = await getManager()
             .createQueryBuilder(MovieRating, 'movie_rating')
-            .select('DISTINCT("movieId")')
+            .select('COUNT(DISTINCT("movieId"))')
             .where('movie_rating.userId = :id', { id: userIdTemp })
             .getRawMany();
           const movieRatingCount = await getManager()
@@ -40,7 +40,7 @@ const resolvers: Resolvers = {
             ok: true,
             error: null,
             countInfo: {
-              watchedMovieCount: watchedMovieCountTemp.length,
+              watchedMovieCount: watchedMovieCountTemp[0].count,
               movieRatingCount
             }
           };
