@@ -18,7 +18,7 @@ interface MovieDetailData {
   original_title: string;
   adult: boolean;
   overview: string;
-  release_datde: string;
+  release_date: string;
 }
 
 interface MovieListData {
