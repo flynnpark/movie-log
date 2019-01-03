@@ -77,7 +77,7 @@ export const findMovie = async (query: string) => {
   return results;
 };
 
-export const getMovieDetail = async (movieId: string) => {
+export const getMovieDetail = async (movieId: number) => {
   try {
     const { data } = await axios.get<MovieDetailData>(
       `${MOVIE_DETAIL_URL}/${movieId}`,

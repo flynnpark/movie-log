@@ -1,7 +1,7 @@
 type Query {
   FindMovie(query: String): [Movie]
   genre: Genre
-  GetMovieDetail(movieId: Int): GetMovieDetailResponse!
+  GetMovieDetail(movieId: Int!): GetMovieDetailResponse!
   GetNowPlaying: [Movie]
   GetPopular: [Movie]
   GetTopRated: [Movie]

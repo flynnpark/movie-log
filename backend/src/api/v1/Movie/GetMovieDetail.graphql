@@ -5,5 +5,5 @@ type GetMovieDetailResponse {
 }
 
 type Query {
-  GetMovieDetail(movieId: Int): GetMovieDetailResponse!
+  GetMovieDetail(movieId: Int!): GetMovieDetailResponse!
 }

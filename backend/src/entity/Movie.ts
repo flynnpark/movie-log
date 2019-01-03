@@ -23,7 +23,7 @@ class Movie extends BaseEntity {
   @Column()
   overview: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: 'date' })
   release_date: Date;
 }
 
