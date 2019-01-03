@@ -9,6 +9,9 @@ class Movie extends BaseEntity {
   title: string;
 
   @Column()
+  tagline: string;
+
+  @Column({ nullable: true })
   poster_path: string;
 
   @Column()
@@ -22,6 +25,9 @@ class Movie extends BaseEntity {
 
   @Column()
   overview: string;
+
+  @Column()
+  runtime: number;
 
   @Column({ type: 'date' })
   release_date: Date;
