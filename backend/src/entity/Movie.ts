@@ -1,4 +1,12 @@
-import { Entity, BaseEntity, PrimaryColumn, Column } from 'typeorm';
+import {
+  Entity,
+  BaseEntity,
+  PrimaryColumn,
+  Column,
+  ManyToMany,
+  JoinTable
+} from 'typeorm';
+import Genre from './Genre';
 
 @Entity()
 class Movie extends BaseEntity {
@@ -8,7 +16,7 @@ class Movie extends BaseEntity {
   @Column()
   title: string;
 
-  @Column()
+  @Column({ nullable: true })
   tagline: string;
 
   @Column({ nullable: true })
@@ -19,6 +27,10 @@ class Movie extends BaseEntity {
 
   @Column()
   original_title: string;
+
+  @ManyToMany(type => Genre)
+  @JoinTable()
+  genres: Genre[];
 
   @Column()
   adult: boolean;
