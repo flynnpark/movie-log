@@ -4,7 +4,9 @@ import { getNowPlaying } from '../../../utils/tmdb';
 
 const resolvers: Resolvers = {
   Query: {
-    GetNowPlaying: privateResolver(async _ => getNowPlaying())
+    GetNowPlaying: privateResolver(async (_: null | undefined) =>
+      getNowPlaying()
+    )
   }
 };
 

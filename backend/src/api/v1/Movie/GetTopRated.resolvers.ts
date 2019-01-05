@@ -4,7 +4,7 @@ import { getTopRated } from '../../../utils/tmdb';
 
 const resolvers: Resolvers = {
   Query: {
-    GetTopRated: privateResolver(async _ => getTopRated())
+    GetTopRated: privateResolver(async (_: null | undefined) => getTopRated())
   }
 };
 

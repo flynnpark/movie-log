@@ -4,7 +4,7 @@ import { getPopular } from '../../../utils/tmdb';
 
 const resolvers: Resolvers = {
   Query: {
-    GetPopular: privateResolver(async _ => getPopular())
+    GetPopular: privateResolver(async (_: null | undefined) => getPopular())
   }
 };
 

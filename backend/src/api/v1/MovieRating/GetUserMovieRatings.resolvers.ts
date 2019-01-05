@@ -10,17 +10,17 @@ const resolvers: Resolvers = {
         return {
           ok: false,
           error: 'User not found',
-          movieRatings: null,
+          movieRatings: null
         };
       }
       const movieRatings = MovieRating.find({ userId });
       return {
         ok: true,
         error: null,
-        movieRatings,
+        movieRatings
       };
-    },
-  },
+    }
+  }
 };
 
 export default resolvers;

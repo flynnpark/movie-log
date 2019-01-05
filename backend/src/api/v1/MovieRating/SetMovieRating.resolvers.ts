@@ -1,3 +1,4 @@
+import { Context } from 'graphql-yoga/dist/types';
 import MovieRating from '../../../entity/MovieRating';
 import {
   SetMovieRatingMutationArgs,
@@ -5,7 +6,6 @@ import {
 } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
-import { Context } from 'graphql-yoga/dist/types';
 
 /**
  * 한 영화에 여러 번 평점을 생성할 수 있음
