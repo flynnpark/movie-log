@@ -30,7 +30,7 @@ export interface getMyInfo {
 // ====================================================
 
 export interface getHomeData_GetNowPlaying {
-  __typename: "Movie";
+  __typename: "MovieItem";
   id: number;
   title: string;
   poster_path: string | null;
@@ -40,7 +40,7 @@ export interface getHomeData_GetNowPlaying {
 }
 
 export interface getHomeData_GetTopRated {
-  __typename: "Movie";
+  __typename: "MovieItem";
   id: number;
   title: string;
   poster_path: string | null;
@@ -50,7 +50,7 @@ export interface getHomeData_GetTopRated {
 }
 
 export interface getHomeData_GetPopular {
-  __typename: "Movie";
+  __typename: "MovieItem";
   id: number;
   title: string;
   poster_path: string | null;
@@ -101,7 +101,7 @@ export interface getMovieDetail_GetMovieDetail_movie_genres {
 }
 
 export interface getMovieDetail_GetMovieDetail_movie {
-  __typename: "MovieDetail";
+  __typename: "Movie";
   id: number;
   title: string;
   tagline: string;
@@ -267,7 +267,7 @@ export interface getProfileDataVariables {
 // ====================================================
 
 export interface findMovie_FindMovie {
-  __typename: "Movie";
+  __typename: "MovieItem";
   id: number;
   title: string;
   poster_path: string | null;

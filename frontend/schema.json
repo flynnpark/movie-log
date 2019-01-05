@@ -33,7 +33,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Movie",
+                "name": "MovieItem",
                 "ofType": null
               }
             },
@@ -60,9 +60,13 @@
                 "name": "movieId",
                 "description": "",
                 "type": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
                 },
                 "defaultValue": null
               }
@@ -88,7 +92,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Movie",
+                "name": "MovieItem",
                 "ofType": null
               }
             },
@@ -104,7 +108,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Movie",
+                "name": "MovieItem",
                 "ofType": null
               }
             },
@@ -120,7 +124,7 @@
               "name": null,
               "ofType": {
                 "kind": "OBJECT",
-                "name": "Movie",
+                "name": "MovieItem",
                 "ofType": null
               }
             },
@@ -140,12 +144,12 @@
             "deprecationReason": null
           },
           {
-            "name": "movieDetail",
+            "name": "movieItem",
             "description": "",
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "MovieDetail",
+              "name": "MovieItem",
               "ofType": null
             },
             "isDeprecated": false,
@@ -347,7 +351,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "Movie",
+        "name": "MovieItem",
         "description": "",
         "fields": [
           {
@@ -598,7 +602,7 @@
             "args": [],
             "type": {
               "kind": "OBJECT",
-              "name": "MovieDetail",
+              "name": "Movie",
               "ofType": null
             },
             "isDeprecated": false,
@@ -612,7 +616,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "MovieDetail",
+        "name": "Movie",
         "description": "",
         "fields": [
           {
