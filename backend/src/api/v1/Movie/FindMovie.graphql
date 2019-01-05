@@ -1,3 +1,3 @@
 type Query {
-  FindMovie(query: String): [Movie]
+  FindMovie(query: String): [MovieItem]
 }

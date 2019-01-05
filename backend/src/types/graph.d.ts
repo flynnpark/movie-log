@@ -1,15 +1,15 @@
-export const typeDefs = ["type Query {\n  FindMovie(query: String): [Movie]\n  genre: Genre\n  GetMovieDetail(movieId: Int!): GetMovieDetailResponse!\n  GetNowPlaying: [Movie]\n  GetPopular: [Movie]\n  GetTopRated: [Movie]\n  movie: Movie\n  movieDetail: MovieDetail\n  GetMovieRating(movieId: Int!): GetMovieRatingResponse!\n  GetMovieRatings(movieId: Int!, limit: Int): GetMovieRatingsResponse!\n  GetUserMovieRatings: GetUserMovieRatingsResponse!\n  movieRating: MovieRating\n  GetUserInfo(userId: Int): GetUserInfoResponse!\n  GetUserProfile(userId: Int): GetUserProfileResponse!\n  user: User\n  userExpose: UserExpose\n}\n\ntype Genre {\n  id: Int!\n  name: String!\n}\n\ntype GetMovieDetailResponse {\n  ok: Boolean!\n  error: String\n  movie: MovieDetail\n}\n\ntype Movie {\n  id: Int!\n  title: String!\n  poster_path: String\n  original_language: String!\n  original_title: String!\n  genre_ids: [Int]!\n  adult: Boolean!\n  overview: String\n  release_date: String!\n}\n\ntype MovieDetail {\n  id: Int!\n  title: String!\n  tagline: String!\n  poster_path: String\n  original_language: String!\n  original_title: String!\n  genres: [Genre]!\n  adult: Boolean!\n  overview: String!\n  release_date: String!\n  runtime: Int!\n}\n\ntype GetMovieRatingResponse {\n  ok: Boolean!\n  error: String\n  movieRating: MovieRating\n}\n\ntype GetMovieRatingsResponse {\n  ok: Boolean!\n  error: String\n  movieRatings: [MovieRating]\n}\n\ntype GetUserMovieRatingsResponse {\n  ok: Boolean!\n  error: String\n  movieRatings: [MovieRating]\n}\n\ntype MovieRating {\n  id: Int!\n  movieId: Int!\n  userId: Int!\n  rating: Float!\n  watchDate: String!\n  createdAt: String!\n}\n\ntype RemoveMovieRatingResponse {\n  ok: Boolean!\n  error: String\n  movieRating: MovieRating\n}\n\ntype Mutation {\n  RemoveMovieRating(id: Int): RemoveMovieRatingResponse\n  SetMovieRating(movieId: Int!, rating: Float!, watchDate: String!): SetMovieRatingResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(email: String!, password: String!, name: String!, avatar: String, shortBio: String): EmailSignUpResponse!\n  UpdateMyProfile(password: String, name: String, avatar: String): UpdateMyProfileResponse!\n}\n\ntype SetMovieRatingResponse {\n  ok: Boolean!\n  error: String\n  movieRating: MovieRating\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype CountInfo {\n  watchedMovieCount: Int!\n  movieRatingCount: Int!\n}\n\ntype GetUserInfoResponse {\n  ok: Boolean!\n  error: String\n  countInfo: CountInfo\n}\n\ntype GetUserProfileResponse {\n  ok: Boolean!\n  error: String\n  user: UserExpose\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  password: String!\n  name: String!\n  avatar: String\n  shortBio: String\n  createdAt: String!\n}\n\ntype UserExpose {\n  id: Int!\n  email: String!\n  name: String!\n  avatar: String\n  shortBio: String\n  createdAt: String!\n}\n"];
+export const typeDefs = ["type Query {\n  FindMovie(query: String): [MovieItem]\n  genre: Genre\n  GetMovieDetail(movieId: Int!): GetMovieDetailResponse!\n  GetNowPlaying: [MovieItem]\n  GetPopular: [MovieItem]\n  GetTopRated: [MovieItem]\n  movie: Movie\n  movieItem: MovieItem\n  GetMovieRating(movieId: Int!): GetMovieRatingResponse!\n  GetMovieRatings(movieId: Int!, limit: Int): GetMovieRatingsResponse!\n  GetUserMovieRatings: GetUserMovieRatingsResponse!\n  movieRating: MovieRating\n  GetUserInfo(userId: Int): GetUserInfoResponse!\n  GetUserProfile(userId: Int): GetUserProfileResponse!\n  user: User\n  userExpose: UserExpose\n}\n\ntype Genre {\n  id: Int!\n  name: String!\n}\n\ntype GetMovieDetailResponse {\n  ok: Boolean!\n  error: String\n  movie: Movie\n}\n\ntype Movie {\n  id: Int!\n  title: String!\n  tagline: String!\n  poster_path: String\n  original_language: String!\n  original_title: String!\n  genres: [Genre]!\n  adult: Boolean!\n  overview: String!\n  release_date: String!\n  runtime: Int!\n}\n\ntype MovieItem {\n  id: Int!\n  title: String!\n  poster_path: String\n  original_language: String!\n  original_title: String!\n  genre_ids: [Int]!\n  adult: Boolean!\n  overview: String\n  release_date: String!\n}\n\ntype GetMovieRatingResponse {\n  ok: Boolean!\n  error: String\n  movieRating: MovieRating\n}\n\ntype GetMovieRatingsResponse {\n  ok: Boolean!\n  error: String\n  movieRatings: [MovieRating]\n}\n\ntype GetUserMovieRatingsResponse {\n  ok: Boolean!\n  error: String\n  movieRatings: [MovieRating]\n}\n\ntype MovieRating {\n  id: Int!\n  movieId: Int!\n  userId: Int!\n  rating: Float!\n  watchDate: String!\n  createdAt: String!\n}\n\ntype RemoveMovieRatingResponse {\n  ok: Boolean!\n  error: String\n  movieRating: MovieRating\n}\n\ntype Mutation {\n  RemoveMovieRating(id: Int): RemoveMovieRatingResponse\n  SetMovieRating(movieId: Int!, rating: Float!, watchDate: String!): SetMovieRatingResponse!\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(email: String!, password: String!, name: String!, avatar: String, shortBio: String): EmailSignUpResponse!\n  UpdateMyProfile(password: String, name: String, avatar: String): UpdateMyProfileResponse!\n}\n\ntype SetMovieRatingResponse {\n  ok: Boolean!\n  error: String\n  movieRating: MovieRating\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype CountInfo {\n  watchedMovieCount: Int!\n  movieRatingCount: Int!\n}\n\ntype GetUserInfoResponse {\n  ok: Boolean!\n  error: String\n  countInfo: CountInfo\n}\n\ntype GetUserProfileResponse {\n  ok: Boolean!\n  error: String\n  user: UserExpose\n}\n\ntype UpdateMyProfileResponse {\n  ok: Boolean!\n  error: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  password: String!\n  name: String!\n  avatar: String\n  shortBio: String\n  createdAt: String!\n}\n\ntype UserExpose {\n  id: Int!\n  email: String!\n  name: String!\n  avatar: String\n  shortBio: String\n  createdAt: String!\n}\n"];
 /* tslint:disable */
 
 export interface Query {
-  FindMovie: Array<Movie> | null;
+  FindMovie: Array<MovieItem> | null;
   genre: Genre | null;
   GetMovieDetail: GetMovieDetailResponse;
-  GetNowPlaying: Array<Movie> | null;
-  GetPopular: Array<Movie> | null;
-  GetTopRated: Array<Movie> | null;
+  GetNowPlaying: Array<MovieItem> | null;
+  GetPopular: Array<MovieItem> | null;
+  GetTopRated: Array<MovieItem> | null;
   movie: Movie | null;
-  movieDetail: MovieDetail | null;
+  movieItem: MovieItem | null;
   GetMovieRating: GetMovieRatingResponse;
   GetMovieRatings: GetMovieRatingsResponse;
   GetUserMovieRatings: GetUserMovieRatingsResponse;
@@ -45,7 +45,7 @@ export interface GetUserProfileQueryArgs {
   userId: number | null;
 }
 
-export interface Movie {
+export interface MovieItem {
   id: number;
   title: string;
   poster_path: string | null;
@@ -65,10 +65,10 @@ export interface Genre {
 export interface GetMovieDetailResponse {
   ok: boolean;
   error: string | null;
-  movie: MovieDetail | null;
+  movie: Movie | null;
 }
 
-export interface MovieDetail {
+export interface Movie {
   id: number;
   title: string;
   tagline: string;

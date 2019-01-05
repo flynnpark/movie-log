@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import axios from 'axios';
+import Genre from '../entity/Genre';
 
 dotenv.config();
 
@@ -13,12 +14,15 @@ const API_KEY = process.env.TMDB_KEY;
 interface MovieDetailData {
   id: number;
   title: string;
+  tagline: string;
   poster_path: string;
   original_language: string;
   original_title: string;
+  genres: Array<Genre>;
   adult: boolean;
   overview: string;
   release_date: string;
+  runtime: number;
 }
 
 interface MovieListData {
@@ -77,7 +81,9 @@ export const findMovie = async (query: string) => {
   return results;
 };
 
-export const getMovieDetail = async (movieId: number) => {
+export const getMovieDetail = async (
+  movieId: number
+): Promise<MovieDetailData | null> => {
   try {
     const { data } = await axios.get<MovieDetailData>(
       `${MOVIE_DETAIL_URL}/${movieId}`,

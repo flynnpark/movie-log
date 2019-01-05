@@ -6,6 +6,7 @@ import {
   GetMovieDetailResponse
 } from '../../../types/graph';
 import Movie from '../../../entity/Movie';
+import Genre from '../../../entity/Genre';
 
 const resolvers: Resolvers = {
   Query: {
@@ -24,11 +25,20 @@ const resolvers: Resolvers = {
         }
         const movieDetail = await getMovieDetail(movieId);
         if (movieDetail) {
-          // const movieDetailToDB = await Movie.create(movieDetail).save();
+          const genres = movieDetail.genres;
+          if (genres) {
+            genres.forEach(async genre => {
+              await Genre.create(genre).save();
+            });
+          }
+          const movieDetailToDB = await Movie.create(movieDetail).save();
           return {
             ok: true,
             error: null,
-            movie: null
+            movie: {
+              ...movieDetailToDB,
+              release_date: movieDetailToDB.release_date.toString()
+            }
           };
         }
         return {

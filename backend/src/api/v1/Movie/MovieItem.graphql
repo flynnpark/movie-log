@@ -1,17 +1,15 @@
-type MovieDetail {
+type MovieItem {
   id: Int!
   title: String!
-  tagline: String!
   poster_path: String
   original_language: String!
   original_title: String!
-  genres: [Genre]!
+  genre_ids: [Int]!
   adult: Boolean!
-  overview: String!
+  overview: String
   release_date: String!
-  runtime: Int!
 }
 
 type Query {
-  movieDetail: MovieDetail
+  movieItem: MovieItem
 }
