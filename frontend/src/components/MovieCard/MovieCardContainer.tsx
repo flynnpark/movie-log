@@ -4,7 +4,7 @@ import {
   getHomeData_GetNowPlaying,
   getHomeData_GetPopular,
   getHomeData_GetTopRated
-} from 'src/types/api';
+} from 'src/types/local';
 
 class MovieCardContainer extends Component<
   getHomeData_GetNowPlaying | getHomeData_GetPopular | getHomeData_GetTopRated,

@@ -5,7 +5,7 @@ import {
   getHomeData_GetNowPlaying,
   getHomeData_GetPopular,
   getHomeData_GetTopRated
-} from 'src/types/api';
+} from 'src/types/local';
 
 const MovieCardContainer = styled.div`
   display: flex;

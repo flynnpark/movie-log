@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import MovieCardList from 'src/components/MovieCardList';
-import { getHomeData } from 'src/types/api';
+import { getHomeData } from 'src/types/local';
 
 interface IProps {
   data: getHomeData | undefined;

@@ -26,49 +26,6 @@ export interface getMyInfo {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getHomeData
-// ====================================================
-
-export interface getHomeData_GetNowPlaying {
-  __typename: "MovieItem";
-  id: number;
-  title: string;
-  poster_path: string | null;
-  genre_ids: (number | null)[];
-  overview: string | null;
-  release_date: string;
-}
-
-export interface getHomeData_GetTopRated {
-  __typename: "MovieItem";
-  id: number;
-  title: string;
-  poster_path: string | null;
-  genre_ids: (number | null)[];
-  overview: string | null;
-  release_date: string;
-}
-
-export interface getHomeData_GetPopular {
-  __typename: "MovieItem";
-  id: number;
-  title: string;
-  poster_path: string | null;
-  genre_ids: (number | null)[];
-  overview: string | null;
-  release_date: string;
-}
-
-export interface getHomeData {
-  GetNowPlaying: (getHomeData_GetNowPlaying | null)[] | null;
-  GetTopRated: (getHomeData_GetTopRated | null)[] | null;
-  GetPopular: (getHomeData_GetPopular | null)[] | null;
-}
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL mutation operation: startEmailVerification
 // ====================================================
 
@@ -92,36 +49,10 @@ export interface startEmailVerificationVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getMovieDetail
+// GraphQL query operation: getMovieRatings
 // ====================================================
 
-export interface getMovieDetail_GetMovieDetail_movie_genres {
-  __typename: "Genre";
-  name: string;
-}
-
-export interface getMovieDetail_GetMovieDetail_movie {
-  __typename: "Movie";
-  id: number;
-  title: string;
-  tagline: string;
-  poster_path: string | null;
-  original_language: string;
-  original_title: string;
-  genres: (getMovieDetail_GetMovieDetail_movie_genres | null)[];
-  adult: boolean;
-  overview: string;
-  release_date: string;
-}
-
-export interface getMovieDetail_GetMovieDetail {
-  __typename: "GetMovieDetailResponse";
-  ok: boolean;
-  error: string | null;
-  movie: getMovieDetail_GetMovieDetail_movie | null;
-}
-
-export interface getMovieDetail_GetMovieRatings_movieRatings {
+export interface getMovieRatings_GetMovieRatings_movieRatings {
   __typename: "MovieRating";
   id: number;
   userId: number;
@@ -131,19 +62,18 @@ export interface getMovieDetail_GetMovieRatings_movieRatings {
   createdAt: string;
 }
 
-export interface getMovieDetail_GetMovieRatings {
+export interface getMovieRatings_GetMovieRatings {
   __typename: "GetMovieRatingsResponse";
   ok: boolean;
   error: string | null;
-  movieRatings: (getMovieDetail_GetMovieRatings_movieRatings | null)[] | null;
+  movieRatings: (getMovieRatings_GetMovieRatings_movieRatings | null)[] | null;
 }
 
-export interface getMovieDetail {
-  GetMovieDetail: getMovieDetail_GetMovieDetail;
-  GetMovieRatings: getMovieDetail_GetMovieRatings;
+export interface getMovieRatings {
+  GetMovieRatings: getMovieRatings_GetMovieRatings;
 }
 
-export interface getMovieDetailVariables {
+export interface getMovieRatingsVariables {
   movieId: number;
 }
 

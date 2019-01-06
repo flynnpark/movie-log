@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-console.log(process.env);
-
 const SEARCH_URL = 'https://api.themoviedb.org/3/search/movie';
 const NOW_PLAYING_URL = 'https://api.themoviedb.org/3/movie/now_playing';
 const TOP_RATED_URL = 'https://api.themoviedb.org/3/movie/top_rated';

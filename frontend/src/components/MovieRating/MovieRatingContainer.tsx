@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import moment from 'moment-timezone';
 import MovieRatingPresenter from './MovieRatingPresenter';
-import { getMovieDetail_GetMovieRatings_movieRatings } from 'src/types/api';
+import { getMovieRatings_GetMovieRatings_movieRatings } from 'src/types/api';
 
 interface IProps {
-  movieRating?: getMovieDetail_GetMovieRatings_movieRatings;
+  movieRating?: getMovieRatings_GetMovieRatings_movieRatings;
   handleMovieRatingApply?: (rating: number, watchDate: string) => void;
   handleMovieRatingRemove?: (id: number) => void;
 }

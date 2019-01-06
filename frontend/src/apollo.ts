@@ -5,7 +5,7 @@ import {
   getPopular,
   getTopRated
 } from './utils/tmdb';
-import { getMovieDetailVariables } from './types/api';
+import { getMovieDetailVariables } from './types/local';
 
 const cache = new InMemoryCache();
 
@@ -120,7 +120,6 @@ const client = new ApolloClient({
     });
   },
   onError: ({ graphQLErrors, networkError }) => {
-    console.log(graphQLErrors);
     if (graphQLErrors) {
       graphQLErrors.map(({ message }) => {
         console.log(`Unexpected error: ${message}`);
@@ -136,6 +135,9 @@ const client = new ApolloClient({
           });
         }
       });
+    }
+    if (graphQLErrors) {
+      console.log(`graphQLErrors: ${graphQLErrors}`);
     }
     if (networkError) {
       console.log(`Unexpected error: ${networkError}`);

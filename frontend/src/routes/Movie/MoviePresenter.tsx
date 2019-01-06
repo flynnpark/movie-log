@@ -3,7 +3,8 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Alert, Card } from 'antd';
 import MovieRating from 'src/components/MovieRating';
-import { getMovieDetail } from 'src/types/api';
+import { getMovieDetail } from 'src/types/local';
+import { getMovieRatings } from 'src/types/api';
 
 const MovieInfoContinaer = styled.div`
   background-color: #fff;
@@ -54,20 +55,21 @@ const CardBodyStyle = {
 };
 
 interface IProps {
-  data: getMovieDetail;
+  movieData: getMovieDetail;
+  ratingData: getMovieRatings | undefined;
   handleMovieRatingApply: (rating: number, watchDate: string) => void;
   handleMovieRatingRemove: (id: number) => void;
 }
 
 const MoviePresenter: React.FunctionComponent<IProps> = ({
-  data,
+  movieData,
+  ratingData,
   handleMovieRatingApply,
   handleMovieRatingRemove
 }) => {
   const {
-    GetMovieDetail: { ok, movie },
-    GetMovieRatings: { ok: ratingOk, movieRatings }
-  } = data;
+    GetMovieDetail: { ok, movie }
+  } = movieData;
   return (
     <>
       {ok && movie ? (
@@ -103,9 +105,10 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
                     <MovieRating
                       handleMovieRatingApply={handleMovieRatingApply}
                     />
-                    {ratingOk &&
-                      movieRatings &&
-                      movieRatings.map(
+                    {ratingData &&
+                      ratingData.GetMovieRatings.ok &&
+                      ratingData.GetMovieRatings.movieRatings &&
+                      ratingData.GetMovieRatings.movieRatings.map(
                         movieRating =>
                           movieRating && (
                             <MovieRating

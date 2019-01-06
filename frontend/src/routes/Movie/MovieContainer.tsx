@@ -2,20 +2,22 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Query, Mutation, MutationFn } from 'react-apollo';
 import {
-  getMovieDetail,
   setMovieRating,
   setMovieRatingVariables,
   removeMovieRating,
   removeMovieRatingVariables,
-  getMovieDetail_GetMovieRatings_movieRatings
+  getMovieRatings,
+  getMovieRatings_GetMovieRatings_movieRatings
 } from 'src/types/api';
 import MoviePresenter from './MoviePresenter';
+import { GET_MOVIE_DETAIL } from './MovieQueries.local';
 import {
-  GET_MOVIE_DETAIL,
+  GET_MOVIE_RATINGS,
   SET_MOVIE_RATING,
   REMOVE_MOVIE_RATING
 } from './MovieQueries';
 import Loading from 'src/components/Loading';
+import { getMovieDetail } from 'src/types/local';
 
 interface IParams {
   movieId: string;
@@ -27,6 +29,8 @@ interface IProps extends RouteComponentProps<IParams> {
 }
 
 class MovieDetailQueries extends Query<getMovieDetail> {}
+
+class MovieRatingsQueries extends Query<getMovieRatings> {}
 
 class SetMovieRatingMutation extends Mutation<
   setMovieRating,
@@ -55,8 +59,8 @@ class MovieContainer extends Component<IProps> {
       this.setMovieRatingFn({
         variables: { movieId, rating, watchDate },
         update: (store, { data: { SetMovieRating } }) => {
-          const prevData: getMovieDetail | null = store.readQuery({
-            query: GET_MOVIE_DETAIL,
+          const prevData: getMovieRatings | null = store.readQuery({
+            query: GET_MOVIE_RATINGS,
             variables: { movieId }
           });
           if (
@@ -75,7 +79,7 @@ class MovieContainer extends Component<IProps> {
               }
             };
             store.writeQuery({
-              query: GET_MOVIE_DETAIL,
+              query: GET_MOVIE_RATINGS,
               variables: { movieId },
               data: newData
             });
@@ -94,7 +98,7 @@ class MovieContainer extends Component<IProps> {
       this.removeMovieRatingFn({
         variables: { id },
         update: (store, { data: { RemoveMovieRating } }) => {
-          const prevData: getMovieDetail | null = store.readQuery({
+          const prevData: getMovieRatings | null = store.readQuery({
             query: GET_MOVIE_DETAIL,
             variables: { movieId }
           });
@@ -108,7 +112,7 @@ class MovieContainer extends Component<IProps> {
               GetMovieRatings: {
                 ...prevData.GetMovieRatings,
                 movieRatings: prevData.GetMovieRatings.movieRatings.filter(
-                  (movieRating: getMovieDetail_GetMovieRatings_movieRatings) =>
+                  (movieRating: getMovieRatings_GetMovieRatings_movieRatings) =>
                     movieRating.id !== RemoveMovieRating.movieRating.id
                 )
               }
@@ -132,37 +136,47 @@ class MovieContainer extends Component<IProps> {
       } = match;
       return (
         <MovieDetailQueries query={GET_MOVIE_DETAIL} variables={{ movieId }}>
-          {({ data, loading }) =>
-            loading ? (
-              <Loading />
-            ) : (
-              <SetMovieRatingMutation mutation={SET_MOVIE_RATING}>
-                {setMovieRatingFn => {
-                  this.setMovieRatingFn = setMovieRatingFn;
-                  return (
-                    <RemoveMovieRatingMutation mutation={REMOVE_MOVIE_RATING}>
-                      {removeMovieRatingFn => {
-                        this.removeMovieRatingFn = removeMovieRatingFn;
-                        return (
-                          data && (
-                            <MoviePresenter
-                              data={data}
-                              handleMovieRatingApply={
-                                this.handleMovieRatingApply
-                              }
-                              handleMovieRatingRemove={
-                                this.handleMovieRatingRemove
-                              }
-                            />
-                          )
-                        );
-                      }}
-                    </RemoveMovieRatingMutation>
-                  );
-                }}
-              </SetMovieRatingMutation>
-            )
-          }
+          {({ data: movieData, loading: movieLoading }) => (
+            <MovieRatingsQueries
+              query={GET_MOVIE_RATINGS}
+              variables={{ movieId }}
+            >
+              {({ data: ratingData, loading: ratingLoading }) =>
+                movieLoading || ratingLoading ? (
+                  <Loading />
+                ) : (
+                  <SetMovieRatingMutation mutation={SET_MOVIE_RATING}>
+                    {setMovieRatingFn => {
+                      this.setMovieRatingFn = setMovieRatingFn;
+                      return (
+                        <RemoveMovieRatingMutation
+                          mutation={REMOVE_MOVIE_RATING}
+                        >
+                          {removeMovieRatingFn => {
+                            this.removeMovieRatingFn = removeMovieRatingFn;
+                            return (
+                              movieData && (
+                                <MoviePresenter
+                                  movieData={movieData}
+                                  ratingData={ratingData}
+                                  handleMovieRatingApply={
+                                    this.handleMovieRatingApply
+                                  }
+                                  handleMovieRatingRemove={
+                                    this.handleMovieRatingRemove
+                                  }
+                                />
+                              )
+                            );
+                          }}
+                        </RemoveMovieRatingMutation>
+                      );
+                    }}
+                  </SetMovieRatingMutation>
+                )
+              }
+            </MovieRatingsQueries>
+          )}
         </MovieDetailQueries>
       );
     }
