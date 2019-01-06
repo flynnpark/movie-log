@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost';
 
 export const GET_HOME_DATA = gql`
   query getHomeData {
-    GetNowPlaying {
+    GetNowPlaying @client {
       id
       title
       poster_path
@@ -10,7 +10,7 @@ export const GET_HOME_DATA = gql`
       overview
       release_date
     }
-    GetTopRated {
+    GetTopRated @client {
       id
       title
       poster_path
@@ -18,7 +18,7 @@ export const GET_HOME_DATA = gql`
       overview
       release_date
     }
-    GetPopular {
+    GetPopular @client {
       id
       title
       poster_path

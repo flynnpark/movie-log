@@ -1,4 +1,11 @@
 import ApolloClient, { Operation, InMemoryCache } from 'apollo-boost';
+import {
+  getMovieDetail,
+  getNowPlaying,
+  getPopular,
+  getTopRated
+} from './utils/tmdb';
+import { getMovieDetailVariables } from './types/api';
 
 const cache = new InMemoryCache();
 
@@ -37,6 +44,70 @@ const client = new ApolloClient({
             }
           });
           return null;
+        }
+      },
+      Query: {
+        GetNowPlaying: async (_: null | undefined) => {
+          const movieList = await getNowPlaying();
+          const newMovieList = new Array();
+          movieList.map(movieItem => {
+            newMovieList.push({
+              __typename: 'MovieItem',
+              ...movieItem
+            });
+          });
+          return newMovieList;
+        },
+        GetPopular: async (_: null | undefined) => {
+          const movieList = await getPopular();
+          const newMovieList = new Array();
+          movieList.map(movieItem => {
+            newMovieList.push({
+              __typename: 'MovieItem',
+              ...movieItem
+            });
+          });
+          return newMovieList;
+        },
+        GetTopRated: async (_: null | undefined) => {
+          const movieList = await getTopRated();
+          const newMovieList = new Array();
+          movieList.map(movieItem => {
+            newMovieList.push({
+              __typename: 'MovieItem',
+              ...movieItem
+            });
+          });
+          return newMovieList;
+        },
+        GetMovieDetail: async (
+          _: null | undefined,
+          { movieId }: getMovieDetailVariables
+        ) => {
+          const movieDetail = await getMovieDetail(movieId);
+          if (movieDetail) {
+            return {
+              __typename: 'GetMovieDetailResponse',
+              ok: true,
+              error: null,
+              movie: {
+                ...movieDetail,
+                __typename: 'MovieInfo',
+                genres: movieDetail.genres.map(genre => {
+                  return {
+                    ...genre,
+                    __typename: 'Genre'
+                  };
+                })
+              }
+            };
+          }
+          return {
+            __typename: 'GetMovieDetailResponse',
+            ok: false,
+            error: 'Movie not found',
+            movie: null
+          };
         }
       }
     }

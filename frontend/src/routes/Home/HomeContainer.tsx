@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Query } from 'react-apollo';
 import { getHomeData } from 'src/types/api';
 import HomePresenter from './HomePresenter';
-import { GET_HOME_DATA } from './HomeQueries';
+import { GET_HOME_DATA } from './HomeQueries.local';
 import Loading from 'src/components/Loading';
 
 class NowPlayingQueries extends Query<getHomeData> {}

@@ -2,7 +2,7 @@ import { gql } from 'apollo-boost';
 
 export const GET_MOVIE_DETAIL = gql`
   query getMovieDetail($movieId: Int!) {
-    GetMovieDetail(movieId: $movieId) {
+    GetMovieDetail(movieId: $movieId) @client {
       ok
       error
       movie {

@@ -1,14 +1,13 @@
-import dotenv from 'dotenv';
 import axios from 'axios';
 
-dotenv.config();
+console.log(process.env);
 
 const SEARCH_URL = 'https://api.themoviedb.org/3/search/movie';
 const NOW_PLAYING_URL = 'https://api.themoviedb.org/3/movie/now_playing';
 const TOP_RATED_URL = 'https://api.themoviedb.org/3/movie/top_rated';
 const POPULAR_URL = 'https://api.themoviedb.org/3/movie/popular';
 const MOVIE_DETAIL_URL = 'https://api.themoviedb.org/3/movie';
-const API_KEY = process.env.TMDB_KEY;
+const API_KEY = process.env.REACT_APP_TMDB_KEY;
 
 interface IMovieDetailData {
   id: number;
