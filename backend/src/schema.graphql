@@ -1,5 +1,9 @@
+type Genre {
+  id: Int!
+  name: String!
+}
+
 type Query {
-  FindMovie(query: String): [MovieItem]
   genre: Genre
   movie: Movie
   movieItem: MovieItem
@@ -11,11 +15,6 @@ type Query {
   GetUserProfile(userId: Int): GetUserProfileResponse!
   user: User
   userExpose: UserExpose
-}
-
-type Genre {
-  id: Int!
-  name: String!
 }
 
 type Movie {
