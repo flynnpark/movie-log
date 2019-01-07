@@ -3,23 +3,27 @@ import MovieCardListPresenter from './MovieCardListPresenter';
 import {
   getHomeData_GetNowPlaying,
   getHomeData_GetPopular,
-  getHomeData_GetTopRated
+  getHomeData_GetTopRated,
+  findMovie_FindMovie
 } from 'src/types/local';
 
 interface IProps {
   title?: string;
-  movieList?: Array<
+  movieList: Array<
     | getHomeData_GetNowPlaying
     | getHomeData_GetPopular
     | getHomeData_GetTopRated
+    | findMovie_FindMovie
     | null
-  >;
+  > | null;
 }
 
 class MovieCardListContainer extends Component<IProps, any> {
   public render() {
-    const { movieList } = this.props;
-    return movieList && <MovieCardListPresenter {...this.props} />;
+    const { title, movieList } = this.props;
+    return (
+      movieList && <MovieCardListPresenter title={title} {...this.props} />
+    );
   }
 }
 

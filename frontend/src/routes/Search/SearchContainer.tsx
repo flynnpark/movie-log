@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Query } from 'react-apollo';
-import { findMovie } from 'src/types/api';
+import { findMovie } from 'src/types/local';
 import SearchPresenter from './SearchPresenter';
-import { FIND_MOVIE } from './SearchQueries';
+import { FIND_MOVIE } from './SearchQueries.local';
 import Loading from 'src/components/Loading';
 
 class FindMovieQueries extends Query<findMovie> {}

@@ -4,7 +4,8 @@ import MovieCard from 'src/components/MovieCard';
 import {
   getHomeData_GetNowPlaying,
   getHomeData_GetPopular,
-  getHomeData_GetTopRated
+  getHomeData_GetTopRated,
+  findMovie_FindMovie
 } from 'src/types/local';
 
 const MovieCardContainer = styled.div`
@@ -25,8 +26,9 @@ interface IProps {
     | getHomeData_GetNowPlaying
     | getHomeData_GetPopular
     | getHomeData_GetTopRated
+    | findMovie_FindMovie
     | null
-  >;
+  > | null;
 }
 
 const MovieCardListPresenter: React.FunctionComponent<IProps> = ({

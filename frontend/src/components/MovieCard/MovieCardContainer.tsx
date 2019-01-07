@@ -3,11 +3,15 @@ import MovieCardPresenter from './MovieCardPresenter';
 import {
   getHomeData_GetNowPlaying,
   getHomeData_GetPopular,
-  getHomeData_GetTopRated
+  getHomeData_GetTopRated,
+  findMovie_FindMovie
 } from 'src/types/local';
 
 class MovieCardContainer extends Component<
-  getHomeData_GetNowPlaying | getHomeData_GetPopular | getHomeData_GetTopRated,
+  | getHomeData_GetNowPlaying
+  | getHomeData_GetPopular
+  | getHomeData_GetTopRated
+  | findMovie_FindMovie,
   any
 > {
   public render() {

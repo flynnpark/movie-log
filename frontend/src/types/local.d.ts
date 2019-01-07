@@ -34,6 +34,23 @@ export interface getHomeData {
   GetPopular: (getHomeData_GetPopular | null)[] | null;
 }
 
+export interface findMovie_FindMovie {
+  __typename: 'MovieItem';
+  id: number;
+  title: string;
+  poster_path: string | null;
+  genre_ids: (number | null)[];
+  release_date: string;
+}
+
+export interface findMovie {
+  FindMovie: (findMovie_FindMovie | null)[] | null;
+}
+
+export interface findMovieVariables {
+  query: string;
+}
+
 export interface getMovieDetail_GetMovieDetail_movie_genres {
   __typename: 'Genre';
   name: string;

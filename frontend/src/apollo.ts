@@ -3,9 +3,10 @@ import {
   getMovieDetail,
   getNowPlaying,
   getPopular,
-  getTopRated
+  getTopRated,
+  findMovie
 } from './utils/tmdb';
-import { getMovieDetailVariables } from './types/local';
+import { getMovieDetailVariables, findMovieVariables } from './types/local';
 
 const cache = new InMemoryCache();
 
@@ -79,6 +80,23 @@ const client = new ApolloClient({
             });
           });
           return newMovieList;
+        },
+        FindMovie: async (
+          _: null | undefined,
+          { query }: findMovieVariables
+        ) => {
+          if (query) {
+            const movieList = await findMovie(query);
+            const newMovieList = new Array();
+            movieList.map(movieItem => {
+              newMovieList.push({
+                __typename: 'MovieItem',
+                ...movieItem
+              });
+            });
+            return newMovieList;
+          }
+          return null;
         },
         GetMovieDetail: async (
           _: null | undefined,

@@ -193,30 +193,6 @@ export interface getProfileDataVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: findMovie
-// ====================================================
-
-export interface findMovie_FindMovie {
-  __typename: "MovieItem";
-  id: number;
-  title: string;
-  poster_path: string | null;
-  genre_ids: (number | null)[];
-  release_date: string;
-}
-
-export interface findMovie {
-  FindMovie: (findMovie_FindMovie | null)[] | null;
-}
-
-export interface findMovieVariables {
-  query: string;
-}
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL mutation operation: startEmailSignUp
 // ====================================================
 
