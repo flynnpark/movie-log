@@ -24,14 +24,26 @@ interface IMovieDetailData {
   runtime: number;
 }
 
+interface IMovie {
+  id: number;
+  title: string;
+  poster_path: string;
+  original_language: string;
+  original_title: string;
+  genre_ids: number[];
+  adult: boolean;
+  overview: string;
+  release_date: string;
+}
+
 interface IMovieListData {
   page: number;
   total_results: number;
   total_pages: number;
-  results: [any];
+  results: IMovie[];
 }
 
-export const getNowPlaying = async () => {
+export const getNowPlaying = async (): Promise<IMovie[]> => {
   const {
     data: { results }
   } = await axios.get<IMovieListData>(NOW_PLAYING_URL, {
@@ -43,7 +55,7 @@ export const getNowPlaying = async () => {
   return results;
 };
 
-export const getTopRated = async () => {
+export const getTopRated = async (): Promise<IMovie[]> => {
   const {
     data: { results }
   } = await axios.get<IMovieListData>(TOP_RATED_URL, {
@@ -55,7 +67,7 @@ export const getTopRated = async () => {
   return results;
 };
 
-export const getPopular = async () => {
+export const getPopular = async (): Promise<IMovie[]> => {
   const {
     data: { results }
   } = await axios.get<IMovieListData>(POPULAR_URL, {
@@ -67,7 +79,7 @@ export const getPopular = async () => {
   return results;
 };
 
-export const findMovie = async (query: string) => {
+export const findMovie = async (query: string): Promise<IMovie[]> => {
   const {
     data: { results }
   } = await axios.get<IMovieListData>(SEARCH_URL, {
