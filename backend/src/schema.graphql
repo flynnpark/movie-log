@@ -1,12 +1,10 @@
-type Genre {
-  id: Int!
-  name: String!
+type GetMovieRatingResponse {
+  ok: Boolean!
+  error: String
+  movieRating: MovieRating
 }
 
 type Query {
-  genre: Genre
-  movie: Movie
-  movieItem: MovieItem
   GetMovieRating(movieId: Int!): GetMovieRatingResponse!
   GetMovieRatings(movieId: Int!, limit: Int): GetMovieRatingsResponse!
   GetUserMovieRatings: GetUserMovieRatingsResponse!
@@ -15,38 +13,6 @@ type Query {
   GetUserProfile(userId: Int): GetUserProfileResponse!
   user: User
   userExpose: UserExpose
-}
-
-type Movie {
-  id: Int!
-  title: String!
-  tagline: String!
-  poster_path: String
-  original_language: String!
-  original_title: String!
-  genres: [Genre]!
-  adult: Boolean!
-  overview: String!
-  release_date: String!
-  runtime: Int!
-}
-
-type MovieItem {
-  id: Int!
-  title: String!
-  poster_path: String
-  original_language: String!
-  original_title: String!
-  genre_ids: [Int]!
-  adult: Boolean!
-  overview: String
-  release_date: String!
-}
-
-type GetMovieRatingResponse {
-  ok: Boolean!
-  error: String
-  movieRating: MovieRating
 }
 
 type GetMovieRatingsResponse {

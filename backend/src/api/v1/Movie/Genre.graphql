@@ -1,8 +1,0 @@
-type Genre {
-  id: Int!
-  name: String!
-}
-
-type Query {
-  genre: Genre
-}
