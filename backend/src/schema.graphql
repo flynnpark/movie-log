@@ -9,6 +9,7 @@ type Query {
   GetMovieRatings(movieId: Int!, limit: Int): GetMovieRatingsResponse!
   GetUserMovieRatings: GetUserMovieRatingsResponse!
   movieRating: MovieRating
+  GetRatedMovies(userId: Int!): GetRatedMoviesResponse!
   GetUserInfo(userId: Int): GetUserInfoResponse!
   GetUserProfile(userId: Int): GetUserProfileResponse!
   user: User
@@ -66,6 +67,16 @@ type EmailSignUpResponse {
   ok: Boolean!
   error: String
   token: String
+}
+
+type RatedMovie {
+  id: Int!
+}
+
+type GetRatedMoviesResponse {
+  ok: Boolean!
+  error: String
+  ratedMovies: [RatedMovie]
 }
 
 type CountInfo {
