@@ -9,5 +9,5 @@ type GetRatedMoviesResponse {
 }
 
 type Query {
-  GetRatedMovies(userId: Int!): GetRatedMoviesResponse!
+  GetRatedMovies(userId: Int!, offset: Int!): GetRatedMoviesResponse!
 }

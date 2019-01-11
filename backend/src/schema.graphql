@@ -9,7 +9,7 @@ type Query {
   GetMovieRatings(movieId: Int!, limit: Int): GetMovieRatingsResponse!
   GetUserMovieRatings: GetUserMovieRatingsResponse!
   movieRating: MovieRating
-  GetRatedMovies(userId: Int!): GetRatedMoviesResponse!
+  GetRatedMovies(userId: Int!, offset: Int!): GetRatedMoviesResponse!
   GetUserInfo(userId: Int): GetUserInfoResponse!
   GetUserProfile(userId: Int): GetUserProfileResponse!
   user: User
@@ -70,7 +70,7 @@ type EmailSignUpResponse {
 }
 
 type RatedMovie {
-  id: Int!
+  movieId: Int!
 }
 
 type GetRatedMoviesResponse {
