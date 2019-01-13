@@ -193,6 +193,34 @@ export interface getProfileDataVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getRatedMovies
+// ====================================================
+
+export interface getRatedMovies_GetRatedMovies_ratedMovies {
+  __typename: "RatedMovie";
+  movieId: number;
+}
+
+export interface getRatedMovies_GetRatedMovies {
+  __typename: "GetRatedMoviesResponse";
+  ok: boolean;
+  error: string | null;
+  ratedMovies: (getRatedMovies_GetRatedMovies_ratedMovies | null)[] | null;
+}
+
+export interface getRatedMovies {
+  GetRatedMovies: getRatedMovies_GetRatedMovies;
+}
+
+export interface getRatedMoviesVariables {
+  userId: number;
+  offset: number;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: startEmailSignUp
 // ====================================================
 

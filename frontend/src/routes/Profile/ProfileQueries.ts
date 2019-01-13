@@ -24,3 +24,15 @@ export const GET_PROFILE_DATA = gql`
     }
   }
 `;
+
+export const GET_RATED_MOVIES = gql`
+  query getRatedMovies($userId: Int!, $offset: Int!) {
+    GetRatedMovies(userId: $userId, offset: $offset) {
+      ok
+      error
+      ratedMovies {
+        movieId
+      }
+    }
+  }
+`;

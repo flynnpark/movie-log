@@ -126,6 +126,14 @@ const client = new ApolloClient({
             error: 'Movie not found',
             movie: null
           };
+        },
+        GetMovieList: async (_: null | undefined, { movieIdList }) => {
+          return {
+            __typename: 'GetMovieListResponse',
+            ok: false,
+            error: 'Movie ID List is null',
+            movieList: null
+          };
         }
       }
     }
