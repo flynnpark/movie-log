@@ -5,7 +5,7 @@ type RatedMovie {
 type GetRatedMoviesResponse {
   ok: Boolean!
   error: String
-  ratedMovies: [RatedMovie]
+  ratedMovies: [RatedMovie!]
 }
 
 type Query {
