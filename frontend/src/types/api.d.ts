@@ -205,7 +205,7 @@ export interface getRatedMovies_GetRatedMovies {
   __typename: "GetRatedMoviesResponse";
   ok: boolean;
   error: string | null;
-  ratedMovies: (getRatedMovies_GetRatedMovies_ratedMovies | null)[] | null;
+  ratedMovies: getRatedMovies_GetRatedMovies_ratedMovies[] | null;
 }
 
 export interface getRatedMovies {

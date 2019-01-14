@@ -591,9 +591,13 @@
               "kind": "LIST",
               "name": null,
               "ofType": {
-                "kind": "OBJECT",
-                "name": "RatedMovie",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RatedMovie",
+                  "ofType": null
+                }
               }
             },
             "isDeprecated": false,

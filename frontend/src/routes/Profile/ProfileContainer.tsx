@@ -30,9 +30,16 @@ class ProfileContainer extends Component<IProps, any> {
             <RatedMoviesQueries
               query={GET_RATED_MOVIES}
               variables={{ userId, offset }}
+              onCompleted={(data: getRatedMovies) => {
+                const {
+                  GetRatedMovies: { ratedMovies }
+                } = data;
+                if (ratedMovies) {
+                  console.log(ratedMovies);
+                }
+              }}
             >
               {({ data: ratedMoviesData, loading: ratedMoviesLoading }) => {
-                console.log(ratedMoviesData);
                 return (
                   <React.Fragment>
                     {!profileLoading && profileData ? (
