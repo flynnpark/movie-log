@@ -1,4 +1,5 @@
 import ApolloClient, { Operation, InMemoryCache } from 'apollo-boost';
+import { Context } from 'react-apollo';
 import {
   getMovieDetail,
   getNowPlaying,
@@ -6,7 +7,11 @@ import {
   getTopRated,
   findMovie
 } from './utils/tmdb';
-import { getMovieDetailVariables, findMovieVariables } from './types/local';
+import {
+  getMovieDetailVariables,
+  findMovieVariables,
+  userLoginVariables
+} from './types/local';
 
 const cache = new InMemoryCache();
 
@@ -21,7 +26,11 @@ const client = new ApolloClient({
     },
     resolvers: {
       Mutation: {
-        userLogIn: (_, { token }, { cache: appCache }) => {
+        userLogIn: (
+          _: null | undefined,
+          { token }: userLoginVariables,
+          { cache: appCache }: Context
+        ): null => {
           localStorage.setItem('jwt', token);
           appCache.writeData({
             data: {
@@ -33,7 +42,11 @@ const client = new ApolloClient({
           });
           return null;
         },
-        userLogOut: (_, __, { appCache }) => {
+        userLogOut: (
+          _: null | undefined,
+          __: null | undefined,
+          { appCache }: Context
+        ): null => {
           localStorage.removeItem('jwt');
           localStorage.removeItem('userId');
           appCache.writeData({

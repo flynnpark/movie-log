@@ -1,3 +1,7 @@
+export interface userLoginVariables {
+  token: string;
+}
+
 export interface getHomeData_GetNowPlaying {
   __typename: 'MovieItem';
   id: number;
