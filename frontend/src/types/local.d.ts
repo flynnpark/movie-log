@@ -88,3 +88,22 @@ export interface getMovieDetail {
 export interface getMovieDetailVariables {
   movieId: number;
 }
+
+export interface getMovieList_GetMovieList_movieList {
+  id: number;
+  title: string;
+  poster_path: string;
+  adult: boolean;
+  release_date: string;
+}
+
+export interface getMovieList_GetMovieList {
+  __typename: 'GetMovieListResponse';
+  ok: boolean;
+  error: string | null;
+  movieList: getMovieList_GetMovieList_movieList[] | null;
+}
+
+export interface getMovieList {
+  GetMovieList: getMovieList_GetMovieList;
+}

@@ -1,7 +1,7 @@
 import { gql } from 'apollo-boost';
 
 export const GET_MOVIE_LIST = gql`
-  query getMovieList($movieIdList: Int![]) {
+  query getMovieList($movieIdList: [Int]!) {
     GetMovieList(movieIdList: $movieIdList) @client {
       ok
       error

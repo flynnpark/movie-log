@@ -5,6 +5,8 @@ import { getProfileData, getRatedMovies } from 'src/types/api';
 import { GET_PROFILE_DATA, GET_RATED_MOVIES } from './ProfileQueries';
 import Loading from 'src/components/Loading';
 import ProfilePresenter from './ProfilePresenter';
+import { getMovieList } from 'src/types/local';
+import { GET_MOVIE_LIST } from './ProfileQueries.local';
 
 interface IParams {
   userId: string;
@@ -13,6 +15,8 @@ interface IParams {
 interface IProps extends RouteComponentProps<IParams> {}
 
 class ProfileQueries extends Query<getProfileData> {}
+
+class MovieListQueries extends Query<getMovieList> {}
 
 class RatedMoviesQueries extends Query<getRatedMovies> {}
 
@@ -30,26 +34,23 @@ class ProfileContainer extends Component<IProps, any> {
             <RatedMoviesQueries
               query={GET_RATED_MOVIES}
               variables={{ userId, offset }}
-              onCompleted={(data: getRatedMovies) => {
-                const {
-                  GetRatedMovies: { ratedMovies }
-                } = data;
-                if (ratedMovies) {
-                  console.log(ratedMovies);
-                }
-              }}
             >
-              {({ data: ratedMoviesData, loading: ratedMoviesLoading }) => {
-                return (
-                  <React.Fragment>
-                    {!profileLoading && profileData ? (
-                      <ProfilePresenter data={profileData} />
-                    ) : (
-                      <Loading />
-                    )}
-                  </React.Fragment>
-                );
-              }}
+              {({ data: ratedMoviesData, loading: ratedMoviesLoading }) => (
+                <MovieListQueries
+                  query={GET_MOVIE_LIST}
+                  variables={{ ratedMoviesData }}
+                >
+                  {({ data: movieListData, loading: movieListLoading }) => (
+                    <React.Fragment>
+                      {!profileLoading && profileData ? (
+                        <ProfilePresenter data={profileData} />
+                      ) : (
+                        <Loading />
+                      )}
+                    </React.Fragment>
+                  )}
+                </MovieListQueries>
+              )}
             </RatedMoviesQueries>
           )}
         </ProfileQueries>
