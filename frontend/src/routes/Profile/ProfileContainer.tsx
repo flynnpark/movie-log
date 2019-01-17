@@ -35,22 +35,56 @@ class ProfileContainer extends Component<IProps, any> {
               query={GET_RATED_MOVIES}
               variables={{ userId, offset }}
             >
-              {({ data: ratedMoviesData, loading: ratedMoviesLoading }) => (
-                <MovieListQueries
-                  query={GET_MOVIE_LIST}
-                  variables={{ ratedMoviesData }}
-                >
-                  {({ data: movieListData, loading: movieListLoading }) => (
-                    <React.Fragment>
-                      {!profileLoading && profileData ? (
-                        <ProfilePresenter data={profileData} />
-                      ) : (
-                        <Loading />
-                      )}
-                    </React.Fragment>
-                  )}
-                </MovieListQueries>
-              )}
+              {({ data: ratedMoviesData, loading: ratedMoviesLoading }) => {
+                const ratedMovieIdList: number[] = new Array();
+                if (
+                  ratedMoviesData &&
+                  ratedMoviesData.GetRatedMovies &&
+                  ratedMoviesData.GetRatedMovies.ratedMovies
+                ) {
+                  const {
+                    GetRatedMovies: { ratedMovies }
+                  } = ratedMoviesData;
+                  if (ratedMovies) {
+                    ratedMovies.forEach(ratedMovie => {
+                      ratedMovieIdList.push(ratedMovie.movieId);
+                    });
+                  }
+                  console.log('ratedMovieIdList', ratedMovieIdList);
+                }
+                return (
+                  <>
+                    {!ratedMoviesLoading && ratedMovieIdList ? (
+                      <MovieListQueries
+                        query={GET_MOVIE_LIST}
+                        variables={{ movieIdList: ratedMovieIdList }}
+                      >
+                        {({
+                          data: movieListData,
+                          loading: movieListLoading
+                        }) => {
+                          console.log(movieListData);
+                          console.log('movieListLoading', movieListLoading);
+                          return (
+                            <React.Fragment>
+                              {!profileLoading &&
+                              profileData &&
+                              !ratedMoviesLoading &&
+                              !movieListLoading ? (
+                                <ProfilePresenter data={profileData} />
+                              ) : (
+                                <Loading />
+                              )}
+                            </React.Fragment>
+                          );
+                        }}
+                      </MovieListQueries>
+                    ) : (
+                      <Loading />
+                    )}
+                  </>
+                );
+              }}
             </RatedMoviesQueries>
           )}
         </ProfileQueries>

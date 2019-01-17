@@ -10,7 +10,8 @@ import {
 import {
   getMovieDetailVariables,
   findMovieVariables,
-  userLoginVariables
+  userLoginVariables,
+  getMovieListVariables
 } from './types/local';
 
 const cache = new InMemoryCache();
@@ -140,12 +141,29 @@ const client = new ApolloClient({
             movie: null
           };
         },
-        GetMovieList: async (_: null | undefined, { movieIdList }) => {
+        GetMovieList: async (
+          _: null | undefined,
+          { movieIdList }: getMovieListVariables
+        ) => {
+          console.log('movieIdList', movieIdList);
+          const movieList = new Array();
+          if (movieIdList) {
+            for (const movieId of movieIdList) {
+              const movieInfo = await getMovieDetail(movieId);
+              movieList.push(movieInfo);
+            }
+            return {
+              __typename: 'GetMovieListResponse',
+              ok: true,
+              error: 'Movie ID List is null',
+              movieList
+            };
+          }
           return {
             __typename: 'GetMovieListResponse',
             ok: false,
             error: 'Movie ID List is null',
-            movieList: null
+            movieList
           };
         }
       }

@@ -107,3 +107,7 @@ export interface getMovieList_GetMovieList {
 export interface getMovieList {
   GetMovieList: getMovieList_GetMovieList;
 }
+
+export interface getMovieListVariables {
+  movieIdList: number[];
+}

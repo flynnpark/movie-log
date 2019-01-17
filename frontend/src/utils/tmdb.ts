@@ -8,6 +8,7 @@ const MOVIE_DETAIL_URL = 'https://api.themoviedb.org/3/movie';
 const API_KEY = process.env.REACT_APP_TMDB_KEY;
 
 interface IMovieDetailData {
+  __typename: 'MovieDetail';
   id: number;
   title: string;
   tagline: string;
@@ -105,6 +106,7 @@ export const getMovieDetail = async (
         }
       }
     );
+    data.__typename = 'MovieDetail';
     return data;
   } catch (error) {
     console.log(error);
