@@ -50,7 +50,6 @@ class ProfileContainer extends Component<IProps, any> {
                       ratedMovieIdList.push(ratedMovie.movieId);
                     });
                   }
-                  console.log('ratedMovieIdList', ratedMovieIdList);
                 }
                 return (
                   <>
@@ -63,8 +62,6 @@ class ProfileContainer extends Component<IProps, any> {
                           data: movieListData,
                           loading: movieListLoading
                         }) => {
-                          console.log(movieListData);
-                          console.log('movieListLoading', movieListLoading);
                           return (
                             <React.Fragment>
                               {!profileLoading &&

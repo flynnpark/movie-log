@@ -145,7 +145,6 @@ const client = new ApolloClient({
           _: null | undefined,
           { movieIdList }: getMovieListVariables
         ) => {
-          console.log('movieIdList', movieIdList);
           const movieList = new Array();
           if (movieIdList) {
             for (const movieId of movieIdList) {
