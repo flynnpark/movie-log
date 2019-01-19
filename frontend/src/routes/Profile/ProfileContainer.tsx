@@ -3,7 +3,6 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import { getProfileData, getRatedMovies } from 'src/types/api';
 import { GET_PROFILE_DATA, GET_RATED_MOVIES } from './ProfileQueries';
-import Loading from 'src/components/Loading';
 import ProfilePresenter from './ProfilePresenter';
 import { getMovieList } from 'src/types/local';
 import { GET_MOVIE_LIST } from './ProfileQueries.local';
@@ -52,34 +51,21 @@ class ProfileContainer extends Component<IProps, any> {
                   }
                 }
                 return (
-                  <>
-                    {!ratedMoviesLoading && ratedMovieIdList ? (
-                      <MovieListQueries
-                        query={GET_MOVIE_LIST}
-                        variables={{ movieIdList: ratedMovieIdList }}
-                      >
-                        {({
-                          data: movieListData,
-                          loading: movieListLoading
-                        }) => {
-                          return (
-                            <React.Fragment>
-                              {!profileLoading &&
-                              profileData &&
-                              !ratedMoviesLoading &&
-                              !movieListLoading ? (
-                                <ProfilePresenter data={profileData} />
-                              ) : (
-                                <Loading />
-                              )}
-                            </React.Fragment>
-                          );
-                        }}
-                      </MovieListQueries>
-                    ) : (
-                      <Loading />
+                  <MovieListQueries
+                    query={GET_MOVIE_LIST}
+                    variables={{ movieIdList: ratedMovieIdList }}
+                  >
+                    {({ data: movieListData, loading: movieListLoading }) => (
+                      <ProfilePresenter
+                        profileData={profileData}
+                        profileLoading={profileLoading}
+                        ratedMovieData={ratedMoviesData}
+                        ratedMoviesLoading={ratedMoviesLoading}
+                        movieListData={movieListData}
+                        movieListLoading={movieListLoading}
+                      />
                     )}
-                  </>
+                  </MovieListQueries>
                 );
               }}
             </RatedMoviesQueries>
