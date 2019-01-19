@@ -23,25 +23,22 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
   movieListLoading
 }) => {
   if (!profileLoading && profileData) {
-    if (profileData) {
-      const {
-        GetUserProfile: { ok: profileOk, user },
-        GetUserInfo: { countInfo }
-      } = profileData;
-      if (profileOk && user) {
-        return <ProfileSection userData={user} countData={countInfo} />;
-      }
-      return (
-        <Alert
-          message="Error"
-          description="해당 유저의 프로필을 가져올 수 없습니다."
-          type="error"
-          showIcon={true}
-        />
-      );
-    } else {
-      return <Loading />;
+    const {
+      GetUserProfile: { ok: profileOk, user },
+      GetUserInfo: { countInfo }
+    } = profileData;
+    if (profileOk && user) {
+      return <ProfileSection userData={user} countData={countInfo} />;
     }
+    // 프로필이 존재하지 않을 때
+    return (
+      <Alert
+        message="Error"
+        description="해당 유저의 프로필을 가져올 수 없습니다."
+        type="error"
+        showIcon={true}
+      />
+    );
   }
   return <Loading />;
 };
