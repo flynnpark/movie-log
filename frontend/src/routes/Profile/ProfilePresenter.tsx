@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { Alert } from 'antd';
-import ProfileSection from '../../components/ProfileSection';
 import { getProfileData, getRatedMovies } from 'src/types/api';
 import { getMovieList } from 'src/types/local';
+import ProfileSection from 'src/components/ProfileSection';
 import Loading from 'src/components/Loading';
 
 interface IProps {
@@ -28,7 +28,16 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
       GetUserInfo: { countInfo }
     } = profileData;
     if (profileOk && user) {
-      return <ProfileSection userData={user} countData={countInfo} />;
+      return (
+        <>
+          <ProfileSection userData={user} countData={countInfo} />
+          {!ratedMoviesLoading && !movieListLoading ? (
+            <div>테스트</div>
+          ) : (
+            <Loading />
+          )}
+        </>
+      );
     }
     // 프로필이 존재하지 않을 때
     return (

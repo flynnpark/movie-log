@@ -2,40 +2,20 @@ export interface userLoginVariables {
   token: string;
 }
 
-export interface getHomeData_GetNowPlaying {
+export interface MovieItem {
   __typename: 'MovieItem';
   id: number;
   title: string;
   poster_path: string | null;
-  genre_ids: (number | null)[];
-  overview: string | null;
-  release_date: string;
-}
-
-export interface getHomeData_GetTopRated {
-  __typename: 'MovieItem';
-  id: number;
-  title: string;
-  poster_path: string | null;
-  genre_ids: (number | null)[];
-  overview: string | null;
-  release_date: string;
-}
-
-export interface getHomeData_GetPopular {
-  __typename: 'MovieItem';
-  id: number;
-  title: string;
-  poster_path: string | null;
-  genre_ids: (number | null)[];
+  genre_ids?: (number | null)[];
   overview: string | null;
   release_date: string;
 }
 
 export interface getHomeData {
-  GetNowPlaying: (getHomeData_GetNowPlaying | null)[] | null;
-  GetTopRated: (getHomeData_GetTopRated | null)[] | null;
-  GetPopular: (getHomeData_GetPopular | null)[] | null;
+  GetNowPlaying: (MovieItem | null)[] | null;
+  GetTopRated: (MovieItem | null)[] | null;
+  GetPopular: (MovieItem | null)[] | null;
 }
 
 export interface findMovie_FindMovie {

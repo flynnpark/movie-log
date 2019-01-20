@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
 import MovieCardListPresenter from './MovieCardListPresenter';
-import {
-  getHomeData_GetNowPlaying,
-  getHomeData_GetPopular,
-  getHomeData_GetTopRated,
-  findMovie_FindMovie
-} from 'src/types/local';
+import { MovieItem, findMovie_FindMovie } from 'src/types/local';
 
 interface IProps {
   title?: string;
-  movieList: Array<
-    | getHomeData_GetNowPlaying
-    | getHomeData_GetPopular
-    | getHomeData_GetTopRated
-    | findMovie_FindMovie
-    | null
-  > | null;
+  movieList: Array<MovieItem | findMovie_FindMovie | null> | null;
 }
 
 class MovieCardListContainer extends Component<IProps, any> {

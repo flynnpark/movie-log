@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
 import MovieCardPresenter from './MovieCardPresenter';
-import {
-  getHomeData_GetNowPlaying,
-  getHomeData_GetPopular,
-  getHomeData_GetTopRated,
-  findMovie_FindMovie
-} from 'src/types/local';
+import { MovieItem, findMovie_FindMovie } from 'src/types/local';
 
 class MovieCardContainer extends Component<
-  | getHomeData_GetNowPlaying
-  | getHomeData_GetPopular
-  | getHomeData_GetTopRated
-  | findMovie_FindMovie,
+  MovieItem | findMovie_FindMovie,
   any
 > {
   public render() {
