@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import MovieCard from 'src/components/MovieCard';
-import { MovieItem, findMovie_FindMovie } from 'src/types/local';
+import { MovieItem } from 'src/types/local';
 
 const MovieCardContainer = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const MovieListTitle = styled.h1`
 
 interface IProps {
   title?: string;
-  movieList?: Array<MovieItem | findMovie_FindMovie | null> | null;
+  movieList?: Array<MovieItem | null> | null;
 }
 
 const MovieCardListPresenter: React.FunctionComponent<IProps> = ({

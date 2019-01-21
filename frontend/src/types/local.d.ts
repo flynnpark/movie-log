@@ -18,17 +18,8 @@ export interface getHomeData {
   GetPopular: (MovieItem | null)[] | null;
 }
 
-export interface findMovie_FindMovie {
-  __typename: 'MovieItem';
-  id: number;
-  title: string;
-  poster_path: string | null;
-  genre_ids: (number | null)[];
-  release_date: string;
-}
-
 export interface findMovie {
-  FindMovie: (findMovie_FindMovie | null)[] | null;
+  FindMovie: (MovieItem | null)[] | null;
 }
 
 export interface findMovieVariables {
@@ -69,19 +60,11 @@ export interface getMovieDetailVariables {
   movieId: number;
 }
 
-export interface getMovieList_GetMovieList_movieList {
-  id: number;
-  title: string;
-  poster_path: string;
-  adult: boolean;
-  release_date: string;
-}
-
 export interface getMovieList_GetMovieList {
   __typename: 'GetMovieListResponse';
   ok: boolean;
   error: string | null;
-  movieList: getMovieList_GetMovieList_movieList[] | null;
+  movieList: MovieItem[] | null;
 }
 
 export interface getMovieList {

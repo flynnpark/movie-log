@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import MovieCardListPresenter from './MovieCardListPresenter';
-import { MovieItem, findMovie_FindMovie } from 'src/types/local';
+import { MovieItem } from 'src/types/local';
 
 interface IProps {
   title?: string;
-  movieList: Array<MovieItem | findMovie_FindMovie | null> | null;
+  movieList: Array<MovieItem | null> | null;
 }
 
 class MovieCardListContainer extends Component<IProps, any> {
