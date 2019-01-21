@@ -13,7 +13,7 @@ const ProfileCard = styled(Card)`
 `;
 
 const NameWrapper = styled.div`
-  font-size: 24px;
+  font-size: 32px;
 `;
 
 const InfoWrapper = styled.div``;
@@ -25,6 +25,7 @@ const SimpleBioWrapper = styled.div`
 
 const MovieInfoWrapper = styled.div`
   display: flex;
+  font-size: 16px;
 `;
 
 interface IProps {

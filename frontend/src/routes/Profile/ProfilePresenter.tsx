@@ -3,6 +3,7 @@ import { Alert } from 'antd';
 import { getProfileData, getRatedMovies } from 'src/types/api';
 import { getMovieList } from 'src/types/local';
 import ProfileSection from 'src/components/ProfileSection';
+import MovieCardList from 'src/components/MovieCardList';
 import Loading from 'src/components/Loading';
 
 interface IProps {
@@ -31,8 +32,15 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
       return (
         <>
           <ProfileSection userData={user} countData={countInfo} />
-          {!ratedMoviesLoading && !movieListLoading ? (
-            <div>테스트</div>
+          {!ratedMoviesLoading &&
+          !movieListLoading &&
+          movieListData &&
+          movieListData.GetMovieList &&
+          movieListData.GetMovieList.movieList ? (
+            <MovieCardList
+              title="본 영화"
+              movieList={movieListData.GetMovieList.movieList}
+            />
           ) : (
             <Loading />
           )}
