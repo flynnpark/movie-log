@@ -1,7 +1,13 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import styled from 'styled-components';
 import MovieCardList from 'src/components/MovieCardList';
 import { getHomeData } from 'src/types/local';
+
+const MovieListTitle = styled.h1`
+  font-size: 32px;
+  margin-bottom: 25px;
+`;
 
 interface IProps {
   data: getHomeData | undefined;
@@ -19,13 +25,22 @@ const HomePresenter: React.FunctionComponent<IProps> = ({ data }) => {
           <title>Home | Movie-log</title>
         </Helmet>
         {nowPlayingList && (
-          <MovieCardList title="현재 상영작" movieList={nowPlayingList} />
+          <MovieCardList
+            title={<MovieListTitle>현재 상영</MovieListTitle>}
+            movieList={nowPlayingList}
+          />
         )}
         {popularList && (
-          <MovieCardList title="인기작" movieList={popularList} />
+          <MovieCardList
+            title={<MovieListTitle>인기작</MovieListTitle>}
+            movieList={popularList}
+          />
         )}
         {topRatedList && (
-          <MovieCardList title="최고 순위" movieList={topRatedList} />
+          <MovieCardList
+            title={<MovieListTitle>최고 순위</MovieListTitle>}
+            movieList={topRatedList}
+          />
         )}
       </>
     );

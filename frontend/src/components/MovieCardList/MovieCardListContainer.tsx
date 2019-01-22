@@ -3,8 +3,8 @@ import MovieCardListPresenter from './MovieCardListPresenter';
 import { MovieItem } from 'src/types/local';
 
 interface IProps {
-  title?: string;
-  movieList: Array<MovieItem | null> | null;
+  title?: React.ReactNode;
+  movieList: MovieItem[] | null;
 }
 
 class MovieCardListContainer extends Component<IProps, any> {

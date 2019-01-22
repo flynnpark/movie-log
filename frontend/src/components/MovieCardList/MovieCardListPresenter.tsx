@@ -10,14 +10,9 @@ const MovieCardContainer = styled.div`
   margin: -10px -10px 30px -10px;
 `;
 
-const MovieListTitle = styled.h1`
-  font-size: 32px;
-  margin-bottom: 25px;
-`;
-
 interface IProps {
-  title?: string;
-  movieList?: Array<MovieItem | null> | null;
+  title?: React.ReactNode;
+  movieList?: MovieItem[] | null;
 }
 
 const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
@@ -25,7 +20,7 @@ const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
   movieList
 }) => (
   <React.Fragment>
-    {title && <MovieListTitle>{title}</MovieListTitle>}
+    {title && title}
     <MovieCardContainer>
       {movieList &&
         movieList.map(

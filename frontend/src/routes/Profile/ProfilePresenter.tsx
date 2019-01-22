@@ -1,10 +1,16 @@
 import React, { FunctionComponent } from 'react';
+import styled from 'styled-components';
 import { Alert } from 'antd';
 import { getProfileData, getRatedMovies } from 'src/types/api';
 import { getMovieList } from 'src/types/local';
 import ProfileSection from 'src/components/ProfileSection';
 import MovieCardList from 'src/components/MovieCardList';
 import Loading from 'src/components/Loading';
+
+const MovieListTitle = styled.h1`
+  font-size: 20px;
+  margin-bottom: 14px;
+`;
 
 interface IProps {
   profileData: getProfileData | undefined;
@@ -38,7 +44,7 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
           movieListData.GetMovieList &&
           movieListData.GetMovieList.movieList ? (
             <MovieCardList
-              title="본 영화"
+              title={<MovieListTitle>시청한 영화</MovieListTitle>}
               movieList={movieListData.GetMovieList.movieList}
             />
           ) : (
