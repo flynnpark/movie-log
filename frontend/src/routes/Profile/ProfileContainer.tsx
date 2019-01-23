@@ -34,7 +34,11 @@ class ProfileContainer extends Component<IProps, any> {
               query={GET_RATED_MOVIES}
               variables={{ userId, offset }}
             >
-              {({ data: ratedMoviesData, loading: ratedMoviesLoading }) => {
+              {({
+                data: ratedMoviesData,
+                loading: ratedMoviesLoading,
+                fetchMore
+              }) => {
                 const ratedMovieIdList: number[] = new Array();
                 if (
                   ratedMoviesData &&
@@ -63,6 +67,37 @@ class ProfileContainer extends Component<IProps, any> {
                         ratedMoviesLoading={ratedMoviesLoading}
                         movieListData={movieListData}
                         movieListLoading={movieListLoading}
+                        onLoadMore={() =>
+                          fetchMore({
+                            variables: {
+                              offset: ratedMovieIdList.length
+                            },
+                            updateQuery: (prev, { fetchMoreResult }) => {
+                              if (!fetchMoreResult) {
+                                return prev;
+                              } else {
+                                if (
+                                  ratedMoviesData &&
+                                  ratedMoviesData.GetRatedMovies.ratedMovies &&
+                                  fetchMoreResult.GetRatedMovies.ratedMovies
+                                ) {
+                                  return Object.assign({}, prev, {
+                                    GetRatedMovies: {
+                                      ...ratedMoviesData.GetRatedMovies,
+                                      ratedMovies: [
+                                        ...ratedMoviesData.GetRatedMovies
+                                          .ratedMovies,
+                                        ...fetchMoreResult.GetRatedMovies
+                                          .ratedMovies
+                                      ]
+                                    }
+                                  });
+                                }
+                              }
+                              return prev;
+                            }
+                          })
+                        }
                       />
                     )}
                   </MovieListQueries>

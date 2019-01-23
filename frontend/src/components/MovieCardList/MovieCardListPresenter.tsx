@@ -24,8 +24,8 @@ const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
     <MovieCardContainer>
       {movieList &&
         movieList.map(
-          movieInfo =>
-            movieInfo && <MovieCard key={movieInfo.id} {...movieInfo} />
+          (movieInfo, index) =>
+            movieInfo && <MovieCard key={index} {...movieInfo} />
         )}
     </MovieCardContainer>
   </React.Fragment>
