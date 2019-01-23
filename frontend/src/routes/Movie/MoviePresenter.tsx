@@ -83,7 +83,7 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
                 avatar={
                   <LeftContainer>
                     <img
-                      src={`https://image.tmdb.org/t/p/w200_and_h300_bestv2${
+                      src={`https://image.tmdb.org/t/p/w300${
                         movie.poster_path
                       }`}
                     />
