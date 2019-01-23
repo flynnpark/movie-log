@@ -40,10 +40,7 @@ class ProfileContainer extends Component<IProps, any> {
                 fetchMore
               }) => {
                 const ratedMovieIdList: number[] = new Array();
-                if (
-                  ratedMoviesData &&
-                  ratedMoviesData.GetRatedMovies.ratedMovies
-                ) {
+                if (ratedMoviesData && ratedMoviesData.GetRatedMovies) {
                   const {
                     GetRatedMovies: { ratedMovies }
                   } = ratedMoviesData;

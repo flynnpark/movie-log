@@ -1,16 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { Card } from 'antd';
 
-const MovieCard = styled(Card)`
-  width: 225px;
-  margin: 10px;
-`;
+interface IProps {
+  id: number;
+  poster: string | null;
+  title: string;
+  releaseYear: number;
+}
 
-const MovieCardPresenter = ({ id, poster, title, releaseYear }) => (
+const MovieCardPresenter: React.FunctionComponent<IProps> = ({
+  id,
+  poster,
+  title,
+  releaseYear
+}) => (
   <Link to={`/movie/${id}`}>
-    <MovieCard
+    <Card
       hoverable={true}
       cover={
         <img
@@ -20,7 +26,7 @@ const MovieCardPresenter = ({ id, poster, title, releaseYear }) => (
       }
     >
       <Card.Meta title={title} description={<div>{releaseYear}</div>} />
-    </MovieCard>
+    </Card>
   </Link>
 );
 
