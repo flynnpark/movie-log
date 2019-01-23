@@ -23,8 +23,9 @@ const resolvers: Resolvers = {
           }
           const ratedMovies = await getManager()
             .createQueryBuilder(MovieRating, 'movie_rating')
-            .select('DISTINCT("movieId")')
+            .select('"movieId", "createdAt"')
             .where('movie_rating.userId = :id', { id: userId })
+            .orderBy('"createdAt"', 'DESC')
             .limit(8)
             .offset(offset)
             .getRawMany();
