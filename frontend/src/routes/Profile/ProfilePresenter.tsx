@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import { ApolloQueryResult } from 'apollo-boost';
 import styled from 'styled-components';
 import { Alert, Button } from 'antd';
 import { getProfileData, getRatedMovies } from 'src/types/api';
@@ -6,7 +7,6 @@ import { getMovieList } from 'src/types/local';
 import ProfileSection from 'src/components/ProfileSection';
 import MovieCardList from 'src/components/MovieCardList';
 import Loading from 'src/components/Loading';
-import { ApolloQueryResult } from 'apollo-boost';
 
 const MovieListTitle = styled.h1`
   font-size: 20px;

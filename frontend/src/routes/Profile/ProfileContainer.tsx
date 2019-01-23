@@ -42,7 +42,6 @@ class ProfileContainer extends Component<IProps, any> {
                 const ratedMovieIdList: number[] = new Array();
                 if (
                   ratedMoviesData &&
-                  ratedMoviesData.GetRatedMovies &&
                   ratedMoviesData.GetRatedMovies.ratedMovies
                 ) {
                   const {
@@ -73,26 +72,23 @@ class ProfileContainer extends Component<IProps, any> {
                               offset: ratedMovieIdList.length
                             },
                             updateQuery: (prev, { fetchMoreResult }) => {
-                              if (!fetchMoreResult) {
-                                return prev;
-                              } else {
-                                if (
-                                  ratedMoviesData &&
-                                  ratedMoviesData.GetRatedMovies.ratedMovies &&
-                                  fetchMoreResult.GetRatedMovies.ratedMovies
-                                ) {
-                                  return Object.assign({}, prev, {
-                                    GetRatedMovies: {
-                                      ...ratedMoviesData.GetRatedMovies,
-                                      ratedMovies: [
-                                        ...ratedMoviesData.GetRatedMovies
-                                          .ratedMovies,
-                                        ...fetchMoreResult.GetRatedMovies
-                                          .ratedMovies
-                                      ]
-                                    }
-                                  });
-                                }
+                              if (
+                                ratedMoviesData &&
+                                ratedMoviesData.GetRatedMovies.ratedMovies &&
+                                fetchMoreResult &&
+                                fetchMoreResult.GetRatedMovies.ratedMovies
+                              ) {
+                                return Object.assign({}, prev, {
+                                  GetRatedMovies: {
+                                    ...ratedMoviesData.GetRatedMovies,
+                                    ratedMovies: [
+                                      ...ratedMoviesData.GetRatedMovies
+                                        .ratedMovies,
+                                      ...fetchMoreResult.GetRatedMovies
+                                        .ratedMovies
+                                    ]
+                                  }
+                                });
                               }
                               return prev;
                             }
