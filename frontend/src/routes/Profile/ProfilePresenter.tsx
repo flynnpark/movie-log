@@ -3,7 +3,7 @@ import { ApolloQueryResult } from 'apollo-boost';
 import styled from 'styled-components';
 import { Alert, Button } from 'antd';
 import { getProfileData, getRatedMovies } from 'src/types/api';
-import { getMovieList } from 'src/types/local';
+import { getMovieList, MovieItem } from 'src/types/local';
 import ProfileSection from 'src/components/ProfileSection';
 import MovieCardList from 'src/components/MovieCardList';
 import Loading from 'src/components/Loading';
@@ -37,25 +37,28 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
       GetUserProfile: { ok: profileOk, user },
       GetUserInfo: { countInfo }
     } = profileData;
+    let movieList: MovieItem[] | null = null;
+    if (
+      movieListData &&
+      movieListData.GetMovieList &&
+      movieListData.GetMovieList.movieList
+    ) {
+      movieList = movieListData.GetMovieList.movieList;
+    }
     if (profileOk && user) {
       return (
         <>
           <ProfileSection userData={user} countData={countInfo} />
-          {!ratedMoviesLoading &&
-          !movieListLoading &&
-          movieListData &&
-          movieListData.GetMovieList &&
-          movieListData.GetMovieList.movieList ? (
+          {
             <>
               <MovieCardList
+                loading={ratedMoviesLoading || movieListLoading}
                 title={<MovieListTitle>시청한 영화</MovieListTitle>}
-                movieList={movieListData.GetMovieList.movieList}
+                movieList={movieList}
               />
               <Button onClick={onLoadMore}>더 불러오기</Button>
             </>
-          ) : (
-            <Loading />
-          )}
+          }
         </>
       );
     }
