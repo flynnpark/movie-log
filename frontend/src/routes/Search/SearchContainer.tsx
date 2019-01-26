@@ -4,7 +4,6 @@ import { Query } from 'react-apollo';
 import { findMovie } from 'src/types/local';
 import SearchPresenter from './SearchPresenter';
 import { FIND_MOVIE } from './SearchQueries.local';
-import Loading from 'src/components/Loading';
 
 class FindMovieQueries extends Query<findMovie> {}
 
@@ -24,13 +23,7 @@ class SearchContainer extends Component<IProps> {
       return (
         <FindMovieQueries query={FIND_MOVIE} variables={{ query }}>
           {({ data, loading }) => (
-            <>
-              {loading ? (
-                <Loading />
-              ) : (
-                <SearchPresenter query={query} data={data} />
-              )}
-            </>
+            <SearchPresenter loading={loading} query={query} data={data} />
           )}
         </FindMovieQueries>
       );
