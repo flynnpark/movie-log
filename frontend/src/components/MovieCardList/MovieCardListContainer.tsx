@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
-import MovieCardListPresenter from './MovieCardListPresenter';
 import { MovieItem } from 'src/types/local';
+import MovieCardListPresenter from './MovieCardListPresenter';
 
 interface IProps {
+  loading: boolean;
   title?: React.ReactNode;
   movieList: MovieItem[] | null;
 }
 
 class MovieCardListContainer extends Component<IProps, any> {
   public render() {
-    const { title, movieList } = this.props;
+    const { loading, title, movieList } = this.props;
     return (
-      movieList && <MovieCardListPresenter title={title} {...this.props} />
+      <MovieCardListPresenter
+        title={title}
+        loading={loading}
+        movieList={movieList}
+      />
     );
   }
 }
