@@ -145,8 +145,8 @@ const client = new ApolloClient({
           _: null | undefined,
           { movieIdList }: getMovieListVariables
         ) => {
-          const movieList = new Array();
-          if (movieIdList) {
+          if (movieIdList && movieIdList.length > 0) {
+            const movieList = new Array();
             for (const movieId of movieIdList) {
               const movieInfo = await getMovieDetail(movieId);
               movieList.push(movieInfo);
@@ -162,7 +162,7 @@ const client = new ApolloClient({
             __typename: 'GetMovieListResponse',
             ok: false,
             error: 'Movie ID List is null',
-            movieList
+            movieList: null
           };
         }
       }
