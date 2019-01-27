@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Query } from 'react-apollo';
+import { ApolloQueryResult, OperationVariables } from 'apollo-boost';
 import { getProfileData, getRatedMovies } from 'src/types/api';
 import { GET_PROFILE_DATA, GET_RATED_MOVIES } from './ProfileQueries';
 import ProfilePresenter from './ProfilePresenter';
@@ -20,6 +21,16 @@ class MovieListQueries extends Query<getMovieList> {}
 class RatedMoviesQueries extends Query<getRatedMovies> {}
 
 class ProfileContainer extends Component<IProps, any> {
+  private refetchRatedMovies: (
+    variables?: OperationVariables | undefined
+  ) => Promise<ApolloQueryResult<getRatedMovies>>;
+
+  public componentDidMount() {
+    if (this.refetchRatedMovies) {
+      this.refetchRatedMovies();
+    }
+  }
+
   public render() {
     const { match } = this.props;
     if (match) {
@@ -37,8 +48,10 @@ class ProfileContainer extends Component<IProps, any> {
               {({
                 data: ratedMoviesData,
                 loading: ratedMoviesLoading,
-                fetchMore
+                fetchMore,
+                refetch
               }) => {
+                this.refetchRatedMovies = refetch;
                 const ratedMovieIdList: number[] = new Array();
                 if (ratedMoviesData && ratedMoviesData.GetRatedMovies) {
                   const {

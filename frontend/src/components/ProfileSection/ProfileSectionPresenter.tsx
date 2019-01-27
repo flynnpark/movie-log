@@ -12,6 +12,10 @@ const ProfileCard = styled(Card)`
   margin-bottom: 20px;
 `;
 
+const AvatarWrapper = styled.div`
+  margin-right: 24px;
+`;
+
 const NameWrapper = styled.div`
   font-size: 32px;
 `;
@@ -40,11 +44,13 @@ const ProfileSectionPresenter: React.FunctionComponent<IProps> = ({
   <ProfileCard>
     <Card.Meta
       avatar={
-        avatar ? (
-          <Avatar size={128} src={avatar} />
-        ) : (
-          <Avatar size={128} icon="user" />
-        )
+        <AvatarWrapper>
+          {avatar ? (
+            <Avatar size={128} src={avatar} />
+          ) : (
+            <Avatar size={128} icon="user" />
+          )}
+        </AvatarWrapper>
       }
       title={<NameWrapper>{name}</NameWrapper>}
       description={
