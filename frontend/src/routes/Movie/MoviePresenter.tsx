@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Alert, Card } from 'antd';
+import { Alert, Card, Divider } from 'antd';
 import MovieRating from 'src/components/MovieRating';
 import { getMovieDetail } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
@@ -36,7 +36,7 @@ const OriginTitle = styled.div`
   line-height: 110%;
   color: #8c8c8c;
   white-space: pre-wrap;
-  margin-top: 16px;
+  margin-top: 8px;
 `;
 
 const Tagline = styled.div`
@@ -122,6 +122,7 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
                 }
               />
             </MovieInfoCard>
+            <Divider />
           </MovieInfoContinaer>
         </>
       ) : (

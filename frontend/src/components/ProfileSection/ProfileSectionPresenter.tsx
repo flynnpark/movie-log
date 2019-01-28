@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Avatar } from 'antd';
+import { Card, Avatar, Statistic } from 'antd';
 import {
   getProfileData_GetUserProfile_user,
   getProfileData_GetUserInfo_countInfo
@@ -32,6 +32,13 @@ const MovieInfoWrapper = styled.div`
   font-size: 16px;
 `;
 
+const SmallStatistic = styled(Statistic)`
+  margin-right: 16px;
+  :last-child {
+    margin-right: 0;
+  }
+`;
+
 interface IProps {
   userData: getProfileData_GetUserProfile_user;
   countData: getProfileData_GetUserInfo_countInfo | null;
@@ -59,8 +66,16 @@ const ProfileSectionPresenter: React.FunctionComponent<IProps> = ({
           <MovieInfoWrapper>
             {countData && (
               <>
-                시청한 영화 {countData.watchedMovieCount}개, 평가한 횟수{' '}
-                {countData.movieRatingCount}개
+                <SmallStatistic
+                  title="시청한 영화"
+                  value={countData.watchedMovieCount}
+                  suffix="작품"
+                />
+                <SmallStatistic
+                  title="평가한 횟수"
+                  value={countData.movieRatingCount}
+                  suffix="번"
+                />
               </>
             )}
           </MovieInfoWrapper>
