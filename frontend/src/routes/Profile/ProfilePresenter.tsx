@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { ApolloQueryResult } from 'apollo-boost';
 import styled from 'styled-components';
-import { Alert, Button } from 'antd';
+import { Alert, Divider, BackTop } from 'antd';
 import { getProfileData, getRatedMovies } from 'src/types/api';
 import { getMovieList, MovieItem } from 'src/types/local';
 import ProfileSection from 'src/components/ProfileSection';
@@ -48,6 +48,7 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
     if (profileOk && user) {
       return (
         <>
+          <BackTop />
           <ProfileSection userData={user} countData={countInfo} />
           {
             <>
@@ -56,7 +57,9 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
                 title={<MovieListTitle>시청한 영화</MovieListTitle>}
                 movieList={movieList}
               />
-              <Button onClick={onLoadMore}>더 불러오기</Button>
+              <Divider>
+                <a onClick={onLoadMore}>더 불러오기</a>
+              </Divider>
             </>
           }
         </>
