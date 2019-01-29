@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment-timezone';
-import { DatePicker, Button, Rate } from 'antd';
+import { DatePicker, Button, Rate, Popconfirm } from 'antd';
 
 const MovieRatingContainer = styled.div`
   display: flex;
@@ -126,12 +126,9 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
           </DateContainer>
         </DateWrapper>
         <ButtonWrapper>
-          <Button
-            type="dashed"
-            shape="circle"
-            icon="delete"
-            onClick={removeMovieRating}
-          />
+          <Popconfirm title="이 점수를 지울까요?" onConfirm={removeMovieRating}>
+            <Button type="dashed" shape="circle" icon="delete" />
+          </Popconfirm>
         </ButtonWrapper>
       </>
     )}
