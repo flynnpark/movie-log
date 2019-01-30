@@ -12,7 +12,7 @@ const resolvers: Resolvers = {
     ) => {
       const { movieId, limit } = args;
       const { user } = req;
-      const take = limit ? limit : 5;
+      const take = limit ? limit : 3;
       const movieRatings = await MovieRating.find({
         where: { movieId, userId: user.id },
         take,
