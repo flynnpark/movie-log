@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from 'react';
+import Helmet from 'react-helmet';
 import { ApolloQueryResult } from 'apollo-boost';
 import styled from 'styled-components';
 import { Alert, Divider, BackTop } from 'antd';
@@ -48,6 +49,9 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
     if (profileOk && user) {
       return (
         <>
+          <Helmet>
+            <title>'{user.name}'님의 프로필</title>
+          </Helmet>
           <BackTop />
           <ProfileSection userData={user} countData={countInfo} />
           {
