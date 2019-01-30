@@ -14,6 +14,10 @@ const MovieListTitle = styled.h1`
   margin-bottom: 14px;
 `;
 
+const DividerWrapper = styled.div`
+  margin-bottom: 30px;
+`;
+
 interface IProps {
   profileData: getProfileData | undefined;
   profileLoading: boolean;
@@ -61,9 +65,11 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
                 title={<MovieListTitle>시청한 영화</MovieListTitle>}
                 movieList={movieList}
               />
-              <Divider>
-                <a onClick={onLoadMore}>더 불러오기</a>
-              </Divider>
+              <DividerWrapper>
+                <Divider>
+                  <a onClick={onLoadMore}>더 불러오기</a>
+                </Divider>
+              </DividerWrapper>
             </>
           }
         </>

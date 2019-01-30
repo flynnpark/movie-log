@@ -44,11 +44,12 @@ const OriginTitle = styled.div`
 const Tagline = styled.div`
   display: flex;
   color: #262626;
+  font-size: 18px;
   margin-top: 16px;
 `;
 
 const GenreWrapper = styled.div`
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 14px;
 `;
 
