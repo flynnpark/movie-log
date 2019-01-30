@@ -79,7 +79,7 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
     {handleClickRating && handleClickWatchDate && setMovieRating ? (
       <>
         <RatingWrapper>
-          <RatingTitle>평가해주세요</RatingTitle>
+          <RatingTitle>영화는 어땠나요?</RatingTitle>
           <StarButtonContainer>
             <Rate
               allowHalf={true}

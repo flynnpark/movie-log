@@ -8,7 +8,9 @@ import { getMovieRatings } from 'src/types/api';
 
 const MovieInfoContinaer = styled.div`
   background-color: #fff;
-  padding: 24px;
+  padding: 36px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px #e8e8e8;
 `;
 
 const MovieInfoCard = styled(Card)`
@@ -36,7 +38,7 @@ const OriginTitle = styled.div`
   line-height: 110%;
   color: #8c8c8c;
   white-space: pre-wrap;
-  margin-top: 8px;
+  margin-top: 4px;
 `;
 
 const Tagline = styled.div`
