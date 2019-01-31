@@ -16,6 +16,7 @@ import Profile from '../../routes/Profile';
 import Search from '../../routes/Search';
 import Movie from '../../routes/Movie';
 import Navigation from '../Navigation';
+import Footer from '../Footer';
 
 const FixedHeader = styled(Layout.Header)`
   position: fixed;
@@ -73,6 +74,9 @@ const LoggedInRoutes: React.FunctionComponent<ILoggedInRoutesProps> = props => (
         <Redirect from={'*'} to={'/'} />
       </Switch>
     </Content>
+    <Layout.Footer>
+      <Footer />
+    </Layout.Footer>
   </Layout>
 );
 
