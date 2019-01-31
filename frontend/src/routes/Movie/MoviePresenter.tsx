@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Alert, Card, Divider } from 'antd';
+import { Alert, Card } from 'antd';
 import MovieRating from 'src/components/MovieRating';
 import { getMovieDetail } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
@@ -25,14 +25,14 @@ const LeftContainer = styled.div`
 
 const TitleContainer = styled.div``;
 
-const Title = styled.div`
+const Title = styled.h1`
   display: flex;
   font-size: 42px;
   line-height: 110%;
   white-space: pre-wrap;
 `;
 
-const OriginTitle = styled.div`
+const OriginTitle = styled.h2`
   display: flex;
   font-size: 24px;
   line-height: 110%;
@@ -49,7 +49,7 @@ const Tagline = styled.div`
 `;
 
 const GenreWrapper = styled.div`
-  font-size: 18px;
+  font-size: 16px;
   margin-top: 14px;
 `;
 
@@ -125,7 +125,9 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
                 }
               />
             </MovieInfoCard>
-            <Divider />
+            <Card>
+              <Card.Meta title={'기본 정보'} description={movie.overview} />
+            </Card>
           </MovieInfoContinaer>
         </>
       ) : (
