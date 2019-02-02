@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
 import MovieHeaderPresenter from './MovieHeaderPresenter';
 import { getMovieDetail_GetMovieDetail_movie } from 'src/types/local';
+import { getMovieRatings } from 'src/types/api';
 
-class MovieHeaderContainer extends Component<
-  getMovieDetail_GetMovieDetail_movie,
-  any
-> {
+interface IProps {
+  movie: getMovieDetail_GetMovieDetail_movie;
+  ratingData: getMovieRatings | undefined;
+  handleMovieRatingApply: (rating: number, watchDate: string) => void;
+  handleMovieRatingRemove: (id: number) => void;
+}
+
+class MovieHeaderContainer extends Component<IProps, any> {
   public render() {
-    console.log(this.props);
-    return <MovieHeaderPresenter />;
+    const {
+      movie,
+      ratingData,
+      handleMovieRatingApply,
+      handleMovieRatingRemove
+    } = this.props;
+    return (
+      <MovieHeaderPresenter
+        movie={movie}
+        ratingData={ratingData}
+        handleMovieRatingApply={handleMovieRatingApply}
+        handleMovieRatingRemove={handleMovieRatingRemove}
+      />
+    );
   }
 }
 

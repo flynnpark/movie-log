@@ -2,6 +2,8 @@ import React from 'react';
 import { Card, Divider } from 'antd';
 import styled from 'styled-components';
 import MovieRating from 'src/components/MovieRating';
+import { getMovieDetail_GetMovieDetail_movie } from 'src/types/local';
+import { getMovieRatings } from 'src/types/api';
 
 const MovieInfoContinaer = styled.div`
   background-color: #fff;
@@ -54,12 +56,19 @@ const CardBodyStyle = {
   padding: 0
 };
 
-const MovieHeaderPresenter = (
+interface IProps {
+  movie: getMovieDetail_GetMovieDetail_movie;
+  ratingData: getMovieRatings | undefined;
+  handleMovieRatingApply: (rating: number, watchDate: string) => void;
+  handleMovieRatingRemove: (id: number) => void;
+}
+
+const MovieHeaderPresenter: React.FunctionComponent<IProps> = ({
   movie,
   ratingData,
   handleMovieRatingApply,
   handleMovieRatingRemove
-) => (
+}) => (
   <MovieInfoContinaer>
     <MovieInfoCard bodyStyle={CardBodyStyle}>
       <Card.Meta
