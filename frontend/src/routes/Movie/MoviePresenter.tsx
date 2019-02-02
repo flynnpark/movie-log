@@ -1,7 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Alert, Card } from 'antd';
+import { Alert, Card, Divider } from 'antd';
 import MovieRating from 'src/components/MovieRating';
 import { getMovieDetail } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
@@ -102,9 +102,11 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
                 description={
                   <React.Fragment>
                     <GenreWrapper>
+                      {new Date(movie.release_date).getFullYear()}
+                      {' · '}
                       {movie.genres.map(genre => genre && genre.name).join(' ')}
                     </GenreWrapper>
-                    <div>{movie.release_date.replace(/-/gi, '. ')}</div>
+                    <Divider />
                     <MovieRating
                       handleMovieRatingApply={handleMovieRatingApply}
                     />

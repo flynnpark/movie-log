@@ -15,7 +15,7 @@ class MovieCardContainer extends Component<MovieItem, any> {
     );
   }
 
-  private getReleasedYear = (releaseDateStr: string) => {
+  private getReleasedYear = (releaseDateStr: string): number => {
     const releaseDate = new Date(releaseDateStr);
     return releaseDate.getFullYear();
   };
