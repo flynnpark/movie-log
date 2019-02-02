@@ -21,11 +21,17 @@ class MovieListQueries extends Query<getMovieList> {}
 class RatedMoviesQueries extends Query<getRatedMovies> {}
 
 class ProfileContainer extends Component<IProps, any> {
+  private refetchProfile: (
+    variables?: OperationVariables | undefined
+  ) => Promise<ApolloQueryResult<getProfileData>>;
   private refetchRatedMovies: (
     variables?: OperationVariables | undefined
   ) => Promise<ApolloQueryResult<getRatedMovies>>;
 
   public componentDidMount() {
+    if (this.refetchProfile) {
+      this.refetchProfile();
+    }
     if (this.refetchRatedMovies) {
       this.refetchRatedMovies();
     }
@@ -40,77 +46,84 @@ class ProfileContainer extends Component<IProps, any> {
       const offset = 0;
       return (
         <ProfileQueries query={GET_PROFILE_DATA} variables={{ userId }}>
-          {({ data: profileData, loading: profileLoading }) => (
-            <RatedMoviesQueries
-              query={GET_RATED_MOVIES}
-              variables={{ userId, offset }}
-            >
-              {({
-                data: ratedMoviesData,
-                loading: ratedMoviesLoading,
-                fetchMore,
-                refetch
-              }) => {
-                this.refetchRatedMovies = refetch;
-                const ratedMovieIdList: number[] = new Array();
-                if (ratedMoviesData && ratedMoviesData.GetRatedMovies) {
-                  const {
-                    GetRatedMovies: { ratedMovies }
-                  } = ratedMoviesData;
-                  if (ratedMovies) {
-                    ratedMovies.forEach(ratedMovie => {
-                      ratedMovieIdList.push(ratedMovie.movieId);
-                    });
+          {({
+            data: profileData,
+            loading: profileLoading,
+            refetch: refetchProfile
+          }) => {
+            this.refetchProfile = refetchProfile;
+            return (
+              <RatedMoviesQueries
+                query={GET_RATED_MOVIES}
+                variables={{ userId, offset }}
+              >
+                {({
+                  data: ratedMoviesData,
+                  loading: ratedMoviesLoading,
+                  fetchMore,
+                  refetch: refetchRatedMovies
+                }) => {
+                  this.refetchRatedMovies = refetchRatedMovies;
+                  const ratedMovieIdList: number[] = new Array();
+                  if (ratedMoviesData && ratedMoviesData.GetRatedMovies) {
+                    const {
+                      GetRatedMovies: { ratedMovies }
+                    } = ratedMoviesData;
+                    if (ratedMovies) {
+                      ratedMovies.forEach(ratedMovie => {
+                        ratedMovieIdList.push(ratedMovie.movieId);
+                      });
+                    }
                   }
-                }
-                return (
-                  <MovieListQueries
-                    query={GET_MOVIE_LIST}
-                    variables={{ movieIdList: ratedMovieIdList }}
-                  >
-                    {({ data: movieListData, loading: movieListLoading }) => (
-                      <ProfilePresenter
-                        profileData={profileData}
-                        profileLoading={profileLoading}
-                        ratedMovieData={ratedMoviesData}
-                        ratedMoviesLoading={ratedMoviesLoading}
-                        movieListData={movieListData}
-                        movieListLoading={movieListLoading}
-                        onLoadMore={() =>
-                          fetchMore({
-                            variables: {
-                              offset: ratedMovieIdList.length
-                            },
-                            updateQuery: (prev, { fetchMoreResult }) => {
-                              if (
-                                ratedMoviesData &&
-                                ratedMoviesData.GetRatedMovies.ratedMovies &&
-                                fetchMoreResult &&
-                                fetchMoreResult.GetRatedMovies.ratedMovies
-                              ) {
-                                return Object.assign({}, prev, {
-                                  GetRatedMovies: {
-                                    ...ratedMoviesData.GetRatedMovies,
-                                    ratedMovies: [
-                                      ...ratedMoviesData.GetRatedMovies
-                                        .ratedMovies,
-                                      ...fetchMoreResult.GetRatedMovies
-                                        .ratedMovies
-                                    ]
-                                  }
-                                });
+                  return (
+                    <MovieListQueries
+                      query={GET_MOVIE_LIST}
+                      variables={{ movieIdList: ratedMovieIdList }}
+                    >
+                      {({ data: movieListData, loading: movieListLoading }) => (
+                        <ProfilePresenter
+                          profileData={profileData}
+                          profileLoading={profileLoading}
+                          ratedMovieData={ratedMoviesData}
+                          ratedMoviesLoading={ratedMoviesLoading}
+                          movieListData={movieListData}
+                          movieListLoading={movieListLoading}
+                          onLoadMore={() =>
+                            fetchMore({
+                              variables: {
+                                offset: ratedMovieIdList.length
+                              },
+                              updateQuery: (prev, { fetchMoreResult }) => {
+                                if (
+                                  ratedMoviesData &&
+                                  ratedMoviesData.GetRatedMovies.ratedMovies &&
+                                  fetchMoreResult &&
+                                  fetchMoreResult.GetRatedMovies.ratedMovies
+                                ) {
+                                  return Object.assign({}, prev, {
+                                    GetRatedMovies: {
+                                      ...ratedMoviesData.GetRatedMovies,
+                                      ratedMovies: [
+                                        ...ratedMoviesData.GetRatedMovies
+                                          .ratedMovies,
+                                        ...fetchMoreResult.GetRatedMovies
+                                          .ratedMovies
+                                      ]
+                                    }
+                                  });
+                                }
+                                return prev;
                               }
-                              return prev;
-                            }
-                          })
-                        }
-                      />
-                    )}
-                  </MovieListQueries>
-                );
-              }}
-            </RatedMoviesQueries>
-          )}
+                            })
+                          }
+                        />
+                      )}
+                    </MovieListQueries>
+                  );
+                }}
+              </RatedMoviesQueries>
+            );
+          }}
         </ProfileQueries>
       );
     }
