@@ -13,13 +13,13 @@ export interface MovieItem {
 }
 
 export interface getHomeData {
-  GetNowPlaying: MovieItem[] | null;
-  GetTopRated: MovieItem[] | null;
-  GetPopular: MovieItem[] | null;
+  GetNowPlaying: MovieItem[];
+  GetTopRated: MovieItem[];
+  GetPopular: MovieItem[];
 }
 
 export interface findMovie {
-  FindMovie: MovieItem[] | null;
+  FindMovie: MovieItem[];
 }
 
 export interface findMovieVariables {
@@ -64,7 +64,7 @@ export interface getMovieList_GetMovieList {
   __typename: 'GetMovieListResponse';
   ok: boolean;
   error: string | null;
-  movieList: MovieItem[] | null;
+  movieList: MovieItem[];
 }
 
 export interface getMovieList {

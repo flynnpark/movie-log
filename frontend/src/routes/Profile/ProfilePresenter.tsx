@@ -31,7 +31,6 @@ interface IProps {
 const ProfilePresenter: FunctionComponent<IProps> = ({
   profileData,
   profileLoading,
-  ratedMovieData,
   ratedMoviesLoading,
   movieListData,
   movieListLoading,
@@ -42,7 +41,7 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
       GetUserProfile: { ok: profileOk, user },
       GetUserInfo: { countInfo }
     } = profileData;
-    let movieList: MovieItem[] | null = null;
+    let movieList: MovieItem[] = new Array<MovieItem>();
     if (
       movieListData &&
       movieListData.GetMovieList &&

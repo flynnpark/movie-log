@@ -5,7 +5,7 @@ import MovieCardListPresenter from './MovieCardListPresenter';
 interface IProps {
   loading: boolean;
   title?: React.ReactNode;
-  movieList: MovieItem[] | null;
+  movieList: MovieItem[];
 }
 
 class MovieCardListContainer extends Component<IProps, any> {

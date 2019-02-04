@@ -12,7 +12,7 @@ const MovieCardContainer = styled.div`
 interface IProps {
   loading: boolean;
   title?: React.ReactNode;
-  movieList?: MovieItem[] | null;
+  movieList?: MovieItem[];
 }
 
 const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
