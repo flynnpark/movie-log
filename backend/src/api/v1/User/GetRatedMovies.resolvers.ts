@@ -29,7 +29,7 @@ const resolvers: Resolvers = {
             .limit(8)
             .offset(offset)
             .getRawMany();
-          if (ratedMovies.length === 0) {
+          if (!ratedMovies || ratedMovies.length === 0) {
             return {
               ok: false,
               error: 'No movies anymore',
