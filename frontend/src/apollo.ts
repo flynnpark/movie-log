@@ -154,7 +154,7 @@ const client = new ApolloClient({
             return {
               __typename: 'GetMovieListResponse',
               ok: true,
-              error: 'Movie ID List is null',
+              error: null,
               movieList
             };
           }
