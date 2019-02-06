@@ -64,11 +64,13 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
                 title={<MovieListTitle>시청한 영화</MovieListTitle>}
                 movieList={movieList}
               />
-              <DividerWrapper>
-                <Divider>
-                  <a onClick={onLoadMore}>더 불러오기</a>
-                </Divider>
-              </DividerWrapper>
+              {countInfo && countInfo.movieRatingCount > movieList.length && (
+                <DividerWrapper>
+                  <Divider>
+                    <a onClick={onLoadMore}>더 불러오기</a>
+                  </Divider>
+                </DividerWrapper>
+              )}
             </>
           }
         </>
