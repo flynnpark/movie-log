@@ -1,16 +1,9 @@
 import React from 'react';
 import { Card, Divider } from 'antd';
 import styled from 'styled-components';
-import MovieRating from 'src/components/MovieRating';
 import { getMovieDetail_GetMovieDetail_movie } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
-
-const MovieInfoContinaer = styled.div`
-  background-color: #fff;
-  padding: 36px;
-  border-radius: 4px;
-  box-shadow: 0 1px 4px #e8e8e8;
-`;
+import MovieRating from 'src/components/MovieRating';
 
 const MovieInfoCard = styled(Card)`
   background-color: transparent;
@@ -69,48 +62,46 @@ const MovieHeaderPresenter: React.FunctionComponent<IProps> = ({
   handleMovieRatingApply,
   handleMovieRatingRemove
 }) => (
-  <MovieInfoContinaer>
-    <MovieInfoCard bodyStyle={CardBodyStyle}>
-      <Card.Meta
-        avatar={
-          <LeftContainer>
-            <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} />
-          </LeftContainer>
-        }
-        title={
-          <TitleContainer>
-            <Title>{movie.title}</Title>
-            <OriginTitle>{movie.original_title}</OriginTitle>
-            {movie.tagline && <Tagline>{movie.tagline}</Tagline>}
-          </TitleContainer>
-        }
-        description={
-          <React.Fragment>
-            <GenreWrapper>
-              {new Date(movie.release_date).getFullYear()}
-              {' · '}
-              {movie.genres.map(genre => genre && genre.name).join(' ')}
-            </GenreWrapper>
-            <Divider />
-            <MovieRating handleMovieRatingApply={handleMovieRatingApply} />
-            {ratingData &&
-              ratingData.GetMovieRatings.ok &&
-              ratingData.GetMovieRatings.movieRatings &&
-              ratingData.GetMovieRatings.movieRatings.map(
-                movieRating =>
-                  movieRating && (
-                    <MovieRating
-                      key={movieRating.id}
-                      movieRating={movieRating}
-                      handleMovieRatingRemove={handleMovieRatingRemove}
-                    />
-                  )
-              )}
-          </React.Fragment>
-        }
-      />
-    </MovieInfoCard>
-  </MovieInfoContinaer>
+  <MovieInfoCard bodyStyle={CardBodyStyle}>
+    <Card.Meta
+      avatar={
+        <LeftContainer>
+          <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} />
+        </LeftContainer>
+      }
+      title={
+        <TitleContainer>
+          <Title>{movie.title}</Title>
+          <OriginTitle>{movie.original_title}</OriginTitle>
+          {movie.tagline && <Tagline>{movie.tagline}</Tagline>}
+        </TitleContainer>
+      }
+      description={
+        <React.Fragment>
+          <GenreWrapper>
+            {new Date(movie.release_date).getFullYear()}
+            {' · '}
+            {movie.genres.map(genre => genre && genre.name).join(' ')}
+          </GenreWrapper>
+          <Divider />
+          <MovieRating handleMovieRatingApply={handleMovieRatingApply} />
+          {ratingData &&
+            ratingData.GetMovieRatings.ok &&
+            ratingData.GetMovieRatings.movieRatings &&
+            ratingData.GetMovieRatings.movieRatings.map(
+              movieRating =>
+                movieRating && (
+                  <MovieRating
+                    key={movieRating.id}
+                    movieRating={movieRating}
+                    handleMovieRatingRemove={handleMovieRatingRemove}
+                  />
+                )
+            )}
+        </React.Fragment>
+      }
+    />
+  </MovieInfoCard>
 );
 
 export default MovieHeaderPresenter;

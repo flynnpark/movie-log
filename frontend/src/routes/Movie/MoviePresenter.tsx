@@ -1,9 +1,17 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Alert } from 'antd';
+import { Alert, Divider } from 'antd';
+import styled from 'styled-components';
 import { getMovieDetail } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
 import MovieHeader from 'src/components/MovieHeader';
+
+const MovieInfoContinaer = styled.div`
+  background-color: #fff;
+  padding: 36px;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px #e8e8e8;  Z
+`;
 
 interface IProps {
   movieData: getMovieDetail;
@@ -28,20 +36,28 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
           <Helmet>
             <title>{movie.title} | Movie-log</title>
           </Helmet>
-          <MovieHeader
-            movie={movie}
-            ratingData={ratingData}
-            handleMovieRatingApply={handleMovieRatingApply}
-            handleMovieRatingRemove={handleMovieRatingRemove}
-          />
+          <MovieInfoContinaer>
+            <MovieHeader
+              movie={movie}
+              ratingData={ratingData}
+              handleMovieRatingApply={handleMovieRatingApply}
+              handleMovieRatingRemove={handleMovieRatingRemove}
+            />
+            <Divider />
+          </MovieInfoContinaer>
         </>
       ) : (
-        <Alert
-          message="Error"
-          description="해당 영화 정보를 가져올 수 없습니다."
-          type="error"
-          showIcon={true}
-        />
+        <>
+          <Helmet>
+            <title>정보가 존재하지 않습니다. | Movie-log</title>
+          </Helmet>
+          <Alert
+            message="Error"
+            description="해당 영화 정보를 가져올 수 없습니다."
+            type="error"
+            showIcon={true}
+          />
+        </>
       )}
     </>
   );
