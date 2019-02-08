@@ -10,7 +10,7 @@ const MovieInfoContinaer = styled.div`
   background-color: #fff;
   padding: 36px;
   border-radius: 4px;
-  box-shadow: 0 1px 4px #e8e8e8;  Z
+  box-shadow: 0 1px 4px #e8e8e8;
 `;
 
 interface IProps {
