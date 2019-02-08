@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { getMovieDetail } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
 import MovieHeader from 'src/components/MovieHeader';
+import MovieInfo from 'src/components/MovieInfo';
 
 const MovieInfoContinaer = styled.div`
   background-color: #fff;
@@ -44,6 +45,7 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
               handleMovieRatingRemove={handleMovieRatingRemove}
             />
             <Divider />
+            <MovieInfo movie={movie} />
           </MovieInfoContinaer>
         </>
       ) : (

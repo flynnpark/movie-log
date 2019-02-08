@@ -8,7 +8,6 @@ interface IProps {
 const MovieHeaderPresenter: React.FunctionComponent<IProps> = ({ movie }) => (
   <div>
     <p>Movie's info is here!</p>
-    <p>{movie}</p>
   </div>
 );
 
