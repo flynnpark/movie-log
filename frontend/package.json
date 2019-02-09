@@ -49,8 +49,5 @@
       "airbnb",
       "prettier"
     ]
-  },
-  "resolutions": {
-    "@types/react": "^16.7.21"
   }
 }
