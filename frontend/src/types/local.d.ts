@@ -26,8 +26,15 @@ export interface findMovieVariables {
   query: string;
 }
 
-export interface getMovieDetail_GetMovieDetail_movie_genres {
+export interface Genre {
   __typename: 'Genre';
+  id: number;
+  name: string;
+}
+
+export interface Country {
+  __typename: 'Country';
+  iso_3166_1: string;
   name: string;
 }
 
@@ -39,7 +46,10 @@ export interface getMovieDetail_GetMovieDetail_movie {
   poster_path: string | null;
   original_language: string;
   original_title: string;
-  genres: (getMovieDetail_GetMovieDetail_movie_genres | null)[];
+  production_countries: Country[];
+  homepage: string | null;
+  runtime: number | null;
+  genres: Genre[];
   adult: boolean;
   overview: string;
   release_date: string;
