@@ -9,7 +9,7 @@ const MovieInfoHeader = styled.h1`
   margin-bottom: 14px;
 `;
 
-const MovieReleasedDate = styled.div`
+const MovieInfo = styled.div`
   margin-bottom: 10px;
 `;
 
@@ -24,9 +24,10 @@ interface IProps {
 const MovieHeaderPresenter: React.FunctionComponent<IProps> = ({ movie }) => (
   <>
     <MovieInfoHeader>기본 정보</MovieInfoHeader>
-    <MovieReleasedDate>
-      개봉일 {movie.release_date.replace(/-/g, '. ')}
-    </MovieReleasedDate>
+    <MovieInfo>
+      {movie.title} {movie.original_title}
+    </MovieInfo>
+    <MovieInfo>개봉일 {movie.release_date.replace(/-/g, '. ')}</MovieInfo>
     <MovieOverview>{movie.overview}</MovieOverview>
   </>
 );
