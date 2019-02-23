@@ -26,10 +26,26 @@ export interface findMovieVariables {
   query: string;
 }
 
+export interface Collection {
+  __typename: 'Collection';
+  id: number;
+  name: string;
+  poster_path: string;
+  backdrop_path: string;
+}
+
 export interface Genre {
   __typename: 'Genre';
   id: number;
   name: string;
+}
+
+export interface Company {
+  __typename: 'Company';
+  id: number;
+  logo_path: string;
+  name: string;
+  origin_country: string;
 }
 
 export interface Country {
@@ -40,19 +56,32 @@ export interface Country {
 
 export interface getMovieDetail_GetMovieDetail_movie {
   __typename: 'Movie';
+  adult: boolean;
+  backdrop_path: string;
+  belongs_to_collection: Collection | null;
+  budget: number;
+  genres: Genre[];
+  homepage: string | null;
   id: number;
-  title: string;
-  tagline: string;
-  poster_path: string | null;
   original_language: string;
   original_title: string;
-  production_countries: Country[];
-  homepage: string | null;
-  runtime: number | null;
-  genres: Genre[];
-  adult: boolean;
   overview: string;
+  popularity: number;
+  poster_path: string | null;
+  production_companies: Company[];
+  production_countries: Country[];
   release_date: string;
+  revenue: number;
+  runtime: number | null;
+  status:
+    | 'Rumored'
+    | 'Planned'
+    | 'In Production'
+    | 'Post Production'
+    | 'Released'
+    | 'Canceled';
+  tagline: string;
+  title: string;
 }
 
 export interface getMovieDetail_GetMovieDetail {
