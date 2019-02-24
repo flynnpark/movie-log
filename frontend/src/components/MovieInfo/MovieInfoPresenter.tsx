@@ -28,6 +28,10 @@ const MovieHeaderPresenter: React.FunctionComponent<IProps> = ({ movie }) => (
       {movie.title} {movie.original_title}
     </MovieInfo>
     <MovieInfo>개봉일 {movie.release_date.replace(/-/g, '. ')}</MovieInfo>
+    {movie.runtime && <MovieInfo>{movie.runtime}분</MovieInfo>}
+    {movie.belongs_to_collection && (
+      <MovieInfo>{movie.belongs_to_collection.name}</MovieInfo>
+    )}
     <MovieOverview>{movie.overview}</MovieOverview>
   </>
 );
