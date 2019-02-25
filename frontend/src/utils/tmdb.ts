@@ -113,3 +113,36 @@ export const getMovieDetail = async (
     return null;
   }
 };
+
+export const getMovieRecommendations = async (movieId: number) => {
+  try {
+    const { data } = await axios.get(
+      `${MOVIE_DETAIL_URL}/${movieId}/recommendations`,
+      {
+        params: {
+          api_key: API_KEY,
+          language: 'ko-KR'
+        }
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+
+export const getMovieSimilar = async (movieId: number) => {
+  try {
+    const { data } = await axios.get(`${MOVIE_DETAIL_URL}/${movieId}/similar`, {
+      params: {
+        api_key: API_KEY,
+        language: 'ko-KR'
+      }
+    });
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
