@@ -114,7 +114,9 @@ export const getMovieDetail = async (
   }
 };
 
-export const getMovieRecommendations = async (movieId: number) => {
+export const getMovieRecommendations = async (
+  movieId: number
+): Promise<IMovie[] | null> => {
   try {
     const { data } = await axios.get(
       `${MOVIE_DETAIL_URL}/${movieId}/recommendations`,
@@ -132,7 +134,9 @@ export const getMovieRecommendations = async (movieId: number) => {
   }
 };
 
-export const getMovieSimilar = async (movieId: number) => {
+export const getMovieSimilar = async (
+  movieId: number
+): Promise<IMovie[] | null> => {
   try {
     const { data } = await axios.get(`${MOVIE_DETAIL_URL}/${movieId}/similar`, {
       params: {

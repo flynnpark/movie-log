@@ -4,12 +4,16 @@ export interface userLoginVariables {
 
 export interface MovieItem {
   __typename: 'MovieItem';
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids?: number[];
   id: number;
-  title: string;
-  poster_path: string | null;
-  genre_ids?: (number | null)[];
+  original_language: string;
+  original_title: string;
   overview: string | null;
+  poster_path: string | null;
   release_date: string;
+  title: string;
 }
 
 export interface getHomeData {
