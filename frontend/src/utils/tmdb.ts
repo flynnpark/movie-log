@@ -116,28 +116,32 @@ export const getMovieDetail = async (
 
 export const getMovieRecommendations = async (
   movieId: number
-): Promise<IMovieListData> => {
+): Promise<IMovie[]> => {
   const {
     data: { results }
-  } = await axios.get(`${MOVIE_DETAIL_URL}/${movieId}/recommendations`, {
-    params: {
-      api_key: API_KEY,
-      language: 'ko-KR'
+  } = await axios.get<IMovieListData>(
+    `${MOVIE_DETAIL_URL}/${movieId}/recommendations`,
+    {
+      params: {
+        api_key: API_KEY,
+        language: 'ko-KR'
+      }
     }
-  });
+  );
   return results;
 };
 
-export const getMovieSimilar = async (
-  movieId: number
-): Promise<IMovieListData> => {
+export const getMovieSimilar = async (movieId: number): Promise<IMovie[]> => {
   const {
     data: { results }
-  } = await axios.get(`${MOVIE_DETAIL_URL}/${movieId}/similar`, {
-    params: {
-      api_key: API_KEY,
-      language: 'ko-KR'
+  } = await axios.get<IMovieListData>(
+    `${MOVIE_DETAIL_URL}/${movieId}/similar`,
+    {
+      params: {
+        api_key: API_KEY,
+        language: 'ko-KR'
+      }
     }
-  });
+  );
   return results;
 };

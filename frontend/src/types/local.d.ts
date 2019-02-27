@@ -103,6 +103,14 @@ export interface getMovieDetailVariables {
   movieId: number;
 }
 
+export interface getMovieRecommendationsVariables {
+  movieId: number;
+}
+
+export interface getMovieSimilarVariables {
+  movieId: number;
+}
+
 export interface getMovieList_GetMovieList {
   __typename: 'GetMovieListResponse';
   ok: boolean;

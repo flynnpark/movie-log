@@ -5,13 +5,17 @@ import {
   getNowPlaying,
   getPopular,
   getTopRated,
-  findMovie
+  findMovie,
+  getMovieRecommendations,
+  getMovieSimilar
 } from './utils/tmdb';
 import {
   getMovieDetailVariables,
   findMovieVariables,
   userLoginVariables,
-  getMovieListVariables
+  getMovieListVariables,
+  getMovieRecommendationsVariables,
+  getMovieSimilarVariables
 } from './types/local';
 
 const cache = new InMemoryCache();
@@ -140,6 +144,34 @@ const client = new ApolloClient({
             error: 'Movie not found',
             movie: null
           };
+        },
+        GetMovieRecommendations: async (
+          _: null | undefined,
+          { movieId }: getMovieRecommendationsVariables
+        ) => {
+          const movieList = await getMovieRecommendations(movieId);
+          const newMovieList = new Array();
+          movieList.map(movieItem => {
+            newMovieList.push({
+              __typename: 'MovieItem',
+              ...movieItem
+            });
+          });
+          return newMovieList;
+        },
+        GetMovieSimilar: async (
+          _: null | undefined,
+          { movieId }: getMovieSimilarVariables
+        ) => {
+          const movieList = await getMovieSimilar(movieId);
+          const newMovieList = new Array();
+          movieList.map(movieItem => {
+            newMovieList.push({
+              __typename: 'MovieItem',
+              ...movieItem
+            });
+          });
+          return newMovieList;
         },
         GetMovieList: async (
           _: null | undefined,
