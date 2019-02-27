@@ -22,3 +22,15 @@ export const GET_MOVIE_DETAIL = gql`
     }
   }
 `;
+
+export const GET_MOVIE_RECOMMENDATIONS = gql`
+  query getMovieRecommendations($movieId: Int!) {
+    GetMovieRecommendations(movieId: $movieId) @client {
+      id
+      title
+      poster_path
+      overview
+      release_date
+    }
+  }
+`;
