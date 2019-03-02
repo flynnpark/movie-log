@@ -34,3 +34,15 @@ export const GET_MOVIE_RECOMMENDATIONS = gql`
     }
   }
 `;
+
+export const GET_MOVIE_SIMILAR = gql`
+  query getMovieSimilar($movieId: Int!) {
+    GetMovieSimilar(movieId: $movieId) @client {
+      id
+      title
+      poster_path
+      overview
+      release_date
+    }
+  }
+`;
