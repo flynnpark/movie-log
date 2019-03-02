@@ -1,5 +1,4 @@
 import ApolloClient, { Operation, InMemoryCache } from 'apollo-boost';
-import { Context } from 'react-apollo';
 import {
   getMovieDetail,
   getNowPlaying,
@@ -34,7 +33,7 @@ const client = new ApolloClient({
         userLogIn: (
           _: null | undefined,
           { token }: userLoginVariables,
-          { cache: appCache }: Context
+          { cache: appCache }
         ): null => {
           localStorage.setItem('jwt', token);
           appCache.writeData({
@@ -50,7 +49,7 @@ const client = new ApolloClient({
         userLogOut: (
           _: null | undefined,
           __: null | undefined,
-          { appCache }: Context
+          { appCache }
         ): null => {
           localStorage.removeItem('jwt');
           localStorage.removeItem('userId');
