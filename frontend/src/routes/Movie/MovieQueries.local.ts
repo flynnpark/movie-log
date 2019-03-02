@@ -20,11 +20,6 @@ export const GET_MOVIE_DETAIL = gql`
         release_date
       }
     }
-  }
-`;
-
-export const GET_MOVIE_RECOMMENDATIONS = gql`
-  query getMovieRecommendations($movieId: Int!) {
     GetMovieRecommendations(movieId: $movieId) @client {
       id
       title
@@ -32,11 +27,6 @@ export const GET_MOVIE_RECOMMENDATIONS = gql`
       overview
       release_date
     }
-  }
-`;
-
-export const GET_MOVIE_SIMILAR = gql`
-  query getMovieSimilar($movieId: Int!) {
     GetMovieSimilar(movieId: $movieId) @client {
       id
       title
