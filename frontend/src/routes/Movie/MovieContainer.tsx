@@ -62,8 +62,9 @@ class MovieContainer extends Component<IProps> {
       const {
         params: { movieId }
       } = match;
+      const intMovieId = Number(movieId)
       await this.setMovieRatingFn({
-        variables: { movieId, rating, watchDate }
+        variables: { movieId: intMovieId, rating, watchDate }
       });
       if (this.refetchMovieRatings) {
         await this.refetchMovieRatings();
@@ -84,12 +85,13 @@ class MovieContainer extends Component<IProps> {
       const {
         params: { movieId }
       } = match;
+      const intMovieId = Number(movieId)
       return (
-        <MovieDetailQueries query={GET_MOVIE_DETAIL} variables={{ movieId }}>
+        <MovieDetailQueries query={GET_MOVIE_DETAIL} variables={{ movieId: intMovieId }}>
           {({ data: movieData, loading: movieLoading }) => (
             <MovieRatingsQueries
               query={GET_MOVIE_RATINGS}
-              variables={{ movieId }}
+              variables={{ movieId: intMovieId }}
             >
               {({
                 data: ratingData,

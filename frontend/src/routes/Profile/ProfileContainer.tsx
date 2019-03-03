@@ -43,9 +43,10 @@ class ProfileContainer extends Component<IProps, any> {
       const {
         params: { userId }
       } = match;
+      const intUserId = Number(userId);
       const offset = 0;
       return (
-        <ProfileQueries query={GET_PROFILE_DATA} variables={{ userId }}>
+        <ProfileQueries query={GET_PROFILE_DATA} variables={{ userId: intUserId }}>
           {({
             data: profileData,
             loading: profileLoading,
@@ -55,7 +56,7 @@ class ProfileContainer extends Component<IProps, any> {
             return (
               <RatedMoviesQueries
                 query={GET_RATED_MOVIES}
-                variables={{ userId, offset }}
+                variables={{ userId: intUserId, offset }}
               >
                 {({
                   data: ratedMoviesData,
