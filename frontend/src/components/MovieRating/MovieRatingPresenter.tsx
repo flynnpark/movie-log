@@ -122,7 +122,7 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
         </RatingWrapper>
         <DateWrapper>
           <DateContainer>
-            {moment(new Date(watchDate)).format(dateFormat)}
+            {moment(new Date(Number(watchDate))).format(dateFormat)}
           </DateContainer>
         </DateWrapper>
         <ButtonWrapper>
