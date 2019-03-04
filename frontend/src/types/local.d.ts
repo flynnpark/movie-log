@@ -97,6 +97,8 @@ export interface getMovieDetail_GetMovieDetail {
 
 export interface getMovieDetail {
   GetMovieDetail: getMovieDetail_GetMovieDetail;
+  GetMovieRecommendations: MovieItem[];
+  GetMovieSimilar: MovieItem[];
 }
 
 export interface getMovieDetailVariables {
