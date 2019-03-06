@@ -6,6 +6,7 @@ import { getMovieDetail } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
 import MovieHeader from 'src/components/MovieHeader';
 import MovieInfo from 'src/components/MovieInfo';
+import MovieCardList from 'src/components/MovieCardList';
 
 const MovieInfoContinaer = styled.div`
   background-color: #fff;
@@ -14,7 +15,15 @@ const MovieInfoContinaer = styled.div`
   box-shadow: 0 1px 4px #e8e8e8;
 `;
 
+const MovieListTitle = styled.h4`
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 14px;
+`;
+
 interface IProps {
+  movieLoading: boolean;
   movieData: getMovieDetail;
   ratingData: getMovieRatings | undefined;
   handleMovieRatingApply: (rating: number, watchDate: string) => void;
@@ -22,13 +31,16 @@ interface IProps {
 }
 
 const MoviePresenter: React.FunctionComponent<IProps> = ({
+  movieLoading,
   movieData,
   ratingData,
   handleMovieRatingApply,
   handleMovieRatingRemove
 }) => {
   const {
-    GetMovieDetail: { ok, movie }
+    GetMovieDetail: { ok, movie },
+    GetMovieRecommendations,
+    GetMovieSimilar
   } = movieData;
   return (
     <>
@@ -46,6 +58,18 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
             />
             <Divider />
             <MovieInfo movie={movie} />
+            <Divider />
+            <MovieCardList
+              title={<MovieListTitle>추천 영화 목록</MovieListTitle>}
+              loading={movieLoading}
+              movieList={GetMovieRecommendations.slice(0, 8)}
+            />
+            <Divider />
+            <MovieCardList
+              title={<MovieListTitle>비슷한 영화 목록</MovieListTitle>}
+              loading={movieLoading}
+              movieList={GetMovieSimilar.slice(0, 8)}
+            />
           </MovieInfoContinaer>
         </>
       ) : (

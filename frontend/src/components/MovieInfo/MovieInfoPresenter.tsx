@@ -15,6 +15,7 @@ const MovieInfo = styled.div`
 
 const MovieOverview = styled.p`
   line-height: 160%;
+  margin-bottom: 30px;
 `;
 
 interface IProps {

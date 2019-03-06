@@ -117,6 +117,7 @@ class MovieContainer extends Component<IProps> {
                                 return (
                                   movieData && (
                                     <MoviePresenter
+                                      movieLoading={movieLoading}
                                       movieData={movieData}
                                       ratingData={ratingData}
                                       handleMovieRatingApply={
