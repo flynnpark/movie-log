@@ -4,16 +4,18 @@ import MovieCardListPresenter from './MovieCardListPresenter';
 
 interface IProps {
   loading: boolean;
+  size?: 'mini' | 'normal';
   title?: React.ReactNode;
   movieList: MovieItem[];
 }
 
 class MovieCardListContainer extends Component<IProps, any> {
   public render() {
-    const { loading, title, movieList } = this.props;
+    const { loading, size, title, movieList } = this.props;
     return (
       <MovieCardListPresenter
         title={title}
+        size={size}
         loading={loading}
         movieList={movieList}
       />

@@ -8,7 +8,7 @@ class MovieCardContainer extends Component<MovieItem, any> {
     return (
       <MovieCardPresenter
         id={id}
-        poster={poster_path}
+        poster_path={poster_path}
         title={title}
         releaseYear={this.getReleasedYear(release_date)}
       />

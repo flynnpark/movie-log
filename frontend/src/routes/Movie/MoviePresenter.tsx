@@ -60,15 +60,17 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
             <MovieInfo movie={movie} />
             <Divider />
             <MovieCardList
-              title={<MovieListTitle>추천 영화 목록</MovieListTitle>}
               loading={movieLoading}
-              movieList={GetMovieRecommendations.slice(0, 8)}
+              size="mini"
+              title={<MovieListTitle>추천 영화 목록</MovieListTitle>}
+              movieList={GetMovieRecommendations.slice(0, 12)}
             />
             <Divider />
             <MovieCardList
-              title={<MovieListTitle>비슷한 영화 목록</MovieListTitle>}
               loading={movieLoading}
-              movieList={GetMovieSimilar.slice(0, 8)}
+              size="mini"
+              title={<MovieListTitle>비슷한 영화 목록</MovieListTitle>}
+              movieList={GetMovieSimilar.slice(0, 12)}
             />
           </MovieInfoContinaer>
         </>
