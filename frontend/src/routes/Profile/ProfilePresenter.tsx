@@ -53,7 +53,7 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
       return (
         <>
           <Helmet>
-            <title>'{user.name}'님의 프로필</title>
+            <title>'{user.name}'님의 프로필 | Movie-log</title>
           </Helmet>
           <BackTop />
           <ProfileSection userData={user} countData={countInfo} />
