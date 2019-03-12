@@ -20,6 +20,11 @@ export const GET_MOVIE_DETAIL = gql`
         release_date
       }
     }
+  }
+`;
+
+export const GET_RELATED_MOVIES = gql`
+  query getRelatedMovies($movieId: Int!) {
     GetMovieRecommendations(movieId: $movieId) @client {
       id
       title

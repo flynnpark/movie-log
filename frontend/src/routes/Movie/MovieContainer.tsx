@@ -10,14 +10,14 @@ import {
   getMovieRatings
 } from 'src/types/api';
 import MoviePresenter from './MoviePresenter';
-import { GET_MOVIE_DETAIL } from './MovieQueries.local';
+import { GET_MOVIE_DETAIL, GET_RELATED_MOVIES } from './MovieQueries.local';
 import {
   GET_MOVIE_RATINGS,
   SET_MOVIE_RATING,
   REMOVE_MOVIE_RATING
 } from './MovieQueries';
 import Loading from 'src/components/Loading';
-import { getMovieDetail } from 'src/types/local';
+import { getMovieDetail, getRelatedMovies } from 'src/types/local';
 
 interface IParams {
   movieId: string;
@@ -31,6 +31,8 @@ interface IProps extends RouteComponentProps<IParams> {
 class MovieDetailQueries extends Query<getMovieDetail> {}
 
 class MovieRatingsQueries extends Query<getMovieRatings> {}
+
+class RelatedMoviesQueries extends Query<getRelatedMovies> {}
 
 class SetMovieRatingMutation extends Mutation<
   setMovieRating,
@@ -105,35 +107,48 @@ class MovieContainer extends Component<IProps> {
                     {movieLoading || ratingLoading ? (
                       <Loading />
                     ) : (
-                      <SetMovieRatingMutation mutation={SET_MOVIE_RATING}>
-                        {setMovieRatingFn => {
-                          this.setMovieRatingFn = setMovieRatingFn;
-                          return (
-                            <RemoveMovieRatingMutation
-                              mutation={REMOVE_MOVIE_RATING}
-                            >
-                              {removeMovieRatingFn => {
-                                this.removeMovieRatingFn = removeMovieRatingFn;
-                                return (
-                                  movieData && (
-                                    <MoviePresenter
-                                      movieLoading={movieLoading}
-                                      movieData={movieData}
-                                      ratingData={ratingData}
-                                      handleMovieRatingApply={
-                                        this.handleMovieRatingApply
-                                      }
-                                      handleMovieRatingRemove={
-                                        this.handleMovieRatingRemove
-                                      }
-                                    />
-                                  )
-                                );
-                              }}
-                            </RemoveMovieRatingMutation>
-                          );
-                        }}
-                      </SetMovieRatingMutation>
+                      <RelatedMoviesQueries
+                        query={GET_RELATED_MOVIES}
+                        variables={{ movieId: Number(movieId) }}
+                      >
+                        {({
+                          data: relatedMoviesData,
+                          loading: relatedMoviesLoading
+                        }) => (
+                          <SetMovieRatingMutation mutation={SET_MOVIE_RATING}>
+                            {setMovieRatingFn => {
+                              this.setMovieRatingFn = setMovieRatingFn;
+                              return (
+                                <RemoveMovieRatingMutation
+                                  mutation={REMOVE_MOVIE_RATING}
+                                >
+                                  {removeMovieRatingFn => {
+                                    this.removeMovieRatingFn = removeMovieRatingFn;
+                                    return (
+                                      movieData && (
+                                        <MoviePresenter
+                                          movieData={movieData}
+                                          ratingData={ratingData}
+                                          relatedMoviesLoading={
+                                            relatedMoviesLoading
+                                          }
+                                          relatedMoviesData={relatedMoviesData}
+                                          handleMovieRatingApply={
+                                            this.handleMovieRatingApply
+                                          }
+                                          handleMovieRatingRemove={
+                                            this.handleMovieRatingRemove
+                                          }
+                                        />
+                                      )
+                                    );
+                                  }}
+                                </RemoveMovieRatingMutation>
+                              );
+                            }}
+                          </SetMovieRatingMutation>
+                        )}
+                      </RelatedMoviesQueries>
                     )}
                   </>
                 );

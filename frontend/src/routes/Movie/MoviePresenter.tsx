@@ -2,7 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Alert, Divider } from 'antd';
 import styled from 'styled-components';
-import { getMovieDetail } from 'src/types/local';
+import { getMovieDetail, getRelatedMovies } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
 import MovieHeader from 'src/components/MovieHeader';
 import MovieInfo from 'src/components/MovieInfo';
@@ -23,24 +23,24 @@ const MovieListTitle = styled.h4`
 `;
 
 interface IProps {
-  movieLoading: boolean;
   movieData: getMovieDetail;
   ratingData: getMovieRatings | undefined;
+  relatedMoviesLoading: boolean;
+  relatedMoviesData: getRelatedMovies | undefined;
   handleMovieRatingApply: (rating: number, watchDate: string) => void;
   handleMovieRatingRemove: (id: number) => void;
 }
 
 const MoviePresenter: React.FunctionComponent<IProps> = ({
-  movieLoading,
   movieData,
   ratingData,
+  relatedMoviesLoading,
+  relatedMoviesData,
   handleMovieRatingApply,
   handleMovieRatingRemove
 }) => {
   const {
-    GetMovieDetail: { ok, movie },
-    GetMovieRecommendations,
-    GetMovieSimilar
+    GetMovieDetail: { ok, movie }
   } = movieData;
   return (
     <>
@@ -59,19 +59,29 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
             <Divider />
             <MovieInfo movie={movie} />
             <Divider />
-            <MovieCardList
-              loading={movieLoading}
-              size="mini"
-              title={<MovieListTitle>추천 영화 목록</MovieListTitle>}
-              movieList={GetMovieRecommendations.slice(0, 12)}
-            />
+            {relatedMoviesData && (
+              <MovieCardList
+                loading={relatedMoviesLoading}
+                size="mini"
+                title={<MovieListTitle>추천 영화</MovieListTitle>}
+                movieList={
+                  relatedMoviesData.GetMovieRecommendations &&
+                  relatedMoviesData.GetMovieRecommendations.slice(0, 12)
+                }
+              />
+            )}
             <Divider />
-            <MovieCardList
-              loading={movieLoading}
-              size="mini"
-              title={<MovieListTitle>비슷한 영화 목록</MovieListTitle>}
-              movieList={GetMovieSimilar.slice(0, 12)}
-            />
+            {relatedMoviesData && (
+              <MovieCardList
+                loading={relatedMoviesLoading}
+                size="mini"
+                title={<MovieListTitle>비슷한 영화</MovieListTitle>}
+                movieList={
+                  relatedMoviesData.GetMovieSimilar &&
+                  relatedMoviesData.GetMovieSimilar.slice(0, 12)
+                }
+              />
+            )}
           </MovieInfoContinaer>
         </>
       ) : (
