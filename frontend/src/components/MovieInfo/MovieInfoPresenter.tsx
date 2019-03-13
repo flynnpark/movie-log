@@ -10,7 +10,15 @@ const MovieInfoHeader = styled.h1`
 `;
 
 const MovieInfo = styled.div`
-  margin-bottom: 10px;
+  padding-bottom: 10px;
+`;
+
+const MovieTitle = styled.h5`
+  font-weight: 500;
+`;
+
+const MovieSubtitle = styled.span`
+  color: #999;
 `;
 
 const MovieOverview = styled.p`
@@ -26,7 +34,9 @@ const MovieHeaderPresenter: React.FunctionComponent<IProps> = ({ movie }) => (
   <>
     <MovieInfoHeader>기본 정보</MovieInfoHeader>
     <MovieInfo>
-      {movie.title} {movie.original_title}
+      <MovieTitle>
+        {movie.title} <MovieSubtitle>{movie.original_title}</MovieSubtitle>
+      </MovieTitle>
     </MovieInfo>
     <MovieInfo>개봉일 {movie.release_date.replace(/-/g, '. ')}</MovieInfo>
     {movie.runtime && <MovieInfo>{movie.runtime}분</MovieInfo>}
