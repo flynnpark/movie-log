@@ -1,4 +1,5 @@
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -23,6 +24,7 @@ export interface getMyInfo {
 }
 
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -46,6 +48,7 @@ export interface startEmailVerificationVariables {
 }
 
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -78,6 +81,7 @@ export interface getMovieRatingsVariables {
 }
 
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -112,6 +116,7 @@ export interface setMovieRatingVariables {
 }
 
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -144,6 +149,7 @@ export interface removeMovieRatingVariables {
 }
 
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -158,6 +164,7 @@ export interface getProfileData_GetUserProfile_user {
   avatar: string | null;
   shortBio: string | null;
   createdAt: string;
+  isMe: boolean;
 }
 
 export interface getProfileData_GetUserProfile {
@@ -190,6 +197,7 @@ export interface getProfileDataVariables {
 }
 
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -218,6 +226,7 @@ export interface getRatedMoviesVariables {
 }
 
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -244,6 +253,7 @@ export interface startEmailSignUpVariables {
 }
 
 /* tslint:disable */
+/* eslint-disable */
 // This file was automatically generated and should not be edited.
 
 //==============================================================

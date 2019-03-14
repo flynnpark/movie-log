@@ -12,6 +12,7 @@ export const GET_PROFILE_DATA = gql`
         avatar
         shortBio
         createdAt
+        isMe
       }
     }
     GetUserInfo(userId: $userId) {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Avatar, Statistic } from 'antd';
+import { Card, Avatar, Statistic, Button } from 'antd';
 import {
   getProfileData_GetUserProfile_user,
   getProfileData_GetUserInfo_countInfo
@@ -18,6 +18,14 @@ const AvatarWrapper = styled.div`
 
 const NameWrapper = styled.div`
   font-size: 32px;
+  display: flex;
+  align-items: center;
+`;
+
+const Name = styled.span`
+  display: inline-block;
+  margin-right: 10px;
+  justify-content: center;
 `;
 
 const InfoWrapper = styled.div``;
@@ -45,7 +53,7 @@ interface IProps {
 }
 
 const ProfileSectionPresenter: React.FunctionComponent<IProps> = ({
-  userData: { avatar, name, shortBio },
+  userData: { avatar, name, shortBio, isMe },
   countData
 }) => (
   <ProfileCard>
@@ -59,7 +67,12 @@ const ProfileSectionPresenter: React.FunctionComponent<IProps> = ({
           )}
         </AvatarWrapper>
       }
-      title={<NameWrapper>{name}</NameWrapper>}
+      title={
+        <NameWrapper>
+          <Name>{name}</Name>
+          {isMe && <Button shape="circle" icon="setting" />}
+        </NameWrapper>
+      }
       description={
         <InfoWrapper>
           <SimpleBioWrapper>{shortBio}</SimpleBioWrapper>
