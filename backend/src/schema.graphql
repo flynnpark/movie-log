@@ -118,4 +118,5 @@ type UserExpose {
   avatar: String
   shortBio: String
   createdAt: String!
+  isMe: Boolean!
 }

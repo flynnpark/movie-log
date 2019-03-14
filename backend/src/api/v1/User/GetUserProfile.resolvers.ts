@@ -12,24 +12,34 @@ const resolvers: Resolvers = {
         { userId }: GetUserProfileQueryArgs,
         context: Context
       ) => {
-        let userIdTemp: number | undefined;
+        const {
+          req: {
+            user: { id }
+          }
+        } = context;
+        let user;
+        let isMe = false;
         if (userId) {
-          userIdTemp = userId;
+          // userId가 있고 id와 같을 경우 자신의 프로필
+          // 둘 다 아닐 경우 남의 프로필
+          user = await User.findOne({ id: userId });
+          if (id === userId) {
+            isMe = true;
+          }
         } else {
-          const {
-            req: {
-              user: { id }
-            }
-          } = context;
-          userIdTemp = id;
+          // userId가 없을 경우 자신의 프로필
+          user = await User.findOne({ id });
+          isMe = true;
         }
-        const user = await User.findOne({ id: userIdTemp });
         if (user) {
           delete user.password;
           return {
             ok: true,
             error: null,
-            user
+            user: {
+              ...user,
+              isMe
+            }
           };
         }
         return {
