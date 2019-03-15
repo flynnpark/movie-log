@@ -1,3 +1,3 @@
-import ProfileSectionContainer from './ProfileSectionContainer';
+import ProfileSection from './ProfileSection';
 
-export default ProfileSectionContainer;
+export default ProfileSection;
