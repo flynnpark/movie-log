@@ -49,7 +49,7 @@ const client = new ApolloClient({
         userLogOut: (
           _: null | undefined,
           __: null | undefined,
-          { appCache }
+          { cache: appCache }
         ): null => {
           localStorage.removeItem('jwt');
           localStorage.removeItem('userId');
