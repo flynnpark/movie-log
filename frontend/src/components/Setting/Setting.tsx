@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import { Modal, Menu } from 'antd';
 import styled from 'styled-components';
 import { Mutation } from 'react-apollo';
@@ -8,7 +8,12 @@ const BorderlessMenu = styled(Menu)`
   border: none;
 `;
 
-const Setting = ({ visible, setVisible }) => {
+interface IProps {
+  visible: boolean;
+  setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Setting: FunctionComponent<IProps> = ({ visible, setVisible }) => {
   return (
     <Mutation mutation={USER_LOG_OUT}>
       {userLogOut => (
