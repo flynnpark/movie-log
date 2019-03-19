@@ -96,7 +96,7 @@ const ProfileSection: React.FunctionComponent<IProps> = ({
                   <SmallStatistic
                     title="평가한 횟수"
                     value={countData.movieRatingCount}
-                    suffix="번"
+                    suffix="회"
                   />
                 </>
               )}

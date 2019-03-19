@@ -7,6 +7,23 @@ import { Button, Card, Checkbox, Form, Icon, Input } from 'antd';
 
 const PageWrapper = styled.div`
   height: 100vh;
+  text-align: center;
+`;
+
+const LoginCard = styled(Card)`
+  @media (min-width: 719px) {
+    display: inline-block;
+    position: relative;
+    width: 375px;
+    height: auto;
+    vertical-align: middle;
+  }
+  width: 100%;
+  height: 100%;
+`;
+
+const LoginTitle = styled.h1`
+  font-size: 1.8em;
 `;
 
 interface IProps {
@@ -28,7 +45,7 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
       <Helmet>
         <title>Log in | Movie.log</title>
       </Helmet>
-      <Card title="Log in">
+      <LoginCard title={<LoginTitle>Movie.log</LoginTitle>}>
         <Form
           onSubmit={async event => {
             event.preventDefault();
@@ -36,6 +53,7 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
             await onSubmitFn();
           }}
         >
+          <Form.Item>Login</Form.Item>
           <Form.Item>
             {getFieldDecorator('email', {
               rules: [
@@ -83,7 +101,7 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
             </Link>
           </Form.Item>
         </Form>
-      </Card>
+      </LoginCard>
     </PageWrapper>
   );
 };

@@ -29,6 +29,17 @@ const FixedHeader = styled(Layout.Header)`
   box-shadow: 0 1px 4px #e8e8e8;
 `;
 
+const LoggedOutContent = styled(Layout.Content)`
+  @media (min-width: 719px) {
+    padding-top: 96px;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  width: 100%;
+  height: 100vh;
+`;
+
 const Content = styled(Layout.Content)`
   padding-top: 96px;
   max-width: 960px;
@@ -48,13 +59,13 @@ const AppPresenter: React.FunctionComponent<IProps> = ({ isLoggedIn }) => (
 
 const LoggedOutRoutes: React.FunctionComponent = () => (
   <Layout>
-    <Content>
+    <LoggedOutContent>
       <Switch>
         <Route exact={true} path="/" component={LogIn} />
         <Route path="/signup" component={SignUp} />
         <Redirect from={'*'} to={'/'} />
       </Switch>
-    </Content>
+    </LoggedOutContent>
   </Layout>
 );
 
