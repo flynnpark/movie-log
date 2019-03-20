@@ -13,7 +13,7 @@ const ProfileCard = styled(Card)`
   margin-bottom: 20px;
 `;
 
-const AvatarWrapper = styled.div`
+const AvatarWithMargin = styled(Avatar)`
   margin-right: 24px;
 `;
 
@@ -62,13 +62,13 @@ const ProfileSection: React.FunctionComponent<IProps> = ({
     <ProfileCard>
       <Card.Meta
         avatar={
-          <AvatarWrapper>
+          <>
             {avatar ? (
-              <Avatar size={128} src={avatar} />
+              <AvatarWithMargin size={128} src={avatar} />
             ) : (
-              <Avatar size={128} icon="user" />
+              <AvatarWithMargin size={128} icon="user" />
             )}
-          </AvatarWrapper>
+          </>
         }
         title={
           <NameWrapper>

@@ -66,7 +66,13 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
                   message: 'Please input your E-mail!'
                 }
               ]
-            })(<Input prefix={<Icon type="user" />} placeholder="E-mail" />)}
+            })(
+              <Input
+                prefix={<Icon type="user" />}
+                placeholder="E-mail"
+                disabled={loading}
+              />
+            )}
           </Form.Item>
           <Form.Item>
             {getFieldDecorator('password', {
@@ -81,6 +87,7 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
                 prefix={<Icon type="lock" />}
                 type="password"
                 placeholder="Password"
+                disabled={loading}
               />
             )}
           </Form.Item>
@@ -88,14 +95,24 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
             {getFieldDecorator('remember', {
               valuePropName: 'checked',
               initialValue: true
-            })(<Checkbox>Remember me</Checkbox>)}
+            })(<Checkbox disabled={loading}>Remember me</Checkbox>)}
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit" block={true}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              block={true}
+              loading={loading}
+            >
               Log in
             </Button>
             <Link to="/signup">
-              <Button type="default" htmlType="button" block={true}>
+              <Button
+                type="default"
+                htmlType="button"
+                block={true}
+                loading={loading}
+              >
                 Sign up
               </Button>
             </Link>
