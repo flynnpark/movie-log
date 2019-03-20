@@ -13,7 +13,7 @@ interface IParams {
 
 interface IProps extends RouteComponentProps<IParams> {}
 
-class SearchContainer extends Component<IProps> {
+class SearchContainer extends Component<IProps, {}> {
   public render() {
     const { match } = this.props;
     if (match) {

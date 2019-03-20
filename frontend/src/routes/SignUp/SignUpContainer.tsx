@@ -17,7 +17,7 @@ interface IState {
   shortBio: string;
 }
 
-interface IProps extends RouteComponentProps<any> {
+interface IProps extends RouteComponentProps<{}> {
   form: WrappedFormUtils;
 }
 

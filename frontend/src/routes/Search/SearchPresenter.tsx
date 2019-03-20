@@ -15,22 +15,23 @@ interface IProps {
   data: findMovie | undefined;
 }
 
-const SearchPresenter: React.FunctionComponent<IProps> = props => {
-  const { loading, query, data } = props;
-  return (
-    <>
-      <Helmet>
-        <title>'{query}' 검색 결과 | Movie-log</title>
-      </Helmet>
-      {data && (
-        <MovieCardList
-          loading={loading}
-          title={<MovieListTitle>'{query}' 검색 결과</MovieListTitle>}
-          movieList={data.FindMovie}
-        />
-      )}
-    </>
-  );
-};
+const SearchPresenter: React.FunctionComponent<IProps> = ({
+  loading,
+  query,
+  data
+}) => (
+  <>
+    <Helmet>
+      <title>'{query}' 검색 결과 | Movie-log</title>
+    </Helmet>
+    {data && (
+      <MovieCardList
+        loading={loading}
+        title={<MovieListTitle>'{query}' 검색 결과</MovieListTitle>}
+        movieList={data.FindMovie}
+      />
+    )}
+  </>
+);
 
 export default SearchPresenter;

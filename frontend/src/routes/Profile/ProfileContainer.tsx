@@ -20,7 +20,7 @@ class MovieListQueries extends Query<getMovieList> {}
 
 class RatedMoviesQueries extends Query<getRatedMovies> {}
 
-class ProfileContainer extends Component<IProps, any> {
+class ProfileContainer extends Component<IProps, {}> {
   private refetchProfile: (
     variables?: OperationVariables | undefined
   ) => Promise<ApolloQueryResult<getProfileData>>;
@@ -46,7 +46,10 @@ class ProfileContainer extends Component<IProps, any> {
       const intUserId = Number(userId);
       const offset = 0;
       return (
-        <ProfileQueries query={GET_PROFILE_DATA} variables={{ userId: intUserId }}>
+        <ProfileQueries
+          query={GET_PROFILE_DATA}
+          variables={{ userId: intUserId }}
+        >
           {({
             data: profileData,
             loading: profileLoading,

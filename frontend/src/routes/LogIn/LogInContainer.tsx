@@ -77,16 +77,14 @@ class LogInContainer extends React.Component<IProps, IState> {
               }
             }}
           >
-            {(mutation, { loading }) => {
-              return (
-                <LogInPresenter
-                  loading={loading}
-                  form={form}
-                  handleSubmit={this.handleSubmit}
-                  onSubmitFn={mutation}
-                />
-              );
-            }}
+            {(mutation, { loading }) => (
+              <LogInPresenter
+                loading={loading}
+                form={form}
+                handleSubmit={this.handleSubmit}
+                onSubmitFn={mutation}
+              />
+            )}
           </EmailSignInMutation>
         )}
       </Mutation>
