@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
-import { Form } from 'antd';
+import { Form, notification } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 import {
   startEmailVerification,
@@ -61,7 +61,7 @@ class LogInContainer extends React.Component<IProps, IState> {
           <EmailSignInMutation
             mutation={EMAIL_LOG_IN}
             variables={{ email, password }}
-            onCompleted={data => {
+            onCompleted={(data: startEmailVerification) => {
               const { EmailSignIn } = data;
               if (EmailSignIn.ok) {
                 if (EmailSignIn.token) {
@@ -73,7 +73,10 @@ class LogInContainer extends React.Component<IProps, IState> {
                 }
                 return;
               } else {
-                console.log(data);
+                notification.error({
+                  message: 'Login Failed',
+                  description: data.EmailSignIn.error
+                });
               }
             }}
           >
