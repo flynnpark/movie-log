@@ -7,6 +7,18 @@ import { MutationFn } from 'react-apollo';
 
 const PageWrapper = styled.div`
   height: 100vh;
+  text-align: center;
+`;
+
+const SignUpCard = styled(Card)`
+  @media (min-width: 719px) {
+    display: inline-block;
+    position: relative;
+    width: 600px;
+    height: auto;
+    vertical-align: middle;
+  }
+  width: 100%;
 `;
 
 interface IProps {
@@ -49,19 +61,6 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
     }
   };
 
-  const tailFormItemLayout = {
-    wrapperCol: {
-      xs: {
-        span: 24,
-        offset: 0
-      },
-      sm: {
-        span: 18,
-        offset: 6
-      }
-    }
-  };
-
   const uploadButton = (
     <div>
       <Icon type="plus" />
@@ -74,7 +73,7 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
       <Helmet>
         <title>Sign Up | Movie.log</title>
       </Helmet>
-      <Card title="Sign Up">
+      <SignUpCard title="Sign Up">
         <Form
           onSubmit={async event => {
             event.preventDefault();
@@ -165,7 +164,7 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
           >
             {getFieldDecorator('shortBio')(<Input.TextArea rows={3} />)}
           </Form.Item>
-          <Form.Item {...tailFormItemLayout}>
+          <Form.Item>
             <Button type="default" htmlType="button">
               <Link to="/">Back</Link>
             </Button>{' '}
@@ -174,7 +173,7 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
             </Button>
           </Form.Item>
         </Form>
-      </Card>
+      </SignUpCard>
     </PageWrapper>
   );
 };
