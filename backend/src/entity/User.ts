@@ -33,6 +33,12 @@ class User extends BaseEntity {
   @Column({ type: 'varchar', length: 200, nullable: true })
   shortBio: string | null;
 
+  @Column({ type: 'varchar', length: 80, nullable: true })
+  facebookId: string | null;
+
+  @Column({ type: 'varchar', length: 80, nullable: true })
+  googleId: string | null;
+
   @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
 
