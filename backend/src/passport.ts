@@ -1,5 +1,6 @@
 import passport from 'passport';
 import { Strategy, ExtractJwt, VerifiedCallback } from 'passport-jwt';
+import FacebookTokenStrategy, { Profile } from 'passport-facebook-token';
 import { Request, Response, NextFunction } from 'express';
 import User from './entity/User';
 
@@ -12,10 +13,13 @@ const jwtOptions = {
   secretOrKey: process.env.JSON_WEB_TOKEN || 'DEFAULT_KEY'
 };
 
-const verifyUser = async (payload: JWTPayload, done: VerifiedCallback) => {
+const facebookAppId: string = process.env.FACEBOOK_APP_ID || '';
+const facebookAppSecret: string = process.env.FACEBOOK_APP_SECRET || '';
+
+const verifyJWTUser = async (payload: JWTPayload, done: VerifiedCallback) => {
   try {
     const user = await User.findOne({ id: payload.id });
-    if (user !== null) {
+    if (user) {
       return done(null, user);
     }
     return done(null, false);
@@ -24,15 +28,35 @@ const verifyUser = async (payload: JWTPayload, done: VerifiedCallback) => {
   }
 };
 
-export const authenticateJwt = (
+const verifyFacebookUser = async (
+  accessToken: string,
+  refreshToken: string,
+  profile: Profile,
+  done
+) => {
+  try {
+    const user = await User.findOne({ facebookId: profile.id });
+    if (user) {
+      return done(null, user);
+    }
+    return done(null, false);
+  } catch (error) {
+    return done(error, false);
+  }
+};
+
+export const passportAuthenticate = (
   req: Request,
   res: Response,
   next: NextFunction
 ) =>
   passport.authenticate(
-    'jwt',
+    ['jwt', 'facebook-token'],
     { session: false },
     (error: Error, user: User | false) => {
+      if (error) {
+        console.log(error);
+      }
       if (user) {
         req.user = user;
       }
@@ -40,5 +64,14 @@ export const authenticateJwt = (
     }
   )(req, res, next);
 
-passport.use(new Strategy(jwtOptions, verifyUser));
+passport.use(new Strategy(jwtOptions, verifyJWTUser));
+passport.use(
+  new FacebookTokenStrategy(
+    {
+      clientID: facebookAppId,
+      clientSecret: facebookAppSecret
+    },
+    verifyFacebookUser
+  )
+);
 passport.initialize();

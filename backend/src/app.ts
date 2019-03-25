@@ -4,7 +4,7 @@ import logger from 'morgan';
 import helmet from 'helmet';
 import schema from './schema';
 import './passport';
-import { authenticateJwt } from './passport';
+import { passportAuthenticate } from './passport';
 
 class App {
   public app: GraphQLServer;
@@ -26,7 +26,7 @@ class App {
     express.use(cors());
     express.use(logger('dev'));
     express.use(helmet());
-    express.use(authenticateJwt);
+    express.use(passportAuthenticate);
   };
 }
 
