@@ -42,8 +42,9 @@ const verifyFacebookUser: VerifyFunction = async (
     user = await User.create({
       email: profile.emails[0].value,
       name: profile.displayName,
-      avatar: profile.photos[0].value
-    });
+      avatar: profile.photos[0].value,
+      facebookId: profile.id
+    }).save();
     return done(null, user);
   } catch (error) {
     return done(error, false);
