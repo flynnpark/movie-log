@@ -1,6 +1,6 @@
 import passport from 'passport';
 import { Strategy, ExtractJwt, VerifiedCallback } from 'passport-jwt';
-import FacebookTokenStrategy, { Profile } from 'passport-facebook-token';
+import FacebookTokenStrategy, { VerifyFunction } from 'passport-facebook-token';
 import { Request, Response, NextFunction } from 'express';
 import User from './entity/User';
 
@@ -28,18 +28,23 @@ const verifyJWTUser = async (payload: JWTPayload, done: VerifiedCallback) => {
   }
 };
 
-const verifyFacebookUser = async (
-  accessToken: string,
-  refreshToken: string,
-  profile: Profile,
+const verifyFacebookUser: VerifyFunction = async (
+  accessToken,
+  refreshToken,
+  profile,
   done
 ) => {
   try {
-    const user = await User.findOne({ facebookId: profile.id });
+    let user = await User.findOne({ facebookId: profile.id });
     if (user) {
       return done(null, user);
     }
-    return done(null, false);
+    user = await User.create({
+      email: profile.emails[0].value,
+      name: profile.displayName,
+      avatar: profile.photos[0].value
+    });
+    return done(null, user);
   } catch (error) {
     return done(error, false);
   }
