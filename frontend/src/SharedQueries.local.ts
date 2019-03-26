@@ -11,3 +11,9 @@ export const USER_LOG_OUT = gql`
     userLogOut @client
   }
 `;
+
+export const FACEBOOK_LOG_IN = gql`
+  mutation facebookLogIn($facebookToken: String!) {
+    facebookLogIn(facebookToken: $facebookToken) @client
+  }
+`;

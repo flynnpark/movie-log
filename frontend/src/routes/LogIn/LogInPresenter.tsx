@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Button, Card, Checkbox, Form, Icon, Input } from 'antd';
+import ReactFacebookLogin from 'react-facebook-login';
 
 const PageWrapper = styled.div`
   height: 100vh;
@@ -31,13 +32,15 @@ interface IProps {
   loading: boolean;
   handleSubmit: (event: any) => void;
   onSubmitFn: MutationFn;
+  facebookLogIn: MutationFn;
 }
 
 const LoginPresenter: React.FunctionComponent<IProps> = ({
   form,
   loading,
   handleSubmit,
-  onSubmitFn
+  onSubmitFn,
+  facebookLogIn
 }) => {
   const { getFieldDecorator } = form;
   return (
@@ -116,6 +119,22 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
                 Sign up
               </Button>
             </Link>
+          </Form.Item>
+          <Form.Item>
+            <ReactFacebookLogin
+              appId={process.env.REACT_APP_TMDB_KEY || ''}
+              autoLoad={true}
+              fields="name,email,picture"
+              callback={response => {
+                console.log(response);
+                facebookLogIn({
+                  variables: {
+                    facebookToken: response.accessToken
+                  }
+                });
+              }}
+            />
+            ,
           </Form.Item>
         </Form>
       </LoginCard>

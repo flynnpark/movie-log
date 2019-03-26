@@ -1,5 +1,9 @@
-export interface userLoginVariables {
+export interface userLogInVariables {
   token: string;
+}
+
+export interface facebookLogInVariables {
+  facebookToken: string;
 }
 
 export interface MovieItem {

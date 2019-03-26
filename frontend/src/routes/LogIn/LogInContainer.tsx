@@ -9,7 +9,7 @@ import {
 } from '../../types/api';
 import LogInPresenter from './LogInPresenter';
 import { EMAIL_LOG_IN } from './LogInQueries';
-import { USER_LOG_IN } from '../../SharedQueries.local';
+import { USER_LOG_IN, FACEBOOK_LOG_IN } from '../../SharedQueries.local';
 
 interface IState {
   email: string;
@@ -58,37 +58,42 @@ class LogInContainer extends React.Component<IProps, IState> {
     return (
       <Mutation mutation={USER_LOG_IN}>
         {userLogIn => (
-          <EmailSignInMutation
-            mutation={EMAIL_LOG_IN}
-            variables={{ email, password }}
-            onCompleted={(data: startEmailVerification) => {
-              const { EmailSignIn } = data;
-              if (EmailSignIn.ok) {
-                if (EmailSignIn.token) {
-                  userLogIn({
-                    variables: {
-                      token: EmailSignIn.token
+          <Mutation mutation={FACEBOOK_LOG_IN}>
+            {facebookLogIn => (
+              <EmailSignInMutation
+                mutation={EMAIL_LOG_IN}
+                variables={{ email, password }}
+                onCompleted={(data: startEmailVerification) => {
+                  const { EmailSignIn } = data;
+                  if (EmailSignIn.ok) {
+                    if (EmailSignIn.token) {
+                      userLogIn({
+                        variables: {
+                          token: EmailSignIn.token
+                        }
+                      });
                     }
-                  });
-                }
-                return;
-              } else {
-                notification.error({
-                  message: 'Login Failed',
-                  description: data.EmailSignIn.error
-                });
-              }
-            }}
-          >
-            {(mutation, { loading }) => (
-              <LogInPresenter
-                loading={loading}
-                form={form}
-                handleSubmit={this.handleSubmit}
-                onSubmitFn={mutation}
-              />
+                    return;
+                  } else {
+                    notification.error({
+                      message: 'Login Failed',
+                      description: data.EmailSignIn.error
+                    });
+                  }
+                }}
+              >
+                {(mutation, { loading }) => (
+                  <LogInPresenter
+                    loading={loading}
+                    form={form}
+                    handleSubmit={this.handleSubmit}
+                    onSubmitFn={mutation}
+                    facebookLogIn={facebookLogIn}
+                  />
+                )}
+              </EmailSignInMutation>
             )}
-          </EmailSignInMutation>
+          </Mutation>
         )}
       </Mutation>
     );

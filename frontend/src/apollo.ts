@@ -11,10 +11,11 @@ import {
 import {
   getMovieDetailVariables,
   findMovieVariables,
-  userLoginVariables,
+  userLogInVariables,
   getMovieListVariables,
   getMovieRecommendationsVariables,
-  getMovieSimilarVariables
+  getMovieSimilarVariables,
+  facebookLogInVariables
 } from './types/local';
 
 const cache = new InMemoryCache();
@@ -25,14 +26,16 @@ const client = new ApolloClient({
     defaults: {
       auth: {
         __typename: 'Auth',
-        isLoggedIn: Boolean(localStorage.getItem('jwt'))
+        isLoggedIn:
+          Boolean(localStorage.getItem('jwt')) ||
+          Boolean(localStorage.getItem('facebookToken'))
       }
     },
     resolvers: {
       Mutation: {
         userLogIn: (
           _: null | undefined,
-          { token }: userLoginVariables,
+          { token }: userLogInVariables,
           { cache: appCache }
         ): null => {
           localStorage.setItem('jwt', token);
@@ -58,6 +61,22 @@ const client = new ApolloClient({
               auth: {
                 __typename: 'Auth',
                 isLoggedIn: false
+              }
+            }
+          });
+          return null;
+        },
+        facebookLogIn: (
+          _: null | undefined,
+          { facebookToken }: facebookLogInVariables,
+          { cache: appCache }
+        ): null => {
+          localStorage.setItem('facebookToken', facebookToken);
+          appCache.writeData({
+            data: {
+              auth: {
+                __typename: 'Auth',
+                isLoggedIn: true
               }
             }
           });
@@ -202,7 +221,8 @@ const client = new ApolloClient({
   request: async (operation: Operation) => {
     operation.setContext({
       headers: {
-        Authorization: `JWT ${localStorage.getItem('jwt')}` || ''
+        Authorization: `JWT ${localStorage.getItem('jwt')}` || '',
+        access_token: `${localStorage.getItem('facebookToken')}` || ''
       }
     });
   },
