@@ -122,7 +122,7 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
           </Form.Item>
           <Form.Item>
             <ReactFacebookLogin
-              appId={process.env.REACT_APP_TMDB_KEY || ''}
+              appId={process.env.REACT_APP_FACEBOOK_APP_ID || ''}
               autoLoad={true}
               fields="name,email,picture"
               callback={response => {

@@ -56,6 +56,10 @@ const client = new ApolloClient({
         ): null => {
           localStorage.removeItem('jwt');
           localStorage.removeItem('userId');
+          localStorage.removeItem('facebookToken');
+          if ((window as any).FB) {
+            (window as any).FB.logout();
+          }
           appCache.writeData({
             data: {
               auth: {
