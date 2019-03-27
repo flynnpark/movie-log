@@ -126,7 +126,6 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
               autoLoad={true}
               fields="name,email,picture"
               callback={response => {
-                console.log(response);
                 facebookLogIn({
                   variables: {
                     facebookToken: response.accessToken

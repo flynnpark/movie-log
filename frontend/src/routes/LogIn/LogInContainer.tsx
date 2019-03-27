@@ -37,7 +37,7 @@ class LogInContainer extends React.Component<IProps, IState> {
     };
   }
 
-  public handleSubmit = event => {
+  public handleSubmit = (event: React.FormEvent): void => {
     const { form } = this.props;
     event.preventDefault();
     form.validateFields((error, fieldsValue) => {
