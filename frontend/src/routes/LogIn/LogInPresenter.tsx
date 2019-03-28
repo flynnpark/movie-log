@@ -3,8 +3,8 @@ import { MutationFn } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Button, Card, Checkbox, Form, Icon, Input } from 'antd';
-import ReactFacebookLogin from 'react-facebook-login';
+import { Button, Card, Checkbox, Form, Icon, Input, Divider } from 'antd';
+import { FacebookProvider, Login } from 'react-facebook';
 
 const PageWrapper = styled.div`
   height: 100vh;
@@ -120,20 +120,34 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
               </Button>
             </Link>
           </Form.Item>
+          <Divider>OR</Divider>
           <Form.Item>
-            <ReactFacebookLogin
+            <FacebookProvider
               appId={process.env.REACT_APP_FACEBOOK_APP_ID || ''}
-              autoLoad={true}
-              fields="name,email,picture"
-              callback={response => {
-                facebookLogIn({
-                  variables: {
-                    facebookToken: response.accessToken
-                  }
-                });
-              }}
-            />
-            ,
+            >
+              <Login
+                scope="email"
+                onCompleted={response => {
+                  facebookLogIn({
+                    variables: {
+                      facebookToken: response.tokenDetail.accessToken
+                    }
+                  });
+                }}
+              >
+                {({ loading: facebookLoading, handleClick, error, data }) => (
+                  <Button
+                    type="primary"
+                    htmlType="button"
+                    block={true}
+                    onClick={handleClick}
+                    disabled={facebookLoading}
+                  >
+                    Login via Facebook
+                  </Button>
+                )}
+              </Login>
+            </FacebookProvider>
           </Form.Item>
         </Form>
       </LoginCard>

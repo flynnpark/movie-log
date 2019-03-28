@@ -26,7 +26,6 @@ const Setting: FunctionComponent<IProps> = ({ visible, setVisible }) => {
           <BorderlessMenu
             selectable={false}
             onClick={({ key }) => {
-              console.log(key);
               if (key === 'logout') {
                 userLogOut();
               }

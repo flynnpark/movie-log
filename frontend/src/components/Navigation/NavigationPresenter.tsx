@@ -77,7 +77,11 @@ const NavigationPresenter: React.FunctionComponent<IProps> = ({
           <RightSide>
             {!loading && userId ? (
               <Link to={`/profile/${userId}`}>
-                <Avatar size={32} icon={avatar ? avatar : 'user'} />
+                {avatar ? (
+                  <Avatar size={32} src={avatar} />
+                ) : (
+                  <Avatar size={32} icon="user" />
+                )}
               </Link>
             ) : (
               <Avatar size={32} icon="user" />
