@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Button, Card, Checkbox, Form, Icon, Input, Divider } from 'antd';
-import { FacebookProvider, Login } from 'react-facebook';
 
 const PageWrapper = styled.div`
   height: 100vh;
@@ -32,7 +31,8 @@ interface IProps {
   loading: boolean;
   handleSubmit: (event: any) => void;
   onSubmitFn: MutationFn;
-  facebookLogIn: MutationFn;
+  facebookLoading: boolean;
+  handleFacebookClick: any;
 }
 
 const LoginPresenter: React.FunctionComponent<IProps> = ({
@@ -40,7 +40,8 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
   loading,
   handleSubmit,
   onSubmitFn,
-  facebookLogIn
+  facebookLoading,
+  handleFacebookClick
 }) => {
   const { getFieldDecorator } = form;
   return (
@@ -73,7 +74,7 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
               <Input
                 prefix={<Icon type="user" />}
                 placeholder="E-mail"
-                disabled={loading}
+                disabled={loading || facebookLoading}
               />
             )}
           </Form.Item>
@@ -90,7 +91,7 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
                 prefix={<Icon type="lock" />}
                 type="password"
                 placeholder="Password"
-                disabled={loading}
+                disabled={loading || facebookLoading}
               />
             )}
           </Form.Item>
@@ -98,14 +99,18 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
             {getFieldDecorator('remember', {
               valuePropName: 'checked',
               initialValue: true
-            })(<Checkbox disabled={loading}>Remember me</Checkbox>)}
+            })(
+              <Checkbox disabled={loading || facebookLoading}>
+                Remember me
+              </Checkbox>
+            )}
           </Form.Item>
           <Form.Item>
             <Button
               type="primary"
               htmlType="submit"
               block={true}
-              loading={loading}
+              loading={loading || facebookLoading}
             >
               Log in
             </Button>
@@ -114,7 +119,7 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
                 type="default"
                 htmlType="button"
                 block={true}
-                loading={loading}
+                loading={loading || facebookLoading}
               >
                 Sign up
               </Button>
@@ -122,32 +127,16 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
           </Form.Item>
           <Divider>OR</Divider>
           <Form.Item>
-            <FacebookProvider
-              appId={process.env.REACT_APP_FACEBOOK_APP_ID || ''}
+            <Button
+              type="primary"
+              htmlType="button"
+              block={true}
+              onClick={handleFacebookClick}
+              disabled={loading || facebookLoading}
             >
-              <Login
-                scope="email"
-                onCompleted={response => {
-                  facebookLogIn({
-                    variables: {
-                      facebookToken: response.tokenDetail.accessToken
-                    }
-                  });
-                }}
-              >
-                {({ loading: facebookLoading, handleClick, error, data }) => (
-                  <Button
-                    type="primary"
-                    htmlType="button"
-                    block={true}
-                    onClick={handleClick}
-                    disabled={facebookLoading}
-                  >
-                    Login via Facebook
-                  </Button>
-                )}
-              </Login>
-            </FacebookProvider>
+              <Icon type="facebook" theme="filled" />
+              Login via Facebook
+            </Button>
           </Form.Item>
         </Form>
       </LoginCard>
@@ -156,3 +145,4 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
 };
 
 export default LoginPresenter;
+``;

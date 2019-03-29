@@ -3,6 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
 import { Form, notification } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { Login } from 'react-facebook';
 import {
   startEmailVerification,
   startEmailVerificationVariables
@@ -83,13 +84,36 @@ class LogInContainer extends React.Component<IProps, IState> {
                 }}
               >
                 {(mutation, { loading }) => (
-                  <LogInPresenter
-                    loading={loading}
-                    form={form}
-                    handleSubmit={this.handleSubmit}
-                    onSubmitFn={mutation}
-                    facebookLogIn={facebookLogIn}
-                  />
+                  <Login
+                    scope="email"
+                    onCompleted={response => {
+                      facebookLogIn({
+                        variables: {
+                          facebookToken: response.tokenDetail.accessToken
+                        }
+                      });
+                    }}
+                    onError={error => {
+                      notification.error({
+                        message: 'Login Failed',
+                        description: error
+                      });
+                    }}
+                  >
+                    {({
+                      loading: facebookLoading,
+                      handleClick: handleFacebookClick
+                    }) => (
+                      <LogInPresenter
+                        loading={loading}
+                        form={form}
+                        handleSubmit={this.handleSubmit}
+                        onSubmitFn={mutation}
+                        facebookLoading={facebookLoading}
+                        handleFacebookClick={handleFacebookClick}
+                      />
+                    )}
+                  </Login>
                 )}
               </EmailSignInMutation>
             )}
