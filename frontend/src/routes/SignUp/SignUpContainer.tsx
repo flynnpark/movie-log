@@ -1,12 +1,13 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Mutation } from 'react-apollo';
-import { Form } from 'antd';
+import { Form, notification } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
+import { Login } from 'react-facebook';
 import SignUpPresenter from './SignUpPresenter';
 import { EMAIL_SIGN_UP } from './SignUpQueries';
 import { startEmailSignUp, startEmailSignUpVariables } from '../../types/api';
-import { USER_LOG_IN } from '../../SharedQueries.local';
+import { USER_LOG_IN, FACEBOOK_LOG_IN } from '../../SharedQueries.local';
 
 interface IState {
   confirmDirty: boolean;
@@ -99,45 +100,71 @@ class SignUpContainer extends React.Component<IProps, IState> {
     return (
       <Mutation mutation={USER_LOG_IN}>
         {userLogIn => (
-          <EmailSignUpMutation
-            mutation={EMAIL_SIGN_UP}
-            variables={{
-              email,
-              password,
-              name,
-              avatar,
-              shortBio
-            }}
-            onCompleted={data => {
-              const { EmailSignUp } = data;
-              if (EmailSignUp.ok) {
-                if (EmailSignUp.token) {
-                  userLogIn({
-                    variables: {
-                      token: EmailSignUp.token
+          <Mutation mutation={FACEBOOK_LOG_IN}>
+            {facebookLogIn => (
+              <EmailSignUpMutation
+                mutation={EMAIL_SIGN_UP}
+                variables={{
+                  email,
+                  password,
+                  name,
+                  avatar,
+                  shortBio
+                }}
+                onCompleted={data => {
+                  const { EmailSignUp } = data;
+                  if (EmailSignUp.ok) {
+                    if (EmailSignUp.token) {
+                      userLogIn({
+                        variables: {
+                          token: EmailSignUp.token
+                        }
+                      });
                     }
-                  });
-                }
-                return;
-              } else {
-                console.log(data);
-              }
-            }}
-          >
-            {(mutation, { loading }) => {
-              return (
-                <SignUpPresenter
-                  loading={loading}
-                  form={form}
-                  validateToNextPassword={this.validateToNextPassword}
-                  compareToFirstPassword={this.compareToFirstPassword}
-                  handleConfirmBlur={this.handleConfirmBlur}
-                  handleSubmit={this.handleSubmit}
-                  onSubmitFn={mutation}
-                />
-              );
-            }}
-          </EmailSignUpMutation>
+                    return;
+                  } else {
+                    console.log(data);
+                  }
+                }}
+              >
+                {(mutation, { loading }) => (
+                  <Login
+                    scope="email"
+                    onCompleted={response => {
+                      facebookLogIn({
+                        variables: {
+                          facebookToken: response.tokenDetail.accessToken
+                        }
+                      });
+                    }}
+                    onError={error => {
+                      notification.error({
+                        message: 'Login Failed',
+                        description: error
+                      });
+                    }}
+                  >
+                    {({
+                      loading: facebookLoading,
+                      handleClick: handleFacebookClick
+                    }) => (
+                      <SignUpPresenter
+                        loading={loading}
+                        form={form}
+                        validateToNextPassword={this.validateToNextPassword}
+                        compareToFirstPassword={this.compareToFirstPassword}
+                        handleConfirmBlur={this.handleConfirmBlur}
+                        handleSubmit={this.handleSubmit}
+                        onSubmitFn={mutation}
+                        facebookLoading={facebookLoading}
+                        handleFacebookClick={handleFacebookClick}
+                      />
+                    )}
+                  </Login>
+                )}
+              </EmailSignUpMutation>
+            )}
+          </Mutation>
         )}
       </Mutation>
     );

@@ -132,7 +132,7 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
               htmlType="button"
               block={true}
               onClick={handleFacebookClick}
-              disabled={loading || facebookLoading}
+              loading={loading || facebookLoading}
             >
               <Icon type="facebook" theme="filled" />
               Login via Facebook

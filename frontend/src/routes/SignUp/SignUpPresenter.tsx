@@ -2,7 +2,16 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Card, Form, Input, Tooltip, Icon, Upload, Button } from 'antd';
+import {
+  Card,
+  Form,
+  Input,
+  Tooltip,
+  Icon,
+  Upload,
+  Button,
+  Divider
+} from 'antd';
 import { MutationFn } from 'react-apollo';
 
 const PageWrapper = styled.div`
@@ -14,11 +23,12 @@ const SignUpCard = styled(Card)`
   @media (min-width: 719px) {
     display: inline-block;
     position: relative;
-    width: 600px;
+    width: 375px;
     height: auto;
     vertical-align: middle;
   }
   width: 100%;
+  height: 100%;
 `;
 
 interface IProps {
@@ -37,6 +47,8 @@ interface IProps {
   ) => void;
   handleSubmit: (event: any) => void;
   onSubmitFn: MutationFn;
+  facebookLoading: boolean;
+  handleFacebookClick: any;
 }
 
 const SignUpPresenter: React.FunctionComponent<IProps> = ({
@@ -46,7 +58,9 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
   validateToNextPassword,
   compareToFirstPassword,
   handleSubmit,
-  onSubmitFn
+  onSubmitFn,
+  facebookLoading,
+  handleFacebookClick
 }) => {
   const { getFieldDecorator } = form;
 
@@ -117,7 +131,7 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
               ]
             })(<Input type="password" onBlur={handleConfirmBlur} />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Confirm Password">
+          <Form.Item {...formItemLayout} label="Confirm">
             {getFieldDecorator('confirm', {
               rules: [
                 {
@@ -170,6 +184,19 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
             </Button>{' '}
             <Button type="primary" htmlType="submit">
               Register
+            </Button>
+          </Form.Item>
+          <Divider>OR</Divider>
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="button"
+              block={true}
+              onClick={handleFacebookClick}
+              loading={loading || facebookLoading}
+            >
+              <Icon type="facebook" theme="filled" />
+              Login via Facebook
             </Button>
           </Form.Item>
         </Form>
