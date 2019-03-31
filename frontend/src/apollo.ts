@@ -233,6 +233,7 @@ const client = new ApolloClient({
         console.log(`Unexpected error: ${message}`);
         if (message === 'Unauthorized') {
           localStorage.removeItem('jwt');
+          localStorage.removeItem('facebookToken');
           cache.writeData({
             data: {
               auth: {
