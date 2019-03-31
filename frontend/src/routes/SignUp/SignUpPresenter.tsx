@@ -100,6 +100,7 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
               name="avatar"
               listType="picture-card"
               showUploadList={false}
+              disabled={loading || facebookLoading}
             >
               {uploadButton}
             </Upload>
@@ -116,7 +117,7 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
                   message: 'Please input your E-mail'
                 }
               ]
-            })(<Input />)}
+            })(<Input disabled={loading || facebookLoading} />)}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Password">
             {getFieldDecorator('password', {
@@ -129,7 +130,13 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
                   validator: validateToNextPassword
                 }
               ]
-            })(<Input type="password" onBlur={handleConfirmBlur} />)}
+            })(
+              <Input
+                type="password"
+                onBlur={handleConfirmBlur}
+                disabled={loading || facebookLoading}
+              />
+            )}
           </Form.Item>
           <Form.Item {...formItemLayout} label="Confirm">
             {getFieldDecorator('confirm', {
@@ -142,7 +149,7 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
                   validator: compareToFirstPassword
                 }
               ]
-            })(<Input type="password" />)}
+            })(<Input type="password" disabled={loading || facebookLoading} />)}
           </Form.Item>
           <Form.Item
             {...formItemLayout}
@@ -163,7 +170,7 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
                   whitespace: true
                 }
               ]
-            })(<Input />)}
+            })(<Input disabled={loading || facebookLoading} />)}
           </Form.Item>
           <Form.Item
             {...formItemLayout}
@@ -176,14 +183,26 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
               </span>
             }
           >
-            {getFieldDecorator('shortBio')(<Input.TextArea rows={3} />)}
+            {getFieldDecorator('shortBio')(
+              <Input.TextArea rows={3} disabled={loading || facebookLoading} />
+            )}
           </Form.Item>
           <Form.Item>
-            <Button type="default" htmlType="button">
-              <Link to="/">Back</Link>
-            </Button>{' '}
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              htmlType="submit"
+              block={true}
+              loading={loading || facebookLoading}
+            >
               Register
+            </Button>
+            <Button
+              type="default"
+              htmlType="button"
+              block={true}
+              loading={loading || facebookLoading}
+            >
+              <Link to="/">Back</Link>
             </Button>
           </Form.Item>
           <Divider>OR</Divider>
