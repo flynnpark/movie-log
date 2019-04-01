@@ -3,7 +3,7 @@ import { MutationFn } from 'react-apollo';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Button, Card, Checkbox, Form, Icon, Input, Divider } from 'antd';
+import { Button, Card, Checkbox, Form, Icon, Input, Divider, Spin } from 'antd';
 
 const PageWrapper = styled.div`
   height: 100vh;
@@ -106,37 +106,28 @@ const LoginPresenter: React.FunctionComponent<IProps> = ({
             )}
           </Form.Item>
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              block={true}
-              loading={loading || facebookLoading}
-            >
-              Log in
-            </Button>
-            <Link to="/signup">
-              <Button
-                type="default"
-                htmlType="button"
-                block={true}
-                loading={loading || facebookLoading}
-              >
-                Sign up
+            <Spin spinning={loading || facebookLoading}>
+              <Button type="primary" htmlType="submit" block={true}>
+                Log in
               </Button>
-            </Link>
+              <Button type="default" htmlType="button" block={true}>
+                <Link to="/signup">Sign up</Link>
+              </Button>
+            </Spin>
           </Form.Item>
           <Divider>OR</Divider>
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="button"
-              block={true}
-              onClick={handleFacebookClick}
-              loading={loading || facebookLoading}
-            >
-              <Icon type="facebook" theme="filled" />
-              Login via Facebook
-            </Button>
+            <Spin spinning={loading || facebookLoading}>
+              <Button
+                type="primary"
+                htmlType="button"
+                block={true}
+                onClick={handleFacebookClick}
+              >
+                <Icon type="facebook" theme="filled" />
+                Login via Facebook
+              </Button>
+            </Spin>
           </Form.Item>
         </Form>
       </LoginCard>

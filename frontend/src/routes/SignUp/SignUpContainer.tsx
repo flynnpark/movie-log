@@ -156,7 +156,11 @@ class SignUpContainer extends React.Component<IProps, IState> {
                         handleConfirmBlur={this.handleConfirmBlur}
                         handleSubmit={this.handleSubmit}
                         onSubmitFn={mutation}
-                        facebookLoading={facebookLoading}
+                        facebookLoading={
+                          facebookLoading === undefined
+                            ? false
+                            : facebookLoading
+                        }
                         handleFacebookClick={handleFacebookClick}
                       />
                     )}

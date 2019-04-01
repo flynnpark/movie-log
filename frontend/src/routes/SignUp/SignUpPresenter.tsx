@@ -10,7 +10,8 @@ import {
   Icon,
   Upload,
   Button,
-  Divider
+  Divider,
+  Spin
 } from 'antd';
 import { MutationFn } from 'react-apollo';
 
@@ -188,35 +189,28 @@ const SignUpPresenter: React.FunctionComponent<IProps> = ({
             )}
           </Form.Item>
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="submit"
-              block={true}
-              loading={loading || facebookLoading}
-            >
-              Register
-            </Button>
-            <Button
-              type="default"
-              htmlType="button"
-              block={true}
-              loading={loading || facebookLoading}
-            >
-              <Link to="/">Back</Link>
-            </Button>
+            <Spin spinning={loading || facebookLoading}>
+              <Button type="primary" htmlType="submit" block={true}>
+                Register
+              </Button>
+              <Button type="default" htmlType="button" block={true}>
+                <Link to="/">Back</Link>
+              </Button>
+            </Spin>
           </Form.Item>
           <Divider>OR</Divider>
           <Form.Item>
-            <Button
-              type="primary"
-              htmlType="button"
-              block={true}
-              onClick={handleFacebookClick}
-              loading={loading || facebookLoading}
-            >
-              <Icon type="facebook" theme="filled" />
-              Login via Facebook
-            </Button>
+            <Spin spinning={loading || facebookLoading}>
+              <Button
+                type="primary"
+                htmlType="button"
+                block={true}
+                onClick={handleFacebookClick}
+              >
+                <Icon type="facebook" theme="filled" />
+                Login via Facebook
+              </Button>
+            </Spin>
           </Form.Item>
         </Form>
       </SignUpCard>

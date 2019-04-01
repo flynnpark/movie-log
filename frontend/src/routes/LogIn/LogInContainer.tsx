@@ -109,7 +109,11 @@ class LogInContainer extends React.Component<IProps, IState> {
                         form={form}
                         handleSubmit={this.handleSubmit}
                         onSubmitFn={mutation}
-                        facebookLoading={facebookLoading}
+                        facebookLoading={
+                          facebookLoading === undefined
+                            ? false
+                            : facebookLoading
+                        }
                         handleFacebookClick={handleFacebookClick}
                       />
                     )}
