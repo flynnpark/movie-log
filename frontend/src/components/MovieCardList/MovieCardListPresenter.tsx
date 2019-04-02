@@ -34,6 +34,7 @@ const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
             ? { gutter: 16, column: 6 }
             : { gutter: 16, column: 4 }
         }
+        loading={loading}
         dataSource={movieList}
         renderItem={(item: MovieItem, index: number) => (
           <List.Item>
@@ -46,7 +47,7 @@ const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
         )}
       />
     )}
-    {loading && movieList && <Loading />}
+    {loading && movieList === undefined && <Loading />}
   </MovieCardContainer>
 );
 
