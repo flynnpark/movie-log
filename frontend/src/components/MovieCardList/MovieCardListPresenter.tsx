@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { List } from 'antd';
 import { MovieItem } from 'src/types/local';
 import MovieCard from 'src/components/MovieCard';
-import Loading from 'src/components/Loading';
 import MiniMovieCard from '../MiniMovieCard';
 
 const MovieCardContainer = styled.div`
@@ -25,29 +24,23 @@ const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
 }) => (
   <MovieCardContainer>
     {title && title}
-    {loading && !movieList ? (
-      <Loading />
-    ) : (
-      <List
-        grid={
-          size === 'mini'
-            ? { gutter: 16, column: 6 }
-            : { gutter: 16, column: 4 }
-        }
-        loading={loading}
-        dataSource={movieList}
-        renderItem={(item: MovieItem, index: number) => (
-          <List.Item>
-            {size === 'mini' ? (
-              <MiniMovieCard key={item.id} {...item} />
-            ) : (
-              <MovieCard key={index} {...item} />
-            )}
-          </List.Item>
-        )}
-      />
-    )}
-    {loading && movieList === undefined && <Loading />}
+    <List
+      grid={
+        size === 'mini' ? { gutter: 16, column: 6 } : { gutter: 16, column: 4 }
+      }
+      loading={loading}
+      dataSource={movieList}
+      renderItem={(item: MovieItem, index: number) => (
+        <List.Item>
+          {size === 'mini' ? (
+            <MiniMovieCard key={item.id} {...item} />
+          ) : (
+            <MovieCard key={index} {...item} />
+          )}
+        </List.Item>
+      )}
+    />
+    {/* {loading && movieList === undefined && <Loading />} */}
   </MovieCardContainer>
 );
 
