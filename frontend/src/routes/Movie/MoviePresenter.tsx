@@ -2,13 +2,14 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Alert, Divider } from 'antd';
 import styled from 'styled-components';
+import QueueAnim from 'rc-queue-anim';
 import { getMovieDetail, getRelatedMovies } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
 import MovieHeader from 'src/components/MovieHeader';
 import MovieInfo from 'src/components/MovieInfo';
 import MovieCardList from 'src/components/MovieCardList';
 
-const MovieInfoContinaer = styled.div`
+const MovieInfoContainer = styled.div`
   background-color: #fff;
   padding: 36px;
   border-radius: 4px;
@@ -49,40 +50,47 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
           <Helmet>
             <title>{movie.title} | Movie-log</title>
           </Helmet>
-          <MovieInfoContinaer>
-            <MovieHeader
-              movie={movie}
-              ratingData={ratingData}
-              handleMovieRatingApply={handleMovieRatingApply}
-              handleMovieRatingRemove={handleMovieRatingRemove}
-            />
-            <Divider />
-            <MovieInfo movie={movie} />
-            <Divider />
-            {relatedMoviesData && (
-              <MovieCardList
-                loading={relatedMoviesLoading}
-                size="mini"
-                title={<MovieListTitle>추천 영화</MovieListTitle>}
-                movieList={
-                  relatedMoviesData.GetMovieRecommendations &&
-                  relatedMoviesData.GetMovieRecommendations.slice(0, 12)
-                }
-              />
-            )}
-            <Divider />
-            {relatedMoviesData && (
-              <MovieCardList
-                loading={relatedMoviesLoading}
-                size="mini"
-                title={<MovieListTitle>비슷한 영화</MovieListTitle>}
-                movieList={
-                  relatedMoviesData.GetMovieSimilar &&
-                  relatedMoviesData.GetMovieSimilar.slice(0, 12)
-                }
-              />
-            )}
-          </MovieInfoContinaer>
+          <QueueAnim type={['right', 'left']}>
+            <MovieInfoContainer key="container">
+              <QueueAnim type={['right', 'left']}>
+                <MovieHeader
+                  key="header"
+                  movie={movie}
+                  ratingData={ratingData}
+                  handleMovieRatingApply={handleMovieRatingApply}
+                  handleMovieRatingRemove={handleMovieRatingRemove}
+                />
+                <Divider />
+                <MovieInfo key="info" movie={movie} />
+                <Divider />
+                {relatedMoviesData && (
+                  <MovieCardList
+                    key="recommended"
+                    loading={relatedMoviesLoading}
+                    size="mini"
+                    title={<MovieListTitle>추천 영화</MovieListTitle>}
+                    movieList={
+                      relatedMoviesData.GetMovieRecommendations &&
+                      relatedMoviesData.GetMovieRecommendations.slice(0, 12)
+                    }
+                  />
+                )}
+                <Divider />
+                {relatedMoviesData && (
+                  <MovieCardList
+                    key="similar"
+                    loading={relatedMoviesLoading}
+                    size="mini"
+                    title={<MovieListTitle>비슷한 영화</MovieListTitle>}
+                    movieList={
+                      relatedMoviesData.GetMovieSimilar &&
+                      relatedMoviesData.GetMovieSimilar.slice(0, 12)
+                    }
+                  />
+                )}
+              </QueueAnim>
+            </MovieInfoContainer>
+          </QueueAnim>
         </>
       ) : (
         <>

@@ -20,6 +20,7 @@
     "graphql-tag": "^2.10.1",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.23",
+    "rc-queue-anim": "^1.6.12",
     "react": "^16.8.1",
     "react-apollo": "^2.5.1",
     "react-apollo-hooks": "^0.4.3",
