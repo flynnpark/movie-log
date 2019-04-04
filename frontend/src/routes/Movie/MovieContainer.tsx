@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Query, Mutation, MutationFn } from 'react-apollo';
 import { OperationVariables, ApolloQueryResult } from 'apollo-boost';
+import Helmet from 'react-helmet';
+import { Alert } from 'antd';
 import {
   setMovieRating,
   setMovieRatingVariables,
@@ -82,7 +84,7 @@ class MovieContainer extends Component<IProps> {
 
   public render() {
     const { match } = this.props;
-    if (match) {
+    if (match.params.movieId) {
       const {
         params: { movieId }
       } = match;
@@ -158,7 +160,19 @@ class MovieContainer extends Component<IProps> {
         </MovieDetailQueries>
       );
     }
-    return null;
+    return (
+      <>
+        <Helmet>
+          <title>정보가 존재하지 않습니다. | Movie-log</title>
+        </Helmet>
+        <Alert
+          message="Error"
+          description="영화 정보를 가져올 수 없습니다."
+          type="error"
+          showIcon={true}
+        />
+      </>
+    );
   }
 }
 
