@@ -7,6 +7,7 @@ import { GET_PROFILE_DATA, GET_RATED_MOVIES } from './ProfileQueries';
 import ProfilePresenter from './ProfilePresenter';
 import { getMovieList } from 'src/types/local';
 import { GET_MOVIE_LIST } from './ProfileQueries.local';
+import Loading from 'src/components/Loading';
 
 interface IParams {
   userId: string;
@@ -85,42 +86,48 @@ class ProfileContainer extends Component<IProps, {}> {
                       variables={{ movieIdList: ratedMovieIdList }}
                     >
                       {({ data: movieListData, loading: movieListLoading }) => (
-                        <ProfilePresenter
-                          profileData={profileData}
-                          profileLoading={profileLoading}
-                          ratedMovieData={ratedMoviesData}
-                          ratedMoviesLoading={ratedMoviesLoading}
-                          movieListData={movieListData}
-                          movieListLoading={movieListLoading}
-                          onLoadMore={() =>
-                            fetchMore({
-                              variables: {
-                                offset: ratedMovieIdList.length
-                              },
-                              updateQuery: (prev, { fetchMoreResult }) => {
-                                if (
-                                  ratedMoviesData &&
-                                  ratedMoviesData.GetRatedMovies.ratedMovies &&
-                                  fetchMoreResult &&
-                                  fetchMoreResult.GetRatedMovies.ratedMovies
-                                ) {
-                                  return Object.assign({}, prev, {
-                                    GetRatedMovies: {
-                                      ...ratedMoviesData.GetRatedMovies,
-                                      ratedMovies: [
-                                        ...ratedMoviesData.GetRatedMovies
-                                          .ratedMovies,
-                                        ...fetchMoreResult.GetRatedMovies
-                                          .ratedMovies
-                                      ]
+                        <>
+                          {profileLoading ? (
+                            <Loading />
+                          ) : (
+                            <ProfilePresenter
+                              profileData={profileData}
+                              ratedMovieData={ratedMoviesData}
+                              ratedMoviesLoading={ratedMoviesLoading}
+                              movieListData={movieListData}
+                              movieListLoading={movieListLoading}
+                              onLoadMore={() =>
+                                fetchMore({
+                                  variables: {
+                                    offset: ratedMovieIdList.length
+                                  },
+                                  updateQuery: (prev, { fetchMoreResult }) => {
+                                    if (
+                                      ratedMoviesData &&
+                                      ratedMoviesData.GetRatedMovies
+                                        .ratedMovies &&
+                                      fetchMoreResult &&
+                                      fetchMoreResult.GetRatedMovies.ratedMovies
+                                    ) {
+                                      return Object.assign({}, prev, {
+                                        GetRatedMovies: {
+                                          ...ratedMoviesData.GetRatedMovies,
+                                          ratedMovies: [
+                                            ...ratedMoviesData.GetRatedMovies
+                                              .ratedMovies,
+                                            ...fetchMoreResult.GetRatedMovies
+                                              .ratedMovies
+                                          ]
+                                        }
+                                      });
                                     }
-                                  });
-                                }
-                                return prev;
+                                    return prev;
+                                  }
+                                })
                               }
-                            })
-                          }
-                        />
+                            />
+                          )}
+                        </>
                       )}
                     </MovieListQueries>
                   );

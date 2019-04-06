@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { ApolloQueryResult } from 'apollo-boost';
 import styled from 'styled-components';
 import { Alert, Divider, BackTop } from 'antd';
+import QueueAnim from 'rc-queue-anim';
 import { getProfileData, getRatedMovies } from 'src/types/api';
 import { getMovieList, MovieItem } from 'src/types/local';
 import ProfileSection from 'src/components/ProfileSection';
@@ -20,7 +21,6 @@ const DividerWrapper = styled.div`
 
 interface IProps {
   profileData: getProfileData | undefined;
-  profileLoading: boolean;
   ratedMovieData: getRatedMovies | undefined;
   ratedMoviesLoading: boolean;
   movieListData: getMovieList | undefined;
@@ -30,13 +30,12 @@ interface IProps {
 
 const ProfilePresenter: FunctionComponent<IProps> = ({
   profileData,
-  profileLoading,
   ratedMoviesLoading,
   movieListData,
   movieListLoading,
   onLoadMore
 }) => {
-  if (!profileLoading && profileData) {
+  if (profileData) {
     const {
       GetUserProfile: { ok: profileOk, user },
       GetUserInfo: { countInfo }
@@ -51,29 +50,26 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
     }
     if (profileOk && user) {
       return (
-        <>
+        <QueueAnim type={['right', 'left']}>
           <Helmet>
             <title>'{user.name}'님의 프로필 | Movie-log</title>
           </Helmet>
           <BackTop />
-          <ProfileSection userData={user} countData={countInfo} />
-          {
-            <>
-              <MovieCardList
-                loading={ratedMoviesLoading || movieListLoading}
-                title={<MovieListTitle>시청한 영화</MovieListTitle>}
-                movieList={movieList}
-              />
-              {countInfo && countInfo.movieRatingCount > movieList.length && (
-                <DividerWrapper>
-                  <Divider>
-                    <a onClick={onLoadMore}>더 불러오기</a>
-                  </Divider>
-                </DividerWrapper>
-              )}
-            </>
-          }
-        </>
+          <ProfileSection key="section" userData={user} countData={countInfo} />
+          <MovieCardList
+            key="list"
+            loading={ratedMoviesLoading || movieListLoading}
+            title={<MovieListTitle>시청한 영화</MovieListTitle>}
+            movieList={movieList}
+          />
+          {countInfo && countInfo.movieRatingCount > movieList.length && (
+            <DividerWrapper key="divider">
+              <Divider>
+                <a onClick={onLoadMore}>더 불러오기</a>
+              </Divider>
+            </DividerWrapper>
+          )}
+        </QueueAnim>
       );
     }
     // 프로필이 존재하지 않을 때
