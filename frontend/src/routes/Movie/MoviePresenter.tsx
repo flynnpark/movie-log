@@ -50,18 +50,19 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
           <Helmet>
             <title>{movie.title} | Movie-log</title>
           </Helmet>
-          <QueueAnim type={['right', 'left']}>
+          <QueueAnim>
             <MovieInfoContainer key="container">
-              <QueueAnim type={['right', 'left']}>
-                <MovieHeader
-                  key="header"
-                  movie={movie}
-                  ratingData={ratingData}
-                  handleMovieRatingApply={handleMovieRatingApply}
-                  handleMovieRatingRemove={handleMovieRatingRemove}
-                />
+              <QueueAnim>
+                <div key="movieHeader">
+                  <MovieHeader
+                    movie={movie}
+                    ratingData={ratingData}
+                    handleMovieRatingApply={handleMovieRatingApply}
+                    handleMovieRatingRemove={handleMovieRatingRemove}
+                  />
+                </div>
                 <Divider />
-                <MovieInfo key="info" movie={movie} />
+                <MovieInfo key="movieInfo" movie={movie} />
                 <Divider />
                 {relatedMoviesData && (
                   <MovieCardList
@@ -97,12 +98,15 @@ const MoviePresenter: React.FunctionComponent<IProps> = ({
           <Helmet>
             <title>정보가 존재하지 않습니다. | Movie-log</title>
           </Helmet>
-          <Alert
-            message="Error"
-            description="해당 영화 정보를 가져올 수 없습니다."
-            type="error"
-            showIcon={true}
-          />
+          <QueueAnim>
+            <Alert
+              key="alert"
+              message="Error"
+              description="해당 영화 정보를 가져올 수 없습니다."
+              type="error"
+              showIcon={true}
+            />
+          </QueueAnim>
         </>
       )}
     </>

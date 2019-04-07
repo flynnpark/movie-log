@@ -50,14 +50,16 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
     }
     if (profileOk && user) {
       return (
-        <QueueAnim type={['right', 'left']}>
+        <QueueAnim>
           <Helmet>
             <title>'{user.name}'님의 프로필 | Movie-log</title>
           </Helmet>
           <BackTop />
-          <ProfileSection key="section" userData={user} countData={countInfo} />
+          <div key="profileSection">
+            <ProfileSection userData={user} countData={countInfo} />
+          </div>
           <MovieCardList
-            key="list"
+            key="movieCardList"
             loading={ratedMoviesLoading || movieListLoading}
             title={<MovieListTitle>시청한 영화</MovieListTitle>}
             movieList={movieList}
@@ -74,12 +76,20 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
     }
     // 프로필이 존재하지 않을 때
     return (
-      <Alert
-        message="Error"
-        description="해당 유저의 프로필을 가져올 수 없습니다."
-        type="error"
-        showIcon={true}
-      />
+      <>
+        <Helmet>
+          <title>정보가 존재하지 않습니다. | Movie-log</title>
+        </Helmet>
+        <QueueAnim>
+          <Alert
+            key="alert"
+            message="Error"
+            description="해당 유저의 프로필을 가져올 수 없습니다."
+            type="error"
+            showIcon={true}
+          />
+        </QueueAnim>
+      </>
     );
   }
   return <Loading />;

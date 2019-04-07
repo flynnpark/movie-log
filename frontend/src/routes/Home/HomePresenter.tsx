@@ -22,7 +22,7 @@ const HomePresenter: React.FunctionComponent<IProps> = ({ loading, data }) => {
     const popularList = GetPopular && GetPopular.slice(0, 12);
     const topRatedList = GetTopRated && GetTopRated.slice(0, 12);
     return (
-      <QueueAnim type={['right', 'left']}>
+      <QueueAnim>
         <Helmet>
           <title>Home | Movie-log</title>
         </Helmet>
