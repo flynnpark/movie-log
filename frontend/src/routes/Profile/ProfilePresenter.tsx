@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import { ApolloQueryResult } from 'apollo-boost';
 import styled from 'styled-components';
-import { Alert, Divider, BackTop } from 'antd';
+import { Alert, Divider } from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import { getProfileData, getRatedMovies } from 'src/types/api';
 import { getMovieList, MovieItem } from 'src/types/local';
@@ -54,7 +54,6 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
           <Helmet>
             <title>'{user.name}'님의 프로필 | Movie-log</title>
           </Helmet>
-          <BackTop />
           <div key="profileSection">
             <ProfileSection userData={user} countData={countInfo} />
           </div>

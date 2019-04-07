@@ -8,7 +8,7 @@ import {
   RouteComponentProps
 } from 'react-router-dom';
 import styled from 'styled-components';
-import { Layout } from 'antd';
+import { Layout, BackTop } from 'antd';
 import Home from '../../routes/Home';
 import LogIn from '../../routes/LogIn';
 import SignUp from '../../routes/SignUp';
@@ -59,6 +59,7 @@ const AppPresenter: React.FunctionComponent<IProps> = ({ isLoggedIn }) => (
 
 const LoggedOutRoutes: React.FunctionComponent = () => (
   <Layout>
+    <BackTop />
     <LoggedOutContent>
       <Switch>
         <Route exact={true} path="/" component={LogIn} />
@@ -73,6 +74,7 @@ interface ILoggedInRoutesProps extends RouteComponentProps<any> {}
 
 const LoggedInRoutes: React.FunctionComponent<ILoggedInRoutesProps> = props => (
   <Layout>
+    <BackTop />
     <FixedHeader>
       <Navigation {...props} />
     </FixedHeader>
