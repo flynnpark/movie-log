@@ -1,6 +1,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
+import QueueAnim from 'rc-queue-anim';
 import { findMovie } from 'src/types/local';
 import MovieCardList from 'src/components/MovieCardList';
 
@@ -20,18 +21,19 @@ const SearchPresenter: React.FunctionComponent<IProps> = ({
   query,
   data
 }) => (
-  <>
+  <QueueAnim>
     <Helmet>
       <title>'{query}' 검색 결과 | Movie-log</title>
     </Helmet>
     {data && (
       <MovieCardList
+        key="search"
         loading={loading}
         title={<MovieListTitle>'{query}' 검색 결과</MovieListTitle>}
         movieList={data.FindMovie}
       />
     )}
-  </>
+  </QueueAnim>
 );
 
 export default SearchPresenter;
