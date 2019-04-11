@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import Helmet from 'react-helmet';
 import { ApolloQueryResult } from 'apollo-boost';
 import styled from 'styled-components';
-import { Alert, Divider } from 'antd';
+import { Alert, Divider, Tabs } from 'antd';
 import QueueAnim from 'rc-queue-anim';
 import { getProfileData, getRatedMovies } from 'src/types/api';
 import { getMovieList, MovieItem } from 'src/types/local';
@@ -17,6 +17,32 @@ const MovieListTitle = styled.h1`
 
 const DividerWrapper = styled.div`
   margin-bottom: 30px;
+`;
+
+const CardContainer = styled.div`
+  & .ant-tabs-card > .ant-tabs-content {
+    margin-top: -16px;
+  }
+
+  & .ant-tabs-card > .ant-tabs-content > .ant-tabs-tabpane {
+    background: #fff;
+    padding: 16px;
+    border-radius: 0 5px 5px 5px;
+  }
+
+  & .ant-tabs-card > .ant-tabs-bar {
+    border-color: #fff;
+  }
+
+  & .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+    border-color: transparent;
+    background: transparent;
+  }
+
+  & .ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+    border-color: #fff;
+    background: #fff;
+  }
 `;
 
 interface IProps {
@@ -57,19 +83,28 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
           <div key="profileSection">
             <ProfileSection userData={user} countData={countInfo} />
           </div>
-          <MovieCardList
-            key="movieCardList"
-            loading={ratedMoviesLoading || movieListLoading}
-            title={<MovieListTitle>시청한 영화</MovieListTitle>}
-            movieList={movieList}
-          />
-          {countInfo && countInfo.movieRatingCount > movieList.length && (
-            <DividerWrapper key="divider">
-              <Divider>
-                <a onClick={onLoadMore}>더 불러오기</a>
-              </Divider>
-            </DividerWrapper>
-          )}
+          <CardContainer key="cardContainer">
+            <Tabs type="card">
+              <Tabs.TabPane tab="목록" key="list">
+                <MovieCardList
+                  key="movieCardList"
+                  loading={ratedMoviesLoading || movieListLoading}
+                  title={<MovieListTitle>시청한 영화</MovieListTitle>}
+                  movieList={movieList}
+                />
+                {countInfo && countInfo.movieRatingCount > movieList.length && (
+                  <DividerWrapper key="divider">
+                    <Divider>
+                      <a onClick={onLoadMore}>더 불러오기</a>
+                    </Divider>
+                  </DividerWrapper>
+                )}
+              </Tabs.TabPane>
+              <Tabs.TabPane tab="타임라인" key="timeline">
+                <div>Timeline Here</div>
+              </Tabs.TabPane>
+            </Tabs>
+          </CardContainer>
         </QueueAnim>
       );
     }
