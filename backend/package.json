@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/wphestiraid/movie-log-backend#readme",
   "dependencies": {
+    "@types/dotenv": "^6.1.1",
     "@types/helmet": "^0.0.43",
     "@types/morgan": "^1.7.35",
     "@types/passport": "^1.0.0",
