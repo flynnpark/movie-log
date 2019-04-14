@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { List } from 'antd';
 import { MovieItem } from 'src/types/local';
-import MovieCard from 'src/components/MovieCard';
-import MiniMovieCard from '../MiniMovieCard';
+// import MovieCard from 'src/components/MovieCard';
+// import MiniMovieCard from '../MiniMovieCard';
+import NewMovieCard from '../NewMovieCard';
 
 const MovieCardContainer = styled.div`
   margin-bottom: 30px;
@@ -33,9 +34,9 @@ const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
       renderItem={(item: MovieItem, index: number) => (
         <List.Item>
           {size === 'mini' ? (
-            <MiniMovieCard key={item.id} {...item} />
+            <NewMovieCard key={index} {...item} />
           ) : (
-            <MovieCard key={index} {...item} />
+            <NewMovieCard key={index} {...item} />
           )}
         </List.Item>
       )}
