@@ -4,6 +4,7 @@ import { Card, Divider } from 'antd';
 import { getMovieDetail_GetMovieDetail_movie } from 'src/types/local';
 import { getMovieRatings } from 'src/types/api';
 import MovieRating from 'src/components/MovieRating';
+import MoviePosterWithLoading from '../MoviePosterWIithLoading';
 
 const MovieInfoCard = styled(Card)`
   background-color: transparent;
@@ -13,6 +14,7 @@ const MovieInfoCard = styled(Card)`
 
 const LeftContainer = styled.div`
   margin-right: 12px;
+  width: 300px;
 `;
 
 const TitleContainer = styled.div``;
@@ -66,7 +68,10 @@ const MovieHeaderPresenter: React.FunctionComponent<IProps> = ({
     <Card.Meta
       avatar={
         <LeftContainer>
-          <img src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} />
+          <MoviePosterWithLoading
+            title={movie.title}
+            posterPath={movie.poster_path}
+          />
         </LeftContainer>
       }
       title={

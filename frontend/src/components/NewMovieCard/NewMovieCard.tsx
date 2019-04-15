@@ -4,18 +4,18 @@ import MoviePosterWithLoading from '../MoviePosterWIithLoading';
 
 interface IProps {
   id: number;
-  poster_path: string | null;
+  posterPath: string | null;
   title: string;
 }
 
 const NewMovieCard: React.FunctionComponent<IProps> = ({
   id,
   title,
-  poster_path
+  posterPath
 }) => {
   return (
     <Link to={`/movie/${id}`}>
-      <MoviePosterWithLoading title={title} poster_path={poster_path} />
+      <MoviePosterWithLoading title={title} posterPath={posterPath} />
     </Link>
   );
 };

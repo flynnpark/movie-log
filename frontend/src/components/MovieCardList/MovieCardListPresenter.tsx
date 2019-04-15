@@ -34,9 +34,19 @@ const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
       renderItem={(item: MovieItem, index: number) => (
         <List.Item>
           {size === 'mini' ? (
-            <NewMovieCard key={index} {...item} />
+            <NewMovieCard
+              key={index}
+              id={item.id}
+              title={item.title}
+              posterPath={item.poster_path}
+            />
           ) : (
-            <NewMovieCard key={index} {...item} />
+            <NewMovieCard
+              key={index}
+              id={item.id}
+              title={item.title}
+              posterPath={item.poster_path}
+            />
           )}
         </List.Item>
       )}

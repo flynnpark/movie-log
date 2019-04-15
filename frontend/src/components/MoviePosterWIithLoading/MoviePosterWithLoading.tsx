@@ -34,20 +34,21 @@ const Image = styled.img`
 
 interface IProps {
   title: string;
-  poster_path: string | null;
+  posterPath: string | null;
 }
 
 const MoviePosterWithLoading: React.FunctionComponent<IProps> = ({
   title,
-  poster_path
+  posterPath
 }) => {
   const [loading, setLoading] = useState(true);
+  console.log(posterPath);
   return (
     <ImageWrapper>
       <ImagePlaceholder>
         <Icon type="picture" />
         <Image
-          src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${poster_path}`}
+          src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${posterPath}`}
           alt={title}
           style={loading ? { visibility: 'hidden' } : {}}
           onLoad={() => setLoading(false)}
