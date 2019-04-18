@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { List } from 'antd';
 import { MovieItem } from 'src/types/local';
-// import MovieCard from 'src/components/MovieCard';
-// import MiniMovieCard from '../MiniMovieCard';
-import NewMovieCard from '../NewMovieCard';
+import NewMovieCard from '../MovieCard';
 
 const MovieCardContainer = styled.div`
   margin-bottom: 30px;
