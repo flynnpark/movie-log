@@ -100,9 +100,9 @@ const ProfilePresenter: FunctionComponent<IProps> = ({
                   </DividerWrapper>
                 )}
               </Tabs.TabPane>
-              <Tabs.TabPane tab="타임라인" key="timeline">
+              {/* <Tabs.TabPane tab="타임라인" key="timeline">
                 <div>Timeline Here</div>
-              </Tabs.TabPane>
+              </Tabs.TabPane> */}
             </Tabs>
           </CardContainer>
         </QueueAnim>
