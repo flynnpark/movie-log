@@ -26,7 +26,7 @@ const MovieCardListPresenter: React.FunctionComponent<IProps> = ({
     <List
       grid={
         size === 'mini'
-          ? { gutter: 16, column: 6 }
+          ? { gutter: 16, xs: 4, md: 6 }
           : { gutter: 16, xs: 3, md: 4 }
       }
       loading={loading}

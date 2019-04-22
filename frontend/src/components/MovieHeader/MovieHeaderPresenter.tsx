@@ -13,22 +13,32 @@ const MovieInfoCard = styled(Card)`
 `;
 
 const LeftContainer = styled.div`
-  margin-right: 12px;
-  width: 300px;
+  @media (min-width: 719px) {
+    margin-right: 12px;
+    width: 300px;
+  }
+  margin-right: 6px;
+  width: 150px;
 `;
 
 const TitleContainer = styled.div``;
 
 const Title = styled.h1`
+  @media (min-width: 719px) {
+    font-size: 42px;
+  }
   display: flex;
-  font-size: 42px;
+  font-size: 22px;
   line-height: 110%;
   white-space: pre-wrap;
 `;
 
 const OriginTitle = styled.h2`
+  @media (min-width: 719px) {
+    font-size: 24px;
+  }
   display: flex;
-  font-size: 24px;
+  font-size: 14px;
   line-height: 110%;
   color: #8c8c8c;
   white-space: pre-wrap;
@@ -36,14 +46,20 @@ const OriginTitle = styled.h2`
 `;
 
 const Tagline = styled.div`
+  @media (min-width: 719px) {
+    font-size: 18px;
+  }
   display: flex;
   color: #262626;
-  font-size: 18px;
+  font-size: 13px;
   margin-top: 16px;
 `;
 
 const GenreWrapper = styled.div`
-  font-size: 16px;
+  @media (min-width: 719px) {
+    font-size: 16px;
+  }
+  font-size: 13px;
   margin-top: 14px;
 `;
 
