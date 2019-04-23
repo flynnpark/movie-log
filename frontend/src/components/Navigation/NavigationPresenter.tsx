@@ -18,7 +18,7 @@ const HeaderSide = styled.div`
 
 const HeaderCenter = styled.div`
   display: flex;
-  width: 640px !important;
+  width: 480px !important;
 `;
 
 const SearchField = styled(Input.Search)`
@@ -27,7 +27,7 @@ const SearchField = styled(Input.Search)`
   flex-grow: 1;
   margin-left: auto;
   margin-right: auto;
-  width: 640px !important;
+  width: 480px !important;
   padding: auto;
 `;
 
@@ -59,37 +59,35 @@ const NavigationPresenter: React.FunctionComponent<IProps> = ({
     avatar = user.avatar;
   }
   return (
-    <React.Fragment>
-      <HeaderContainer>
-        <HeaderSide>
-          <LeftSide>
-            <Link to="/">Movie.log</Link>
-          </LeftSide>
-        </HeaderSide>
-        <HeaderCenter>
-          <SearchField
-            placeholder="영화 제목을 검색해보세요."
-            size="large"
-            onSearch={(value: string) => history.push(`/search/${value}`)}
-          />
-        </HeaderCenter>
-        <HeaderSide>
-          <RightSide>
-            {!loading && userId ? (
-              <Link to={`/profile/${userId}`}>
-                {avatar ? (
-                  <Avatar size={32} src={avatar} />
-                ) : (
-                  <Avatar size={32} icon="user" />
-                )}
-              </Link>
-            ) : (
-              <Avatar size={32} icon="user" />
-            )}
-          </RightSide>
-        </HeaderSide>
-      </HeaderContainer>
-    </React.Fragment>
+    <HeaderContainer>
+      <HeaderSide>
+        <LeftSide>
+          <Link to="/">Movie.log</Link>
+        </LeftSide>
+      </HeaderSide>
+      <HeaderCenter>
+        <SearchField
+          placeholder="영화 제목을 검색해보세요."
+          size="large"
+          onSearch={(value: string) => history.push(`/search/${value}`)}
+        />
+      </HeaderCenter>
+      <HeaderSide>
+        <RightSide>
+          {!loading && userId ? (
+            <Link to={`/profile/${userId}`}>
+              {avatar ? (
+                <Avatar size={32} src={avatar} />
+              ) : (
+                <Avatar size={32} icon="user" />
+              )}
+            </Link>
+          ) : (
+            <Avatar size={32} icon="user" />
+          )}
+        </RightSide>
+      </HeaderSide>
+    </HeaderContainer>
   );
 };
 

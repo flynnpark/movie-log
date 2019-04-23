@@ -19,6 +19,9 @@ import Navigation from '../Navigation';
 import Footer from '../Footer';
 
 const FixedHeader = styled(Layout.Header)`
+  @media (max-width: 767px) {
+    display: none;
+  }
   position: fixed;
   display: flex;
   background-color: #fff;
@@ -41,13 +44,12 @@ const LoggedOutContent = styled(Layout.Content)`
 `;
 
 const Content = styled(Layout.Content)`
-  @media (min-width: 719px) {
+  @media (min-width: 768px) {
     padding-top: 96px;
     max-width: 960px;
     width: 100%;
     margin: 0 auto;
   }
-  padding-top: 64px;
   width: 100%;
 `;
 
