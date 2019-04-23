@@ -4,8 +4,11 @@ import moment from 'moment-timezone';
 import { DatePicker, Button, Rate, Popconfirm } from 'antd';
 
 const MovieRatingContainer = styled.div`
+  @media (min-width: 719px) {
+    flex-direction: row;
+  }
+  flex-direction: column;
   display: flex;
-  flex-direction: row;
   margin-top: 8px;
 `;
 
@@ -16,6 +19,9 @@ const RatingWrapper = styled.div`
 `;
 
 const RatingTitle = styled.div`
+  @media (max-width: 718px) {
+    font-size: 13px;
+  }
   display: flex;
 `;
 
@@ -30,13 +36,19 @@ const StarContainer = styled.div`
 `;
 
 const DateWrapper = styled.div`
+  @media (min-width: 719px) {
+    margin-left: 10px;
+  }
   display: flex;
   flex-direction: column;
-  margin-left: 10px;
   justify-content: center;
 `;
 
 const DateTitle = styled.div`
+  @media (max-width: 718px) {
+    font-size: 13px;
+    margin-top: 4px;
+  }
   display: flex;
 `;
 

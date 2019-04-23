@@ -18,7 +18,7 @@ const LeftContainer = styled.div`
     width: 300px;
   }
   margin-right: 6px;
-  width: 150px;
+  width: 130px;
 `;
 
 const TitleContainer = styled.div``;
@@ -63,6 +63,12 @@ const GenreWrapper = styled.div`
   margin-top: 14px;
 `;
 
+const MiddleDivider = styled(Divider)`
+  @media (max-width: 718px) {
+    margin: 12px 0;
+  }
+`;
+
 const CardBodyStyle = {
   padding: 0
 };
@@ -104,7 +110,7 @@ const MovieHeaderPresenter: React.FunctionComponent<IProps> = ({
             {' · '}
             {movie.genres.map(genre => genre && genre.name).join(' ')}
           </GenreWrapper>
-          <Divider />
+          <MiddleDivider />
           <MovieRating handleMovieRatingApply={handleMovieRatingApply} />
           {ratingData &&
             ratingData.GetMovieRatings.ok &&

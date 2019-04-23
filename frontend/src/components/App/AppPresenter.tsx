@@ -41,10 +41,14 @@ const LoggedOutContent = styled(Layout.Content)`
 `;
 
 const Content = styled(Layout.Content)`
-  padding-top: 96px;
-  max-width: 960px;
+  @media (min-width: 719px) {
+    padding-top: 96px;
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  padding-top: 64px;
   width: 100%;
-  margin: 0 auto;
 `;
 
 interface IProps {

@@ -10,6 +10,9 @@ import MovieInfo from 'src/components/MovieInfo';
 import MovieCardList from 'src/components/MovieCardList';
 
 const MovieInfoContainer = styled.div`
+  @media (max-width: 718px) {
+    padding: 24px;
+  }
   background-color: #fff;
   padding: 36px;
   border-radius: 4px;
