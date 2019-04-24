@@ -17,6 +17,7 @@ import Search from '../../routes/Search';
 import Movie from '../../routes/Movie';
 import Navigation from '../Navigation';
 import Footer from '../Footer';
+import MobileNavigationContainer from '../MobileNavigation/MobileNavigationContainer';
 
 const FixedHeader = styled(Layout.Header)`
   @media (max-width: 767px) {
@@ -24,6 +25,22 @@ const FixedHeader = styled(Layout.Header)`
   }
   position: fixed;
   display: flex;
+  background-color: #fff;
+  z-index: 1;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px #e8e8e8;
+`;
+
+const FixedFooter = styled(Layout.Footer)`
+  @media (min-width: 768px) {
+    display: none;
+  }
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  padding: 0;
   background-color: #fff;
   z-index: 1;
   width: 100%;
@@ -96,6 +113,9 @@ const LoggedInRoutes: React.FunctionComponent<ILoggedInRoutesProps> = props => (
     <Layout.Footer>
       <Footer />
     </Layout.Footer>
+    <FixedFooter>
+      <MobileNavigationContainer />
+    </FixedFooter>
   </Layout>
 );
 

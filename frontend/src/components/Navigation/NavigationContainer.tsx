@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import NavigationPresenter from './NavigationPresenter';
@@ -9,11 +9,7 @@ class GetMyInfoQueries extends Query<getProfileData> {}
 
 interface IProps extends RouteComponentProps<any> {}
 
-class NavigationContainer extends Component<IProps> {
-  constructor(props: IProps) {
-    super(props);
-  }
-
+class NavigationContainer extends React.Component<IProps> {
   public render() {
     return (
       <GetMyInfoQueries query={GET_NAVIGATION_DATA}>
