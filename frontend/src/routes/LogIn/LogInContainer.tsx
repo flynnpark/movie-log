@@ -4,13 +4,13 @@ import { Mutation } from 'react-apollo';
 import { Form, notification } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 import { Login } from 'react-facebook';
+import { USER_LOG_IN, FACEBOOK_LOG_IN } from 'SharedQueries.local';
 import {
   startEmailVerification,
   startEmailVerificationVariables
-} from '../../types/api';
+} from 'types/api';
 import LogInPresenter from './LogInPresenter';
 import { EMAIL_LOG_IN } from './LogInQueries';
-import { USER_LOG_IN, FACEBOOK_LOG_IN } from '../../SharedQueries.local';
 
 interface IState {
   email: string;

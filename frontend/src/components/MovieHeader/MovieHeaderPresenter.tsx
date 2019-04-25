@@ -4,7 +4,7 @@ import { Card, Divider } from 'antd';
 import { getMovieDetail_GetMovieDetail_movie } from 'types/local';
 import { getMovieRatings } from 'types/api';
 import MovieRating from 'components/MovieRating';
-import MoviePosterWithLoading from '../MoviePosterWIithLoading';
+import MoviePosterWithLoading from 'components/MoviePosterWIithLoading';
 
 const MovieInfoCard = styled(Card)`
   background-color: transparent;

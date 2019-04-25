@@ -9,15 +9,15 @@ import {
 } from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout, BackTop } from 'antd';
-import Home from '../../routes/Home';
-import LogIn from '../../routes/LogIn';
-import SignUp from '../../routes/SignUp';
-import Profile from '../../routes/Profile';
-import Search from '../../routes/Search';
-import Movie from '../../routes/Movie';
-import Navigation from '../Navigation';
-import Footer from '../Footer';
-import MobileNavigationContainer from '../MobileNavigation/MobileNavigationContainer';
+import Home from 'routes/Home';
+import LogIn from 'routes/LogIn';
+import SignUp from 'routes/SignUp';
+import Profile from 'routes/Profile';
+import Search from 'routes/Search';
+import Movie from 'routes/Movie';
+import Navigation from 'components/Navigation';
+import Footer from 'components/Footer';
+import MobileNavigationContainer from 'components/MobileNavigation/MobileNavigationContainer';
 
 const FixedHeader = styled(Layout.Header)`
   @media (max-width: 767px) {

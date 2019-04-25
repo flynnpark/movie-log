@@ -13,13 +13,13 @@ import {
 } from 'types/api';
 import { getMovieDetail, getRelatedMovies } from 'types/local';
 import Loading from 'components/Loading';
-import MoviePresenter from './MoviePresenter';
 import { GET_MOVIE_DETAIL, GET_RELATED_MOVIES } from './MovieQueries.local';
 import {
   GET_MOVIE_RATINGS,
   SET_MOVIE_RATING,
   REMOVE_MOVIE_RATING
 } from './MovieQueries';
+import MoviePresenter from './MoviePresenter';
 
 interface IParams {
   movieId: string;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import MoviePosterWithLoading from '../MoviePosterWIithLoading';
+import MoviePosterWithLoading from 'components/MoviePosterWIithLoading';
 
 const MovieTitle = styled.div`
   display: flex;

@@ -5,7 +5,7 @@ import {
   getProfileData_GetUserProfile_user,
   getProfileData_GetUserInfo_countInfo
 } from 'types/api';
-import Setting from '../Setting';
+import Setting from 'components/Setting';
 
 const ProfileCard = styled(Card)`
   background-color: transparent;

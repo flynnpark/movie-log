@@ -4,10 +4,10 @@ import { Mutation } from 'react-apollo';
 import { Form, notification } from 'antd';
 import { WrappedFormUtils } from 'antd/lib/form/Form';
 import { Login } from 'react-facebook';
-import SignUpPresenter from './SignUpPresenter';
+import { USER_LOG_IN, FACEBOOK_LOG_IN } from 'SharedQueries.local';
+import { startEmailSignUp, startEmailSignUpVariables } from 'types/api';
 import { EMAIL_SIGN_UP } from './SignUpQueries';
-import { startEmailSignUp, startEmailSignUpVariables } from '../../types/api';
-import { USER_LOG_IN, FACEBOOK_LOG_IN } from '../../SharedQueries.local';
+import SignUpPresenter from './SignUpPresenter';
 
 interface IState {
   confirmDirty: boolean;
