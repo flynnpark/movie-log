@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "outDir": "build/dist",
     "module": "commonjs",
     "target": "es5",
@@ -20,6 +20,7 @@
     "esModuleInterop": true,
     "skipDefaultLibCheck": true
   },
+  "include": ["src"],
   "exclude": [
     "node_modules",
     "build",

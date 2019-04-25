@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MovieItem } from 'src/types/local';
+import { MovieItem } from 'types/local';
 import MovieCardListPresenter from './MovieCardListPresenter';
 
 interface IProps {

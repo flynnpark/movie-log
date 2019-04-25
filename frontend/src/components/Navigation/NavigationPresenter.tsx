@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
 import { Input, Avatar } from 'antd';
 import styled from 'styled-components';
-import { getProfileData } from 'src/types/api';
+import { getProfileData } from 'types/api';
 
 const HeaderContainer = styled.div`
   display: flex;

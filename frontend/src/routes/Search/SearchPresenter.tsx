@@ -2,8 +2,8 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import QueueAnim from 'rc-queue-anim';
-import { findMovie } from 'src/types/local';
-import MovieCardList from 'src/components/MovieCardList';
+import { findMovie } from 'types/local';
+import MovieCardList from 'components/MovieCardList';
 
 const MovieListTitle = styled.h1`
   font-size: 32px;

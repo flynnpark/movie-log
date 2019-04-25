@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment-timezone';
+import { getMovieRatings_GetMovieRatings_movieRatings } from 'types/api';
 import MovieRatingPresenter from './MovieRatingPresenter';
-import { getMovieRatings_GetMovieRatings_movieRatings } from 'src/types/api';
 
 interface IProps {
   movieRating?: getMovieRatings_GetMovieRatings_movieRatings;

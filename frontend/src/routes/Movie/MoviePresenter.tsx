@@ -3,11 +3,11 @@ import Helmet from 'react-helmet';
 import { Alert, Divider } from 'antd';
 import styled from 'styled-components';
 import QueueAnim from 'rc-queue-anim';
-import { getMovieDetail, getRelatedMovies } from 'src/types/local';
-import { getMovieRatings } from 'src/types/api';
-import MovieHeader from 'src/components/MovieHeader';
-import MovieInfo from 'src/components/MovieInfo';
-import MovieCardList from 'src/components/MovieCardList';
+import { getMovieDetail, getRelatedMovies } from 'types/local';
+import { getMovieRatings } from 'types/api';
+import MovieHeader from 'components/MovieHeader';
+import MovieInfo from 'components/MovieInfo';
+import MovieCardList from 'components/MovieCardList';
 
 const MovieInfoContainer = styled.div`
   @media (max-width: 718px) {

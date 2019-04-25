@@ -4,7 +4,7 @@ import { Card, Avatar, Statistic, Button } from 'antd';
 import {
   getProfileData_GetUserProfile_user,
   getProfileData_GetUserInfo_countInfo
-} from 'src/types/api';
+} from 'types/api';
 import Setting from '../Setting';
 
 const ProfileCard = styled(Card)`

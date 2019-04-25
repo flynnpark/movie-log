@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { List } from 'antd';
-import { MovieItem } from 'src/types/local';
+import { MovieItem } from 'types/local';
 import NewMovieCard from '../MovieCard';
 
 const MovieCardContainer = styled.div`

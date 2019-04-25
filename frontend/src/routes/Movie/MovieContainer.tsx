@@ -10,7 +10,9 @@ import {
   removeMovieRating,
   removeMovieRatingVariables,
   getMovieRatings
-} from 'src/types/api';
+} from 'types/api';
+import { getMovieDetail, getRelatedMovies } from 'types/local';
+import Loading from 'components/Loading';
 import MoviePresenter from './MoviePresenter';
 import { GET_MOVIE_DETAIL, GET_RELATED_MOVIES } from './MovieQueries.local';
 import {
@@ -18,8 +20,6 @@ import {
   SET_MOVIE_RATING,
   REMOVE_MOVIE_RATING
 } from './MovieQueries';
-import Loading from 'src/components/Loading';
-import { getMovieDetail, getRelatedMovies } from 'src/types/local';
 
 interface IParams {
   movieId: string;
@@ -52,10 +52,6 @@ class MovieContainer extends Component<IProps> {
   private refetchMovieRatings: (
     variables?: OperationVariables | undefined
   ) => Promise<ApolloQueryResult<getMovieRatings>>;
-
-  constructor(props: IProps) {
-    super(props);
-  }
 
   public handleMovieRatingApply = async (
     rating: number,

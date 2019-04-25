@@ -4,11 +4,11 @@ import { ApolloQueryResult } from 'apollo-boost';
 import styled from 'styled-components';
 import { Alert, Divider, Tabs } from 'antd';
 import QueueAnim from 'rc-queue-anim';
-import { getProfileData, getRatedMovies } from 'src/types/api';
-import { getMovieList, MovieItem } from 'src/types/local';
-import ProfileSection from 'src/components/ProfileSection';
-import MovieCardList from 'src/components/MovieCardList';
-import Loading from 'src/components/Loading';
+import { getProfileData, getRatedMovies } from 'types/api';
+import { getMovieList, MovieItem } from 'types/local';
+import ProfileSection from 'components/ProfileSection';
+import MovieCardList from 'components/MovieCardList';
+import Loading from 'components/Loading';
 
 const MovieListTitle = styled.h1`
   font-size: 20px;

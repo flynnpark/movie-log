@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { getMovieRatings } from 'types/api';
+import { getMovieDetail_GetMovieDetail_movie } from 'types/local';
 import MovieHeaderPresenter from './MovieHeaderPresenter';
-import { getMovieDetail_GetMovieDetail_movie } from 'src/types/local';
-import { getMovieRatings } from 'src/types/api';
 
 interface IProps {
   movie: getMovieDetail_GetMovieDetail_movie;

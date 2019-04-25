@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Query } from 'react-apollo';
-import { getHomeData } from 'src/types/local';
-import HomePresenter from './HomePresenter';
+import { getHomeData } from 'types/local';
 import { GET_HOME_DATA } from './HomeQueries.local';
+import HomePresenter from './HomePresenter';
 
 class NowPlayingQueries extends Query<getHomeData> {}
 

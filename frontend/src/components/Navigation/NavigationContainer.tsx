@@ -1,9 +1,9 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Query } from 'react-apollo';
-import NavigationPresenter from './NavigationPresenter';
-import { getProfileData } from 'src/types/api';
+import { getProfileData } from 'types/api';
 import { GET_NAVIGATION_DATA } from './NavigationQueries';
+import NavigationPresenter from './NavigationPresenter';
 
 class GetMyInfoQueries extends Query<getProfileData> {}
 

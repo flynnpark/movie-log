@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { getMovieDetail_GetMovieDetail_movie } from 'src/types/local';
+import { getMovieDetail_GetMovieDetail_movie } from 'types/local';
 
 const MovieInfoHeader = styled.h1`
   display: flex;

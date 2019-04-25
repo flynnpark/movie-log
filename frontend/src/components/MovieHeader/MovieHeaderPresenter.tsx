@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card, Divider } from 'antd';
-import { getMovieDetail_GetMovieDetail_movie } from 'src/types/local';
-import { getMovieRatings } from 'src/types/api';
-import MovieRating from 'src/components/MovieRating';
+import { getMovieDetail_GetMovieDetail_movie } from 'types/local';
+import { getMovieRatings } from 'types/api';
+import MovieRating from 'components/MovieRating';
 import MoviePosterWithLoading from '../MoviePosterWIithLoading';
 
 const MovieInfoCard = styled(Card)`

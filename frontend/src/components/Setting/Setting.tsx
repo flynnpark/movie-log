@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { Modal, Menu } from 'antd';
 import styled from 'styled-components';
 import { Mutation } from 'react-apollo';
-import { USER_LOG_OUT } from 'src/SharedQueries.local';
+import { USER_LOG_OUT } from 'SharedQueries.local';
 
 const BorderlessMenu = styled(Menu)`
   border: none;

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { Query } from 'react-apollo';
 import { ApolloQueryResult, OperationVariables } from 'apollo-boost';
-import { getProfileData, getRatedMovies } from 'src/types/api';
+import { getProfileData, getRatedMovies } from 'types/api';
+import { getMovieList } from 'types/local';
+import Loading from 'components/Loading';
 import { GET_PROFILE_DATA, GET_RATED_MOVIES } from './ProfileQueries';
-import ProfilePresenter from './ProfilePresenter';
-import { getMovieList } from 'src/types/local';
 import { GET_MOVIE_LIST } from './ProfileQueries.local';
-import Loading from 'src/components/Loading';
+import ProfilePresenter from './ProfilePresenter';
 
 interface IParams {
   userId: string;
@@ -69,7 +69,7 @@ class ProfileContainer extends Component<IProps, {}> {
                   refetch: refetchRatedMovies
                 }) => {
                   this.refetchRatedMovies = refetchRatedMovies;
-                  const ratedMovieIdList: number[] = new Array();
+                  const ratedMovieIdList: number[] = [];
                   if (ratedMoviesData && ratedMoviesData.GetRatedMovies) {
                     const {
                       GetRatedMovies: { ratedMovies }
