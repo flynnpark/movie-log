@@ -1,4 +1,5 @@
 import 'antd/dist/antd.css';
+import 'antd-mobile/dist/antd-mobile.css';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
