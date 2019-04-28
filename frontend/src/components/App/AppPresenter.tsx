@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter,
-  Redirect,
-  Route,
-  Switch,
-  withRouter,
-  RouteComponentProps
-} from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { Layout, BackTop } from 'antd';
 import Home from 'routes/Home';
@@ -76,7 +69,7 @@ interface IProps {
 
 const AppPresenter: React.FunctionComponent<IProps> = ({ isLoggedIn }) => (
   <BrowserRouter>
-    {isLoggedIn ? <WrappedLoggedInRoutes /> : <LoggedOutRoutes />}
+    {isLoggedIn ? <LoggedInRoutes /> : <LoggedOutRoutes />}
   </BrowserRouter>
 );
 
@@ -93,20 +86,18 @@ const LoggedOutRoutes: React.FunctionComponent = () => (
   </Layout>
 );
 
-interface ILoggedInRoutesProps extends RouteComponentProps<any> {}
-
-const LoggedInRoutes: React.FunctionComponent<ILoggedInRoutesProps> = props => (
+const LoggedInRoutes: React.FunctionComponent = () => (
   <Layout>
     <BackTop />
     <FixedHeader>
-      <Navigation {...props} />
+      <Navigation />
     </FixedHeader>
     <Content>
       <Switch>
+        <Route path="/profile/:userId" component={Profile} />
+        <Route path="/search/:query" component={Search} />
+        <Route path="/movie/:movieId" component={Movie} />
         <Route exact={true} path="/" component={Home} />
-        <Route exact={true} path="/profile/:userId" component={Profile} />
-        <Route exact={true} path="/search/:query" component={Search} />
-        <Route exact={true} path="/movie/:movieId" component={Movie} />
         <Redirect from={'*'} to={'/'} />
       </Switch>
     </Content>
@@ -118,7 +109,5 @@ const LoggedInRoutes: React.FunctionComponent<ILoggedInRoutesProps> = props => (
     </FixedFooter>
   </Layout>
 );
-
-const WrappedLoggedInRoutes = withRouter(LoggedInRoutes);
 
 export default AppPresenter;

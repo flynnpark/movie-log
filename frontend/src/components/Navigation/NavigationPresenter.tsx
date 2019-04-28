@@ -39,7 +39,7 @@ const RightSide = styled.div`
   margin-left: auto;
 `;
 
-interface IProps extends RouteComponentProps<any> {
+interface IProps extends RouteComponentProps {
   data: getProfileData | undefined;
   loading: boolean;
 }
