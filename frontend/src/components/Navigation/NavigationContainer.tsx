@@ -17,8 +17,8 @@ class NavigationContainer extends React.Component<IProps> {
           return (
             <NavigationPresenter
               {...this.props}
-              data={data}
               loading={loading}
+              data={data}
             />
           );
         }}

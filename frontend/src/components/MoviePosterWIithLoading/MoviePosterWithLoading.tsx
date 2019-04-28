@@ -37,12 +37,8 @@ interface IProps {
   posterPath: string | null;
 }
 
-const MoviePosterWithLoading: React.FunctionComponent<IProps> = ({
-  title,
-  posterPath
-}) => {
+const MoviePosterWithLoading: React.FC<IProps> = ({ title, posterPath }) => {
   const [loading, setLoading] = useState(true);
-  console.log(posterPath);
   return (
     <ImageWrapper>
       <ImagePlaceholder>
