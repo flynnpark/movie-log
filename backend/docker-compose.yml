@@ -1,0 +1,32 @@
+version: '2.1'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./docker/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=movielog
+      - POSTGRES_USER=movielog
+      - POSTGRES_PASSWORD=movielog
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8
+    healthcheck:
+      test: "pg_isready -h localhost -p 5432 -q -U movielog"
+      interval: 3s
+      timeout: 1s
+      retries: 10
+
+  movie-log:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      db:
+        condition: service_healthy
+    links:
+      - db
+    volumes:
+      - ./src:/usr/src/app/src
