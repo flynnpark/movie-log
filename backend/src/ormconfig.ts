@@ -7,7 +7,7 @@ const connectionOptions: ConnectionOptions = {
   host: process.env.DB_ENDPOINT,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
-  // synchronize: true,
+  synchronize: true,
   logging: true,
   entities: ['entity/**/*.ts'],
   migrations: ['migration/**/*.ts'],
