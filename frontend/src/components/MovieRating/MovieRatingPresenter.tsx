@@ -18,6 +18,13 @@ const RatingWrapper = styled.div`
   justify-content: center;
 `;
 
+const RatingInfoHeader = styled.h1`
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 14px;
+`;
+
 const RatingTitle = styled.div`
   @media (max-width: 718px) {
     font-size: 13px;
@@ -80,9 +87,6 @@ const ButtonWrapper = styled.div`
 `;
 
 const UserFeedbackWrapper = styled.div`
-  @media (max-width: 480px) {
-    flex-direction: column;
-  }
   display: flex;
   flex-direction: row;
 `
@@ -115,6 +119,7 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
     {handleClickRating && handleClickWatchDate && setMovieRating ? (
       <>
         <RatingWrapper>
+          <RatingInfoHeader>평가</RatingInfoHeader>
           <RatingTitle>영화는 어땠나요?</RatingTitle>
           <StarButtonContainer>
             <StarRate
