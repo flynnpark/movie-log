@@ -6,8 +6,8 @@ import NewMovieCard from 'components/MovieCard';
 
 const MovieCardContainer = styled.div`
   margin-bottom: 30px;
-  @media (max-width: 960px) {
-    padding: 24px;
+  :last-child {
+    margin-bottom: 0;
   }
 `;
 
