@@ -53,6 +53,7 @@ const Tagline = styled.div`
   color: #262626;
   font-size: 13px;
   margin-top: 16px;
+  white-space: normal;
 `;
 
 const GenreWrapper = styled.div`

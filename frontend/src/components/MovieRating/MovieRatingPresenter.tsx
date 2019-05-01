@@ -29,6 +29,12 @@ const StarButtonContainer = styled.div`
   display: flex;
 `;
 
+const StarRate = styled(Rate)`
+  li {
+    width: calc(20% - 8px);
+  }
+`
+
 const StarContainer = styled.div`
   display: flex;
   align-items: center;
@@ -40,6 +46,7 @@ const DateWrapper = styled.div`
     margin-left: 10px;
   }
   display: flex;
+  max-width: 170px;
   flex-direction: column;
   justify-content: center;
 `;
@@ -63,6 +70,7 @@ const DateContainer = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
+  max-width: 30px;
   margin-left: 10px;
   align-items: flex-end;
   justify-content: center;
@@ -93,7 +101,7 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
         <RatingWrapper>
           <RatingTitle>영화는 어땠나요?</RatingTitle>
           <StarButtonContainer>
-            <Rate
+            <StarRate
               allowHalf={true}
               style={{ fontSize: '26px' }}
               value={rating}
@@ -109,16 +117,16 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
               format={dateFormat}
               onChange={handleClickWatchDate}
             />
+            <ButtonWrapper>
+              <Button
+                type="dashed"
+                shape="circle"
+                icon="check"
+                onClick={setMovieRating}
+              />
+            </ButtonWrapper>
           </DatePickerContainer>
         </DateWrapper>
-        <ButtonWrapper>
-          <Button
-            type="dashed"
-            shape="circle"
-            icon="check"
-            onClick={setMovieRating}
-          />
-        </ButtonWrapper>
       </>
     ) : (
       <>
