@@ -62,6 +62,9 @@ const DateWrapper = styled.div`
 `;
 
 const DateTitle = styled.div`
+  @media (min-width: 719px) {
+    padding-top: 41px;
+  }
   @media (max-width: 718px) {
     font-size: 13px;
     margin-top: 4px;
