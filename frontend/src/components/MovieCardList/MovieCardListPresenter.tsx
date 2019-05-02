@@ -6,6 +6,9 @@ import NewMovieCard from 'components/MovieCard';
 
 const MovieCardContainer = styled.div`
   margin-bottom: 30px;
+  :last-child {
+    margin-bottom: 0;
+  }
 `;
 
 interface IProps {

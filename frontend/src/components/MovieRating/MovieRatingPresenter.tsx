@@ -18,6 +18,13 @@ const RatingWrapper = styled.div`
   justify-content: center;
 `;
 
+const RatingInfoHeader = styled.h1`
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 14px;
+`;
+
 const RatingTitle = styled.div`
   @media (max-width: 718px) {
     font-size: 13px;
@@ -29,7 +36,16 @@ const StarButtonContainer = styled.div`
   display: flex;
 `;
 
+const StarRate = styled(Rate)`
+  li {
+    width: calc(20% - 8px);
+  }
+`
+
 const StarContainer = styled.div`
+  @media (max-width: 480px) {
+    justify-content: left;
+  }
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,11 +56,15 @@ const DateWrapper = styled.div`
     margin-left: 10px;
   }
   display: flex;
+  max-width: 170px;
   flex-direction: column;
   justify-content: center;
 `;
 
 const DateTitle = styled.div`
+  @media (min-width: 719px) {
+    padding-top: 41px;
+  }
   @media (max-width: 718px) {
     font-size: 13px;
     margin-top: 4px;
@@ -63,10 +83,21 @@ const DateContainer = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
+  max-width: 30px;
   margin-left: 10px;
   align-items: flex-end;
   justify-content: center;
 `;
+
+const UserFeedbackWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const RightWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`
 
 interface IProps {
   rating: number;
@@ -91,9 +122,10 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
     {handleClickRating && handleClickWatchDate && setMovieRating ? (
       <>
         <RatingWrapper>
+          <RatingInfoHeader>평가</RatingInfoHeader>
           <RatingTitle>영화는 어땠나요?</RatingTitle>
           <StarButtonContainer>
-            <Rate
+            <StarRate
               allowHalf={true}
               style={{ fontSize: '26px' }}
               value={rating}
@@ -109,19 +141,19 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
               format={dateFormat}
               onChange={handleClickWatchDate}
             />
+            <ButtonWrapper>
+              <Button
+                type="dashed"
+                shape="circle"
+                icon="check"
+                onClick={setMovieRating}
+              />
+            </ButtonWrapper>
           </DatePickerContainer>
         </DateWrapper>
-        <ButtonWrapper>
-          <Button
-            type="dashed"
-            shape="circle"
-            icon="check"
-            onClick={setMovieRating}
-          />
-        </ButtonWrapper>
       </>
     ) : (
-      <>
+      <UserFeedbackWrapper>
         <RatingWrapper>
           <StarContainer>
             <Rate
@@ -132,17 +164,19 @@ const MovieRatingPresenter: React.FunctionComponent<IProps> = ({
             />
           </StarContainer>
         </RatingWrapper>
-        <DateWrapper>
-          <DateContainer>
-            {moment(new Date(Number(watchDate))).format(dateFormat)}
-          </DateContainer>
-        </DateWrapper>
-        <ButtonWrapper>
-          <Popconfirm title="이 점수를 지울까요?" onConfirm={removeMovieRating}>
-            <Button type="dashed" shape="circle" icon="delete" />
-          </Popconfirm>
-        </ButtonWrapper>
-      </>
+        <RightWrapper>
+          <DateWrapper>
+            <DateContainer>
+              {moment(new Date(Number(watchDate))).format(dateFormat)}
+            </DateContainer>
+          </DateWrapper>
+          <ButtonWrapper>
+            <Popconfirm title="이 점수를 지울까요?" onConfirm={removeMovieRating}>
+              <Button type="dashed" shape="circle" icon="delete" />
+            </Popconfirm>
+          </ButtonWrapper>
+        </RightWrapper>
+      </UserFeedbackWrapper>
     )}
   </MovieRatingContainer>
 );

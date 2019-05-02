@@ -7,7 +7,6 @@ import MovieCardList from 'components/MovieCardList';
 
 const HomeWrapper = styled.div`
   display: block;
-  margin: 24px;
 `;
 
 const MovieListTitle = styled.h1`

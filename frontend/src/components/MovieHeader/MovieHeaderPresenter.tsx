@@ -53,6 +53,7 @@ const Tagline = styled.div`
   color: #262626;
   font-size: 13px;
   margin-top: 16px;
+  white-space: normal;
 `;
 
 const GenreWrapper = styled.div`
@@ -61,6 +62,7 @@ const GenreWrapper = styled.div`
   }
   font-size: 13px;
   margin-top: 14px;
+  color: rgba(0, 0, 0, 0.65);
 `;
 
 const MiddleDivider = styled(Divider)`
@@ -101,33 +103,31 @@ const MovieHeaderPresenter: React.FunctionComponent<IProps> = ({
           <Title>{movie.title}</Title>
           <OriginTitle>{movie.original_title}</OriginTitle>
           {movie.tagline && <Tagline>{movie.tagline}</Tagline>}
-        </TitleContainer>
-      }
-      description={
-        <React.Fragment>
           <GenreWrapper>
             {new Date(movie.release_date).getFullYear()}
             {' · '}
             {movie.genres.map(genre => genre && genre.name).join(' ')}
           </GenreWrapper>
-          <MiddleDivider />
-          <MovieRating handleMovieRatingApply={handleMovieRatingApply} />
-          {ratingData &&
-            ratingData.GetMovieRatings.ok &&
-            ratingData.GetMovieRatings.movieRatings &&
-            ratingData.GetMovieRatings.movieRatings.map(
-              movieRating =>
-                movieRating && (
-                  <MovieRating
-                    key={movieRating.id}
-                    movieRating={movieRating}
-                    handleMovieRatingRemove={handleMovieRatingRemove}
-                  />
-                )
-            )}
-        </React.Fragment>
+        </TitleContainer>
       }
     />
+    <React.Fragment>
+      <MiddleDivider />
+      <MovieRating handleMovieRatingApply={handleMovieRatingApply} />
+      {ratingData &&
+        ratingData.GetMovieRatings.ok &&
+        ratingData.GetMovieRatings.movieRatings &&
+        ratingData.GetMovieRatings.movieRatings.map(
+          movieRating =>
+            movieRating && (
+              <MovieRating
+                key={movieRating.id}
+                movieRating={movieRating}
+                handleMovieRatingRemove={handleMovieRatingRemove}
+              />
+            )
+        )}
+    </React.Fragment>
   </MovieInfoCard>
 );
 
