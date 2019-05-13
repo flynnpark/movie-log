@@ -6,7 +6,9 @@ import {
   getTopRated,
   findMovie,
   getMovieRecommendations,
-  getMovieSimilar
+  getMovieSimilar,
+  IMovie,
+  IMovieDetailData
 } from './utils/tmdb';
 import {
   getMovieDetailVariables,
@@ -87,8 +89,8 @@ const client = new ApolloClient({
       Query: {
         GetNowPlaying: async (_: null | undefined) => {
           const movieList = await getNowPlaying();
-          const newMovieList = new Array();
-          movieList.map(movieItem => {
+          const newMovieList: IMovie[] = [];
+          movieList.forEach(movieItem => {
             newMovieList.push({
               __typename: 'MovieItem',
               ...movieItem
@@ -98,8 +100,8 @@ const client = new ApolloClient({
         },
         GetPopular: async (_: null | undefined) => {
           const movieList = await getPopular();
-          const newMovieList = new Array();
-          movieList.map(movieItem => {
+          const newMovieList: IMovie[] = [];
+          movieList.forEach(movieItem => {
             newMovieList.push({
               __typename: 'MovieItem',
               ...movieItem
@@ -109,8 +111,8 @@ const client = new ApolloClient({
         },
         GetTopRated: async (_: null | undefined) => {
           const movieList = await getTopRated();
-          const newMovieList = new Array();
-          movieList.map(movieItem => {
+          const newMovieList: IMovie[] = [];
+          movieList.forEach(movieItem => {
             newMovieList.push({
               __typename: 'MovieItem',
               ...movieItem
@@ -124,8 +126,8 @@ const client = new ApolloClient({
         ) => {
           if (query) {
             const movieList = await findMovie(query);
-            const newMovieList = new Array();
-            movieList.map(movieItem => {
+            const newMovieList: IMovie[] = [];
+            movieList.forEach(movieItem => {
               newMovieList.push({
                 __typename: 'MovieItem',
                 ...movieItem
@@ -169,8 +171,8 @@ const client = new ApolloClient({
           { movieId }: getMovieRecommendationsVariables
         ) => {
           const movieList = await getMovieRecommendations(movieId);
-          const newMovieList = new Array();
-          movieList.map(movieItem => {
+          const newMovieList: IMovie[] = [];
+          movieList.forEach(movieItem => {
             newMovieList.push({
               __typename: 'MovieItem',
               ...movieItem
@@ -183,8 +185,8 @@ const client = new ApolloClient({
           { movieId }: getMovieSimilarVariables
         ) => {
           const movieList = await getMovieSimilar(movieId);
-          const newMovieList = new Array();
-          movieList.map(movieItem => {
+          const newMovieList: IMovie[] = [];
+          movieList.forEach(movieItem => {
             newMovieList.push({
               __typename: 'MovieItem',
               ...movieItem
@@ -197,10 +199,12 @@ const client = new ApolloClient({
           { movieIdList }: getMovieListVariables
         ) => {
           if (movieIdList && movieIdList.length > 0) {
-            const movieList = new Array();
+            const movieList: IMovieDetailData[] = [];
             for (const movieId of movieIdList) {
               const movieInfo = await getMovieDetail(movieId);
-              movieList.push(movieInfo);
+              if (movieInfo) {
+                movieList.push(movieInfo);
+              }
             }
             return {
               __typename: 'GetMovieListResponse',
@@ -229,7 +233,7 @@ const client = new ApolloClient({
   },
   onError: ({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
-      graphQLErrors.map(({ message }) => {
+      graphQLErrors.forEach(({ message }) => {
         console.log(`Unexpected error: ${message}`);
         if (message === 'Unauthorized') {
           localStorage.removeItem('jwt');

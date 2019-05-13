@@ -25,7 +25,8 @@ interface IMovieDetailData {
   runtime: number;
 }
 
-interface IMovie {
+export interface IMovie {
+  __typename?: string;
   id: number;
   title: string;
   poster_path: string;
