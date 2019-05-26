@@ -1,7 +1,7 @@
 import { Context } from 'graphql-yoga/dist/types';
+import MovieRating from '../../../entity/MovieRating';
 import { GetMovieRatingsQueryArgs } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
-import MovieRating from '../../../entity/MovieRating';
 
 const resolvers: Resolvers = {
   Query: {

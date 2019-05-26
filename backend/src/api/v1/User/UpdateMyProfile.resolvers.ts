@@ -1,11 +1,11 @@
-import { Resolvers } from '../../../types/resolvers';
 import User from '../../../entity/User';
 import {
   UpdateMyProfileMutationArgs,
-  UpdateMyProfileResponse,
+  UpdateMyProfileResponse
 } from '../../../types/graph';
-import privateResolver from '../../../utils/privateResolver';
+import { Resolvers } from '../../../types/resolvers';
 import cleanNullArgs from '../../../utils/cleanNullArgs';
+import privateResolver from '../../../utils/privateResolver';
 
 const resolvers: Resolvers = {
   Mutation: {
@@ -31,14 +31,14 @@ const resolvers: Resolvers = {
           await User.update({ id: user.id }, { ...notNull });
           return {
             ok: true,
-            error: null,
+            error: null
           };
         } catch (error) {
           return { ok: false, error: error.message };
         }
       }
-    ),
-  },
+    )
+  }
 };
 
 export default resolvers;

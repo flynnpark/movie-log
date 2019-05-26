@@ -1,10 +1,10 @@
-import { GraphQLServer } from 'graphql-yoga';
 import cors from 'cors';
-import logger from 'morgan';
+import { GraphQLServer } from 'graphql-yoga';
 import helmet from 'helmet';
-import schema from './schema';
+import logger from 'morgan';
 import './passport';
 import { passportAuthenticate } from './passport';
+import schema from './schema';
 
 class App {
   public app: GraphQLServer;

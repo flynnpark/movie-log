@@ -1,10 +1,10 @@
 import {
-  Entity,
   BaseEntity,
-  PrimaryColumn,
   Column,
+  Entity,
+  JoinTable,
   ManyToMany,
-  JoinTable
+  PrimaryColumn
 } from 'typeorm';
 import Genre from './Genre';
 

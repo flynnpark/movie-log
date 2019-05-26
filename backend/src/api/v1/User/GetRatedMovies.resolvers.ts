@@ -1,9 +1,9 @@
-import { getManager } from 'typeorm';
 import { GetRatedMoviesQueryArgs } from 'src/types/graph';
-import { Resolvers } from '../../../types/resolvers';
-import privateResolver from '../../../utils/privateResolver';
+import { getManager } from 'typeorm';
 import MovieRating from '../../../entity/MovieRating';
 import User from '../../../entity/User';
+import { Resolvers } from '../../../types/resolvers';
+import privateResolver from '../../../utils/privateResolver';
 
 const resolvers: Resolvers = {
   Query: {

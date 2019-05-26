@@ -1,8 +1,8 @@
 import { Context } from 'graphql-yoga/dist/types';
+import User from '../../../entity/User';
 import { GetUserProfileQueryArgs } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
-import User from '../../../entity/User';
 
 const resolvers: Resolvers = {
   Query: {

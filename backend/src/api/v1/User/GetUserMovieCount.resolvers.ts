@@ -1,10 +1,10 @@
-import { getManager } from 'typeorm';
 import { Context } from 'graphql-yoga/dist/types';
+import { getManager } from 'typeorm';
+import MovieRating from '../../../entity/MovieRating';
+import User from '../../../entity/User';
+import { GetUserInfoQueryArgs } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
-import { GetUserInfoQueryArgs } from '../../../types/graph';
-import User from '../../../entity/User';
-import MovieRating from '../../../entity/MovieRating';
 
 const resolvers: Resolvers = {
   Query: {

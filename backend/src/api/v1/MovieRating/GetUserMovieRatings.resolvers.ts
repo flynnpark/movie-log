@@ -1,6 +1,6 @@
-import { Resolvers } from '../../../types/resolvers';
-import User from '../../../entity/User';
 import MovieRating from '../../../entity/MovieRating';
+import User from '../../../entity/User';
+import { Resolvers } from '../../../types/resolvers';
 
 const resolvers: Resolvers = {
   Query: {

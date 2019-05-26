@@ -1,3 +1,4 @@
+import { Context } from 'graphql-yoga/dist/types';
 import MovieRating from '../../../entity/MovieRating';
 import {
   RemoveMovieRatingMutationArgs,
@@ -5,7 +6,6 @@ import {
 } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
 import privateResolver from '../../../utils/privateResolver';
-import { Context } from 'graphql-yoga/dist/types';
 
 const resolvers: Resolvers = {
   Mutation: {

@@ -1,7 +1,7 @@
+import { NextFunction, Request, Response } from 'express';
 import passport from 'passport';
-import { Strategy, ExtractJwt, VerifiedCallback } from 'passport-jwt';
 import FacebookTokenStrategy, { VerifyFunction } from 'passport-facebook-token';
-import { Request, Response, NextFunction } from 'express';
+import { ExtractJwt, Strategy, VerifiedCallback } from 'passport-jwt';
 import User from './entity/User';
 
 export interface JWTPayload {

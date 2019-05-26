@@ -26,6 +26,7 @@ type GetUserMovieRatingsResponse {
   ok: Boolean!
   error: String
   movieRatings: [MovieRating]
+  movieRatingsCount: Int!
 }
 
 type MovieRating {

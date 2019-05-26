@@ -1,6 +1,6 @@
+import MovieRating from '../../../entity/MovieRating';
 import { GetMovieRatingQueryArgs } from '../../../types/graph';
 import { Resolvers } from '../../../types/resolvers';
-import MovieRating from '../../../entity/MovieRating';
 
 const resolvers: Resolvers = {
   Query: {
