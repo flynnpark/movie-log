@@ -9,8 +9,8 @@ const connectionOptions: ConnectionOptions = {
   password: process.env.DB_PASSWORD,
   synchronize: true,
   logging: true,
-  entities: ['entity/**/*.ts'],
-  migrations: ['migration/**/*.ts'],
+  entities: [__dirname + '/entity/*{.ts,.js}'],
+  migrations: [__dirname + '/migration/*{.ts,.js}'],
   cli: {
     entitiesDir: 'entity',
     migrationsDir: 'migration'

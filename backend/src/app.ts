@@ -1,33 +1,38 @@
+import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
-import { GraphQLServer } from 'graphql-yoga';
+import express from 'express';
 import helmet from 'helmet';
 import logger from 'morgan';
+import { createConnection, getConnection } from 'typeorm';
+import connectionOptions from './ormconfig';
 import './passport';
 import { passportAuthenticate } from './passport';
 import schema from './schema';
 
-class App {
-  public app: GraphQLServer;
+const app = express();
 
-  constructor() {
-    this.app = new GraphQLServer({
-      schema,
-      context: req => {
-        return {
-          req: req.request
-        };
-      }
-    });
-    this.setMiddlewares();
+app.use(cors());
+app.use(logger('dev'));
+app.use(helmet());
+app.use(passportAuthenticate);
+
+const apolloServer = new ApolloServer({
+  schema,
+  playground: true
+});
+apolloServer.applyMiddleware({ app });
+
+const initializeDb = async (): Promise<void> => {
+  try {
+    await getConnection();
+  } catch (error) {
+    if (error.name !== 'ConnectionNotFoundError') {
+      throw error;
+    }
+    await createConnection(connectionOptions);
   }
+};
 
-  private setMiddlewares = (): void => {
-    const { express } = this.app;
-    express.use(cors());
-    express.use(logger('dev'));
-    express.use(helmet());
-    express.use(passportAuthenticate);
-  };
-}
+initializeDb();
 
-export default new App().app;
+export default app;
