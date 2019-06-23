@@ -3,10 +3,10 @@ import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
 @Entity()
 class Genre extends BaseEntity {
   @PrimaryColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  name: string;
+  name!: string;
 }
 
 export default Genre;

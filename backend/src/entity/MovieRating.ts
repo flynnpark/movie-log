@@ -9,22 +9,22 @@ import {
 @Entity()
 class MovieRating extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column()
-  movieId: number;
+  movieId!: number;
 
   @Column()
-  userId: number;
+  userId!: number;
 
   @Column({ type: 'float', nullable: false })
-  rating: number;
+  rating!: number;
 
   @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-  watchDate: Date;
+  watchDate!: Date;
 
   @CreateDateColumn({ type: 'timestamptz' })
-  createdAt: Date;
+  createdAt!: Date;
 }
 
 export default MovieRating;

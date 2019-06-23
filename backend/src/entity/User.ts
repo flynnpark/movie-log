@@ -15,32 +15,32 @@ const BCRYPT_ROUNDS = 10;
 @Entity()
 class User extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id!: number;
 
   @Column({ type: 'varchar', length: 50, unique: true })
   @IsEmail()
-  email: string;
+  email!: string;
 
-  @Column({ type: 'varchar', length: 100, nullable: true })
-  password: string;
+  @Column({ type: 'varchar', length: 100, nullable: false })
+  password!: string;
 
   @Column({ type: 'varchar', length: 30 })
-  name: string;
+  name!: string;
 
   @Column({ type: 'varchar', length: 200, nullable: true })
-  avatar: string | null;
+  avatar?: string | null;
 
   @Column({ type: 'varchar', length: 200, nullable: true })
-  shortBio: string | null;
+  shortBio?: string | null;
 
   @Column({ type: 'varchar', length: 80, nullable: true })
-  facebookId: string | null;
+  facebookId?: string | null;
 
   @Column({ type: 'varchar', length: 80, nullable: true })
-  googleId: string | null;
+  googleId?: string | null;
 
   @CreateDateColumn({ type: 'timestamptz' })
-  createdAt: Date;
+  createdAt!: Date;
 
   public comparePassword(password: string): Promise<boolean> {
     return bcrypt.compare(password, this.password);
