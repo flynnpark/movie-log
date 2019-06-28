@@ -8,8 +8,9 @@
     "dev": "cd src && nodemon --exec ts-node server.ts -e ts,graphql",
     "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
     "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts",
-    "prestart": "tsc",
-    "start": "ts-node .build/server.js",
+    "copy-graphql": "copy ./src/api/**.*.graphql ./.build/api/",
+    "prestart": "tsc && yarn copy-graphql",
+    "start": "sls offline start --skipCacheInvalidation",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
