@@ -4,13 +4,15 @@
   "description": "Movie.log",
   "main": "src/index.ts",
   "scripts": {
-    "predev": "yarn types",
-    "dev": "cd src && nodemon --exec ts-node server.ts -e ts,graphql",
-    "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
+    "build": "tsc && yarn copy-graphql",
+    "copy-graphql": "copy ./src/api/**/*.graphql ./.build/api/",
     "types": "graphql-to-typescript ./src/schema.graphql ./src/types/graph.d.ts",
-    "copy-graphql": "copy ./src/api/**.*.graphql ./.build/api/",
-    "prestart": "tsc && yarn copy-graphql",
-    "start": "sls offline start --skipCacheInvalidation",
+    "pretypes": "gql-merge --out-file ./src/schema.graphql ./src/api/**/*.graphql",
+    "predev": "yarn types",
+    "dev:server": "nodemon --exec ts-node src/server.ts -e ts",
+    "dev:serverless": "yarn build&& sls offline start --skipCacheInvalidation",
+    "deploy:dev": "yarn build&& sls deploy",
+    "deploy:prod": "yarn build&& sls deploy --stage prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,6 +37,7 @@
     "apollo-server-express": "^2.6.4",
     "bcrypt": "^3.0.6",
     "class-validator": "^0.9.1",
+    "copy": "^0.3.2",
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
@@ -49,6 +52,7 @@
     "passport-jwt": "^4.0.0",
     "pg": "^7.11.0",
     "reflect-metadata": "^0.1.13",
+    "serverless": "^1.46.1",
     "serverless-http": "^2.0.2",
     "typeorm": "^0.2.18"
   },
