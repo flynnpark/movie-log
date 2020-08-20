@@ -35,7 +35,7 @@
     "@types/passport-facebook-token": "^0.4.33",
     "@types/passport-jwt": "^3.0.1",
     "apollo-server-express": "^2.7.0",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "class-validator": "^0.9.1",
     "copy": "^0.3.2",
     "cors": "^2.8.5",
